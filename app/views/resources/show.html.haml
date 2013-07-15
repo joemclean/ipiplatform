@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @resource.name
+%p
+  %b Link:
+  = @resource.link
+%p
+  %b Description:
+  = @resource.description
+  %p
+    %b Traits:
+    -@resource.traits.each do |trait|
+      =trait.name
+      
+= link_to 'Edit', edit_resource_path(@resource)
+|
+= link_to 'Back', resources_path

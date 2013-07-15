@@ -1,0 +1,21 @@
+%h1 Listing traits
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @traits.each do |trait|
+    %tr
+      %td= trait.name
+      %td= trait.description
+      %td= link_to 'Show', trait
+      %td= link_to 'Edit', edit_trait_path(trait)
+      %td= link_to 'Destroy', trait, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Trait', new_trait_path
