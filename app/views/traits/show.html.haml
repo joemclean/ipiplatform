@@ -1,12 +1,20 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @trait.name
+%h2 
+  ='Trait: ' + @trait.name
+
 %p
   %b Description:
   = @trait.description
+%p
+  = 'Resources ' + @trait.name.pluralize + ' would enjoy:'
+  %ul
+    - @trait.resources.each do |resource|
+      %li
+        =link_to resource.name, resource_path(resource)
 
-= link_to 'Edit', edit_trait_path(@trait)
-\|
-= link_to 'Back', traits_path
+.btn-group
+  .btn
+    = link_to 'Edit Trait', edit_trait_path(@trait)
+  .btn
+    = link_to 'All Traits', traits_path

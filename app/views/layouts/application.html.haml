@@ -1,0 +1,20 @@
+%html
+  %head
+    %title Ipi Platform
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          .brand
+            =link_to 'IPI Platform Initiative', root_path
+          .btn-group.pull-right
+            .btn
+              =link_to 'Resources', resources_path
+            .btn
+              =link_to 'Traits', traits_path
+    .container
+      = yield

@@ -1,24 +1,18 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
-  # GET /resources
-  # GET /resources.json
   def index
     @resources = Resource.all
   end
 
-  # GET /resources/1
-  # GET /resources/1.json
   def show
   end
 
-  # GET /resources/new
   def new
     @resource = Resource.new
     @traits = Trait.all
   end
 
-  # GET /resources/1/edit
   def edit
     @traits = Trait.all
   end

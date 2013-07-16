@@ -1,8 +1,7 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @resource.name
+%h2
+  ='Resource: '+ @resource.name
 %p
   %b Link:
   = @resource.link
@@ -10,10 +9,14 @@
   %b Description:
   = @resource.description
   %p
-    %b Traits:
-    -@resource.traits.each do |trait|
-      =trait.name
-      
-= link_to 'Edit', edit_resource_path(@resource)
-|
-= link_to 'Back', resources_path
+    %b This is a great resource for:
+    %ul
+      -@resource.traits.each do |trait|
+        %li
+          =link_to trait.name.pluralize, trait_path(trait)
+
+.btn-group
+  .btn
+    = link_to 'Edit Resource', edit_resource_path(@resource)
+  .btn
+    = link_to 'All Resources', resources_path

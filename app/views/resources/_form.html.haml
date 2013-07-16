@@ -1,25 +1,18 @@
-= form_for @resource do |f|
+= bootstrap_form_for @resource do |f| 
   - if @resource.errors.any?
     #error_explanation
       %h2= "#{pluralize(@resource.errors.count, "error")} prohibited this resource from being saved:"
       %ul
         - @resource.errors.full_messages.each do |msg|
           %li= msg
+  = f.text_field :name, :placeholder => 'Name'
+  = f.text_field :link
+  = f.text_area :description
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :link
-    = f.text_field :link
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = hidden_field_tag "resource[trait_ids][]", nil
-    -@traits.each do |trait|
-      =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
-      =trait.name 
-      %br
+  = hidden_field_tag "resource[trait_ids][]", nil
+  -@traits.each do |trait|
+    =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
+    =trait.name 
+    %br
   .actions
     = f.submit 'Save'
