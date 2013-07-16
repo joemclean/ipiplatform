@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 1.9.3
 
 * System dependencies
 
@@ -26,3 +26,67 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+* General go to website for setting up the overall system:
+   http://ruby.railstutorial.org/ruby-on-rails-tutorial-book
+
+* Web resource Mike Varona found that was useful when installing systems
+   http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/
+  Additional words of wisdom about resource:
+
+   BTW, for Homebrew, when you run 'brew doctor', you might not get "ready to brew".
+
+   I consistently get this message after running 'brew doctor':
+
+   Warning: You have MacPorts or Fink installed:
+     /Users/Thoughtworks/.rvm/bin/port, /opt/local/bin/port
+
+   This can cause trouble. You don't have to uninstall them, but you may want to temporarily move them out of the way, e.g.
+
+     sudo mv /opt/local ~/macports
+
+   But in the end, I didn't want/know how to remove/move macports and everything worked fine.
+
+
+   If you get this type of message:
+
+   Warning: Some keg-only formula are linked into the Cellar.
+   Linking a keg-only formula, such as gettext, into the cellar with `brew link <formula>` will cause other formulae to detect them during the `./configure` step. This may cause problems when compiling those
+other formulae.
+
+   Binaries provided by keg-only formulae may override system binaries with other strange results.
+
+   You may wish to `brew unlink` these brews:
+
+   libxml2
+
+   then just do what Homebrew suggests in that last line...
+***
+
+
+--------Steps once GitHub is setup & Received invite from Joe----------
+Terminal
+  cd ~
+  ls
+  mkdir dev
+  cd dev
+  git clone "link copied from github"
+  ls --> see all the things in the folder
+  
+Open up textmate --> Open dev folder --> Should see everything
+
+Terminal
+  cd ipiplatform/
+  bundle install
+  rake db:migrate
+  rails s
+
+On web browser: go to --> localhost:3000 --> Should see Ipi Homepage
+-----------------------------------------------------------------------
+
+-------------Steps for pushing and pulling to github-------------------
+git add .
+git commit -am 'your message'
+git pull --rebase
+git push
+-----------------------------------------------------------------------
