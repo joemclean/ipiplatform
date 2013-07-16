@@ -8,9 +8,9 @@
   .field
     = f.text_field :name, :placeholder => 'Name', :class => 'span6'
   .field
-    = f.text_field :link, :class => 'span6'
+    = f.text_field :link, :placeholder => 'http://www.example.com', :class => 'span6'
   .field
-    = f.text_area :description, :class => 'span6'
+    = f.text_area :description, :placeholder => 'A short description of what this resource is', :class => 'span6'
   .field
     = hidden_field_tag "resource[trait_ids][]", nil
     -@traits.each do |trait|
