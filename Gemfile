@@ -8,9 +8,15 @@ gem "haml-rails"
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'bootstrap_forms'
 
+
+
 group :development do
   gem 'taps'
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
