@@ -5,14 +5,17 @@
       %ul
         - @resource.errors.full_messages.each do |msg|
           %li= msg
-  = f.text_field :name, :placeholder => 'Name'
-  = f.text_field :link
-  = f.text_area :description
-
-  = hidden_field_tag "resource[trait_ids][]", nil
-  -@traits.each do |trait|
-    =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
-    =trait.name 
-    %br
+  .field
+    = f.text_field :name, :placeholder => 'Name', :class => 'span6'
+  .field
+    = f.text_field :link, :class => 'span6'
+  .field
+    = f.text_area :description, :class => 'span6'
+  .field
+    = hidden_field_tag "resource[trait_ids][]", nil
+    -@traits.each do |trait|
+      =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
+      =trait.name 
+      %br
   .actions
     = f.submit 'Save'
