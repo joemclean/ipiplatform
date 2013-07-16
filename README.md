@@ -1,3 +1,4 @@
 IPI Platform
 
-Created by: Kirk and Sung and Mike and Danielle
+<<<<<<< HEAD
+Created by: Danielle, Kirk, Meg, Mike & Sung.
