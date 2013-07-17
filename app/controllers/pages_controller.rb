@@ -6,5 +6,7 @@ class PagesController < ApplicationController
   end
 
   def innovator
+    @traits = Trait.all
   end
+
 end

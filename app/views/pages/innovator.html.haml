@@ -1,2 +1,9 @@
-%h1 Pages#innovator
-%p Find me in app/views/pages/innovator.html.haml
+%h1 What type of innovator are you?
+
+=#image_tag 'placeholder.gif'
+.row
+  -@traits.each do |trait|
+    .traitbox.span3
+      = trait.name
+      = trait.description
+      = link_to 'Show', trait

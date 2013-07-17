@@ -1,14 +1,10 @@
 class TraitsController < ApplicationController
   before_action :set_trait, only: [:show, :edit, :update, :destroy]
 
-  # GET /traits
-  # GET /traits.json
   def index
     @traits = Trait.all
   end
 
-  # GET /traits/1
-  # GET /traits/1.json
   def show
   end
 
