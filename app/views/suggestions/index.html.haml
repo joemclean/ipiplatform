@@ -4,11 +4,13 @@
   %tr
     %th Author
     %th Thoughts
+    %th
 
   - @suggestions.each do |suggestion|
     %tr
       %td= suggestion.author
       %td= suggestion.thoughts
+      %td= link_to 'Resolved', suggestion, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
 
 .btn
