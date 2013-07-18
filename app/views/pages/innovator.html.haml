@@ -4,6 +4,8 @@
 .row
   -@traits.each do |trait|
     .traitbox.span3
-      = trait.name
+      %strong= trait.name
+      %br
       = trait.description
+      %br
       = link_to 'Show', trait
