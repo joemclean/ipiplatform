@@ -8,9 +8,9 @@
 
   .field
     = f.label :author
-    = f.text_field :author
+    = f.text_field :author, :class => 'span6'
   .field
     = f.label :thoughts
-    = f.text_area :thoughts
+    = f.text_area  :thoughts, :rows => 5, :class => 'span8'
   .actions
     = f.submit 'Save'
