@@ -1,0 +1,15 @@
+%h1 Suggestions for IPI
+
+%table.table.table-striped
+  %tr
+    %th Author
+    %th Thoughts
+
+  - @suggestions.each do |suggestion|
+    %tr
+      %td= suggestion.author
+      %td= suggestion.thoughts
+%br
+
+.btn
+  = link_to 'New Suggestion', new_suggestion_path

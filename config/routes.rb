@@ -1,4 +1,6 @@
 IpiPlatform::Application.routes.draw do
+  resources :suggestions
+
   get "pages/home"
   get "pages/publisher"
   get "pages/innovator"
