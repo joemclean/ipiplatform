@@ -4,6 +4,7 @@ IpiPlatform::Application.routes.draw do
   get "pages/home"
   get "pages/publisher"
   get "pages/innovator"
+  get "pages/SungTest"
   resources :traits
   resources :resources
   

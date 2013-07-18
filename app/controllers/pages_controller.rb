@@ -9,4 +9,7 @@ class PagesController < ApplicationController
     @traits = Trait.all
   end
 
+  def SungTest
+    @traits = Trait.all
+  end
 end

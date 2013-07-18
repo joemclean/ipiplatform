@@ -6,17 +6,7 @@
     = csrf_meta_tags
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          .brand
-            =link_to 'IPI Platform Initiative', root_path
-          .btn-group.pull-right
-            .btn
-              =link_to 'Innovator', pages_innovator_path
-            .btn
-              =link_to 'Resources', resources_path
-            .btn
-              =link_to 'Traits', traits_path
+    .content
+      = render 'layouts/header'
     .container
       = yield
