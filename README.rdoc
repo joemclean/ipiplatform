@@ -95,3 +95,10 @@ git push
 --------------Steps for pushing to heroku------------------------------
 git push heroku master
 -----------------------------------------------------------------------
+
+--------------Useful Tutorials-----------------------------------------
+http://www.tutorialspoint.com/ruby/index.htm
+
+Comprehensive Ruby, CSS, HTML, etc guide (no HAML :( )
+
+----------------------------------------------------------------------
