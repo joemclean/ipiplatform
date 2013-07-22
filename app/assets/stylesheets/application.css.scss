@@ -22,4 +22,11 @@ input[type="text"] {
 
 .actions {
 	margin-top: 20px;
-} 
+}
+
+.navbar-bottom {
+	margin: 20px 0 0;
+	.navbar-inner {
+		border-radius: 0;
+	}
+}
