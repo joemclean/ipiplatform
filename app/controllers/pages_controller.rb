@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  layout 'color_block', only: [:phases]
+  
   def home
   end
 
@@ -9,7 +11,7 @@ class PagesController < ApplicationController
     @traits = Trait.all
   end
 
-  def Phases
+  def phases
   end
 
   def SungTest
