@@ -3,8 +3,9 @@
 =#image_tag 'placeholder.gif'
 .row
   -@traits.each do |trait|
-    .traitbox.span3
+    .traitbox.span6
       %strong= trait.name
+      %br
       %br
       = trait.description
       %br
