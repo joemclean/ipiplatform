@@ -17,4 +17,9 @@ class PagesController < ApplicationController
   def SungTest
     @traits = Trait.all
   end
+  
+  def aboutus
+  end
+  
+  
 end

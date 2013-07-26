@@ -102,3 +102,7 @@ http://www.tutorialspoint.com/ruby/index.htm
 Comprehensive Ruby, CSS, HTML, etc guide (no HAML :( )
 
 ----------------------------------------------------------------------
+
+www.gitready.com
+
+Useful commands and troubleshooting help for  Git
