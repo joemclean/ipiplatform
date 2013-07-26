@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     @traits = Trait.all
   end
 
-  def tempphases
+  def phases
   end
 
   def SungTest
