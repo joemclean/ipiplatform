@@ -31,10 +31,8 @@ input[type="text"] {
 	}
 }
 
-.suggestions_button {
-	margin-top:30px;
-	font: {
-	color:#cc2a36;
-	family:impact;
-	}
+.btn.suggestions_button {
+	margin-top:5px;
+	color:#000;
+	weight:strong;
 }
