@@ -3,8 +3,7 @@
 
 %table.table.table-striped
   %tr
-    %th Name
-    %th Link
+    %th{:colspan => 2} Name
     %th Description
     %th
     %th
@@ -13,7 +12,9 @@
   - @resources.each do |resource|
     %tr
       %td= resource.name
-      %td= link_to resource.link, resource.link
+      %td
+        .btn
+          = link_to 'Go!', resource.link
       %td= resource.description
       %td= link_to 'Show', resource
       %td= link_to 'Edit', edit_resource_path(resource)
