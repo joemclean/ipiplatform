@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130731172444) do
     t.string   "survey_id"
   end
 
+
   create_table "resources", force: true do |t|
     t.string   "name"
     t.string   "link"
