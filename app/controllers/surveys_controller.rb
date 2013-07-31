@@ -1,4 +1,4 @@
-class SurveyController < ApplicationController
+class SurveysController < ApplicationController
   def new
   end
   
@@ -7,6 +7,8 @@ class SurveyController < ApplicationController
     5.times do
       @survey.questions.build
     end
+
+    @question_responses = QuestionResponse.all
   end
 
   def index

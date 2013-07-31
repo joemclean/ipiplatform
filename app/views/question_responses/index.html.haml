@@ -1,0 +1,22 @@
+%h1 Question responses
+%table.table.table-striped
+  %tr
+    %td 
+      %b Response text
+    %td 
+      %b Associated trait
+    %td 
+    %td
+  -@question_responses.each do |question_response|
+    %tr
+      %td= question_response.response
+      %td
+        -if question_response.trait_id
+          =Trait.find(question_response.trait_id).name
+      %td
+        =link_to 'Edit', edit_question_response_path(question_response)
+      %td
+        =link_to 'Delete', question_response, :method => :delete, :data => { :confirm => 'Are you sure you want to delete this question response?'  }
+
+.btn
+  =link_to 'New question response', new_question_response_path

@@ -1,0 +1,15 @@
+= form_for @question_response do |f|
+  - if @question_response.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question_response.errors.count, "error")} prohibited this question response from being saved:"
+      %ul
+        - @suggestion.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :response
+    = f.text_area :response, :class => 'span6', :rows => 5
+  .field
+    = f.select("trait_id", traits_for_select)
+  .actions
+    = f.submit 'Save'

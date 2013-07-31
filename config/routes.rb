@@ -1,18 +1,17 @@
 IpiPlatform::Application.routes.draw do
-  get "question/new"
-  get "survey/new"
-  get "survey/create"
-  resources :suggestions
-
+  get "questions/new"
+  get "surveys/new"
+  get "surveys/create"
   get "pages/home"
   get "pages/publisher"
   get "pages/innovator"
-  get "pages/SungTest"
   get "pages/aboutus"
   get "pages/phases"
 
   resources :traits
   resources :resources
+  resources :suggestions
+  resources :question_responses
   
   root 'pages#home'
 
