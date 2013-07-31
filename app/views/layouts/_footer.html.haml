@@ -1,5 +1,8 @@
-.navbar.navbar-bottom
+.navbar.navbar-fixed-bottom
   .navbar-inner
     .container
-      .btn.suggestions_button.pull-left
-        =link_to 'Suggestions', suggestions_path
+      .btn-group.pull-right
+        .btn
+          =link_to 'Resources', resources_path
+        .btn
+          =link_to 'Traits', traits_path

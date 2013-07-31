@@ -10,6 +10,10 @@ class PagesController < ApplicationController
   def innovator
     @traits = Trait.all
   end
+  
+  def tools
+    @resources = Resource.all
+  end
 
   def phases
   end
