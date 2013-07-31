@@ -1,4 +1,7 @@
 IpiPlatform::Application.routes.draw do
+  get "question/new"
+  get "survey/new"
+  get "survey/create"
   resources :suggestions
 
   get "pages/home"
