@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
   def new
   end
   
-  def create
+  def take_survey
     @survey = Survey.new
     5.times do
       @survey.questions.build
@@ -11,7 +11,9 @@ class SurveysController < ApplicationController
     @question_responses = QuestionResponse.all
   end
 
-  def index
+  def results
+    @answers = params['answers']
+
   end
 
 end

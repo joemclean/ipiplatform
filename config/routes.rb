@@ -1,7 +1,8 @@
 IpiPlatform::Application.routes.draw do
   get "questions/new"
   get "surveys/new"
-  get "surveys/create"
+  get "surveys/take_survey"
+  get "surveys/results"
   get "pages/home"
   get "pages/publisher"
   get "pages/innovator"

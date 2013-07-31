@@ -1,0 +1,20 @@
+=form_tag("/surveys/results", method: "get") do
+  %h1 Innovator Type Survey
+  %p Answer a few questions to find out your innovator type!
+
+  -question_count = 1
+  %table.table.table-striped
+    -@survey.questions.each do |question|
+      %tr
+        %td
+          %b
+            = question_count.to_s.html_safe
+        - @question_responses.sample(2).each do |question_response|
+          %td
+            = radio_button_tag(('answers['+question_count.to_s+']'), question_response.trait_id)
+          %td
+            = question_response.response
+
+      - question_count = question_count + 1
+  .actions
+    =submit_tag("Get my type")
