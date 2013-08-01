@@ -1,9 +1,7 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
-      .brand
-        =link_to 'sidekick', root_path
-      .btn-group.pull-right
+      .btn-group.pull-left
         .btn
           =link_to 'Innovator', pages_innovator_path
         .btn
@@ -12,5 +10,7 @@
           =link_to 'Phases', pages_phases_path
         .btn
           =link_to 'About', pages_aboutus_path
-      .btn.suggestions_button.pull-left
+      .brand.offset6.span2
+        =link_to 'sidekick', root_path
+      .btn.suggestions_button.pull-right
         =link_to 'Suggestions', suggestions_path

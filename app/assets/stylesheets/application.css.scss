@@ -45,46 +45,49 @@ input[type="text"] {
 	}
 }
 
-.navbar-fixed-top .btn-group {
-  margin-top:16px;
-  .btn {
-    background-color: transparent !important;
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="transparent", endColorstr="transparent");
-    background-image: -khtml-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: -moz-linear-gradient(top, transparent, transparent);
-    background-image: -ms-linear-gradient(top, transparent, transparent);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, transparent));
-    background-image: -webkit-linear-gradient(top, transparent, transparent);
-    background-image: -o-linear-gradient(top, transparent, transparent);
-    background-image: linear-gradient(transparent, transparent);
-    
-    color: #fff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-    -webkit-font-smoothing: antialiased;
-    font: {
-      family:Raleway
+.navbar-fixed-top {
+  .btn-group {
+    margin-top:20px;
+    .btn {
+      border: none;
+      background-color: transparent !important;
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="transparent", endColorstr="transparent");
+      background-image: -khtml-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+      background-image: -moz-linear-gradient(top, transparent, transparent);
+      background-image: -ms-linear-gradient(top, transparent, transparent);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, transparent));
+      background-image: -webkit-linear-gradient(top, transparent, transparent);
+      background-image: -o-linear-gradient(top, transparent, transparent);
+      background-image: linear-gradient(transparent, transparent);
+      color: #fff !important;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+      -webkit-font-smoothing: antialiased;
+      font: {
+        family:Raleway
+      }
+    }
+  }
+  
+  .brand {
+    margin: 10px;
+    a {
+      color: #DE403C;
+      text-decoration: none;
+      font :{
+        weight: bold;
+        size: 2em;
+        family: Raleway;
+      }
     }
   }
 }
+
 
 .btn {
   a { 
   color: #DE403C;
   font-weight: bold;
   text-decoration: none;
-  }
-}
-
-.brand {
-  margin: 10px;
-  a {
-  color: #DE403C;
-  text-decoration: none;
-  font :{
-    weight: bold;
-    size: 2em;
-    family: Raleway;
-    }
   }
 }
