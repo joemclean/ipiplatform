@@ -9,6 +9,7 @@ IpiPlatform::Application.routes.draw do
   get "pages/aboutus"
   get "pages/phases"
   get "pages/tools"
+  get "pages/landing"
 
   resources :traits
   resources :resources

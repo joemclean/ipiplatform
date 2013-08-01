@@ -24,6 +24,9 @@ class PagesController < ApplicationController
   
   def aboutus
   end
+
+  def landing
+  end
   
   
 end
