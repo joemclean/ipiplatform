@@ -15,7 +15,7 @@
 @import "bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
-body { padding-top: 95px }
+body { padding-top: 85px }
 
 input[type="text"] {
 	padding: 15px 10px;
@@ -36,6 +36,7 @@ input[type="text"] {
   margin-bottom:25px
 }
 
+//SUGGESTIONS BUTTON
 .btn.suggestions_button {
 	margin-top:16px;
 	font: {
