@@ -3,14 +3,9 @@
 %h3 Question by question
 -@answer_hash.each do |question_number, answer|
   %b
-    =question_number.to_s
+    =question_number.to_s + ':'
   =Trait.find(answer).name
   %br
-
-%h3 @answer_hash
-=@answer_hash
-%h3 @score_hash
-=@score_hash #placeholder
 
 %h3 Scored Quiz
 -@score_hash.each do |trait_id, count|

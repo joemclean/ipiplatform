@@ -7,19 +7,19 @@ class Survey < ActiveRecord::Base
     count_traits(answer_ids)
   end
 
-  def strip_ids(answers) #get trait ids, remove question numbers
-    answer_ids = []
+  def strip_ids(answers)
+    selected_trait_ids = []
     answers.each do |question_number, trait_id|
-      answer_ids << trait_id.to_i
+      selected_trait_ids << trait_id.to_i
     end
-    answer_ids
+    selected_trait_ids
   end
 
-  def count_traits (answer_ids)
+  def count_traits (selected_trait_ids)
     score_hash = {}
     Trait.ids.each do |trait_id|
-      answer_count = answer_ids.count(trait_id)
-      score_hash[trait_id] = answer_count
+      selected_trait_count = selected_trait_ids.count(trait_id)
+      score_hash[trait_id] = selected_trait_count
     end
     score_hash
   end
