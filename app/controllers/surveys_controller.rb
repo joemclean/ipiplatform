@@ -4,7 +4,7 @@ class SurveysController < ApplicationController
   
   def take_survey
     @survey = Survey.new
-    build_questions(20)
+    build_questions(25)
     @question_responses = QuestionResponse.all
   end
 
