@@ -38,7 +38,7 @@ input[type="text"] {
 
 //SUGGESTIONS BUTTON
 .btn.suggestions_button {
-	margin-top:16px;
+	margin-top:10px;
 	font: {
 	color:#fff;
 	family:Raleway;
@@ -70,7 +70,9 @@ input[type="text"] {
   }
   
   .brand {
-    margin: 10px 0 0 70px;
+    position: absolute;
+    left: 44%;
+    margin-top: 5px;
     a {
       color: #DE403C;
       text-decoration: none;
