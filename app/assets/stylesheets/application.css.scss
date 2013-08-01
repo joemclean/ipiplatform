@@ -47,31 +47,30 @@ input[type="text"] {
 
 .navbar-fixed-top .btn-group {
   margin-top:16px;
-}
-
-.btn {
-  background-color: #DE403C !important;
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#DE403C", endColorstr="#DE403C");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#DE403C), to(#DE403C));
-  background-image: -moz-linear-gradient(top, #DE403C, #DE403C);
-  background-image: -ms-linear-gradient(top, #DE403C, #DE403C);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #DE403C), color-stop(100%, #DE403C));
-  background-image: -webkit-linear-gradient(top, #DE403C, #DE403C);
-  background-image: -o-linear-gradient(top, #DE403C, #DE403C);
-  background-image: linear-gradient(#DE403C, #DE403C);
-  border-color: #DE403C #DE403C hsl(195, 60%, 40%);
-  color: #fff !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-  -webkit-font-smoothing: antialiased;
-  font: {
-    family:Raleway
+  .btn {
+    background-color: transparent !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="transparent", endColorstr="transparent");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: -moz-linear-gradient(top, transparent, transparent);
+    background-image: -ms-linear-gradient(top, transparent, transparent);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, transparent));
+    background-image: -webkit-linear-gradient(top, transparent, transparent);
+    background-image: -o-linear-gradient(top, transparent, transparent);
+    background-image: linear-gradient(transparent, transparent);
+    
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+    -webkit-font-smoothing: antialiased;
+    font: {
+      family:Raleway
+    }
   }
 }
 
 .btn {
   a { 
-  color: #fff;
+  color: #DE403C;
   font-weight: bold;
   text-decoration: none;
   }
