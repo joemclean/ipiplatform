@@ -1,13 +1,13 @@
 %h1 Your Results
 
+%h3 Scored Quiz
+-@score_hash.each do |trait_id, count|
+  =Trait.find(trait_id).name + ': ' + count.to_s
+  %br
+
 %h3 Question by question
 -@answer_hash.each do |question_number, answer|
   %b
     =question_number.to_s + ':'
   =Trait.find(answer).name
-  %br
-
-%h3 Scored Quiz
--@score_hash.each do |trait_id, count|
-  =Trait.find(trait_id).name + ': ' + count.to_s
   %br
