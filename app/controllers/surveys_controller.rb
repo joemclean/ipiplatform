@@ -9,24 +9,10 @@ class SurveysController < ApplicationController
   end
 
   def get_results
+    survey = Survey.new
     @answer_hash = params['answers']
-
-    @answer_ids = []
-    @answer_hash.each do |question_number, trait_id|
-      @answer_ids << trait_id.to_i
-    end
-
-    @trait_ids = []
-    Trait.all.each do |trait|
-      @trait_ids << trait.id
-    end
-    
-    @score_hash = {}
-    @trait_ids.each do |trait_id|
-      answer_count = @answer_ids.count(trait_id)
-      @score_hash[trait_id] = answer_count
-    end
-
+    survey.answers = @answer_hash
+    @score_hash = survey.score
   end
 
   def build_questions(n)
@@ -34,7 +20,4 @@ class SurveysController < ApplicationController
       @survey.questions.build
     end
   end
-
-
-
 end
