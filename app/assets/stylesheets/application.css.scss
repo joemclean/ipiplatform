@@ -13,7 +13,7 @@
  */
 
 @import "bootstrap";
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Raleway);
 
 body { padding-top: 60px }
 
@@ -36,7 +36,7 @@ input[type="text"] {
 	margin-top:5px;
 	font: {
 	color:#fff;
-	family:Roboto;
+	family:Raleway;
 	}
 }
 
@@ -56,6 +56,9 @@ input[type="text"] {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
   -webkit-font-smoothing: antialiased;
   font: {
-    family:Roboto
+    family:Raleway
   }
+}
+.btn-text {
+	color: #fff
 }
