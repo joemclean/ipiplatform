@@ -1,13 +1,35 @@
-%h1 What type of innovator are you?
+.hero.innovator_hero
+	%h2 Innovator Types
+	%p
+		What’s a “innovator type”? We’ll tell you... Flannel Wes Anderson cliche semiotics. Pug raw denim organic selvage flexitarian YOLO. McSweeney's iPhone dreamcatcher, Neutra messenger bag authentic Tonx mustache meggings wolf master cleanse squid asymmetrical. Try-hard farm-to-table 8-bit sriracha kale chips. Street art Austin kogi fanny pack lomo. Thundercats lomo cornhole tofu you probably haven't heard of them.
+	.btn=link_to 'TAKE THE SURVEY', take_survey_path
+	%br
+	%br
+	.row
+		.btn
+			=link_to 'COLLABORATION', take_survey_path
+		.btn
+			=link_to 'RISK', take_survey_path
+		.btn
+			=link_to 'PROCESS', take_survey_path
+		.btn
+			=link_to 'STYLE', take_survey_path
+		.btn
+			=link_to 'DRIVER', take_survey_path
 
+
+
+
+%br
+%br
 =#image_tag 'placeholder.gif'
 .row
-  -@traits.each do |trait|
-    .traitbox.span6
-      %strong= trait.name
-      %br
-      %br
-      = trait.description
-      %br
-      %br
-      = link_to 'Show', trait
+	-@traits.each do |trait|
+		.traitbox.span6
+			%strong= trait.name
+			%br
+			%br
+			= trait.description
+			%br
+			%br
+			= link_to 'Show', trait
