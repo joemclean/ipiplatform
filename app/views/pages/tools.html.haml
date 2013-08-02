@@ -2,12 +2,15 @@
 
 =#image_tag 'placeholder.gif'
 .row
-  - @resources.each do |resource|
-    .resourcebox.span12
-      %strong= resource.name
-      %br
-      %br
-      = resource.description
-      %br
-      %br
-      = link_to 'Show', resource
+	- @resources.each do |resource|
+		.resourcebox.span12
+			%strong= resource.name
+			%br
+			%br
+			= resource.description
+			%br
+			%br
+			= link_to 'Show', resource
+
+.row
+	.btn=link_to 'Publish A Resource', new_resource_path

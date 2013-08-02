@@ -9,12 +9,25 @@
     big idea some structure.
     %br
     Sidekick is here to help.
+  .btn= link_to 'GET STARTED!', take_survey_path
+
   //.btn=link_to 'HOW IT WORKS', pages_aboutus_path
+//* %br
+//.row
+//  =link_to 'Take the invovator type quiz!', take_survey_path, :class => 'homepage_button span12'
 %br
 .row
-  =link_to 'Take the invovator type quiz!', take_survey_path, :class => 'homepage_button span12'
-%br
+  %h3{:align => 'center'} What Sidekick Can Do For You
+
 .row
-  =link_to 'Read about innovator types.', 'pages/innovator', :class => 'homepage_button span6'
-  =link_to 'Publish a resource.', new_resource_path, :class => 'homepage_button span6'
-%br
+  .td{:class => 'span6'}
+    %h4{:align => 'center', :style => 'color: #6bb8d4'} Learn About Common Innovator Types
+    %p{:align => 'center', :style => 'padding: 10px'} Bacon ipsum dolor sit amet filet mignon hamburger pork loin beef ribs ork flank fatback bresaola sirloin turkey. Capicola jerky doner meatloaf ground round short ribs corned beef leberkas andouille. Strip steak short ribs ribeye pork chicken filet mignon meatloaf andouille. Fatback biltong short ribs, chicken hamburger jowl venison t-bone pancetta shankle flank pastrami beef ribs. Drumstick shoulder leberkas bacon tenderloin, pastrami doner pork belly short ribs swine short loin prosciutto pig. 
+    .btn.pull-right= link_to 'Read about innovator types.', pages_innovator_path
+
+  .td{:class => 'span6'}
+    %h4{:align => 'center', :style => 'color: #6bb8d4'} We Have Resources for Every Project
+    %p{:align => 'center', :style => 'padding: 10px'} Bacon ipsum dolor sit amet filet mignon hamburger pork loin beef ribs ork flank fatback bresaola sirloin turkey. Capicola jerky doner meatloaf ground round short ribs corned beef leberkas andouille. Strip steak short ribs ribeye pork chicken filet mignon meatloaf andouille. Fatback biltong short ribs, chicken hamburger jowl venison t-bone pancetta shankle flank pastrami beef ribs. Drumstick shoulder leberkas bacon tenderloin, pastrami doner pork belly short ribs swine short loin prosciutto pig. 
+    .btn.pull-right= link_to 'Check out our resources.', pages_tools_path
+
+

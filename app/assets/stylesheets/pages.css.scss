@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 a.homepage_button {
-	background-color: #DE403C;
+	background-color: gray;
+  border-radius: 3px;
+  text-decoration: none;
 	text-align: center;
 	padding: 50px 0 50px 0;
 	font-size: 2em;
@@ -35,7 +37,7 @@ a.homepage_button {
   margin-top: -29px;
   background-image: asset-url('LandingBackground.png');
   width: 100%;
-  height: 300px;
+  height: 315px;
   color: #fff;
   text-align: center;
   .btn {
@@ -60,23 +62,31 @@ a.homepage_button {
   .awesome {
     margin: 0 auto;
     line-height: 1.3em;
-    font-size: 30px;
+    font-size: 2em;
     padding: 30px;
 
   }
 }
 
-.innovator_hero{
-  background-color: #FFF;
-  text-align: center;
-  h2 {
-    color: #3aaeef;
-  }
-  p {
-    margin: 15 100 15 100;
+.landing_hero {
+  .btn {
+    a {
+      color: #000;
+      font :{
+        family: Raleway;
+        weight: bold;
+        size: 2em;
+      }
+      text-decoration: none;
+    }
+  } 
+}
+
+.btn {
+  a { 
+    color: #DE403C;
+    font-weight: bold;
+    text-decoration: none;
   }
 }
-a.logo {
-  color: #DE403C;
-  font-family: Raleway;
-}
+
