@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   end
 
   def innovator
-    @traits = Trait.all
+    @spectrums = Spectrum.all
   end
   
   def tools

@@ -67,65 +67,73 @@ zig_zagger_responses = ['When working on a project, I like to follow wherever th
 'I am comfortable making rapid decisions']
 
 
+maverick = [
+    'Maverick',
+    'They call you something of a lone wolf (that’s right, we said it). You are an incredibly independent person, and you prefer those moments when you can quietly reflect on the outcomes of collaboration. In many ways you are a disruptive force—you present ideas that may guide your group in a different direction than they were headed. Your value in the innovative process is to really challenge the group, and produce ideas that may appear to have come out of nowhere. Your inclination towards introspective reflection brings strong and well-thought out ideas to the table.',
+    maverick_responses
+  ]
 
+team_player = [
+    'Team Player',
+    'They call you something of a collaborative powerhouse (excuse me, what?). You believe in the inherent value of ideas that emerge out of the collision of different minds and different people. You try your best to ensure that the potential of each colleague is fully tapped into, and that each and every voice is heard throughout the problem-solving process. In innovation, your point of view helps to guarantee that all of the different influences within a system are factored into the final outcome. Your inclination towards empathy and a democratic approach is bar none.',
+    team_player_responses
+  ]
+straight_liner = [
+    'Straight Liner',
+    'Some people might call you obsessive, but we’d prefer to call you rigorous. You believe that methodologies are tried, tested and true, so why mess with them? This means that you are hesitant to try new tactics, because you know that your methodology will work. As a matter of fact, you’d rather spend your time building out those tactics as opposed to reconfiguring them. As an innovator, you question the idea of reinventing the wheel when it already works so well. Instead, you find the idea of reinventing the way we use a wheel more exciting.',
+    straight_liner_responses
+  ]
+zig_zagger = [
+    'Zig-Zagger',
+    'You’re kind of erratic, but we mean that in the best way possible. You believe that methodologies should adapt as the problem takes on a new shape. You spend your time applying new methodologies, and often look towards other industries for insight into new ways to approach a certain scenario. This means that you don’t necessarily approach a problem with a set plan in mind, even though you have an arsenal of tactics to draw from. As an innovator, you are a wealth of knowledge when it comes to garnering methodologies.',
+    zig_zagger_responses
+  ]
+enterpriser = [
+    'Enterpriser',
+    'You are driven by external rewards, and deeply believe in the value of authorship over your ideas. It’s a big bad world out there, and you want to claim the impact that you are responsible for having created. You are not selfish, but rather, you are headstrong and believe that good work should receive the appropriate accolades. In innovation, you believe that it’s important to instigate personal growth and ensure that the community knows that you and your team are responsible for any of your successes. ',
+    enterpriser_responses
+  ]
+altruist = [
+    'Altruist',
+    'You are an idealist—you believe in the greatest amount of good for the greatest number of people. Your drive to do groundbreaking work is motivated by your internal pride and satisfaction. You don’t necessarily need to see your name posted on the plaque. Rather, you just want to know that your work has had an impact. In innovation, you believe that impact should be at the forefront of every great idea. Save the people!',
+    altruist_responses
+  ]
+adventurer = [
+    'Adventurer',
+    'You’ve got guts, and those guts are always telling you what to do. The thing is, you don’t really challenge them. Instead, you go with them without hesitation or question. This willingness to take chances has helped you to adapt to the most precarious of situations. Because of this, you’re not afraid to act as quickly as you possibly can, no matter what stands in your way. In innovation, your swiftness and agility enables you to create and reiterate just as fast as Wile E. Coyote.',
+    adventurer_responses
+  ]
+anchor = [
+    'Anchor',
+    'You’ve got a little guy sitting on your shoulder, and he’s always telling you what to do: slow down, think it through, take your time. This voice in your head is always making you step back, and really reflect on the situation at hand. Your moves are always very calculated and well thought-out. You are a strategist at heart, and prefer to plot out each move as opposed to just react off hand. In innovation, you help to ensure that each move is created with a wee bit of reality and a large dash of practicality.',
+    anchor_responses
+  ]
+analyst = [
+    'Analyst',
+    'You’re like an astronaut tethered to her spaceship—you’re willing to explore, but only when you have a connection back to earth. You thrive on numbers and statistics, and need to establish precendents before you can proceed with your idea. This desire for tangibility makes you bring a level of objectivity to any and every project. In innovation, you bring a very micro-lens to the table that ensures that all of the details of an idea are solid and in place.',
+    analyst_responses
+  ]
+visionary = [
+    'Visionary',
+    'You’re like the best dream you’ve ever had—you’re nothing but imagination and ingenuity. Your tendency to think outside of the box creates completely inspirational and spontaneous ideas. You don’t really care what happens before or after your great idea, because your main motivation is to really extend the mind, and create something that is unlike anything anyone’s ever seen before. When it comes to innovation you’re the big bang that started the Universe.',
+    visionary_responses
+  ]
 
-    traits = [[
-        'Maverick',
-        'They call you something of a lone wolf (that’s right, we said it). You are an incredibly independent person, and you prefer those moments when you can quietly reflect on the outcomes of collaboration. In many ways you are a disruptive force—you present ideas that may guide your group in a different direction than they were headed. Your value in the innovative process is to really challenge the group, and produce ideas that may appear to have come out of nowhere. Your inclination towards introspective reflection brings strong and well-thought out ideas to the table.',
-        maverick_responses
-      ],
-      [
-        'Team Player',
-        'They call you something of a collaborative powerhouse (excuse me, what?). You believe in the inherent value of ideas that emerge out of the collision of different minds and different people. You try your best to ensure that the potential of each colleague is fully tapped into, and that each and every voice is heard throughout the problem-solving process. In innovation, your point of view helps to guarantee that all of the different influences within a system are factored into the final outcome. Your inclination towards empathy and a democratic approach is bar none.',
-        team_player_responses
-      ],
-      [
-        'Straight Liner',
-        'Some people might call you obsessive, but we’d prefer to call you rigorous. You believe that methodologies are tried, tested and true, so why mess with them? This means that you are hesitant to try new tactics, because you know that your methodology will work. As a matter of fact, you’d rather spend your time building out those tactics as opposed to reconfiguring them. As an innovator, you question the idea of reinventing the wheel when it already works so well. Instead, you find the idea of reinventing the way we use a wheel more exciting.',
-        straight_liner_responses
-      ],
-      [
-        'Zig-Zagger',
-        'You’re kind of erratic, but we mean that in the best way possible. You believe that methodologies should adapt as the problem takes on a new shape. You spend your time applying new methodologies, and often look towards other industries for insight into new ways to approach a certain scenario. This means that you don’t necessarily approach a problem with a set plan in mind, even though you have an arsenal of tactics to draw from. As an innovator, you are a wealth of knowledge when it comes to garnering methodologies.',
-        zig_zagger_responses
-      ],
-      [
-        'Enterpriser',
-        'You are driven by external rewards, and deeply believe in the value of authorship over your ideas. It’s a big bad world out there, and you want to claim the impact that you are responsible for having created. You are not selfish, but rather, you are headstrong and believe that good work should receive the appropriate accolades. In innovation, you believe that it’s important to instigate personal growth and ensure that the community knows that you and your team are responsible for any of your successes. ',
-        enterpriser_responses
-      ],
-      [
-        'Altruist',
-        'You are an idealist—you believe in the greatest amount of good for the greatest number of people. Your drive to do groundbreaking work is motivated by your internal pride and satisfaction. You don’t necessarily need to see your name posted on the plaque. Rather, you just want to know that your work has had an impact. In innovation, you believe that impact should be at the forefront of every great idea. Save the people!',
-        altruist_responses
-      ],
-      [
-        'Adventurer',
-        'You’ve got guts, and those guts are always telling you what to do. The thing is, you don’t really challenge them. Instead, you go with them without hesitation or question. This willingness to take chances has helped you to adapt to the most precarious of situations. Because of this, you’re not afraid to act as quickly as you possibly can, no matter what stands in your way. In innovation, your swiftness and agility enables you to create and reiterate just as fast as Wile E. Coyote.',
-        adventurer_responses
-      ],
-      [
-        'Anchor',
-        'You’ve got a little guy sitting on your shoulder, and he’s always telling you what to do: slow down, think it through, take your time. This voice in your head is always making you step back, and really reflect on the situation at hand. Your moves are always very calculated and well thought-out. You are a strategist at heart, and prefer to plot out each move as opposed to just react off hand. In innovation, you help to ensure that each move is created with a wee bit of reality and a large dash of practicality.',
-        anchor_responses
-      ],
-      [
-        'Analyst',
-        'You’re like an astronaut tethered to her spaceship—you’re willing to explore, but only when you have a connection back to earth. You thrive on numbers and statistics, and need to establish precendents before you can proceed with your idea. This desire for tangibility makes you bring a level of objectivity to any and every project. In innovation, you bring a very micro-lens to the table that ensures that all of the details of an idea are solid and in place.',
-        analyst_responses
-      ],
-      [
-        'Visionary',
-        'You’re like the best dream you’ve ever had—you’re nothing but imagination and ingenuity. Your tendency to think outside of the box creates completely inspirational and spontaneous ideas. You don’t really care what happens before or after your great idea, because your main motivation is to really extend the mind, and create something that is unlike anything anyone’s ever seen before. When it comes to innovation you’re the big bang that started the Universe.',
-        visionary_responses
-      ]
-      ]
-    traits.each do |name, description,responses|
-      trait = Trait.find_or_create_by_name_and_description(name: name, description: description)
-      responses.each do |response|
-        trait.question_responses.create(response: response)
-      end
+spectrum_names = [
+  ['Collaboration', [maverick, team_player]], 
+  ['Risk', [anchor, adventurer]], 
+  ['Process', [straight_liner, zig_zagger]], 
+  ['Style', [analyst, visionary]], 
+  ['Drivers', [altruist, enterpriser]]
+]
+spectrum_names.each do |name, trait_pair|
+  spectrum = Spectrum.create(name: name)
+  trait_pair.each do |name, description, responses|
+    trait = spectrum.traits.find_or_create_by_name_and_description(name: name, description: description)
+    responses.each do |response|
+      trait.question_responses.create(response: response)
     end
-
+  end
+end
 
 

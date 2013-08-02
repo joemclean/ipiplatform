@@ -22,14 +22,18 @@
 
 %br
 %br
-=#image_tag 'placeholder.gif'
-.row
-	-@traits.each do |trait|
-		.traitbox.span6
-			%strong= trait.name
-			%br
-			%br
-			= trait.description
-			%br
-			%br
-			= link_to 'Show', trait
+
+-@spectrums.each do |spectrum|
+	=spectrum.name
+	%br
+	=#image_tag 'placeholder.gif'
+	.row
+		-spectrum.traits.each do |trait|
+			.traitbox.span6
+				%strong= trait.name
+				%br
+				%br
+				= trait.description
+				%br
+				%br
+				= link_to 'Show', trait

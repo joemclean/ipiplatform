@@ -2,6 +2,7 @@ class Trait < ActiveRecord::Base
   has_many :trait_associations
   has_many :resources, through: :trait_associations
   has_many :question_responses
+  belongs_to :spectrum
 
   def ids
     trait_ids = []
