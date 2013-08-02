@@ -127,7 +127,7 @@ spectrum_names = [
   ['Drivers', [altruist, enterpriser]]
 ]
 spectrum_names.each do |name, trait_pair|
-  spectrum = Spectrum.create(name: name)
+  spectrum = Spectrum.find_or_create_by_name(name: name)
   trait_pair.each do |name, description, responses|
     trait = spectrum.traits.find_or_create_by_name_and_description(name: name, description: description)
     responses.each do |response|
@@ -162,6 +162,6 @@ resources = [
 ]
   
 resources.each do |name, full_description|
-  resources = Resource.create(name: name, full_description: full_description)
+  resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
 end
 

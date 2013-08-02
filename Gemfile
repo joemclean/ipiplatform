@@ -9,6 +9,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem "haml-rails"
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'bootstrap_forms'
+gem 'hirb'
 
 group :development do
   gem 'taps'
