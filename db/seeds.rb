@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 analyst_responses = ['I excel at understanding intricate problems.',
 'I believe it is important to consider all possibilities before acting',
 'I believe decisions should be based on evidence.',

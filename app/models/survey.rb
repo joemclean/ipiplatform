@@ -23,4 +23,13 @@ class Survey < ActiveRecord::Base
     end
     score_hash
   end
+
+  def generate_questions
+    trait_ids = Trait.ids
+    25.times do
+      question = self.questions.build
+      id_pair = trait_ids.sample(2)
+      question.make_responses(id_pair)
+    end
+  end
 end
