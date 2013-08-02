@@ -11,12 +11,16 @@ a.homepage_button {
 }
 
 .traitbox {
-  background-color: #e2e2e2;
-  height: 300px;
   padding: 10px;
+  height: 525px;
   box-sizing: border-box;
   border-radius: 3px;
   margin-bottom: 20px;
+  p {
+    text-align: center;
+    color: #3aaeef;
+    font-size: 18px;
+  }
 }
 
 .resourcebox {
