@@ -1,44 +1,43 @@
 .hero.signin_hero
-  %h2 Create a User Account
-  %h4 Create one account, customize your innovation experience.
-  %table
-    %tr
-      %td{:style => 'text-align: center', :min_width => '400px'}
-        =form_for @user do |f|
-          -if @user.errors.any?
-            .error_messages
-              %h2 Form is invalid
-              %ul
-                -@user.errors.full_messages.each do |message|
-                  %li
-                    =message
-          .field
-            =f.label :name
-            =f.text_field :name
-          .field
-            =f.label :email
-            =f.text_field :email
-          .field
-            =f.label :password
-            =f.password_field :password
-          .field
-            =f.label :password_confirmation
-            =f.password_field :password_confirmation
-          .actions
-            =f.submit 'Sign Up'
-      %td{:style => 'text-align: center'}
-        %p
-          =image_tag 'edison.png'
-          %br
-          %br
-          "To invent, you need a good imagination and a pile of junk."
-          %br
-          Thomas A. Edison
-          %br
-        %div.small
-          =image_tag 'adventurer.png'
-          =image_tag 'anchor.png'
-          =image_tag 'maverick.png'
-          =image_tag 'team_player.png'
+  %h2 Sign Up for sidekick
+  %h4 Create an account to customize your innovation experience.
+  .container
+    .col.left
+      =form_for @user do |f|
+        -if @user.errors.any?
+          .error_messages
+            %h2 Form is invalid
+            %ul
+              -@user.errors.full_messages.each do |message|
+                %li
+                  =message
+        .field
+          =f.label :name
+          =f.text_field :name
+        .field
+          =f.label :email
+          =f.text_field :email
+        .field
+          =f.label :password
+          =f.password_field :password
+        .field
+          =f.label :password_confirmation
+          =f.password_field :password_confirmation
+        .actions
+          =f.submit 'Sign Up'
+    .col.right
+      = image_tag 'edison.png', class: 'primary'
+      %br
+      %br
+      "To invent, you need a good imagination and a pile of junk."
+      %br
+      &mdash; Thomas A. Edison
+      %br
+      %br
+      =image_tag 'adventurer.png'
+      =image_tag 'anchor.png'
+      =image_tag 'maverick.png'
+      =image_tag 'team_player.png'
   %p
-    =link_to 'Already a member?', new_session_path
+    Already a member?
+    =link_to 'Sign In', new_session_path

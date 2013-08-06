@@ -105,20 +105,31 @@ input[type="password"] {
 .signin_hero{
   border-radius: 10px;
   background-color: #ebebeb;
-  padding: 5 5 5 5;
   text-align: center;
-  table {
-    tr td {
-      align: center;
-      padding: 10px;
-      div {
+  padding: 10px 10px 10px 10px;
+  .container {
+    width: 100%;
+    .col {
+      float: left;
+      display: block;
+      &.left {
+        width: 40%;
+        margin: 30px 40px;
+        .field f label {
+          font-weight: bold;
+        }
+      }
+      &.right {
+        margin: 20px 40px;
         img {
           width: 75px;
           height: 75px;
+          &.primary {
+            height: auto;
+            width: auto;
+          }
         }
       }
     }
-    border: 0px solid black;
-    width: 100%;
   }
 }
