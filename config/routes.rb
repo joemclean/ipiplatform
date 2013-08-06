@@ -1,4 +1,5 @@
 IpiPlatform::Application.routes.draw do
+  resources :sessions
   resources :users
 
   get "questions/new"

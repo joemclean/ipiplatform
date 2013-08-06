@@ -1,11 +1,12 @@
-.navbar.navbar-bottom
-  .navbar-inner
-    .btn-group.pull-right
-      .btn
-        =link_to 'Resources', resources_path
-      .btn
-        =link_to 'Traits', traits_path
-      .btn
-        =link_to 'Question Responses', question_responses_path
-    %p.navbar-text
-      Back end stuff
+-if current_user
+  .navbar.navbar-bottom
+    .navbar-inner
+      .btn-group.pull-right
+        .btn
+          =link_to 'Resources', resources_path
+        .btn
+          =link_to 'Traits', traits_path
+        .btn
+          =link_to 'Question Responses', question_responses_path
+      %p.navbar-text
+        Back end stuff

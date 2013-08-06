@@ -12,5 +12,12 @@
           =link_to 'About', pages_aboutus_path
       .brand
         =link_to 'sidekick', root_path
-      .btn.suggestions_button.pull-right
-        =link_to 'Suggestions', suggestions_path
+      .right_box.pull-right
+        .btn.suggestions_button
+          =link_to 'Suggestions', suggestions_path
+        -if current_user
+          ='Welcome, ' + current_user.name + ' | '
+          = link_to "Log Out", session_path("current"), method: "delete"
+        -else
+          =link_to 'Sign up!', new_user_path
+          =link_to 'Sign in', new_session_path

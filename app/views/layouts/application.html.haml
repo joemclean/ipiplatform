@@ -8,6 +8,8 @@
   %body
     .content
       = render 'layouts/header'  
+    .flash
+      =flash[:notice]
     .container
       = yield
     .content

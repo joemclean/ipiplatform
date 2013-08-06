@@ -1,5 +1,6 @@
 class TraitsController < ApplicationController
   before_action :set_trait, only: [:show, :edit, :update, :destroy]
+  before_filter :authorize
 
   def index
     @traits = Trait.all
