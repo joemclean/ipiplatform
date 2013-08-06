@@ -101,3 +101,24 @@ input[type="password"] {
   text-decoration: none;
   }
 }
+
+.signin_hero{
+  border-radius: 10px;
+  background-color: #ebebeb;
+  padding: 5 5 5 5;
+  text-align: center;
+  table {
+    tr td {
+      align: center;
+      padding: 10px;
+      div {
+        img {
+          width: 75px;
+          height: 75px;
+        }
+      }
+    }
+    border: 0px solid black;
+    width: 100%;
+  }
+}
