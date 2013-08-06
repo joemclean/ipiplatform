@@ -1,4 +1,6 @@
 IpiPlatform::Application.routes.draw do
+  resources :users
+
   get "questions/new"
   get "surveys/new"
   get "surveys/take_survey", :as => :take_survey
