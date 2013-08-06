@@ -1,6 +1,6 @@
-.btn.pull-right
-  = link_to 'New Resources', new_resource_path
-
+-if current_user
+  .btn.pull-right
+    = link_to 'New Resources', new_resource_path
 
 %h1
   Resources
@@ -20,10 +20,18 @@
         .btn
           = link_to 'Go!', resource.link
       %td= resource.description
+       
       %td= link_to 'Show', resource
-      %td= link_to 'Edit', edit_resource_path(resource)
-      %td= link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -if current_user
+        %td= link_to 'Edit', edit_resource_path(resource)
+        %td= link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
 
 %br      
-.btn
-  = link_to 'New Resource', new_resource_path
+
+
+-if current_user
+-else
+.row.phase-white
+  %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 0 0 0 0;'} Log in to edit resources!
+
