@@ -1,9 +1,11 @@
 .hero.signin_hero
   %h2 
     Sign Up for | 
-    %span{style: 'color:#3aaeef;'} 
+    %span{style: 'color:#DE403C;'} 
       sidekick |
-  %h4 Create an account to customize your innovation experience.
+  %h4
+    %span{style: 'color:#3AAEEF;'}
+      Create an account to customize your innovation experience.
   .container
     .col.left
       =form_for @user do |f|
@@ -34,13 +36,15 @@
       %br
       "To invent, you need a good imagination and a pile of junk."
       %br
-      &mdash; Thomas A. Edison
+      %span{style: 'color: grey;'}
+        &mdash; Thomas A. Edison
       %br
       %br
-      =image_tag 'adventurer.png'
+      =image_tag 'altruist.png'
       =image_tag 'anchor.png'
       =image_tag 'maverick.png'
-      =image_tag 'team_player.png'
+      =image_tag 'visionary.png'
+      =image_tag 'zigzagger.png'
   %p
     Already a member?
-    =link_to 'Sign In', new_session_path
+    =link_to 'Sign In!', new_session_path

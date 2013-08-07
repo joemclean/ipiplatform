@@ -1,17 +1,29 @@
 .hero.signin_hero
-	%h2 Login to sidekick
-
 	.container
-		=form_tag sessions_path do
-			.field
-				=label_tag :email
-				=text_field_tag :email, params[:email], class: 'loginfield'
-			.field
-				=label_tag :password
-				=password_field_tag :password, '', class: 'passwordfield'
-			.actions
-				=submit_tag 'Log in', class: 'submitbutton'
-			%br
-			%p
-				Not a member yet?
-				=link_to 'Sign up!', new_user_path
+		.col.left
+			%h2 
+				Login to |
+				%span{style: 'color:#DE403C;'}
+					sidekick |
+
+			.container
+				=form_tag sessions_path do
+					.field
+						=label_tag :email
+						=text_field_tag :email, params[:email], class: 'loginfield'
+					.field
+						=label_tag :password
+						=password_field_tag :password, '', class: 'passwordfield'
+					.actions
+						=submit_tag 'Log in', class: 'submitbutton'
+					%br
+					%p
+						Not a member yet?
+						=link_to 'Sign up!', new_user_path
+		.col.right
+			.typeicons
+				=image_tag 'enterpriser.png'
+				=image_tag 'adventurer.png'
+				=image_tag 'team_player.png'
+				=image_tag 'analyst.png'
+				=image_tag 'straightliner.png'

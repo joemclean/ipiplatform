@@ -137,6 +137,9 @@ input[type="password"] {
       }
       &.right {
         margin: 20px 40px;
+        .typeicons {
+          margin: 125px 0;
+        }
         img {
           width: 75px;
           height: 75px;
