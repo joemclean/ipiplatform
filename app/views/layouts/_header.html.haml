@@ -10,15 +10,13 @@
           =link_to 'Phases', pages_phases_path
         .btn
           =link_to 'About', pages_aboutus_path
-        -if current_user
-          .btn
-            = link_to 'Profile', pages_profile_path
+
       .brand
         =link_to 'sidekick', root_path
       .right_box.pull-right
         .content
           -if current_user
-            ='Welcome, ' + current_user.name + ' | '
+            = link_to  'Welcome, ' + current_user.name + ' | ' , pages_profile_path
             = link_to "Log Out", session_path("current"), method: "delete"
 
           -else

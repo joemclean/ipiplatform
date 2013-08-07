@@ -1,4 +1,47 @@
 .hero.signin_hero
+
   -if current_user
     %h2
       = 'Welcome to your user page , ' + current_user.name 
+  .container
+    .image-group.pull-left
+      = image_tag 'Profile3.png' , class: 'primary'
+      %br
+
+    .image-group.pull-left
+      =image_tag 'adventurer.png'
+      =image_tag 'anchor.png'
+      =image_tag 'maverick.png'
+      =image_tag 'team_player.png'
+      %br
+  %br
+  %br
+    %section.phase-white
+      %table
+        %tr
+
+          %h2 Recent Tools Used
+
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+          %br
+
+
+    %section.phase-grey
+      %table
+        %tr
+
+          %h2 Recent Resources Published
+
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+          = image_tag 'ToolsPlaceholder.png'
+
+        // This phase involves taking direct action to synthesize and put out a physical product, or take concrete steps in making the solution outlined in the plan phase a reality. Prototyping, networking, and product development fall under this category. 
+
+
+
+
