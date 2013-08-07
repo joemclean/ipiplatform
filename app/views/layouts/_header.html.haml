@@ -14,17 +14,18 @@
       .brand
         =link_to 'sidekick', root_path
       .right_box.pull-right
-        .content
+        .content.user_name
           -if current_user
-            %p.navbar-text.pull-right              
-              = link_to  'Welcome, ' + current_user.name + ' | ' , pages_profile_path
-              = link_to "Log Out", session_path("current"), method: "delete"
+            = link_to  'Welcome, ' + current_user.name, pages_profile_path
+            = ' | '
+            = link_to "Log Out", session_path("current"), method: "delete"
 
           -else
-            %p.navbar-text.pull-right   
-              =link_to 'Sign up!', new_user_path
-              =link_to 'Sign in', new_session_path
-          .btn-group.pull-right
-            .btn.suggestions_button
-              =link_to 'Suggestions', suggestions_path
-        
+            =link_to 'Sign up', new_user_path
+            =' | '
+            =link_to 'Sign in', new_session_path
+      .right_box.pull-right
+        .btn-group
+          .btn.suggestions_button
+            =link_to 'Suggestions', suggestions_path, class: 'suggestion'
+
