@@ -108,6 +108,16 @@ input[type="password"] {
   text-align: center;
   padding: 10px 10px 10px 10px;
   .container {
+
+    .field {
+      .loginfield {
+        width: 250px;
+      }
+      .passwordfield {
+        width: 250px;
+      }
+    }
+
     width: 100%;
     .col {
       float: left;
@@ -115,9 +125,6 @@ input[type="password"] {
       &.left {
         width: 40%;
         margin: 30px 40px;
-        .field f label {
-          font-weight: bold;
-        }
       }
       &.right {
         margin: 20px 40px;

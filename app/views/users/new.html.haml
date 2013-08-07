@@ -13,16 +13,16 @@
                   =message
         .field
           =f.label :name
-          =f.text_field :name
+          =f.text_field :name, class: 'loginfield'
         .field
           =f.label :email
-          =f.text_field :email
+          =f.text_field :email, class: 'loginfield'
         .field
           =f.label :password
-          =f.password_field :password
+          =f.password_field :password, class: 'passwordfield'
         .field
           =f.label :password_confirmation
-          =f.password_field :password_confirmation
+          =f.password_field :password_confirmation, class: 'passwordfield'
         .actions
           =f.submit 'Sign Up'
     .col.right

@@ -13,11 +13,12 @@
       .brand
         =link_to 'sidekick', root_path
       .right_box.pull-right
+        .content
+          -if current_user
+            ='Welcome, ' + current_user.name + ' | '
+            = link_to "Log Out", session_path("current"), method: "delete"
+          -else
+            =link_to 'Sign up!', new_user_path
+            =link_to 'Sign in', new_session_path
         .btn.suggestions_button
           =link_to 'Suggestions', suggestions_path
-        -if current_user
-          ='Welcome, ' + current_user.name + ' | '
-          = link_to "Log Out", session_path("current"), method: "delete"
-        -else
-          =link_to 'Sign up!', new_user_path
-          =link_to 'Sign in', new_session_path
