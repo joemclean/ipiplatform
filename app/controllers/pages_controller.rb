@@ -29,6 +29,7 @@ class PagesController < ApplicationController
   end
   
   def profile
+    @resources = Resource.find(:all, :conditions => [ "user_id = ?", session[:user_id]])
   end
   
   

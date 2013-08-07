@@ -23,7 +23,7 @@ class ResourcesController < ApplicationController
   def create
     @resource = Resource.new(resource_params)
     @traits = Trait.all
-
+    @resource.user_id = session[:user_id]
     respond_to do |format|
       if @resource.save
         format.html { redirect_to @resource, notice: 'Resource was successfully created.' }

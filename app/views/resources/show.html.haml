@@ -9,6 +9,9 @@
   %b Full Description:
   = @resource.full_description
   %p
+    %b User ID: 
+    =@resource.user_id
+  %p
     %b This is a great resource for:
     %ul
       -@resource.traits.each do |trait|
