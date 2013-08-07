@@ -19,7 +19,7 @@
   font-family: Raleway;
 }
 
-body { padding-top: 100px }
+body { padding-top: 55px }
 
 input[type="text"] {
 	padding: 15px 10px;
@@ -27,6 +27,13 @@ input[type="text"] {
 
 input[type="password"] {
   padding: 15px 10px;
+}
+
+.div.alert_area {
+  padding: 0 0 0 0;
+  .flash {
+    text-align: center;
+  }
 }
 
 .actions {
@@ -41,7 +48,7 @@ input[type="password"] {
 }
 
 .navbar-top {
-  margin-bottom:25px
+  margin-bottom: 25px
 }
 
 //SUGGESTIONS BUTTON

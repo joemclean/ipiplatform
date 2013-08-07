@@ -6,10 +6,11 @@
     = csrf_meta_tags
 
   %body
-    .content
-      = render 'layouts/header'  
-    .flash
-      =flash[:notice]
+    = render 'layouts/header'
+    -if flash[:notice] 
+      .div.alert_area
+        .flash
+          =flash[:notice]
     .container
       = yield
     .content
