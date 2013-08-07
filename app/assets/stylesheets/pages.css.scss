@@ -33,7 +33,7 @@ a.homepage_button {
   margin-bottom: 20px;
 }
 
-.landing_hero {
+.homepage_hero {
   margin-top: -29px;
   background-image: asset-url('LandingBackground.png');
   width: 100%;
@@ -77,10 +77,55 @@ a.homepage_button {
         weight: bold;
         size: 2em;
       }
-      text-decoration: none;
+    text-decoration: none;
     }
-  } 
+  }
+
+  .whitesection {
+    background-color: #eee;
+    padding: 40px 15px 40px 15px;
+    margin: 0px;
+    color: #DE403C;
+    text-align: center;
+    line-height: 1.1em;
+    font :{
+    size: 2em;
+    }
+  }
 }
+
+.bluesection {
+  background-color: #6BB8D4;
+  color: #FFF;
+  text-align: center;
+  line-height: 1.1em;
+  font :{
+    size: 1.8em;
+  }
+  .box {
+    background-color: #4291AD;
+    padding: 4 2 8 2;
+    font :{
+      size: 0.8em;
+    }
+  }
+  .col {
+    &.left {
+      text-align: center;
+      box-sizing: border-box;
+      padding: 40px 0 0 65px;
+    }
+    &.right {
+      text-align: left;
+      box-sizing: border-box;
+      font :{
+        size: 0.7em;
+      }
+      padding: 40px;
+    }
+  }
+}
+
 
 .btn {
   a { 
