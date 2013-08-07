@@ -107,14 +107,23 @@ input[type="password"] {
   background-color: #ebebeb;
   text-align: center;
   padding: 10px 10px 10px 10px;
+  margin: 0 0 30px;
   .container {
-
     .field {
       .loginfield {
         width: 250px;
       }
       .passwordfield {
         width: 250px;
+      }
+    }
+
+    .actions {
+      .submitbutton {
+        padding: 4 10 4 10;
+        background-color: transparent;
+        color: #DE403C;
+        border-radius: 5px;
       }
     }
 
