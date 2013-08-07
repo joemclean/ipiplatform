@@ -33,6 +33,13 @@ a.homepage_button {
   margin-bottom: 20px;
 }
 
+.profile_icon {
+  img {
+    width: 75px;
+    height: 75px;
+  }
+}
+
 .homepage_hero {
   margin-top: -29px;
   background-image: asset-url('LandingBackground.png');
