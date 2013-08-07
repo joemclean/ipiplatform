@@ -46,7 +46,7 @@ input[type="password"] {
 
 //SUGGESTIONS BUTTON
 .btn.suggestions_button {
-	margin-top:10px;
+	margin-top: 10px;
 	font: {
 	color:#fff;
 	family:Raleway;
@@ -77,6 +77,10 @@ input[type="password"] {
     }
   }
   
+  .user_name {
+    padding: 14px;
+  }
+
   .brand {
     position: absolute;
     left: 44%;
