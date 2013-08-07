@@ -3,6 +3,8 @@ IpiPlatform::Application.routes.draw do
   resources :industries
   resources :sessions
   resources :users
+  
+ # match '/signup' to 'user#new', via: 'get'
 
   get "questions/new"
   get "surveys/new"
