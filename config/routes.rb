@@ -13,6 +13,7 @@ IpiPlatform::Application.routes.draw do
   get "pages/phases"
   get "pages/tools"
   get "pages/landing"
+  get "pages/profile"
 
   resources :traits
   resources :resources
