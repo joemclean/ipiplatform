@@ -2,6 +2,7 @@
 
 %h2
   ='Resource: '+ @resource.name
+%p.authorBox='Uploaded by: ' + @resource.author.name
 %p
   %b Link:
   = link_to @resource.link, @resource.link

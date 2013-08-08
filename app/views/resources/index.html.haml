@@ -16,6 +16,7 @@
   - @resources.each do |resource|
     %tr
       %td= resource.name
+      %td.authorBox= 'Uploaded by: ' + resource.author.name
       %td
         .btn
           = link_to 'Go!', resource.link
