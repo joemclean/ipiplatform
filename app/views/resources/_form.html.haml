@@ -14,6 +14,8 @@
   .field
     = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => 'span8', :rows => 6
   .field
+    = f.text_field :source, :placeholder => 'Who developed this resource?', :class => 'span6'
+  .field
     = hidden_field_tag "resource[trait_ids][]", nil
     -@traits.each do |trait|
       =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)

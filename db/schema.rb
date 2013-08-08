@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808140303) do
+ActiveRecord::Schema.define(version: 20130808190326) do
 
   create_table "question_responses", force: true do |t|
     t.text     "response"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130808140303) do
     t.datetime "updated_at"
     t.text     "full_description"
     t.integer  "user_id"
+    t.string   "source"
   end
 
   create_table "spectrums", force: true do |t|
