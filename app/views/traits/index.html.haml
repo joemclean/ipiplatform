@@ -17,7 +17,6 @@
       -if current_user.is_admin?
         %td= link_to 'Edit', edit_trait_path(trait)
         %td= link_to 'Destroy', trait, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
 .btn
