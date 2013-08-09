@@ -137,7 +137,7 @@ spectrum_names.each do |name, trait_pair|
 end
 
 resources = [
-  ['AB Sketching',
+  ['AB Testing',
   'Goal: Identify the best performing design from a number of options for an existing service or project.'],
   [' Money Talks',
   'Prioritize items within the constraints of your budget.'],
@@ -145,7 +145,7 @@ resources = [
   'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.'],
   [' How Did I Get There? - ThoughtWorks Innovation Deck',
   'Goal: This is a great ice breaker activity for people who may not have worked together before and to get participants comfortable with communicating their ideas through sketching.'],
-  ['How Might We ThoughtWorks Innovation Deck',
+  ['"How Might We" ThoughtWorks Innovation Deck',
   'Goal: Genesis of new ideas or solutions to a defined problem.'],
   ['HBS Elevator Pitch',
   'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
@@ -164,4 +164,3 @@ resources = [
 resources.each do |name, full_description|
   resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
 end
-
