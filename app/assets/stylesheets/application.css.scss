@@ -19,7 +19,7 @@
   font-family: Raleway;
 }
 
-body { padding-top: 55px }
+body { padding-top: 65px }
 
 input[type="text"] {
 	padding: 15px 10px;
@@ -32,8 +32,11 @@ input[type="password"] {
 .div.alert_area {
   padding: 10px;
   margin-bottom: 5px;
+  color: #3aaeef;
+  padding: 0 0 0 0;
   .flash {
-    text-align: center;
+    text-align: right;
+    background-color: #000;
   }
   background-color: #fff388;
 }
