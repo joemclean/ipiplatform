@@ -13,8 +13,10 @@
       %td= trait.name
       %td= trait.description
       %td= link_to 'Show', trait
-      %td= link_to 'Edit', edit_trait_path(trait)
-      %td= link_to 'Destroy', trait, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      
+      -if current_user.is_admin?
+        %td= link_to 'Edit', edit_trait_path(trait)
+        %td= link_to 'Destroy', trait, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
