@@ -21,18 +21,14 @@
         .btn
           = link_to 'Go!', resource.link
       %td= resource.description
-       
+
       %td= link_to 'Show', resource
       -if current_user
         %td= link_to 'Edit', edit_resource_path(resource)
         %td= link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-
-%br      
-
+%br
 
 -if current_user
 -else
 .row.phase-white
   %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 0 0 0 0;'} Log in to edit resources!
-
