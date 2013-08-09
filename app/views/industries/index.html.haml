@@ -1,0 +1,17 @@
+%h1 List of industries
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Edit
+    %th Delete
+
+  - @industries.each do |industry|
+    %tr
+      %td= industry.name
+      %td= link_to 'Edit', edit_industry_path(industry)
+      %td= link_to 'Delete', industry, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'Add new industry', new_industry_path

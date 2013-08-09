@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @industry.name
+
+= link_to 'Edit', edit_industry_path(@industry)
+\|
+= link_to 'Back', industries_path

@@ -166,3 +166,21 @@ resources.each do |name, full_description|
 end
 
 user = User.create(name: 'Default Admin', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
+
+industries = [
+  'Does not matter',
+  'Education',
+  'Finance',
+  'Travel',
+  'Retail',
+  'Media',
+  'Hospitality',
+  'Healthcare',
+  'Hardware Technology',
+  'Software Technology',
+  'Energy'
+]
+
+industries.each do |industry|
+  Industry.create(name: industry)
+end

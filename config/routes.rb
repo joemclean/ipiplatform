@@ -1,4 +1,6 @@
 IpiPlatform::Application.routes.draw do
+  resources :industries
+
   resources :sessions
   resources :users
 
