@@ -1,6 +1,6 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :signed_in?
 
   def index
     @resources = Resource.all

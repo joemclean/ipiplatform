@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  before_filter :authorized?, except: [:new, :create]
+  before_filter :set_user, only: [:edit, :update]
+
   def new
     @user = User.new
   end
@@ -12,9 +16,19 @@ class UsersController < ApplicationController
       render "new"
     end
   end
+  
+  def index
+    @users = User.all
+  end
 
+  def edit
+  end
 
-
+  def update
+    @user.update(user_params)
+    @user.save
+    redirect_to users_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -24,6 +38,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :is_admin)
     end
 end

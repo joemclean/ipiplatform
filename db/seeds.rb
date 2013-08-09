@@ -165,3 +165,5 @@ resources.each do |name, full_description|
   resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
 end
 
+user = User.create(name: 'Default Admin', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
+

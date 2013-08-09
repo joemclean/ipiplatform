@@ -1,0 +1,24 @@
+//a list of all users with a checkbox or link to edit
+
+%h1 Manage Users
+%table.table.table-striped
+  %tr
+    %td
+      User Name
+    %td
+      Email
+    %td
+      Is Admin
+    %td
+      Edit priveledges
+
+  - @users.each do |user|
+    %tr
+      %td
+        =user.name
+      %td
+        =user.email
+      %td
+        ='Yes' if user.is_admin
+      %td
+        =link_to 'Edit', edit_user_path(user)

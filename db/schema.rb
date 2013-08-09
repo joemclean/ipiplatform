@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808190326) do
+ActiveRecord::Schema.define(version: 20130809151515) do
 
   create_table "question_responses", force: true do |t|
     t.text     "response"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20130808190326) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_admin",        default: false
   end
 
 end

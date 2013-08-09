@@ -1,0 +1,12 @@
+=form_for @user do |f|
+  -if @user.errors.any?
+    .error_messages
+      %h2 Form is invalid
+      %ul
+        -@user.errors.full_messages.each do |message|
+          %li
+            =message
+  =f.label :is_admin
+  =f.check_box :is_admin
+  .actions
+    =f.submit 'Edit User', class: 'submitbutton'
