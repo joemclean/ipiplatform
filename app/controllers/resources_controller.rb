@@ -14,8 +14,6 @@ class ResourcesController < ApplicationController
     @traits = Trait.all
   end
 
-  
-
   def edit
     @traits = Trait.all
   end
