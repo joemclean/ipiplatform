@@ -15,10 +15,12 @@
       -@resource.traits.each do |trait|
         %li
           =link_to trait.name.pluralize, trait_path(trait)
+    %b With a focus in the following industries:
+    %ul
+      -@resource.industries.each do |industry|
+        %li= industry.name
 
-
-
-.btn-group 
+.btn-group
   .btn
     = link_to 'All Resources', resources_path
 
@@ -29,5 +31,3 @@
 -else
   .row.phase-white
     %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 50 0 100 50;'} Log in to edit resources!
-  
-

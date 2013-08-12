@@ -15,11 +15,21 @@
     = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => 'span8', :rows => 6
   .field
     = f.text_field :source, :placeholder => 'Who developed this resource?', :class => 'span6'
+  %br
+  %h4= 'What innovator type is this best suited for?'
   .field
     = hidden_field_tag "resource[trait_ids][]", nil
     -@traits.each do |trait|
       =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
       =trait.name 
+      %br
+  %br    
+  %h4= 'Does this have a particular industry focus?'
+  .field
+    = hidden_field_tag "resource[industry_ids][]", nil
+    -@industries.each do |industry|
+      =check_box_tag "resource[industry_ids][]", industry.id, @resource.industry_ids.include?(industry.id)
+      =industry.name 
       %br
   .actions
     = f.submit 'Save'

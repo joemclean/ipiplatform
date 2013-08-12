@@ -12,6 +12,7 @@ class ResourcesController < ApplicationController
   def new
     @resource = Resource.new
     @traits = Trait.all
+    @industries = Industry.all
   end
 
   def edit
@@ -67,6 +68,6 @@ class ResourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [])
+      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [])
     end
 end
