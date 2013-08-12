@@ -268,3 +268,47 @@ a.homepage_button {
     color: #3aaeef;
   }
 }
+
+h2.resourcetitle {
+  text-align: center;
+  color: #EFBD45;  
+}
+
+.row.showresource {
+  col {
+    &.left {
+      font :{
+        size: 2.0em;
+      }
+      box-sizing: border-box;
+    }
+    &.right {
+      box-sizing: border-box;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

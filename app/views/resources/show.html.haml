@@ -1,8 +1,36 @@
 %p#notice= notice
 
-%h2
+%h2.resourcetitle
   ='Resource: '+ @resource.name
-%p.authorBox='Uploaded by: ' + @resource.author.name
+  %br
+  %br
+%p
+  =image_tag 'ResourcePlaceHolder.png'
+
+
+.row.showresource
+  .col.left.span4{:style => 'font-size: 20px;'}
+    = @resource.description
+    %br
+    %br
+    %p.authorBox='Uploaded by: ' + @resource.author.name
+    %br
+    %p
+      %b This is a great resource for:
+      %ul
+        -@resource.traits.each do |trait|
+          .btn.traitconnection
+            =link_to trait.name.pluralize, trait_path(trait)
+          %br
+  .col.right.span8
+    %b Full Description:
+    {:style => 'font-size: 14px; margin: 0 5 0 10px;'}
+    = @resource.full_description
+
+
+
+
+
 %p
   -unless @resource.user_upvote(current_user).count > 0
     .btn
