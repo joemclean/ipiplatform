@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 20130812144447) do
   end
 
   create_table "resource_industries", force: true do |t|
-    t.integer  "resource_id", limit: 255
-    t.integer  "industry_id", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.integer  "industry_id"
   end
 
   create_table "resources", force: true do |t|
