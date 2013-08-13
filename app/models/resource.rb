@@ -15,5 +15,7 @@ class Resource < ActiveRecord::Base
     end
   end
 
-
+  def user_upvote(current_user)
+    Upvote.where("user_id=? and resource_id=?", current_user.id, self.id)
+  end
 end

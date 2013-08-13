@@ -4,11 +4,12 @@
   ='Resource: '+ @resource.name
 %p.authorBox='Uploaded by: ' + @resource.author.name
 %p
-  .btn#upvote_button
-    -if @resource.upvotes.where(user_id: current_user.id).count < 1
-      = link_to 'Up vote', resource_upvotes_path(@resource), :method => :post, remote: true
-    -else
-      Upvoted!
+  -unless @resource.user_upvote(current_user).count > 0
+    .btn
+      = link_to 'Upvote', resource_upvotes_path(@resource), :method => :post
+  -else
+    .btn.btn-success
+      = link_to 'Upvoted!', clear_upvote_path(resource_id: @resource.id) 
 %p
   %b Link:
   = link_to @resource.link, @resource.link

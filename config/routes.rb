@@ -17,6 +17,8 @@ IpiPlatform::Application.routes.draw do
   get "pages/landing"
   get "pages/profile"
 
+  get 'upvotes/clear_upvote', :as => :clear_upvote
+
   resources :traits
   resources :resources do
     resources :upvotes
