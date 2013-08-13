@@ -1,6 +1,6 @@
 IpiPlatform::Application.routes.draw do
+  
   resources :industries
-
   resources :sessions
   resources :users
 
@@ -18,7 +18,9 @@ IpiPlatform::Application.routes.draw do
   get "pages/profile"
 
   resources :traits
-  resources :resources
+  resources :resources do
+    resources :upvotes
+  end
   resources :suggestions
   resources :question_responses
   

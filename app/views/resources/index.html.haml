@@ -7,15 +7,20 @@
 
 %table.table.table-striped
   %tr
-    %th{:colspan => 2} Name
-    %th Description
-    %th
-    %th
-    %th
+    %td{:colspan => 2} Name
+    %td Description
+    %td
+    %td
+    %td
+    %td
 
   - @resources.each do |resource|
     %tr
-      %td= resource.name
+      %td
+        = resource.name
+        %p
+          %b Upvotes:
+          = resource.upvotes.count
       %td.authorBox= 'Uploaded by: ' + resource.author.name
       %td
         .btn

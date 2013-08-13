@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130812144447) do
+ActiveRecord::Schema.define(version: 20130813143036) do
 
   create_table "industries", force: true do |t|
     t.string   "name"
@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 20130812144447) do
   end
 
   create_table "resource_industries", force: true do |t|
+    t.integer  "resource_id", limit: 255
+    t.integer  "industry_id", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.integer  "industry_id"
   end
 
   create_table "resources", force: true do |t|
@@ -83,6 +83,13 @@ ActiveRecord::Schema.define(version: 20130812144447) do
     t.datetime "updated_at"
     t.string   "full_trait_description"
     t.integer  "spectrum_id"
+  end
+
+  create_table "upvotes", force: true do |t|
+    t.integer  "resource_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

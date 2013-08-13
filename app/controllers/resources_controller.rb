@@ -7,6 +7,7 @@ class ResourcesController < ApplicationController
   end
 
   def show
+    
   end
 
   def new

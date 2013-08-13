@@ -4,6 +4,9 @@
   ='Resource: '+ @resource.name
 %p.authorBox='Uploaded by: ' + @resource.author.name
 %p
+  .btn
+    = link_to 'Up vote', new_resource_upvote_path(@resource)
+%p
   %b Link:
   = link_to @resource.link, @resource.link
 %p
