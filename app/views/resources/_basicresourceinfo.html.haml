@@ -1,0 +1,12 @@
+%h2 Basic Information
+.field
+  = f.text_field :name, :placeholder => 'Name', :class => 'span6'
+.field
+  = f.text_field :link, :placeholder => 'http://www.example.com', :class => 'span6'
+.field
+  = f.text_area :description, :placeholder => 'A short description of what this resource is', :class => 'span8', :rows => 5
+.field
+  = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => 'span8', :rows => 6
+.field
+  = f.text_field :source, :placeholder => 'Who developed this resource?', :class => 'span6'
+%br
