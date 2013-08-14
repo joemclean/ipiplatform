@@ -390,8 +390,23 @@ h2.resourcetitle {
       box-sizing: border-box;
     }
   }
+  .authorBox {
+    font :{
+      size: 14px;
+    }
+  }
+  .resourcetraitbox {
+    padding: 0 0 10 0;
+    font :{
+      size: 14px;
+    }
+  }
+  .goldimagesize {
+    img {
+      width: 200px;
+    }
+  } 
 }
-
 
 
 

@@ -7,7 +7,7 @@
 .row
   .span4.resource_filters
     =form_tag do |f|
-      =text_field_tag :search, "Keyword search"
+      =text_field_tag :search, "Keyword search", id: 'search_box'
       %br
       #phase_filters
         .phase_filter
