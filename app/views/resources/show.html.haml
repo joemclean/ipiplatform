@@ -1,7 +1,7 @@
 %p#notice= notice
 
 %h2.resourcetitle
-  ='Resource: '+ @resource.name
+  =@resource.name
   %br
 %p
   =image_tag 'ResourcePlaceHolder.png'
@@ -13,48 +13,45 @@
     %br
     %br
     %p.authorBox='Uploaded by: ' + @resource.author.name
-    %br
-    %b This is a great resource for:
-    %b
-      -@resource.traits.each do |trait|
-        .btn.traitconnection
-          =link_to trait.name.pluralize, trait_path(trait)
+    %b.resourcetraitBox
+      This is a great resource for:
+      %br
+      %b{:style => 'padding: 2px;'}
+        %br
+        Traits
+        %br
+        -@resource.traits.each do |trait|
+          =link_to (image_tag trait.image, size: '70x70'), trait_path(trait)
+      %b{:style => 'padding: 2px;'}
+        %br
+        %br
+        Industries
+        %br
+        -@resource.industries.each do |industry|
+          %span.industry_tag
+            =industry.name
+    %p
+      -unless @resource.user_upvote(current_user).count > 0
+        .btn.like
+          = link_to image_tag('Star.png') + " Like!", resource_upvotes_path(@resource), :method => :post
+      -else
+        .btn.btn-success
+          = link_to image_tag('Star-Success.png') + " I like it!", clear_upvote_path(resource_id: @resource.id)
+      -unless @bookmark.exists?
+        .btn
+          = link_to image_tag('bookmark.png') + " Bookmark tool!", make_bookmark_path(resource_id: @resource.id)
+      -else
+        .btn.btn-success
+          =link_to image_tag('bookmarked.png') + "Bookmarked!", unmake_bookmark_path(resource_id: @resource.id)
+
   .col.right.span8
-    %b Full Description:
-    {:style => 'font-size: 14px; margin: 0 5 0 10px;'}
+    %b Full Description: 
     = @resource.full_description
 
 %p
-  -unless @resource.user_upvote(current_user).count > 0
-    .btn
-      = link_to 'Upvote', resource_upvotes_path(@resource), :method => :post
-  -else
-    .btn.btn-success
-      = link_to 'Upvoted!', clear_upvote_path(resource_id: @resource.id) 
 %p
-%p
-  -unless @bookmark.exists?
-    .btn
-      = link_to 'Bookmark', make_bookmark_path(resource_id: @resource.id)
-  -else
-    .btn.btn-success
-      =link_to 'Remove Bookmark', unmake_bookmark_path(resource_id: @resource.id)
-%p
-  %b Link:
-  = link_to @resource.link, @resource.link
-%p
-  %b Full Description:
-  = @resource.full_description
-  %p
-    %b This is a great resource for:
-    %ul
-      -@resource.traits.each do |trait|
-        %li
-          =link_to trait.name.pluralize, trait_path(trait)
-    %b With a focus in the following industries:
-    %ul
-      -@resource.industries.each do |industry|
-        %li= industry.name
+
+
 
 .btn-group
   .btn
