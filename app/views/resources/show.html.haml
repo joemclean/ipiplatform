@@ -27,10 +27,6 @@
     {:style => 'font-size: 14px; margin: 0 5 0 10px;'}
     = @resource.full_description
 
-
-
-
-
 %p
   -unless @resource.user_upvote(current_user).count > 0
     .btn
@@ -38,6 +34,14 @@
   -else
     .btn.btn-success
       = link_to 'Upvoted!', clear_upvote_path(resource_id: @resource.id) 
+%p
+%p
+  -unless @bookmark.exists?
+    .btn
+      = link_to 'Bookmark', make_bookmark_path(resource_id: @resource.id)
+  -else
+    .btn.btn-success
+      =link_to 'Remove Bookmark', unmake_bookmark_path(resource_id: @resource.id)
 %p
   %b Link:
   = link_to @resource.link, @resource.link

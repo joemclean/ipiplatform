@@ -7,6 +7,9 @@ class ResourcesController < ApplicationController
   end
 
   def show
+    @bookmark = Bookmark.new
+    @bookmark.user_id = current_user.id
+    @bookmark.resource_id = @resource.id
   end
 
   def new
@@ -73,6 +76,8 @@ class ResourcesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

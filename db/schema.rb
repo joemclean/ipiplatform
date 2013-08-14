@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20130814171951) do
+=======
+ActiveRecord::Schema.define(version: 20130813213156) do
+
+  create_table "bookmarks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+>>>>>>> Added Bookmarks button
 
   create_table "industries", force: true do |t|
     t.string   "name"
@@ -33,10 +44,10 @@ ActiveRecord::Schema.define(version: 20130814171951) do
   end
 
   create_table "resource_industries", force: true do |t|
+    t.integer  "resource_id", limit: 255
+    t.integer  "industry_id", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.integer  "industry_id"
   end
 
   create_table "resources", force: true do |t|

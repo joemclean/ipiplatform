@@ -1,5 +1,5 @@
 IpiPlatform::Application.routes.draw do
-  
+
   resources :industries
   resources :sessions
   resources :users
@@ -20,11 +20,16 @@ IpiPlatform::Application.routes.draw do
   get "pages/profile"
 
   get 'upvotes/clear_upvote', :as => :clear_upvote
+  get 'bookmarks/make_bookmark', :as => :make_bookmark
+  get 'bookmarks/unmake_bookmark', :as => :unmake_bookmark
 
   resources :traits
+  resources :bookmarks
+  
   resources :resources do
     resources :upvotes
   end
+  
   resources :suggestions
   resources :question_responses
   

@@ -3,7 +3,9 @@ class Resource < ActiveRecord::Base
   has_many :traits, through: :trait_associations
   has_many :resource_industries
   has_many :industries, through: :resource_industries
-  has_many :upvotes
+  has_many :upvotes, :dependent => :destroy
+  has_many :bookmarks, :dependent => :destroy
+  has_many :users, through: :bookmarks
 
   belongs_to :user
   
