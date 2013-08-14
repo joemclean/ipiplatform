@@ -11,6 +11,8 @@ gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'bootstrap_forms'
 gem 'hirb'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'carrierwave'
+gem 'fog'
 
 
 group :development do

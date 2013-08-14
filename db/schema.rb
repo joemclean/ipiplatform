@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130813143036) do
+ActiveRecord::Schema.define(version: 20130814171951) do
 
   create_table "industries", force: true do |t|
     t.string   "name"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20130813143036) do
     t.datetime "updated_at"
     t.string   "full_trait_description"
     t.integer  "spectrum_id"
+    t.string   "image"
   end
 
   create_table "upvotes", force: true do |t|
