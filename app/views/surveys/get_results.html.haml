@@ -1,15 +1,27 @@
 %h1 Your Results
 
 %h3 Scored Quiz
--@score_hash.each do |trait_id, count|
-  =Trait.find(trait_id).name + ': ' + count.to_s
-  %br
 
-%h3 Question by question
--@answer_hash.each do |question_number, answer|
-  %b
-    =question_number.to_s + ':'
-  =Trait.find(answer).name
-  %br
+%div.results_box
+  -@score_hash.each do |trait_id, count|
+    -trait = Trait.find(trait_id)
+    .div.image_results
+      =image_tag trait.image
+      %br
+      %h4
+        =trait.name
+        ='(' + count.to_s + ')'
 
 
+%h3 Understanding Results
+%table.table.table-striped
+  -@score_hash.each do |trait_id, count|
+    -trait = Trait.find(trait_id)
+    %tr
+      %td{:colspan => '2'}
+        %h4=trait.name
+    %tr
+      %td.descriptionImage
+        =image_tag trait.image
+      %td
+        =trait.description
