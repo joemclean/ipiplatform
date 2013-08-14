@@ -10,7 +10,9 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    @resource = Resource.new
+    session[:resource_params] ||= {}
+    @resource = Resource.new(session[:resource_params])
+    @resource.current_step = session[:resource_step]
     @traits = Trait.all
     @industries = Industry.all
   end
@@ -22,18 +24,30 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-    @resource = Resource.new(resource_params)
+    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
+    @resource = Resource.new(session[:resource_params])
+    @resource.current_step = session[:resource_step]
     @traits = Trait.all
+    @industries = Industry.all
     @resource.user_id = session[:user_id]
-    respond_to do |format|
-      if @resource.save
-        format.html { redirect_to @resource, notice: 'Resource was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @resource }
+    if @resource.valid?
+      if params[:back_button]
+        @resource.previous_step
+      elsif @resource.last_step?
+        @resource.save if @resource.all_valid?
       else
-        format.html { render action: 'new' }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
+        @resource.next_step
       end
+    session[:resource_step] =  @resource.current_step
     end
+    if @resource.new_record?
+      render "new"
+    else
+      session[:resource_step] = session[:resource_params] = nil
+      flash[:notice] = "resource saved"
+      redirect_to @resource
+    end
+         
   end
 
   # PATCH/PUT /resources/1

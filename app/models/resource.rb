@@ -6,6 +6,39 @@ class Resource < ActiveRecord::Base
   has_many :upvotes
 
   belongs_to :user
+  
+  attr_writer :current_step
+  
+  def current_step
+    @current_step ||  steps.first
+  end
+  
+  def steps
+    ["basicresourceinfo", "resourcetags"]
+  end
+  
+  def first_step?
+    current_step == steps.first
+  end
+  
+  def last_step?
+    current_step == steps.last
+  end
+  
+  def next_step
+    self.current_step = steps[steps.index(current_step)+1]
+  end
+  
+  def previous_step
+    self.current_step = steps[steps.index(current_step)-1]
+  end
+  
+  def all_valid?
+    steps.all? do |step|
+      self.current_step = step
+      valid?
+    end
+  end
 
   def author
     if self.user_id
