@@ -31,6 +31,7 @@ a.homepage_button {
   box-sizing: border-box;
   border-radius: 3px;
   margin-bottom: 20px;
+  height: 200px;
 }
 
 .profile_icon {
@@ -100,6 +101,50 @@ a.homepage_button {
   }
 }
 
+.resourcelanding_hero {
+  background-color: #EFBD45;
+  padding: 100px 15px 100px 15px;
+  line-height: 1.3em;
+  color: #B57B28;
+  text-align: center;
+  font :{
+    size: 2.5em;
+  }
+  .goldtextsection {
+    padding: 50 150 0 150;
+    line-height: 20px;
+    font :{
+      size: 16px;
+    }
+  }
+}
+
+.goldsection {
+  background-color: #EFBD45;
+  color: #B57B28;
+  text-align: center;
+  line-height: 1.1em;
+  font :{
+    size: 1.8em;
+  }
+  .col {
+    &.left {
+      text-align: center;
+      box-sizing: border-box;
+      padding: 40px 0 0 65px;
+    }
+    &.right {
+      text-align: left;
+      box-sizing: border-box;
+      color: #000;
+      font :{
+        size: 0.7em;
+      }
+      padding: 40px;
+    }
+  }
+}
+
 .bluesection {
   background-color: #6BB8D4;
   color: #FFF;
@@ -159,7 +204,25 @@ a.homepage_button {
   font :{
     size: 1.8em;
   }
-
+  .btn {
+    a {
+      color: #FFF;
+    }
+    background-color: #A33C6D !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#A33C6D", endColorstr="#A33C6D");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#A33C6D), to(#A33C6D));
+    background-image: -moz-linear-gradient(top, #A33C6D, #A33C6D);
+    background-image: -ms-linear-gradient(top, #A33C6D, #A33C6D);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #A33C6D), color-stop(100%, #A33C6D));
+    background-image: -webkit-linear-gradient(top, #A33C6D, #A33C6D);
+    background-image: -o-linear-gradient(top, #A33C6D, #A33C6D);
+    background-image: linear-gradient(#A33C6D, #A33C6D);
+    border-color: #A33C6D #A33C6D;
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+    -webkit-font-smoothing: antialiased;
+  }
   .box {
     background-color: #A33C6D;
     padding: 4 2 8 2;
@@ -194,7 +257,25 @@ a.homepage_button {
   font :{
     size: 1.8em;
   }
-  
+  .btn {
+    a {
+      color: #FFF;
+    }
+    background-color: #60AC8E !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#60AC8E", endColorstr="#60AC8E");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#60AC8E), to(#60AC8E));
+    background-image: -moz-linear-gradient(top, #60AC8E, #60AC8E);
+    background-image: -ms-linear-gradient(top, #60AC8E, #60AC8E);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #60AC8E), color-stop(100%, #60AC8E));
+    background-image: -webkit-linear-gradient(top, #60AC8E, #60AC8E);
+    background-image: -o-linear-gradient(top, #60AC8E, #60AC8E);
+    background-image: linear-gradient(#60AC8E, #60AC8E);
+    border-color: #60AC8E #60AC8E;
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+    -webkit-font-smoothing: antialiased;
+  }
   .box {
     background-color: #60AC8E;
     padding: 4 2 8 2;
@@ -229,7 +310,30 @@ a.homepage_button {
   font :{
     size: 1.8em;
   }
-  
+  .btn {
+    a {
+      color: #FFF;
+    }
+    background-color: #EFBD45 !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#EFBD45", endColorstr="#EFBD45");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#EFBD45), to(#EFBD45));
+    background-image: -moz-linear-gradient(top, #EFBD45, #EFBD45);
+    background-image: -ms-linear-gradient(top, #EFBD45, #EFBD45);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #EFBD45), color-stop(100%, #EFBD45));
+    background-image: -webkit-linear-gradient(top, #EFBD45, #EFBD45);
+    background-image: -o-linear-gradient(top, #EFBD45, #EFBD45);
+    background-image: linear-gradient(#EFBD45, #EFBD45);
+    border-color: #EFBD45 #EFBD45;
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+    -webkit-font-smoothing: antialiased;
+  }
+  .goldimagesize {
+    img {
+      width: 200px;
+    }
+  } 
   .box {
     background-color: #EFBD45;
     padding: 4 2 8 2;
