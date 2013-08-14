@@ -1,39 +1,57 @@
 -if current_user
   .btn.pull-right
-    = link_to 'New Resources', new_resource_path
+    = link_to 'New Resource', new_resource_path
 
 %h1
   Resources
+.row
+  .span4.resource_filters
+    =form_tag do |f|
+      =text_field_tag :search, "Keyword search"
+      %br
+      #phase_filters
+        .phase_filter
+          Plan
+        .phase_filter
+          Act
+        .phase_filter
+          Observe
+        .phase_filter
+          Reflect
+    .trait_filter_box
+      -Trait.all.each do |trait|
+        =image_tag trait.image, size: '50x50', class: 'trait_filter', title: trait.name
 
-%table.table.table-striped
-  %tr
-    %td{:colspan => 2} Name
-    %td Description
-    %td
-    %td
-    %td
-    %td
 
-  - @resources.each do |resource|
-    %tr
-      %td
-        = resource.name
-        %p
-          %b Upvotes:
-          = resource.upvotes.count
-      %td.authorBox= 'Uploaded by: ' + resource.author.name
-      %td
-        .btn
-          = link_to 'Go!', resource.link
-      %td= resource.description
+  .span8
+    %table.table.table-striped
+      %tr
+        %td Name
+        %td Upvotes
+        %td Author
+        %td Description
+        %td
+        %td
+        %td
+      - @resources.each do |resource|
+        %tr.small_text
+          %td
+            = resource.name
+          %td
+            = resource.upvotes.count
+          %td
+            = resource.author.name
+          %td
+            = resource.full_description
+          %td
+            = link_to 'Show', resource
+          %td
+            = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
+          %td
+            = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
+    %br
 
-      %td= link_to 'Show', resource
-      -if current_user
-        %td= link_to 'Edit', edit_resource_path(resource)
-        %td= link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
-%br
-
--if current_user
--else
-.row.phase-white
-  %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 0 0 0 0;'} Log in to edit resources!
+    -if current_user
+    -else
+    .row.phase-white
+      %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 0 0 0 0;'} Log in to edit resources!

@@ -5,3 +5,35 @@
   color: #999999;
 }
 
+.resource_filters {
+  background-color: #fafafa;
+  padding: 15px;
+  box-sizing: border-box;
+  .trait_filter_box {
+    margin: 0 auto;
+    width: 120px
+  }
+  img.trait_filter {
+    margin:3px;
+  }
+  #phase_filters {
+    width: 180px;
+    margin: 0 auto;
+  }
+  .phase_filter {
+    padding: 30px 0;
+    text-align: center;
+    width: 80px;
+    background-color: #eee;
+    float: left;
+    margin:5px;
+  }
+  .phase_filter:hover {
+    background-color: #ccc
+  }
+}
+
+tr.small_text {
+  font-size: .75em;
+}
+
