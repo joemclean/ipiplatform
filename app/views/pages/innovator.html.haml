@@ -1,48 +1,35 @@
 .hero.innovator_hero
-	%h2 Innovator Types
-	%p
-		What’s a “innovator type”? We’ll tell you... Flannel Wes Anderson cliche semiotics. Pug raw denim organic selvage flexitarian YOLO. McSweeney's iPhone dreamcatcher, Neutra messenger bag authentic Tonx mustache meggings wolf master cleanse squid asymmetrical. Try-hard farm-to-table 8-bit sriracha kale chips. Street art Austin kogi fanny pack lomo. Thundercats lomo cornhole tofu you probably haven't heard of them.
-	%br
-	.btn=link_to 'TAKE THE SURVEY', take_survey_path
-	%br
-	%br
-//	.row
-//		.btn
-//			=link_to 'COLLABORATION', take_survey_path
-//		.btn
-//			=link_to 'RISK', take_survey_path
-//		.btn
-//			=link_to 'PROCESS', take_survey_path
-//		.btn
-//			=link_to 'STYLE', take_survey_path
-//		.btn
-//			=link_to 'DRIVER', take_survey_path
-
-%br
-
-%table.table.table-striped{:style => 'border: 0px;'}
-	-@spectrums.each do |spectrum|
-		%tr
-			%td
-				%p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
-					=spectrum.name
-					%br
-					=spectrum.description
-					%br
-					%table
-						-spectrum.traits.each do |trait|
-							%td{:style => 'border: 0px;' 'background-color: transparent; text-align:center; margin: 10px'}
-								.traitbox.span6
-									%p
-										=image_tag 'adventurer.png'
-										%br
-										%br
-										%p{:style => 'font-weight: bold; color:#6BB8D4'}
-											= trait.name
-									%br
-									%p{:style => 'align: center'}
-									= trait.description
-									%br
-									%br
-									%p{:style => 'color: #6BB8D4; text-align: right'}
-										= link_to 'Show', trait
+  %h2 Learning About You, The Innovator
+  %p
+    We all have qualities that make us unique, and those qualities also determine how we innovate. The Sidekick Innovation Type Survey, is a fun and easy way to determine your unique innovation-related characteristics. Click on the link below to get started, or scroll down to read more about the innovation type spectra.
+  %br
+  .btn=link_to 'TAKE THE SURVEY', take_survey_path
+  %br
+  %br
+.row
+  %table.table.table-striped{:style => 'border: 0px;'}
+    -@spectrums.each do |spectrum|
+      %tr
+        %td
+          %p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+            =spectrum.name
+            %br
+            =spectrum.description
+            %br
+            %table
+              -spectrum.traits.each do |trait|
+                %td{:style => 'border: 0px;' 'background-color: transparent; text-align:center; margin: 10px'}
+                  .traitbox.span6
+                    %p
+                      =image_tag 'adventurer.png'
+                      %br
+                      %br
+                      %p{:style => 'font-weight: bold; color:#6BB8D4'}
+                        = trait.name
+                    %br
+                    %p{:style => 'align: center'}
+                    = trait.description
+                    %br
+                    %br
+                    %p{:style => 'color: #6BB8D4; text-align: right'}
+                      = link_to 'Show', trait

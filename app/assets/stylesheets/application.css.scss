@@ -15,6 +15,11 @@
 @import "bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
+td {
+  box-sizing: border-box;
+  padding: 0px;
+}
+
 * {
   font-family: Raleway;
 }
