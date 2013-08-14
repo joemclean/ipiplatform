@@ -1,12 +1,47 @@
+.hero.resourcelanding_hero
+	A library of innovation resources,
+	%br
+	at your fingertips.
+	.goldtextsection
+		Brisket biltong prosciutto salami beef, capicola leberkas swine kielbasa. Pancetta meatloaf pastrami kielbasa, doner salami rump. Bresaola ham pastrami brisket flank beef ribs short ribs shoulder capicola shankle meatball tenderloin ball tip bacon andouille. Short loin turkey meatball pork belly tongue, corned beef tenderloin doner fatback rump brisket spare ribs shank ball tip. 
 
+.whitegoldsection
+	%br
+	Tailored results.
+	.row
+		.col.left.span6
+			Something about where the user is in the innovation process and how Sidekick will  provide the appropriate resources. Brisket biltong prosciutto salami beef, capicola leberkas swine kielbasa. Pancetta meatloaf pastrami kielbasa, doner salami rump. Bresaola ham pastrami brisket flank beef ribs short ribs shoulder capicola shankle meatball tenderloin ball tip bacon andouille. Short loin turkey meatball pork belly tongue, corned. 
+			%br
+			%br
+		.col.right.span6
+			.goldimagesize
+				=image_tag 'scissors-01.png'
+				=image_tag 'tailored-01.png'
 
+.goldsection
+	%br
+	%br
+	Search, Simplified
+	.row
+		.col.left.span6
+			=image_tag 'arrow-02-02.png'
+		.col.right.span6
+			%br
+			After we’ve figured out the process and tools that work best for your type, Sidekick will help you plot the steps moving forward. You’re a smart cookie, and we want to help you succeed by providing you with resources tailored to your needs.
+			%br
+			%br
+			%br
 
-%h1 Some Helpful Resources
+.whitegoldsection
+	%br
+	Some Helpful Resources
+	%br
+	%br
 
 =#image_tag 'placeholder.gif'
 .row
-	- @resources.each do |resource|
-		.resourcebox.span12
+	- @resources.first(4).each do |resource|
+		.resourcebox.span3
 			%strong= resource.name
 			%br
 			%span.authorBox= 'Uploaded by: ' + resource.author.name
