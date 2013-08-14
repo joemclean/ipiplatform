@@ -14,42 +14,28 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    session[:resource_params] ||= {}
-    @resource = Resource.new(session[:resource_params])
-    @resource.current_step = session[:resource_step]
+    @resource = Resource.new()
     @traits = Trait.all
     @industries = Industry.all
   end
 
   def edit
     @traits = Trait.all
+    @industries = Industry.all
   end
 
   # POST /resources
   # POST /resources.json
   def create
     session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
-    @resource = Resource.new(session[:resource_params])
-    @resource.current_step = session[:resource_step]
+    @resource = Resource.new(resource_params)
     @traits = Trait.all
     @industries = Industry.all
     @resource.user_id = session[:user_id]
-    if @resource.valid?
-      if params[:back_button]
-        @resource.previous_step
-      elsif @resource.last_step?
-        @resource.save if @resource.all_valid?
-      else
-        @resource.next_step
-      end
-    session[:resource_step] =  @resource.current_step
-    end
-    if @resource.new_record?
-      render "new"
+    if @resource.save
+      render "index"
     else
-      session[:resource_step] = session[:resource_params] = nil
-      flash[:notice] = "resource saved"
-      redirect_to @resource
+      render "new"
     end
          
   end

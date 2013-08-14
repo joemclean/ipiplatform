@@ -5,11 +5,35 @@
       %ul
         - @resource.errors.full_messages.each do |msg|
           %li= msg
+  %h2 Basic Information
+  .field
+    = f.text_field :name, :placeholder => 'Name', :class => 'span6'
+  .field
+    = f.text_field :link, :placeholder => 'http://www.example.com', :class => 'span6'
+  .field
+    = f.text_area :description, :placeholder => 'A short description of what this resource is', :class => 'span8', :rows => 5
+  .field
+    = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => 'span8', :rows => 6
+  .field
+    = f.text_field :source, :placeholder => 'Who developed this resource?', :class => 'span6'
 
-
-  = render :partial => "#{@resource.current_step}", :locals => {:f => f} 
-  = f.submit "Continue"
-  = f.submit "Back", :name => "back_button" unless @resource.first_step?
-
+  %h2 Tags
+  %h4= 'What innovator type is this best suited for?'
+  .field
+    = hidden_field_tag "resource[trait_ids][]", nil
+    -@traits.each do |trait|
+      =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
+      =trait.name 
+      %br
+  %br
+  %h4= 'Does this have a particular industry focus?'
+  .field
+    = hidden_field_tag "resource[industry_ids][]", nil
+    -@industries.each do |industry|
+      =check_box_tag "resource[industry_ids][]", industry.id, @resource.industry_ids.include?(industry.id)
+      =industry.name 
+      %br
+  .field
+    =f.submit
 
 
