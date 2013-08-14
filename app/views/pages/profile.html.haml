@@ -9,11 +9,12 @@
       %br
 
     .image-group.profile_icon.pull-left
-      =image_tag 'adventurer.png'
-      =image_tag 'anchor.png'
-      =image_tag 'maverick.png'
-      =image_tag 'team_player.png'
-      %br
+      -@score_hash.each do |trait_id, count|
+        -trait = Trait.find(trait_id)
+        .div.image_results
+          =image_tag trait.image
+          %br
+          =trait.name
   %br
   %br
     %section.phase-white

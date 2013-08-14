@@ -30,6 +30,8 @@
         -@resource.industries.each do |industry|
           %span.industry_tag
             =industry.name
+    %br
+    %br
     %p
       -unless @resource.user_upvote(current_user).count > 0
         .btn.like
