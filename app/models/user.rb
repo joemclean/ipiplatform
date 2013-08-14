@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
   has_many :resources, through: :bookmarks
   
   validates_uniqueness_of :email
+  serialize :personality
         
 end
