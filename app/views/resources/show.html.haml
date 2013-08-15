@@ -32,19 +32,21 @@
             =industry.name
     %br
     %br
-    %p
-      -unless @resource.user_upvote(current_user).count > 0
-        .btn.like
-          = link_to image_tag('Star.png') + " Like!", resource_upvotes_path(@resource), :method => :post
+    %b.resourcetraitBox
+      Tool popularity
+    %p{:style => 'margin: 4px;'}
+      -if @resource.upvotes.count < 1
+        =''
+      -if @resource.upvotes.count > 1
+        =@resource.upvotes.count
+        ='users like the tool!'
       -else
-        .btn.btn-success
-          = link_to image_tag('Star-Success.png') + " I like it!", clear_upvote_path(resource_id: @resource.id)
-      -unless @bookmark.exists?
-        .btn
-          = link_to image_tag('bookmark.png') + " Bookmark tool!", make_bookmark_path(resource_id: @resource.id)
-      -else
-        .btn.btn-success
-          =link_to image_tag('bookmarked.png') + "Bookmarked!", unmake_bookmark_path(resource_id: @resource.id)
+        =@resource.upvotes.count
+        ='user likes the tool!'
+    %br
+    %br
+
+
 
   .col.right.span8
     %b Full Description: 
@@ -58,20 +60,33 @@
       -else
         .btn
           = link_to 'Go explore the resource!', @resource.link, :target => 'blank'
+      %br
 
 %p
 %p
+.row
+  .col.left.span4
+    -if current_user
+      .btn-group
+      .btn
+        = link_to 'Edit Resource', edit_resource_path(@resource)
+    -else
+      .row.phase-white
+        %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 50 0 100 50;'} Log in to edit resources!
+  .col.right.span8{:style => 'text-align: center;'}
+    -unless @resource.user_upvote(current_user).count > 0
+      .btn.like
+        = link_to image_tag('Star.png') + " Like!", resource_upvotes_path(@resource), :method => :post
+    -else
+      .btn.btn-success
+        = link_to image_tag('Star-Success.png') + " I like it!", clear_upvote_path(resource_id: @resource.id)
+    -unless @bookmark.exists?
+      .btn
+        = link_to image_tag('bookmark.png') + " Bookmark tool!", make_bookmark_path(resource_id: @resource.id)
+    -else
+      .btn.btn-success
+        =link_to image_tag('bookmarked.png') + "Bookmarked!", unmake_bookmark_path(resource_id: @resource.id)
 
-
-
-.btn-group
-  .btn
-    = link_to 'All Resources', resources_path
-
--if current_user
-  .btn-group
-  .btn
-    = link_to 'Edit Resource', edit_resource_path(@resource)
--else
-  .row.phase-white
-    %p{:align => 'left', :style => 'color: #de403c; font-size: 1.5em; margin: 50 0 100 50;'} Log in to edit resources!
+    .btn-group
+      .btn
+        = link_to 'Explore other resources', resources_path
