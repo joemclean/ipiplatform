@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, notice: "Not authorized!" unless current_user && current_user.is_admin?
   end
 
+  def user_has_taken_quiz
+    current_user && current_user.personality
+  end
+  helper_method :user_has_taken_quiz
+
   private
 
   def current_user

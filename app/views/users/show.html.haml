@@ -7,8 +7,8 @@
       = image_tag 'Profile3.png' , class: 'primary'
       %br
     .image-group.profile_icon.pull-left
-      -if @user.personality
-        -@user.personality.each do |trait_id, count|
+      -if user_has_taken_quiz
+        -current_user.personality.each do |trait_id, count|
           -trait = Trait.find(trait_id)
           .div.image_results
             =image_tag trait.image
