@@ -32,7 +32,6 @@ class PagesController < ApplicationController
     #@resources = Resource.find(:all, :conditions => [ "user_id = ?", session[:user_id]])
     @resources = Resource.find_all_by_user_id(session[:user_id])
     @upvoted_resources = Upvote.find_all_by_user_id(session[:user_id])
-    @score_hash = current_user.personality
   end
   
   

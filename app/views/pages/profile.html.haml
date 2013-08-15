@@ -9,12 +9,18 @@
       %br
 
     .image-group.profile_icon.pull-left
-      -@score_hash.each do |trait_id, count|
-        -trait = Trait.find(trait_id)
-        .div.image_results
-          =image_tag trait.image
-          %br
-          =trait.name
+      -if current_user.personality
+        -current_user.personality.each do |trait_id, count|
+          -trait = Trait.find(trait_id)
+          .div.image_results
+            =image_tag trait.image
+            %br
+            =trait.name
+      -else
+        Take the innovator type survey to fill out your profile.
+        %br
+        .btn
+          = link_to 'Take the survey!', take_survey_path
   %br
   %br
     %section.phase-white
