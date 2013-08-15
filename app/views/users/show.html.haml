@@ -4,7 +4,7 @@
   %hr
   .container
     .image-group.pull-left
-      = image_tag 'Profile3.png' , class: 'primary'
+      =image_tag @user.avatar_url
       %br
     .image-group.profile_icon.pull-left
       -if user_has_taken_quiz
