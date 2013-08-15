@@ -28,11 +28,4 @@ class PagesController < ApplicationController
   def landing
   end
   
-  def profile
-    #@resources = Resource.find(:all, :conditions => [ "user_id = ?", session[:user_id]])
-    @resources = Resource.find_all_by_user_id(session[:user_id])
-    @upvoted_resources = Upvote.find_all_by_user_id(session[:user_id])
-  end
-  
-  
 end

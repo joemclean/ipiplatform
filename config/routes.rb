@@ -17,7 +17,6 @@ IpiPlatform::Application.routes.draw do
   get "pages/phases"
   get "pages/tools"
   get "pages/landing"
-  get "pages/profile"
 
   get 'upvotes/clear_upvote', :as => :clear_upvote
   get 'bookmarks/make_bookmark', :as => :make_bookmark

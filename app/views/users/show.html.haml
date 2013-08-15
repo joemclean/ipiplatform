@@ -1,16 +1,14 @@
 .hero.signin_hero
-
-  -if current_user
+  -if @user
     %h2
-      = 'Welcome to your profile page , ' + current_user.name 
+      = 'Welcome to your profile page , ' + @user.name 
   .container
     .image-group.pull-left
       = image_tag 'Profile3.png' , class: 'primary'
       %br
-
     .image-group.profile_icon.pull-left
-      -if current_user.personality
-        -current_user.personality.each do |trait_id, count|
+      -if @user.personality
+        -@user.personality.each do |trait_id, count|
           -trait = Trait.find(trait_id)
           .div.image_results
             =image_tag trait.image
@@ -26,10 +24,7 @@
     %section.phase-white
       %table
         %tr
-
           %h2 Recent Tools Used
-
-
           = image_tag 'ToolsPlaceholder.png'
           = image_tag 'ToolsPlaceholder.png'
           = image_tag 'ToolsPlaceholder.png'
@@ -45,9 +40,3 @@
           %br
           %br
           = link_to 'Show', resource
-
-        // This phase involves taking direct action to synthesize and put out a physical product, or take concrete steps in making the solution outlined in the plan phase a reality. Prototyping, networking, and product development fall under this category. 
-
-
-
-
