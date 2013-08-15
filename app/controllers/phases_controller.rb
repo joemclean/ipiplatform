@@ -6,6 +6,5 @@ class PhasesController < ActionController::Base
   layout "color_block"
 
   def index
-  	# blahhhhhhhhhh
   end
 end

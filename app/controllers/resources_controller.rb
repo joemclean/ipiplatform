@@ -3,6 +3,7 @@ class ResourcesController < ApplicationController
   before_filter :signed_in?
 
   def index
+    @traits = Trait.all
     @resources = Resource.all
     @filter_params = {plan: false, act: false, observe: false, reflect: false}
   end
@@ -24,8 +25,6 @@ class ResourcesController < ApplicationController
     @industries = Industry.all
   end
 
-  # POST /resources
-  # POST /resources.json
   def create
     session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @resource = Resource.new(resource_params)
@@ -40,8 +39,6 @@ class ResourcesController < ApplicationController
          
   end
 
-  # PATCH/PUT /resources/1
-  # PATCH/PUT /resources/1.json
   def update
     respond_to do |format|
       if @resource.update(resource_params)
@@ -54,8 +51,6 @@ class ResourcesController < ApplicationController
     end
   end
 
-  # DELETE /resources/1
-  # DELETE /resources/1.json
   def destroy
     @resource.destroy
     respond_to do |format|
@@ -63,16 +58,12 @@ class ResourcesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_resource
       @resource = Resource.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
       params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [])
     end

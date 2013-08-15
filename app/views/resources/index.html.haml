@@ -19,7 +19,7 @@
         .phase_filter
           Reflect
     .trait_filter_box
-      -Trait.all.each do |trait|
+      -@traits.each do |trait|
         =image_tag trait.image, size: '50x50', class: 'trait_filter', title: trait.name
 
 
