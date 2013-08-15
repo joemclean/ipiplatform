@@ -2,6 +2,8 @@
 %table.table.table-striped
   %tr
     %td
+      Avatar
+    %td
       User Name
     %td
       Email
@@ -13,6 +15,8 @@
       Edit priveledges
   - @users.each do |user|
     %tr
+      %td
+        =image_tag user.avatar_url
       %td
         =user.name
       %td
