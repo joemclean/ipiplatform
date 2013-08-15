@@ -5,7 +5,6 @@
       %ul
         - @suggestion.errors.full_messages.each do |msg|
           %li= msg
-
   .field
     = f.label :response
     = f.text_area :response, :class => 'span6', :rows => 5
