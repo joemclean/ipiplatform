@@ -1,12 +1,6 @@
 class PagesController < ApplicationController
   layout 'color_block', only: [:phases]
   
-  def home
-  end
-
-  def publisher
-  end
-
   def innovator
     @spectrums = Spectrum.all
   end
@@ -16,10 +10,6 @@ class PagesController < ApplicationController
   end
 
   def phases
-  end
-
-  def SungTest
-    @traits = Trait.all
   end
   
   def aboutus

@@ -13,7 +13,6 @@
           %td
             = radio_button_tag(('answers['+question_count.to_s+']'), question_response.trait_id)
           %td
-            //for debugging =question_response.trait_id
             = question_response.response
       - question_count = question_count + 1
   .actions

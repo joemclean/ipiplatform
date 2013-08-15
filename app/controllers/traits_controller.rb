@@ -13,17 +13,13 @@ class TraitsController < ApplicationController
   def show
   end
 
-  # GET /traits/new
   def new
     @trait = Trait.new
   end
 
-  # GET /traits/1/edit
   def edit
   end
 
-  # POST /traits
-  # POST /traits.json
   def create
     @trait = Trait.new(trait_params)
 
@@ -38,8 +34,6 @@ class TraitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /traits/1
-  # PATCH/PUT /traits/1.json
   def update
     respond_to do |format|
       if @trait.update(trait_params)
@@ -52,8 +46,6 @@ class TraitsController < ApplicationController
     end
   end
 
-  # DELETE /traits/1
-  # DELETE /traits/1.json
   def destroy
     @trait.destroy
     respond_to do |format|
@@ -63,12 +55,11 @@ class TraitsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  
     def set_trait
       @trait = Trait.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def trait_params
       params.require(:trait).permit(:name, :description, :full_trait_description, :spectrum_id)
     end

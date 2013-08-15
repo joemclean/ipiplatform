@@ -6,14 +6,8 @@ class SuggestionsController < ApplicationController
     @suggestions = Suggestion.all
   end
 
-  def show
-  end
-
   def new
     @suggestion = Suggestion.new
-  end
-
-  def edit
   end
 
   def create
@@ -25,18 +19,6 @@ class SuggestionsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @suggestion }
       else
         format.html { render action: 'new' }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @suggestion.update(suggestion_params)
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @suggestion.errors, status: :unprocessable_entity }
       end
     end
