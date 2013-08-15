@@ -1,0 +1,19 @@
+<resources>
+    <string name="session_start_failure">There was a problem starting the lesson. Please try again.</string>
+    <string name="session_join_failure">There was a problem joining the lesson. Please try again.</string>
+    <string name="no_session_to_join">Could not join the class session because there isn\'t one currently ongoing.</string>
+    <string name="end_session_failure">There was a problem ending the lesson. Please try again.</string>
+    <string name="sharing_comment_failure">There was an error sharing your comment. Please try again.</string>
+    <string name="sharing_post_failure">There was an error sharing the message. Please try again.</string>
+    <string name="delete_post_failure">There was an error deleting the post. Please try again.</string>
+    <string name="network_not_connected">No network connection is available! Please try again.</string>
+    <string name="network_communication_failure">No network connection is available! Please try again.</string>
+    <string name="internal_error">Error. Please try again</string>
+    <string name="lock_devices_failure">Lock failed</string>
+    <string name="unlock_devices_failure">Unlock failed</string>
+    <string name="submit_response_failure">Error submitting a response. Please try again.</string>
+    <string name="error_opening_google_drive_document">You cannot access this file. It is not publicly available.</string>
+    <string name="delete_comment_failure">There was an error deleting the comment. Please try again.</string>
+    <string name="google_authentication_failure">There is a problem with your google credentials. Please tap the lower right corner next to the clock for more information.</string>
+    <string name="something_went_wrong">Something went wrong. Please try again later.</string>
+</resources>

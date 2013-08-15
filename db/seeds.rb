@@ -137,10 +137,10 @@ spectrum_names = [
   ['Style', [analyst, visionary], 'Do you have an eye for the details, or are you drawn to grand concepts? Whether a stickler for the particulars, or someone who prefers looking at the big picture, a solid understanding of your affinity can play to your strengths when project planning.'], 
   ['Drivers', [altruist, enterpriser], 'Your motivations are the final piece in the Innovation Type puzzle. Knowing what brings you ultimate satisfaction from a project delivery standpoint helps you frame both outcomes and your work with others.']
 ]
-spectrum_names.each do |name, trait_pair, description|
-  spectrum = Spectrum.find_or_create_by_name(name: name)
-  trait_pair.each do |name, description, responses, image|
-    trait = spectrum.traits.find_or_create_by_name_and_description(name: name, description: description, image: image)
+spectrum_names.each do |name, trait_pair, spectrum_description|
+  spectrum = Spectrum.find_or_create_by_name_and_description(name: name, description: spectrum_description)
+  trait_pair.each do |name, trait_description, responses, image|
+    trait = spectrum.traits.create(name: name, description: trait_description, image: image)
     responses.each do |response|
       trait.question_responses.create(response: response)
     end
