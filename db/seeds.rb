@@ -6,6 +6,38 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create(name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
+User.create(name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false)
+
+resources = [
+  ['AB Testing',
+  'Goal: Identify the best performing design from a number of options for an existing service or project.'],
+  [' Money Talks',
+  'Prioritize items within the constraints of your budget.'],
+  ['Collaborative Sketching - ThoughtWork Innovation Deck', 
+  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.'],
+  [' How Did I Get There? - ThoughtWorks Innovation Deck',
+  'Goal: This is a great ice breaker activity for people who may not have worked together before and to get participants comfortable with communicating their ideas through sketching.'],
+  ['"How Might We" ThoughtWorks Innovation Deck',
+  'Goal: Genesis of new ideas or solutions to a defined problem.'],
+  ['HBS Elevator Pitch',
+  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
+  ['Brain Writing - ThoughtWorks Innovation Deck',
+  'Goal: To generate a large number of ideas in a minimum amount of time. This technique is appropriate for situations where writing is favoured over sketching ideas.'],
+  ['Go and See - ThoughtWorks Innovation Deck',
+  'Goal: To discover the opportunities that exist to improve your customer"s experiences.'],
+  ['AB Testing (ThoughtWorks Innovation Deck)',
+  'Goal: Identify the best performing design from a number of options for an existing product or service. Variously known as AB testing, Split testing or Multivariate testing, this controlled experiment allows you to measure the relative effectiveness of different design elements.'],
+  ['HBS Elevator Pitch',
+  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
+  ['Collaborative Sketching - ThoughtWorks Innovation Deck',
+  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.']
+]
+  
+resources.each do |name, full_description|
+  resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
+end
+
 analyst_responses = ['I excel at understanding intricate problems.',
 'I believe it is important to consider all possibilities before acting',
 'I believe decisions should be based on evidence.',
@@ -65,7 +97,6 @@ zig_zagger_responses = ['When working on a project, I like to follow wherever th
 'I think a little chaos is good for the creative process',
 'I like juggling multiple ideas at once',
 'I am comfortable making rapid decisions']
-
 
 maverick = [
     'Maverick',
@@ -127,7 +158,6 @@ visionary = [
     'You’re like the best dream you’ve ever had—you’re nothing but imagination and ingenuity. Your tendency to think outside of the box creates completely inspirational and spontaneous ideas. You don’t really care what happens before or after your great idea, because your main motivation is to really extend the mind, and create something that is unlike anything anyone’s ever seen before. When it comes to innovation you’re the big bang that started the Universe.',
     visionary_responses,
     'visionary.png'
-
   ]
 
 spectrum_names = [
@@ -137,6 +167,10 @@ spectrum_names = [
   ['Style', [analyst, visionary], 'Do you have an eye for the details, or are you drawn to grand concepts? Whether a stickler for the particulars, or someone who prefers looking at the big picture, a solid understanding of your affinity can play to your strengths when project planning.'], 
   ['Drivers', [altruist, enterpriser], 'Your motivations are the final piece in the Innovation Type puzzle. Knowing what brings you ultimate satisfaction from a project delivery standpoint helps you frame both outcomes and your work with others.']
 ]
+
+Spectrum.delete_all
+Trait.delete_all
+QuestionResponse.delete_all
 spectrum_names.each do |name, trait_pair, spectrum_description|
   spectrum = Spectrum.find_or_create_by_name_and_description(name: name, description: spectrum_description)
   trait_pair.each do |name, trait_description, responses, image|
@@ -146,38 +180,6 @@ spectrum_names.each do |name, trait_pair, spectrum_description|
     end
   end
 end
-
-resources = [
-  ['AB Testing',
-  'Goal: Identify the best performing design from a number of options for an existing service or project.'],
-  [' Money Talks',
-  'Prioritize items within the constraints of your budget.'],
-  ['Collaborative Sketching - ThoughtWork Innovation Deck', 
-  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.'],
-  [' How Did I Get There? - ThoughtWorks Innovation Deck',
-  'Goal: This is a great ice breaker activity for people who may not have worked together before and to get participants comfortable with communicating their ideas through sketching.'],
-  ['"How Might We" ThoughtWorks Innovation Deck',
-  'Goal: Genesis of new ideas or solutions to a defined problem.'],
-  ['HBS Elevator Pitch',
-  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
-  ['Brain Writing - ThoughtWorks Innovation Deck',
-  'Goal: To generate a large number of ideas in a minimum amount of time. This technique is appropriate for situations where writing is favoured over sketching ideas.'],
-  ['Go and See - ThoughtWorks Innovation Deck',
-  'Goal: To discover the opportunities that exist to improve your customer"s experiences.'],
-  ['AB Testing (ThoughtWorks Innovation Deck)',
-  'Goal: Identify the best performing design from a number of options for an existing product or service. Variously known as AB testing, Split testing or Multivariate testing, this controlled experiment allows you to measure the relative effectiveness of different design elements.'],
-  ['HBS Elevator Pitch',
-  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
-  ['Collaborative Sketching - ThoughtWorks Innovation Deck',
-  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.']
-]
-  
-resources.each do |name, full_description|
-  resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
-end
-
-User.create(name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
-User.create(name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false)
 
 industries = [
   'Does not matter',
@@ -193,6 +195,24 @@ industries = [
   'Energy'
 ]
 
+Industry.delete_all
 industries.each do |industry|
   Industry.create(name: industry)
 end
+
+phases = [
+  'Plan',
+  'Act',
+  'Observe',
+  'Reflect'
+]
+
+Phase.delete_all
+phases.each do |phase_name|
+  Phase.create(name: phase_name)
+end
+
+
+
+
+

@@ -77,10 +77,10 @@
     <string name="discussion_started">%s started a discussion</string>
     <string name="discussion_started_by_you">You started a discussion</string>
     <string name="no_posts_for_date">There are no posts\n on this date.</string>
-    <string name="no_posts_for_class">There are no posts\n for this class.</string>
+    <string name="no_posts_for_class">There aren\'t any posts\n for this class yet!</string>
     <string name="console_action_switcher_message">A %s is currently running! Do you want to end this activity?</string>
-    <string name="console_action_activity_running_in_another_notebook_message">You have an activity running in another notebook. Do you want to close the activity?</string>
-    <string name="console_action_eyes_on_teacher_running_in_another_notebook_message">You have Eyes on Teacher running in another notebook. Do you want to close it?</string>
+    <string name="console_action_activity_running_in_another_notebook_message">You have an activity running in another notebook. Do you want to end the activity?</string>
+    <string name="console_action_eyes_on_teacher_running_in_another_notebook_message">You have Eyes on Teacher running in another notebook. Do you want to end it?</string>
     <string name="teacher_actitivity_console_notification">%s is Active</string>
     <string name="read_more">Read more ▼</string>
     <string name="read_less">Read less ▲</string>
