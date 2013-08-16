@@ -14,16 +14,12 @@
       -@traits.each do |trait|
         =image_tag trait.image, size: '50x50', class: 'trait_filter', title: trait.name
     .search_title
-      Innovation Stages
-    #phase_filters  
-      .phase_filter
-        Plan
-      .phase_filter
-        Act
-      .phase_filter
-        Observe
-      .phase_filter
-        Reflect
+      Innovation Stages  
+    .phase_filter_box
+      -@phases.each do |phase|
+        =check_box_tag "resource[phase_ids][]", phase.id
+        =phase.name
+        %br
     .search_title
       Industry
     .industry_filter_box
@@ -38,39 +34,23 @@
         .span3
           =image_tag 'ToolsPlaceholder.png'
         .span6
-          = resource.name
+          %b
+            = link_to resource.name, resource
+            %br
+            .manipulate_resource
+              = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
+              = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
           %br
+          Created by: 
           = resource.author.name
+          %br
+          -resource.phases.each do |phase|
+            =phase.name + " |"
           %br
           -resource.traits.each do |trait|
             =link_to (image_tag trait.image, size: '50x50'), trait_path(trait)
-
-    %table.table.table-striped
-      %tr
-        %td Name
-        %td Upvotes
-        %td Author
-        %td Description
-        %td
-        %td
-        %td
-      - @resources.each do |resource|
-        %tr.small_text
-          %td
-            = resource.name
-          %td
-            = resource.upvotes.count
-          %td
-            = resource.author.name
-          %td
-            = resource.full_description
-          %td
-            = link_to 'Show', resource
-          %td
-            = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
-          %td
-            = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
-    %br
+          %br
+      %hr
 
     -if current_user
     -else

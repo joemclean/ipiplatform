@@ -7,8 +7,9 @@
 
 .resource_filters {
   background-color: #fafafa;
-  padding: 7.5px;
+  padding: 10px 0 0 7.5px;
   box-sizing: border-box;
+  margin-top: 4px;
   #search_box {
     margin: 0.5px 0.5px;
   }
@@ -23,13 +24,9 @@
     width: 180px;
     margin: 0 auto;
   }
-  .phase_filter {
-    padding: 30px 0;
-    text-align: center;
-    width: 80px;
-    background-color: #eee;
-    float: left;
-    margin:5px;
+  .phase_filter_box {
+    width: 180px;
+    margin: 0 auto;
   }
   .phase_filter:hover {
     background-color: #ccc

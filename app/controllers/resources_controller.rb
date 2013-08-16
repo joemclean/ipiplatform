@@ -1,11 +1,9 @@
 class ResourcesController < ApplicationController
   before_filter :signed_in?
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_resource_associations, only: [:index, :show, :new, :edit]
 
   def index
-    @traits = Trait.all
-    @industries = Industry.all
-    @resources = Resource.all
     @filter_params = {plan: false, act: false, observe: false, reflect: false}
   end
 
@@ -17,23 +15,14 @@ class ResourcesController < ApplicationController
 
   def new
     @resource = Resource.new()
-    @traits = Trait.all
-    @industries = Industry.all
-    @phases = Phase.all
   end
 
   def edit
-    @traits = Trait.all
-    @industries = Industry.all
-    @phases = Phase.all
   end
 
   def create
     session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @resource = Resource.new(resource_params)
-    @traits = Trait.all
-    @industries = Industry.all
-    @phases = Phase.all
     @resource.user_id = session[:user_id]
     if @resource.save
       render "index"
@@ -70,5 +59,12 @@ class ResourcesController < ApplicationController
 
     def resource_params
       params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [])
+    end
+
+    def set_resource_associations
+      @traits = Trait.all
+      @industries = Industry.all
+      @resources = Resource.all
+      @phases = Phase.all
     end
 end
