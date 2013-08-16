@@ -32,14 +32,12 @@ class SurveysController < ApplicationController
         redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
       end
     else # i did not take the survey and am trying to view results
-      if current_user.personality
+      if current_user && current_user.personality
         @score_hash = current_user.personality
       else
         redirect_to take_survey_path, notice:'Please take the survey to see your innovator-type!'
       end
     end
-
-    @score_hash = @score_hash.first(4)
 
   end
 end
