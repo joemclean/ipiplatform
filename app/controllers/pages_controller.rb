@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  layout 'color_block', only: [:phases]
   
   def innovator
     @spectrums = Spectrum.all

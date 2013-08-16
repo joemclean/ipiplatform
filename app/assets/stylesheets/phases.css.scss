@@ -1,26 +1,31 @@
-.phase-white {
-	background-color: white;
-	margin-top: 0px;
-	padding-left: 200px;
-	padding-top: 50px;
-	padding-bottom: 50px;
-	padding-right: 200px;
+.phase_hero {
+	background-color: #a33c6d;
+	color: #FFF;
+	width: 100%;
+	text-align: center;
+	padding: 75px 0 70px 0;
+  line-height: 1.3em;
+	p {
+		font: {
+			size: 14px;
+		}
+	}
 }
 
-.phase-grey {
-	background-color: #e2e2e2;
-	margin-bottom: 0px;
-	padding-left: 200px;
-	padding-right: 200px;
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-.phase-blue {
-	background-color: #9fd2ef;
-	margin-bottom: 0px;
-	padding-left: 200px;
-	padding-right: 200px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+.phase_overview {
+	padding: 20px 0 20px 0px;
+	.col {
+	  &.right {
+	  	font :{
+	  		size: 18px;
+	  	}
+	    text-align: left;
+	    box-sizing: border-box;
+	    padding: 90px 40px 0 0px;
+	  }
+	  &.left {
+	    box-sizing: border-box;
+	    padding: 0px 0 0 40px;
+	  }
+	}
 }
