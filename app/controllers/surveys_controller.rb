@@ -22,7 +22,9 @@ class SurveysController < ApplicationController
       @answer_hash = params['answers']
       survey.answers = @answer_hash
       @score_hash = survey.score
-
+      @score_hash = @score_hash.sort_by{|trait_id, count| count}.reverse
+      @score_hash = @score_hash.first(4)
+      
       if current_user
         current_user.personality = @score_hash
       else
@@ -36,10 +38,8 @@ class SurveysController < ApplicationController
         redirect_to take_survey_path, notice:'Please take the survey to see your innovator-type!'
       end
     end
-        
-    @score_hash = @score_hash.sort_by{|trait_id, count| count}.reverse
-    @score_hash = @score_hash.first(4)
 
+    @score_hash = @score_hash.first(4)
 
   end
 end
