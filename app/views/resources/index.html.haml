@@ -32,23 +32,36 @@
     - @resources.each do |resource|
       .row
         .span3
-          =image_tag 'ToolsPlaceholder.png'
-        .span6
+          =image_tag 'HCD.png', size: '180x120'
+          %br
+          %br
+          %span.tag_tag
+            Munchies
+          %span.tag_tag
+            Coconuts
+        .span6{:style => 'margin: 0 0 0 -8px;'}
           %b
             = link_to resource.name, resource
             %br
-            .manipulate_resource
-              = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
-              = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
+          .row  
+            .span4
+              Created by: 
+              = resource.author.name
+            .span2.pull-right
+              .manipulate_resource{:style => 'text-align: right;'}
+                = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
+                = ' | '
+                = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
           %br
-          Created by: 
-          = resource.author.name
+          =resource.description
           %br
+          %br
+          Phases: 
           -resource.phases.each do |phase|
-            =phase.name + " |"
+            =phase.name.upcase + " |"
           %br
           -resource.traits.each do |trait|
-            =link_to (image_tag trait.image, size: '50x50'), trait_path(trait)
+            =link_to (image_tag trait.image, size: '40x40'), trait_path(trait)
           %br
       %hr
 
