@@ -26,7 +26,7 @@ class SurveysController < ApplicationController
       @score_hash = @score_hash.first(4)
       
       if current_user
-        current_user.personality = @score_hash
+        current_user.update(personality: @score_hash)
       else
         session[:user_personality] = @score_hash
         redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
