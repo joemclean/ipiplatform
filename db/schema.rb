@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816141338) do
+ActiveRecord::Schema.define(version: 20130816180626) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -20,7 +20,26 @@ ActiveRecord::Schema.define(version: 20130816141338) do
     t.datetime "updated_at"
   end
 
+  create_table "format_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "formats", force: true do |t|
+    t.integer  "medium_id"
+    t.integer  "format_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "industries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "media", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -120,7 +139,6 @@ ActiveRecord::Schema.define(version: 20130816141338) do
     t.datetime "updated_at"
     t.boolean  "is_admin",        default: false
     t.text     "personality"
-    t.string   "avatar"
   end
 
 end

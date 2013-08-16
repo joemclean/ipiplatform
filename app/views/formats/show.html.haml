@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Medium:
+  = @format.medium_id
+%p
+  %b Format type:
+  = @format.format_type_id
+
+= link_to 'Edit', edit_format_path(@format)
+\|
+= link_to 'Back', formats_path

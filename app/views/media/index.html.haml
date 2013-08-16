@@ -1,0 +1,19 @@
+%h1 Listing Format Media
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @media.each do |medium|
+    %tr
+      %td= medium.name
+      %td= link_to 'Show', medium
+      %td= link_to 'Edit', edit_medium_path(medium)
+      %td= link_to 'Destroy', medium, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Medium', new_medium_path

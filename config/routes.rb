@@ -1,5 +1,11 @@
 IpiPlatform::Application.routes.draw do
 
+  resources :formats
+
+  resources :format_types
+
+  resources :media
+
   resources :industries
   resources :sessions
   resources :users

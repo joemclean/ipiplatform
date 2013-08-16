@@ -1,0 +1,16 @@
+= form_for @format do |f|
+  - if @format.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@format.errors.count, "error")} prohibited this format from being saved:"
+      %ul
+        - @format.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :medium_id
+    = f.collection_select(:medium_id, @media, :id, :name)
+  .field
+    = f.label :format_type_id
+    = f.collection_select(:format_type_id, @format_types, :id, :name)
+  .actions
+    = f.submit 'Save'

@@ -1,7 +1,7 @@
 class Bookmark < ActiveRecord::Base
   
   belongs_to :user
-  belongs_to :resources
+  belongs_to :resource
   
   
   

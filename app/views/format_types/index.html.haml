@@ -1,0 +1,19 @@
+%h1 Listing Format Types
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @format_types.each do |format_type|
+    %tr
+      %td= format_type.name
+      %td= link_to 'Show', format_type
+      %td= link_to 'Edit', edit_format_type_path(format_type)
+      %td= link_to 'Destroy', format_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Format type', new_format_type_path
