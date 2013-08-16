@@ -21,7 +21,7 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
+    #session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @resource = Resource.new(resource_params)
     @resource.user_id = session[:user_id]
     if @resource.save
