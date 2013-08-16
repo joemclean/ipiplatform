@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20130816141338) do
     t.datetime "updated_at"
     t.boolean  "is_admin",        default: false
     t.text     "personality"
+    t.string   "avatar"
   end
 
 end
