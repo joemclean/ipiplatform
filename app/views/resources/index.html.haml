@@ -5,25 +5,46 @@
 %h1
   Resources
 .row
-  .span4.resource_filters
+  .span3.resource_filters
     =form_tag do |f|
       =text_field_tag :search, "Keyword search", id: 'search_box'
-      %br
-      #phase_filters
-        .phase_filter
-          Plan
-        .phase_filter
-          Act
-        .phase_filter
-          Observe
-        .phase_filter
-          Reflect
+    .search_title
+      Innovator Types
     .trait_filter_box
       -@traits.each do |trait|
         =image_tag trait.image, size: '50x50', class: 'trait_filter', title: trait.name
+    .search_title
+      Innovation Stages
+    #phase_filters  
+      .phase_filter
+        Plan
+      .phase_filter
+        Act
+      .phase_filter
+        Observe
+      .phase_filter
+        Reflect
+    .search_title
+      Industry
+    .industry_filter_box
+      -@industries.each do |industry|
+        =check_box_tag "resource[industry_ids][]", industry.id
+        =industry.name
+        %br
 
+  .span9
+    - @resources.each do |resource|
+      .row
+        .span3
+          =image_tag 'ToolsPlaceholder.png'
+        .span6
+          = resource.name
+          %br
+          = resource.author.name
+          %br
+          -resource.traits.each do |trait|
+            =link_to (image_tag trait.image, size: '50x50'), trait_path(trait)
 
-  .span8
     %table.table.table-striped
       %tr
         %td Name

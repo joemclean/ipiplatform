@@ -26,7 +26,8 @@
           %p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
             =spectrum.name
             %br
-            =spectrum.description
+            %ul{:style => 'text-align: center; padding: 0px 150px 0px 150px;'}
+              =spectrum.description
             %br
             %table
               -spectrum.traits.each do |trait|

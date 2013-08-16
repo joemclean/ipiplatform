@@ -4,6 +4,7 @@ class ResourcesController < ApplicationController
 
   def index
     @traits = Trait.all
+    @industries = Industry.all
     @resources = Resource.all
     @filter_params = {plan: false, act: false, observe: false, reflect: false}
   end
