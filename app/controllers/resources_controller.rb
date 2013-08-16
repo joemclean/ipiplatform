@@ -25,7 +25,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     @resource.user_id = session[:user_id]
     if @resource.save
-      render "index"
+      redirect_to @resource, notice: 'Resource was successfully created'
     else
       render "new"
     end
