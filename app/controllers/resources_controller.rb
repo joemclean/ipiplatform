@@ -18,11 +18,13 @@ class ResourcesController < ApplicationController
     @resource = Resource.new()
     @traits = Trait.all
     @industries = Industry.all
+    @phases = Phase.all
   end
 
   def edit
     @traits = Trait.all
     @industries = Industry.all
+    @phases = Phase.all
   end
 
   def create
@@ -30,6 +32,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     @traits = Trait.all
     @industries = Industry.all
+    @phases = Phase.all
     @resource.user_id = session[:user_id]
     if @resource.save
       render "index"
@@ -65,6 +68,6 @@ class ResourcesController < ApplicationController
     end
 
     def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [])
+      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [])
     end
 end

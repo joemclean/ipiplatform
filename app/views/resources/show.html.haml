@@ -55,11 +55,8 @@
     %br
     %br
     .explore{:style => 'text-align: center;'}
-      -if @resource.link.empty?
-        = ''
-      -else
-        .btn
-          = link_to 'Go explore the resource!', @resource.link, :target => 'blank'
+      -if @resource.link
+        = link_to 'Go explore the resource!', @resource.link, :target => 'blank'
       %br
 
 %p
