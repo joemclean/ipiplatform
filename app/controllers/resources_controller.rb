@@ -1,6 +1,6 @@
 class ResourcesController < ApplicationController
-  before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_filter :signed_in?
+  before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   def index
     @traits = Trait.all
