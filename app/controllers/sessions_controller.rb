@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       
       if session[:user_personality]
-        current_user.personality = session[:user_personality]
+        current_user.update(personality: session[:user_personality])
         session.delete(:user_personality)
         redirect_to get_results_path, notice: 'Thank you for logging in. Your results have been saved!'
       else
