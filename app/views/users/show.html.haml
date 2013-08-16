@@ -21,22 +21,26 @@
           = link_to 'Take the survey!', take_survey_path
   %br
 %br
-  %h3 
-    Recent Tools Used
-  %table
-    %tr
-      = image_tag 'ToolsPlaceholder.png'
-      = image_tag 'ToolsPlaceholder.png'
-      = image_tag 'ToolsPlaceholder.png'
-      = image_tag 'ToolsPlaceholder.png'
-      %br
+
+
 %h3 Uploaded Resources
-- @resources.each do |resource|
+- @published_resources.each do |resource|
   .resourcebox.span12
     %strong= resource.name
     %br
-    %br
     = resource.description
     %br
-    %br
     = link_to 'Show', resource
+    %br   
+
+%h3 Bookmarked Resources
+- @bookmarks.each do |bookmark|
+  .resourcebox.span12
+    %strong=bookmark.resource.name
+    %br
+    = bookmark.resource.description
+    %br
+    = link_to 'Show', bookmark.resource
+    %br
+
+

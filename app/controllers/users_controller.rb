@@ -25,8 +25,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @resources = Resource.find_all_by_user_id(session[:user_id])
+    @published_resources = Resource.find_all_by_user_id(session[:user_id])
     @upvoted_resources = Upvote.find_all_by_user_id(session[:user_id])
+    #@bookmarks = Bookmark.find_all_by_user_id(session[:user_id])
+    @bookmarks = Bookmark.find_all_by_user_id(current_user.id)
+    
   end
 
   def update
