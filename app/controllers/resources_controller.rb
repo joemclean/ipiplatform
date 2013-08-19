@@ -15,7 +15,6 @@ class ResourcesController < ApplicationController
 
   def new
     @resource = Resource.new()
-    @formats = Format.all
   end
 
   def edit
@@ -59,7 +58,7 @@ class ResourcesController < ApplicationController
     end
 
     def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [])
+      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [], format_ids: [])
     end
 
     def set_resource_associations
@@ -67,5 +66,6 @@ class ResourcesController < ApplicationController
       @industries = Industry.all
       @resources = Resource.all
       @phases = Phase.all
+      @formats = Format.all
     end
 end
