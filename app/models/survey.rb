@@ -26,10 +26,16 @@ class Survey < ActiveRecord::Base
 
   def generate_questions
     trait_ids = Trait.ids
-    25.times do
-      question = self.questions.build
-      id_pair = trait_ids.sample(2)
-      question.make_responses(id_pair)
+    spectrums = Spectrum.all
+    spectrums.each do |spectrum|
+      question_number = 0
+      5.times do
+        question = self.questions.build
+        spectrum.traits.each do |trait|
+          question.question_responses << trait.question_responses.fetch(question_number)
+        end
+        question_number += 1
+      end
     end
   end
 end
