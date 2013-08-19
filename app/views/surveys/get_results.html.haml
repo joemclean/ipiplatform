@@ -3,7 +3,7 @@
 %h3 Scored Quiz
 
 %div.results_box
-  -@score_hash.each do |trait_id, count|
+  -@personality.each do |trait_id, count|
     -trait = Trait.find(trait_id)
     .div.image_results.span2
       =image_tag trait.image
@@ -15,7 +15,7 @@
 
 %h3 Understanding Results
 %table.table.table-striped
-  -@score_hash.each do |trait_id, count|
+  -@personality.each do |trait_id, count|
     -trait = Trait.find(trait_id)
     %tr
       %td{:colspan => '2'}

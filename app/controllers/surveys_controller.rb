@@ -17,27 +17,38 @@ class SurveysController < ApplicationController
       #option 1: I took the suvey and am looking at the results (prompt the user to save)
       #option 2: I didn't take the survey, but i want to look at my results, but haven't logged in.
 
-
     if params['answers'] # i just took the survey
-      @answer_hash = params['answers']
-      survey.answers = @answer_hash
-      @score_hash = survey.score
-      @score_hash = @score_hash.sort_by{|trait_id, count| count}.reverse
-      @score_hash = @score_hash.first(5)
-      
+      evaluate_responses
       if current_user
-        current_user.update(personality: @score_hash)
+        current_user.update(personality: @personality)
       else
-        session[:user_personality] = @score_hash
+        session[:user_personality] = @personality
         redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
       end
     else # i did not take the survey and am trying to view results
       if current_user && current_user.personality
-        @score_hash = current_user.personality
+        view_past_results
       else
-        redirect_to take_survey_path, notice:'Please take the survey to see your innovator-type!'
+        prompt_survey
       end
     end
+  end
 
+  def evaluate_responses
+    survey.answers = params['answers']
+    survey_score = survey.score
+    @personality = personality_results(survey_score)
+  end
+
+  def view_past_results
+    @personality = current_user.personality
+  end
+
+  def prompt_survey
+    redirect_to take_survey_path, notice:'Please take the survey to see your innovator-type!'
+  end
+
+  def personality_results(survey_score)
+    survey_score.sort_by{|trait_id, count| count}.reverse.first(5)
   end
 end
