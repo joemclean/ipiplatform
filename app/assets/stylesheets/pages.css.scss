@@ -378,36 +378,6 @@ h2.resourcetitle {
   color: #EFBD45;  
 }
 
-.row.showresource {
-  col {
-    &.left {
-      font :{
-        size: 2.0em;
-      }
-      box-sizing: border-box;
-    }
-    &.right {
-      box-sizing: border-box;
-    }
-  }
-  .authorBox {
-    font :{
-      size: 14px;
-    }
-  }
-  .resourcetraitbox {
-    padding: 0 0 10 0;
-    font :{
-      size: 14px;
-    }
-  }
-  .goldimagesize {
-    img {
-      width: 200px;
-    }
-  } 
-}
-
 
 
 
