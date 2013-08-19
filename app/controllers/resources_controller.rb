@@ -67,5 +67,6 @@ class ResourcesController < ApplicationController
       @resources = Resource.all
       @phases = Phase.all
       @formats = Format.all
+      @media = Medium.all
     end
 end
