@@ -8,7 +8,7 @@ class SurveysController < ApplicationController
   end
 
   def get_results
-    survey = Survey.new
+    @survey = Survey.new
 
     #if i am logged in
       #option 1: I took the survey again (params['answers']) is set
@@ -35,8 +35,8 @@ class SurveysController < ApplicationController
   end
 
   def evaluate_responses
-    survey.answers = params['answers']
-    survey_score = survey.score
+    @survey.answers = params['answers']
+    survey_score = @survey.score
     @personality = personality_results(survey_score)
   end
 
