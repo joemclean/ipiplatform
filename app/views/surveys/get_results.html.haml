@@ -5,7 +5,7 @@
 %div.results_box
   -@score_hash.each do |trait_id, count|
     -trait = Trait.find(trait_id)
-    .div.image_results
+    .div.image_results.span2
       =image_tag trait.image
       %br
       %h4

@@ -23,7 +23,7 @@ class SurveysController < ApplicationController
       survey.answers = @answer_hash
       @score_hash = survey.score
       @score_hash = @score_hash.sort_by{|trait_id, count| count}.reverse
-      @score_hash = @score_hash.first(4)
+      @score_hash = @score_hash.first(5)
       
       if current_user
         current_user.update(personality: @score_hash)
