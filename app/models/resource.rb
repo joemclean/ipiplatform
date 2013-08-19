@@ -14,6 +14,9 @@ class Resource < ActiveRecord::Base
   has_many :phases, through: :phase_associations
 
   belongs_to :user
+
+  has_many :resource_formats
+  has_many :formats, through: :resource_formats
   
   attr_writer :current_step
   

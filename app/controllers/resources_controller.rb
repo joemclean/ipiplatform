@@ -15,6 +15,7 @@ class ResourcesController < ApplicationController
 
   def new
     @resource = Resource.new()
+    @formats = Format.all
   end
 
   def edit
