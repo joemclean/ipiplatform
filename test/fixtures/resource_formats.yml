@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  format_id: 1
+  resource_id: 1
+
+two:
+  format_id: 1
+  resource_id: 1

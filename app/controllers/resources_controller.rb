@@ -21,11 +21,11 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
+    #session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @resource = Resource.new(resource_params)
     @resource.user_id = session[:user_id]
     if @resource.save
-      render "index"
+      redirect_to @resource, notice: 'Resource was successfully created'
     else
       render "new"
     end
@@ -58,7 +58,7 @@ class ResourcesController < ApplicationController
     end
 
     def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [])
+      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [], format_ids: [])
     end
 
     def set_resource_associations
@@ -66,5 +66,6 @@ class ResourcesController < ApplicationController
       @industries = Industry.all
       @resources = Resource.all
       @phases = Phase.all
+      @formats = Format.all
     end
 end

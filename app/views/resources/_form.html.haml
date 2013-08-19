@@ -41,6 +41,13 @@
       =check_box_tag "resource[industry_ids][]", industry.id, @resource.industry_ids.include?(industry.id)
       =industry.name 
       %br
+  %h4= 'What format is this resource?'
+  .field
+    = hidden_field_tag "resource[format_ids][]", nil
+    -@formats.each do |format|
+      =check_box_tag "resource[format_ids][]", format.id, @resource.format_ids.include?(format.id)
+      =format.medium.name + ' ' + format.format_type.name 
+      %br
   .field
     =f.submit
 
