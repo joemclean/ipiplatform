@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   has_one :personality
 
   validates_uniqueness_of :email
-  serialize :personality
   
   def avatar_url
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
