@@ -8,24 +8,15 @@ class SurveysController < ApplicationController
   end
 
   def get_results
-    @survey = Survey.new
-    evaluate_responses
-
+    survey = Survey.new(answers: params['answers'])
+    sorted_results = sort_results(survey.score)
+    top_traits = get_top_traits(sorted_results)
     if current_user
-      personality = current_user.build_personality
-
-      @sorted_hash.each do |trait_id, trait_count|
-        personality.traits << Trait.find(trait_id)
-      end
-
+      personality = current_user.build_personality(traits: top_traits)
       current_user.save
-      @personality = personality
       redirect_to view_results_path
     else
-      personality = Personality.new
-      @sorted_hash.each do |trait_id, trait_count|
-        personality.traits << Trait.find(trait_id)
-      end
+      personality = Personality.new(traits: top_traits)
       personality.save
       session[:user_personality] = personality.id
       redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
@@ -34,27 +25,27 @@ class SurveysController < ApplicationController
 
   def view_results
     if current_user && current_user.personality
-      view_past_results
+       @personality = current_user.personality
     else
       prompt_survey
     end
   end
 
+  protected
 
-  def evaluate_responses
-    @survey.answers = params['answers']
-    @sorted_hash = sort_results(@survey.score)
-  end
+    def get_top_traits(sorted_results)
+      top_traits = []
+      sorted_results.each do |top_trait_id, count|
+        top_traits << Trait.find(top_trait_id)
+      end
+      top_traits
+    end 
 
-  def view_past_results
-    @personality = current_user.personality
-  end
+    def prompt_survey
+      redirect_to take_survey_path, notice:'Please take the survey to see your innovator type!'
+    end
 
-  def prompt_survey
-    redirect_to take_survey_path, notice:'Please take the survey to see your innovator-type!'
-  end
-
-  def sort_results(survey_score)
-    survey_score.sort_by{|trait_id, count| count}.reverse.first(5)
-  end
+    def sort_results(survey_score)
+      survey_score.sort_by{|trait_id, count| count}.reverse.first(5)
+    end
 end

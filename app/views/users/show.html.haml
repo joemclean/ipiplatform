@@ -7,8 +7,8 @@
       =image_tag @user.avatar_url
       %br
     .image-group.profile_icon.pull-left
-      -if user_has_taken_quiz
-        -current_user.personality.traits.each do |trait|
+      -if @user.personality
+        -@user.personality.traits.each do |trait|
           .div.image_results
             =link_to (image_tag trait.image), get_results_path
             %br
