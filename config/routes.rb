@@ -16,6 +16,7 @@ IpiPlatform::Application.routes.draw do
   get "surveys/new"
   get "surveys/take_survey", :as => :take_survey
   get "surveys/get_results", :as => :get_results
+  get "surveys/view_results", :as => :view_results
   get "pages/home"
   get "pages/publisher"
   get "pages/innovator"

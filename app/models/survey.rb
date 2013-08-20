@@ -16,12 +16,12 @@ class Survey < ActiveRecord::Base
   end
 
   def count_traits (selected_trait_ids)
-    score_hash = {}
+    trait_count = {}
     Trait.ids.each do |trait_id|
       selected_trait_count = selected_trait_ids.count(trait_id)
-      score_hash[trait_id] = selected_trait_count
+      trait_count[trait_id] = selected_trait_count
     end
-    score_hash
+    trait_count
   end
 
   def generate_questions
