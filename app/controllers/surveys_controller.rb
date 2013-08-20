@@ -27,7 +27,7 @@ class SurveysController < ApplicationController
     if current_user && current_user.personality
        @personality = current_user.personality
     else
-      prompt_survey
+      redirect_to take_survey_path, notice:'Please take the survey to see your innovator type!'
     end
   end
 
@@ -39,10 +39,6 @@ class SurveysController < ApplicationController
         top_traits << Trait.find(top_trait_id)
       end
       top_traits
-    end 
-
-    def prompt_survey
-      redirect_to take_survey_path, notice:'Please take the survey to see your innovator type!'
     end
 
     def sort_results(survey_score)
