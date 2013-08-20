@@ -13,14 +13,21 @@ class SurveysController < ApplicationController
 
     if current_user
       personality = current_user.build_personality
+
       @sorted_hash.each do |trait_id, trait_count|
         personality.traits << Trait.find(trait_id)
       end
+
       current_user.save
       @personality = personality
       redirect_to view_results_path
     else
-      session[:user_personality] = @personality
+      personality = Personality.new
+      @sorted_hash.each do |trait_id, trait_count|
+        personality.traits << Trait.find(trait_id)
+      end
+      personality.save
+      session[:user_personality] = personality.id
       redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
     end
   end

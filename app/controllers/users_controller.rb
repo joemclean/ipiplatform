@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if session[:user_personality]
-      @user.personality = session[:user_personality]
+      @user.personality = Personality.find(session[:user_personality])
       session.delete(:user_personality)
     end
 
