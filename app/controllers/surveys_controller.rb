@@ -16,8 +16,7 @@ class SurveysController < ApplicationController
       current_user.save
       redirect_to view_results_path
     else
-      personality = Personality.new(traits: top_traits)
-      personality.save
+      personality = Personality.create(traits: top_traits)
       session[:user_personality] = personality.id
       redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
     end
