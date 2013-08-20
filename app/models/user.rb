@@ -3,12 +3,11 @@ class User < ActiveRecord::Base
 
   #attr_accessible :email, :name, :password, :password_confirmation, :avatar
   has_many :resources
-
   has_many :upvotes, :dependent => :destroy
-  
   has_many :bookmarks, :dependent => :destroy
   has_many :resources, through: :bookmarks
-  
+  has_one :personality
+
   validates_uniqueness_of :email
   serialize :personality
   

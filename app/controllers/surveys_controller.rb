@@ -36,8 +36,7 @@ class SurveysController < ApplicationController
 
   def evaluate_responses
     @survey.answers = params['answers']
-    survey_score = @survey.score
-    @personality = personality_results(survey_score)
+    @personality = personality_results(@survey.score)
   end
 
   def view_past_results

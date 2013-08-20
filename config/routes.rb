@@ -1,5 +1,7 @@
 IpiPlatform::Application.routes.draw do
 
+  get "personalities/create"
+  get "personalities/update"
   resources :formats
 
   resources :format_types
