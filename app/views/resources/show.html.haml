@@ -87,3 +87,22 @@
     .btn-group
       .btn
         = link_to 'Explore other resources', resources_path
+%br
+
+.comments_block
+  .new_comment
+    =form_tag(resource_comments_save_path(@resource), method: :post, :id => 'new_comment') do
+      =hidden_field_tag 'resource_id', @resource.id
+      =text_area_tag 'comment_text', nil, rows: 2, cols: 10
+      =submit_tag 'Save Comment'
+  .comments
+    -@comments.each do |comment|
+      .comment
+        =comment.text
+        %br
+        %span.author
+          =comment.author.name + ' (' + comment.created_at.to_s + ')'
+        -if current_user.id == comment.author.id
+          %br
+          =link_to ' Delete', resource_comments_delete_path(resource_id: @resource.id, comment_id: comment.id)
+

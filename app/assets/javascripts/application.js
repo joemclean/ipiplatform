@@ -22,4 +22,5 @@ $(document).ready(function(){
     var myFormatBoxID = 'Formats_' + $(this).attr('id');
     $('div#' + myFormatBoxID).css('display', 'block');
   });
+
 });

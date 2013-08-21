@@ -1,8 +1,5 @@
 IpiPlatform::Application.routes.draw do
-
-  get "comment/save_comment"
-  get "comment/delete_comment"
-  get "comment/edit_comment"
+  
   get "personalities/create"
   get "personalities/update"
   resources :formats
@@ -32,11 +29,14 @@ IpiPlatform::Application.routes.draw do
   get 'bookmarks/make_bookmark', :as => :make_bookmark
   get 'bookmarks/unmake_bookmark', :as => :unmake_bookmark
 
+
   resources :traits
   resources :bookmarks
   
   resources :resources do
     resources :upvotes
+    post 'comments/save'
+    get 'comments/delete'
   end
   
   resources :suggestions
