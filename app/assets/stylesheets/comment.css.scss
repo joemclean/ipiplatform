@@ -11,7 +11,69 @@ span.EditCommentLink{
   text-decoration:underline;
 }
 
-.editCommentTextArea
+.new_comment_text
 {
-  display:none;
+  width:100%;
+}
+
+
+div.comments_block_out{
+  background-color:#F0F0F0;
+  position:fixed;
+  width:30%;
+  height:79%;
+  right:0px;
+  top:50px;
+  padding:10px;
+  overflow-y:auto;
+}
+div.comments_block_in{
+  background-color:#F0F0F0;
+  position:fixed;
+  width:30%;
+  height:79%;
+  right:-30%;
+  top:50px;
+  padding:10px;
+  overflow-y:auto;
+}
+
+div.comment{
+  width:100%;
+  float:none;
+  clear:both;
+  overflow:hidden;
+}
+h5.author{
+  background-color:#EFBD45;
+}
+
+#comment_toggle { 
+  height: 15px; 
+  width: 104px; 
+  position: fixed; 
+  top: 20%;
+  right:0px; 
+  z-index: 999;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#comment_toggle span { 
+  display: block; 
+  background: #F0F0F0;
+  color:#EFBD45; 
+  padding: 10px; 
+  font-size: 17px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  cursor:pointer;
+}
+
+#comment_toggle span:hover { 
+  background: #EFBD45; 
+  color: #fff;
 }
