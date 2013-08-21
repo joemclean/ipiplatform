@@ -9,14 +9,15 @@ class SurveysController < ApplicationController
 
   def get_results
     survey = Survey.new(answers: params['answers'])
-    sorted_results = sort_results(survey.score)
-    top_traits = get_top_traits(sorted_results)
+    survey_results = survey.score
+    top_traits = get_top_traits(survey_results)
     if current_user
       personality = current_user.build_personality(traits: top_traits)
       current_user.save
       redirect_to view_results_path
     else
-      personality = Personality.create(traits: top_traits)
+      personality = Personality.new(traits: top_traits)
+      personality.save
       session[:user_personality] = personality.id
       redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
     end
@@ -38,9 +39,5 @@ class SurveysController < ApplicationController
         top_traits << Trait.find(top_trait_id)
       end
       top_traits
-    end
-
-    def sort_results(survey_score)
-      survey_score.sort_by{|trait_id, count| count}.reverse.first(5)
     end
 end

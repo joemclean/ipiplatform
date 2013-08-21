@@ -4,7 +4,8 @@ class Survey < ActiveRecord::Base
 
   def score
     answer_ids = strip_ids(@answers)
-    count_traits(answer_ids)
+    survey_score = count_traits(answer_ids)
+    sort_results(survey_score)
   end
 
   def strip_ids(answers)
@@ -22,6 +23,10 @@ class Survey < ActiveRecord::Base
       trait_count[trait_id] = selected_trait_count
     end
     trait_count
+  end
+
+  def sort_results(survey_score)
+    survey_score.sort_by{|trait_id, count| count}.reverse.first(5)
   end
 
   def generate_questions
