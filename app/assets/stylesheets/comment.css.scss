@@ -64,8 +64,8 @@ h5.author{
 
 #comment_toggle span { 
   display: block; 
-  background: #F0F0F0;
-  color:#EFBD45; 
+  background: #EFBD45; 
+  color: #fff;
   padding: 10px; 
   font-size: 17px; 
   font-weight: bold; 
@@ -74,6 +74,6 @@ h5.author{
 }
 
 #comment_toggle span:hover { 
-  background: #EFBD45; 
-  color: #fff;
+  background: #F0F0F0;
+  color:#EFBD45; 
 }
