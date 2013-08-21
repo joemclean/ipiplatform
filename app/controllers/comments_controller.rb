@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
     end
   end
 
+
   private
     def set_comment
       @comment = Comment.find(params[:comment_id].to_i) 
@@ -27,5 +28,4 @@ class CommentsController < ApplicationController
     def set_resource
       @resource = Resource.find(params[:resource_id].to_i)
     end
-
 end
