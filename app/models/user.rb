@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :resources, through: :bookmarks
   has_one :personality
 
+  has_many :comments
+
   validates_uniqueness_of :email
   
   def avatar_url

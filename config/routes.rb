@@ -1,5 +1,8 @@
 IpiPlatform::Application.routes.draw do
 
+  get "comment/save_comment"
+  get "comment/delete_comment"
+  get "comment/edit_comment"
   get "personalities/create"
   get "personalities/update"
   resources :formats

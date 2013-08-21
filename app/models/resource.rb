@@ -17,6 +17,9 @@ class Resource < ActiveRecord::Base
 
   has_many :resource_formats
   has_many :formats, through: :resource_formats
+
+  has_many :comments
+  has_many :users, through: :comments
   
   attr_writer :current_step
   
