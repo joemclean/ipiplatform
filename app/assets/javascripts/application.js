@@ -15,31 +15,12 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
+$(document).on ('unload', function(){
+
   $('input:radio[name="MediumBox"]').change(function(){
     $('div.AllFormats div.FormatSelectBox input:checkbox').removeAttr('checked');
     $('div.FormatSelectBox').css('display', 'none');
     var myFormatBoxID = 'Formats_' + $(this).attr('id');
     $('div#' + myFormatBoxID).css('display', 'block');
-  });
-
-  $('#retractor').click(function(){
-    if($('#comments_block').hasClass('comments_block_in'))
-    {
-      //$('#comments_block').switchClass( 'comments_block_in', 'comments_block_out', 1000 );
-      $('#comments_block').removeClass('comments_block_in');
-      $('#comments_block').addClass('comments_block_out');
-
-      $('#comment_toggle').css('right', '30%');
-    }
-    else
-    {
-      //$('#comments_block').switchClass( 'comments_block_out', 'comments_block_in', 1000 );
-      $('#comments_block').removeClass('comments_block_out');
-      $('#comments_block').addClass('comments_block_in');
-
-      $('#comment_toggle').css('right', '0px');
-    }
-
   });
 });
