@@ -32,13 +32,10 @@
     - @resources.each do |resource|
       .row
         .span3
-          =image_tag 'HCD.png', size: '180x120'
+          =image_tag 'ResourcePlaceHolder.png', size: '160x100'
           %br
           %br
-          %span.tag_tag
-            Munchies
-          %span.tag_tag
-            Coconuts
+          =raw resource.tags.map(&:name).map { |t| link_to t, tag_path(t), class: 'tag_tag' }.join('')
         .span6{:style => 'margin: 0 0 0 -8px;'}
           %b
             = link_to resource.name, resource
@@ -56,7 +53,7 @@
           =resource.description
           %br
           %br
-          Phases: 
+          Phases: | 
           -resource.phases.each do |phase|
             =phase.name.upcase + " |"
           %br

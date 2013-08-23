@@ -10,7 +10,7 @@
       -if @user.personality
         -@user.personality.traits.each do |trait|
           .div.image_results
-            =link_to (image_tag trait.image), get_results_path
+            =link_to (image_tag trait.image), view_results_path
             %br
             =trait.name
       -else

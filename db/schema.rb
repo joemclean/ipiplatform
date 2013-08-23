@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821141958) do
+ActiveRecord::Schema.define(version: 20130823154505) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20130821141958) do
     t.text     "full_description"
     t.integer  "user_id"
     t.string   "source"
+    t.string   "tag_list"
   end
 
   create_table "spectrums", force: true do |t|
@@ -129,6 +130,22 @@ ActiveRecord::Schema.define(version: 20130821141958) do
   end
 
   create_table "surveys", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["resource_id"], name: "index_taggings_on_resource_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -164,6 +181,7 @@ ActiveRecord::Schema.define(version: 20130821141958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_admin",        default: false
+    t.string   "tag_list"
   end
 
 end

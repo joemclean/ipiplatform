@@ -59,7 +59,7 @@ class ResourcesController < ApplicationController
     end
 
     def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, trait_ids: [], industry_ids: [], phase_ids: [], format_ids: [])
+      params.require(:resource).permit(:name, :link, :description, :full_description, :tag_list, trait_ids: [], industry_ids: [], phase_ids: [], format_ids: [])
     end
 
     def set_resource_associations

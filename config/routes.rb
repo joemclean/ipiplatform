@@ -29,6 +29,8 @@ IpiPlatform::Application.routes.draw do
   get 'bookmarks/make_bookmark', :as => :make_bookmark
   get 'bookmarks/unmake_bookmark', :as => :unmake_bookmark
 
+  get 'tags/:tag', to: 'resources#index', as: :tag
+
 
   resources :traits
   resources :bookmarks

@@ -20,6 +20,9 @@ class Resource < ActiveRecord::Base
 
   has_many :comments
   has_many :users, through: :comments
+
+  has_many :taggings
+  has_many :tags, through: :taggings
   
   attr_writer :current_step
   
@@ -65,4 +68,26 @@ class Resource < ActiveRecord::Base
   def user_upvote(current_user)
     Upvote.where("user_id=? and resource_id=?", current_user.id, self.id)
   end
+
+  def self.tagged_with(name)
+    Tag.find_by_name!(name).resources
+  end
+
+  def self.tag_counts
+    Tag.select("tags.*, count(taggings.tag_id) as count").
+      joins(:taggings).group("taggings.tag_id")
+  end
+  
+  def tag_list
+    tags.map(&:name).join(", ")
+  end
+  
+  def tag_list=(names)
+    self.tags = names.split(",").map do |n|
+      Tag.where(name: n.strip).first_or_create!
+    end
+  end
+
+
+
 end

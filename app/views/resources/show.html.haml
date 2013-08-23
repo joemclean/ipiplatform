@@ -45,6 +45,7 @@
         ='user likes the tool!'
     %br
     %br
+    = raw @resource.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
 
 
 
