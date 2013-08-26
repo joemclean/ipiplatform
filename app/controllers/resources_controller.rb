@@ -5,6 +5,7 @@ class ResourcesController < ApplicationController
 
   def index
     @filter_params = {plan: false, act: false, observe: false, reflect: false}
+    @resources = Resource.order("name").page(params[:page])
   end
 
   def show
@@ -65,7 +66,6 @@ class ResourcesController < ApplicationController
     def set_resource_associations
       @traits = Trait.all
       @industries = Industry.all
-      @resources = Resource.all
       @phases = Phase.all
       @formats = Format.all
       @media = Medium.all
