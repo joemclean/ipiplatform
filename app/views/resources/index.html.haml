@@ -39,7 +39,8 @@
           =image_tag 'ResourcePlaceHolder.png', size: '160x100'
           %br
           %br
-          =raw resource.tags.map(&:name).map { |t| link_to t, tag_path(t), class: 'tag_tag' }.join('')
+          -resource.tags.each do |tag|
+            =link_to tag.name, tag_path(tag), class: 'tag_tag'
         .span6{:style => 'margin: 0 0 0 -8px;'}
           %b
             = link_to resource.name, resource
