@@ -4,8 +4,11 @@
 
 %h1
   Resources
+%hr
 .row
   .span3.resource_filters
+    %h3
+      Filters
     =form_tag do |f|
       =text_field_tag :search, "Keyword search", id: 'search_box'
     .search_title
@@ -42,8 +45,8 @@
             %br
           .row  
             .span4
-              Created by: 
-              = resource.author.name
+              Source: 
+              = resource.source
             .span2.pull-right
               .manipulate_resource{:style => 'text-align: right;'}
                 = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?

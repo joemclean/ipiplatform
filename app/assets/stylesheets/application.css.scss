@@ -26,22 +26,13 @@ td {
 
 body { padding-top: 65px }
 
-input[type="text"] {
-	padding: 15px 10px;
-}
-
-input[type="password"] {
-  padding: 15px 10px;
-}
-
 .div.alert_area {
   padding: 10px;
   margin-bottom: 5px;
   color: #3aaeef;
-  padding: 0 0 0 0;
+  padding: 4px;
   .flash {
-    text-align: left;
-    margin-left: 10px;
+    text-align: center;
   }
   background-color: #fff388;
 }

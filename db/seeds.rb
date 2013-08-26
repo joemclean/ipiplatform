@@ -9,33 +9,12 @@
 User.create(name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
 User.create(name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false)
 
-resources = [
-  ['AB Testing',
-  'Goal: Identify the best performing design from a number of options for an existing service or project.'],
-  [' Money Talks',
-  'Prioritize items within the constraints of your budget.'],
-  ['Collaborative Sketching - ThoughtWork Innovation Deck', 
-  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.'],
-  [' How Did I Get There? - ThoughtWorks Innovation Deck',
-  'Goal: This is a great ice breaker activity for people who may not have worked together before and to get participants comfortable with communicating their ideas through sketching.'],
-  ['"How Might We" ThoughtWorks Innovation Deck',
-  'Goal: Genesis of new ideas or solutions to a defined problem.'],
-  ['HBS Elevator Pitch',
-  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
-  ['Brain Writing - ThoughtWorks Innovation Deck',
-  'Goal: To generate a large number of ideas in a minimum amount of time. This technique is appropriate for situations where writing is favoured over sketching ideas.'],
-  ['Go and See - ThoughtWorks Innovation Deck',
-  'Goal: To discover the opportunities that exist to improve your customer"s experiences.'],
-  ['AB Testing (ThoughtWorks Innovation Deck)',
-  'Goal: Identify the best performing design from a number of options for an existing product or service. Variously known as AB testing, Split testing or Multivariate testing, this controlled experiment allows you to measure the relative effectiveness of different design elements.'],
-  ['HBS Elevator Pitch',
-  'Build a shared understanding of problem domain for all participants. Format: for (target customer) who (statement of the need or opportunity) the (product name) is a (product category) that (key benefit, compelling reason to use) unlike (primary competitive alternative) our product (statement of primary differentiation).'],
-  ['Collaborative Sketching - ThoughtWorks Innovation Deck',
-  'Goal: Generate lots of ideas by drawing upon a range of subject matter expertise to contribute.']
-]
-  
-resources.each do |name, full_description|
-  resources = Resource.find_or_create_by_name_and_full_description(name: name, full_description: full_description)
+require 'csv'    
+
+csv_text = File.read('db/resources.csv')
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  resource = Resource.create!(row.to_hash)
 end
 
 analyst_responses = ['I excel at understanding intricate problems.',
