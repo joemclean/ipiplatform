@@ -14,13 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-(function($){
-
-  $('input:radio[name="MediumBox"]').change(function(){
-    $('div.AllFormats div.FormatSelectBox input:checkbox').removeAttr('checked');
-    $('div.FormatSelectBox').css('display', 'none');
-    var myFormatBoxID = 'Formats_' + $(this).attr('id');
-    $('div#' + myFormatBoxID).css('display', 'block');
-  });
-})(jQuery);

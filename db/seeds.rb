@@ -177,26 +177,3 @@ phases = [
 phases.each do |phase_name|
   Phase.create(name: phase_name)
 end
-
-media = [
-  'Text',
-  'Audio',
-  'Video',
-  'Web',
-  'App'
-]
-
-format_types = [
-  'Article',
-  'Tutorial',
-  'Game',
-  'Book'
-]
-
-media.each do |medium|
-  Medium.create(name: medium)
-end
-format_types.each do |format_type|
-  FormatType.create(name: format_type)
-end
-

@@ -44,21 +44,6 @@
       =industry.name 
       %br
   %br
-  %h4= 'What format is this resource?'
-  .field.AllFormats
-    = hidden_field_tag "resource[format_ids][]", nil
-    -@media.each do |medium|
-      =radio_button_tag 'MediumBox', medium.id
-      =medium.name
-      %div.FormatSelectBox{:id => 'Formats_MediumBox_' + medium.id.to_s}
-        -@formats.each do |format|
-          -if format.medium.id == medium.id
-            =check_box_tag "resource[format_ids][]", format.id, @resource.format_ids.include?(format.id)
-            =format.format_type.name
-            %br
-        %br
-      %br
-  %br
   %br
   .field
     =f.submit

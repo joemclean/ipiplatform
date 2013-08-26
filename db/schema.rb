@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823154505) do
+ActiveRecord::Schema.define(version: 20130826165332) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -28,26 +28,7 @@ ActiveRecord::Schema.define(version: 20130823154505) do
     t.text     "text"
   end
 
-  create_table "format_types", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "formats", force: true do |t|
-    t.integer  "medium_id"
-    t.integer  "format_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "industries", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "media", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
