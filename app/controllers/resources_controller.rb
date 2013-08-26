@@ -67,6 +67,5 @@ class ResourcesController < ApplicationController
       @traits = Trait.all
       @industries = Industry.all
       @phases = Phase.all
-      @media = Medium.all
     end
 end
