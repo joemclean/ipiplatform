@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on ('unload', function(){
+(function($){
 
   $('input:radio[name="MediumBox"]').change(function(){
     $('div.AllFormats div.FormatSelectBox input:checkbox').removeAttr('checked');
@@ -23,4 +23,4 @@ $(document).on ('unload', function(){
     var myFormatBoxID = 'Formats_' + $(this).attr('id');
     $('div#' + myFormatBoxID).css('display', 'block');
   });
-});
+})(jQuery);

@@ -9,14 +9,6 @@
 User.create(name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
 User.create(name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false)
 
-require 'csv'    
-
-csv_text = File.read('db/resources.csv')
-csv = CSV.parse(csv_text, :headers => true)
-csv.each do |row|
-  resource = Resource.create!(row.to_hash)
-end
-
 analyst_responses = ['I excel at understanding intricate problems.',
 'I believe it is important to consider all possibilities before acting',
 'I believe decisions should be based on evidence.',
@@ -147,9 +139,6 @@ spectrum_names = [
   ['Drivers', [altruist, enterpriser], 'Your motivations are the final piece in the Innovation Type puzzle. Knowing what brings you ultimate satisfaction from a project delivery standpoint helps you frame both outcomes and your work with others.']
 ]
 
-Spectrum.delete_all
-Trait.delete_all
-QuestionResponse.delete_all
 spectrum_names.each do |name, trait_pair, spectrum_description|
   spectrum = Spectrum.find_or_create_by_name_and_description(name: name, description: spectrum_description)
   trait_pair.each do |name, trait_description, responses, image|
@@ -174,7 +163,6 @@ industries = [
   'Energy'
 ]
 
-Industry.delete_all
 industries.each do |industry|
   Industry.create(name: industry)
 end
@@ -186,7 +174,6 @@ phases = [
   'Reflect'
 ]
 
-Phase.delete_all
 phases.each do |phase_name|
   Phase.create(name: phase_name)
 end
