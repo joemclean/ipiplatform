@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130826165332) do
+ActiveRecord::Schema.define(version: 20131029220811) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
     t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "colors", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "value_proposition_id"
   end
 
   create_table "comments", force: true do |t|
@@ -162,7 +171,13 @@ ActiveRecord::Schema.define(version: 20130826165332) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_admin",        default: false
-    t.string   "tag_list"
+  end
+
+  create_table "value_propositions", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

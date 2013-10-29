@@ -14,6 +14,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
 gem 'fog'
 gem 'kaminari'
+gem 'protected_attributes'
 
 
 group :development do

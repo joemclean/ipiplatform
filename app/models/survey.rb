@@ -30,7 +30,6 @@ class Survey < ActiveRecord::Base
   end
 
   def generate_questions
-    trait_ids = Trait.ids
     spectrums = Spectrum.all
     spectrums.each do |spectrum|
       question_number = 0

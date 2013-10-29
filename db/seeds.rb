@@ -132,8 +132,8 @@ visionary = [
   ]
 
 spectrum_names = [
-  ['Collaboration', [maverick, team_player], 'Are you a “people-person” or do you prefer to go your own way? Your approach to working with others can have a big impact on the development of your project.'], 
-  ['Risk', [anchor, adventurer], 'Some people avoid iffy situations while others run toward them. Knowing your tolerance for uncertainty can help you assess project-related opportunities and how to act on them.'], 
+  ['Collaboration', [maverick, team_player], 'Are you a “people-person” or do you prefer to go your own way? Your approach to working with others can have a big impact on the development of your project.'],
+  ['Risk', [anchor, adventurer], 'Some people avoid iffy situations while others run toward them. Knowing your tolerance for uncertainty can help you assess project-related opportunities and how to act on them.'],
   ['Process', [straight_liner, zig_zagger], 'Does following a recipe to the letter fill you with dread? Or, does the idea of checking what’s in the fridge and winging it, make you break out in a sweat? Your method for making decisions and taking action can strongly affect your project’s development.'], 
   ['Style', [analyst, visionary], 'Do you have an eye for the details, or are you drawn to grand concepts? Whether a stickler for the particulars, or someone who prefers looking at the big picture, a solid understanding of your affinity can play to your strengths when project planning.'], 
   ['Drivers', [altruist, enterpriser], 'Your motivations are the final piece in the Innovation Type puzzle. Knowing what brings you ultimate satisfaction from a project delivery standpoint helps you frame both outcomes and your work with others.']
@@ -146,6 +146,67 @@ spectrum_names.each do |name, trait_pair, spectrum_description|
     responses.each do |response|
       trait.question_responses.create(response: response)
     end
+  end
+end
+
+blue_proposition = [
+    'Traditional TW IT Delivery',
+    'blue description',
+    'visionary.png'
+]
+
+green_proposition = [
+    'Fast IT Delivery',
+    'green description',
+    'visionary.png'
+]
+
+yellow_proposition = [
+    'Rapid Incremental Innovation',
+    'yellow description',
+    'visionary.png'
+]
+
+orange_proposition = [
+    'Disruptive Greenfield Innovation',
+    'orange description',
+    'visionary.png'
+]
+
+red_proposition = [
+    'Complex System Innovation',
+    'red description',
+    'visionary.png'
+]
+
+copper_proposition = [
+    'Agile IT',
+    'copper description',
+    'visionary.png'
+]
+
+silver_proposition = [
+    'Full Product Lifecycle Agile',
+    'silver description',
+    'visionary.png'
+]
+
+gold_proposition = [
+    'Enterprise Agile',
+    'gold description',
+    'visionary.png'
+]
+
+value_propositions = [
+    ['Technical Value Propositions', [blue_proposition, green_proposition], 'Technical Value Propositions Description'],
+    ['Business Innovation Value Propositions', [yellow_proposition, orange_proposition, red_proposition], 'Business Innovation Value Propositions Description'],
+    ['Process Innovation Propositions', [copper_proposition, silver_proposition, gold_proposition], 'Process Innovation Propositions Description']
+]
+
+value_propositions.each do |name, color_propositions, value_proposition_description|
+  value_proposition = ValueProposition.find_or_create_by_name_and_description(name: name, description: value_proposition_description)
+  color_propositions.each do |name, color_description, image|
+    value_proposition.colors.create(name: name, description: color_description, image: image)
   end
 end
 
