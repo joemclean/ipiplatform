@@ -142,7 +142,10 @@ spectrum_names = [
 spectrum_names.each do |name, trait_pair, spectrum_description|
   spectrum = Spectrum.find_or_create_by_name_and_description(name: name, description: spectrum_description)
   trait_pair.each do |name, trait_description, responses, image|
-    trait = spectrum.traits.create(name: name, description: trait_description, image: image)
+    trait = Trait.find_or_create_by_name(name: name)
+    trait.update_attribute(:spectrum_id, spectrum.id)
+    trait.update_attribute(:image, image)
+    trait.update_attribute(:description, trait_description)
     responses.each do |response|
       trait.question_responses.create(response: response)
     end
@@ -158,43 +161,43 @@ blue_proposition = [
 green_proposition = [
     'Fast IT Delivery',
     'green description',
-    'visionary.png'
+    'adventurer.png'
 ]
 
 yellow_proposition = [
     'Rapid Incremental Innovation',
     'yellow description',
-    'visionary.png'
+    'analyst.png'
 ]
 
 orange_proposition = [
     'Disruptive Greenfield Innovation',
     'orange description',
-    'visionary.png'
+    'enterpriser.png'
 ]
 
 red_proposition = [
     'Complex System Innovation',
     'red description',
-    'visionary.png'
+    'anchor.png'
 ]
 
 copper_proposition = [
     'Agile IT',
     'copper description',
-    'visionary.png'
+    'team_player.png'
 ]
 
 silver_proposition = [
     'Full Product Lifecycle Agile',
     'silver description',
-    'visionary.png'
+    'straightliner.png'
 ]
 
 gold_proposition = [
     'Enterprise Agile',
     'gold description',
-    'visionary.png'
+    'zigzagger.png'
 ]
 
 value_propositions = [

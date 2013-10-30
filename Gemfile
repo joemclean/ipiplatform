@@ -19,6 +19,7 @@ gem 'protected_attributes'
 group :test, :development do
   gem 'rspec-rails'
   gem 'rspec-mocks'
+  gem 'pry-rails'
 end
 
 group :test do
