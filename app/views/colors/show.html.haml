@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%h2 
+  ='Color: ' + @color.name
+
+%p
+  %b Full Description:
+  = @trait.full_trait_description
+%p
+  = 'Resources ' + @color.name.pluralize + ' would enjoy:'
+  %ul
+    - @color.resources.each do |resource|
+      %li
+        =link_to resource.name, resource_path(resource)
+
+.btn-group
+  //.btn = link_to 'Edit Color', edit_color_path(@color)
+  .btn
+    = link_to 'All Colors', pages_innovator_path

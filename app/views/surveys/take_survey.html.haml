@@ -11,7 +11,7 @@
             = question_count.to_s.html_safe
         - question.question_responses.each do |question_response|
           %td
-            = radio_button_tag(('answers['+question_count.to_s+']'), question_response.trait_id)
+            = radio_button_tag(('answers['+question_count.to_s+']'), question_response.color_id)
           %td
             = question_response.response
       - question_count = question_count + 1

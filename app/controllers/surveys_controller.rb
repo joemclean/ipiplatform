@@ -10,13 +10,13 @@ class SurveysController < ApplicationController
   def get_results
     survey = Survey.new(answers: params['answers'])
     survey_results = survey.score
-    top_traits = get_top_traits(survey_results)
+    top_colors = get_top_colors(survey_results)
     if current_user
-      personality = current_user.build_personality(traits: top_traits)
+      personality = current_user.build_personality(colors: top_colors)
       current_user.save
       redirect_to view_results_path
     else
-      personality = Personality.new(traits: top_traits)
+      personality = Personality.new(colors: top_colors)
       personality.save
       session[:user_personality] = personality.id
       redirect_to new_session_path, notice:'Sign In/Sign up to view and save your survey!'
@@ -33,11 +33,11 @@ class SurveysController < ApplicationController
 
   protected
 
-    def get_top_traits(sorted_results)
-      top_traits = []
-      sorted_results.each do |top_trait_id, count|
-        top_traits << Trait.find(top_trait_id)
+    def get_top_colors(sorted_results)
+      top_colors = []
+      sorted_results.each do |top_color_id, count|
+        top_colors << Color.find(top_color_id)
       end
-      top_traits
+      top_colors
     end
 end

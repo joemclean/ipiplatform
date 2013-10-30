@@ -8,11 +8,11 @@
       %br
     .image-group.profile_icon.pull-left
       -if @user.personality
-        -@user.personality.traits.each do |trait|
+        -@user.personality.colors.each do |color|
           .div.image_results
-            =link_to (image_tag trait.image), view_results_path
+            =link_to (image_tag color.image), view_results_path
             %br
-            =trait.name
+            =color.name
       -else
         Take the innovator type survey to fill out your profile.
         %br

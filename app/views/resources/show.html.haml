@@ -12,10 +12,10 @@
       %br
       %b{:style => 'padding: 2px;'}
         %br
-        Traits
+        Colors
         %br
-        -@resource.traits.each do |trait|
-          =link_to (image_tag trait.image, size: '70x70'), trait_path(trait)
+        -@resource.colors.each do |color|
+          =link_to (image_tag color.image, size: '70x70'), color_path(color)
       %b{:style => 'padding: 2px;'}
         %br
         %br

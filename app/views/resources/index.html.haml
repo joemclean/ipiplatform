@@ -13,9 +13,9 @@
       =text_field_tag :search, "Keyword search", id: 'search_box'
     .search_title
       Innovator Types
-    .trait_filter_box
-      -@traits.each do |trait|
-        =image_tag trait.image, size: '50x50', class: 'trait_filter', title: trait.name
+    .color_filter_box
+      -@colors.each do |color|
+        =image_tag color.image, size: '50x50', class: 'color_filter', title: color.name
     .search_title
       Innovation Stages  
     .phase_filter_box
@@ -62,8 +62,8 @@
           -resource.phases.each do |phase|
             =phase.name.upcase + " |"
           %br
-          -resource.traits.each do |trait|
-            =link_to (image_tag trait.image, size: '40x40'), trait_path(trait)
+          -resource.colors.each do |color|
+            =link_to (image_tag color.image, size: '40x40'), color_path(color)
           %br
       %hr
 

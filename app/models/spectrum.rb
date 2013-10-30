@@ -1,3 +1,3 @@
 class Spectrum < ActiveRecord::Base
-  has_many :traits
+  has_many :colors
 end

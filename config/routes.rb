@@ -27,7 +27,7 @@ IpiPlatform::Application.routes.draw do
   get 'tags/:tag', to: 'resources#index', as: :tag
 
 
-  resources :traits
+  resources :colors
   resources :bookmarks
   
   resources :resources do

@@ -22,10 +22,10 @@
   %h2 Tags
   %h4= 'What innovator type is this best suited for?'
   .field
-    = hidden_field_tag "resource[trait_ids][]", nil
-    -@traits.each do |trait|
-      =check_box_tag "resource[trait_ids][]", trait.id, @resource.trait_ids.include?(trait.id)
-      =trait.name 
+    = hidden_field_tag "resource[color_ids][]", nil
+    -@colors.each do |color|
+      =check_box_tag "resource[color_ids][]", color.id, @resource.color_ids.include?(color.id)
+      =color.name
       %br
   %br
   %h4= 'What phases is this best suited for?'

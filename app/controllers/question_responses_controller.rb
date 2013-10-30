@@ -38,7 +38,7 @@ class QuestionResponsesController < ApplicationController
   private
 
     def question_response_params
-      params.require(:question_response).permit(:response, :trait_id)
+      params.require(:question_response).permit(:response, :color_id)
     end
 
     def set_question_response

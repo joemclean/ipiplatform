@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   
   def innovator
-    @spectrums = Spectrum.all
+    @value_propositions = ValueProposition.all
   end
   
   def tools

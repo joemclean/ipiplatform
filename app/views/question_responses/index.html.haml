@@ -4,15 +4,15 @@
     %td 
       %b Response text
     %td 
-      %b Associated trait
+      %b Associated color
     %td 
     %td
   -@question_responses.each do |question_response|
     %tr
       %td= question_response.response
       %td
-        -if question_response.trait_id
-          =Trait.find(question_response.trait_id).name
+        -if question_response.color_id
+          =Color.find(question_response.color_id).name
       %td
         =link_to 'Edit', edit_question_response_path(question_response)
       %td

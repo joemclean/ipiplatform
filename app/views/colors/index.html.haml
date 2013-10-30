@@ -1,0 +1,23 @@
+%h1 Colors
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @colors.each do |color|
+    %tr
+      %td= color.name
+      %td= color.description
+      %td= link_to 'Show', color
+      
+      -if current_user.is_admin?
+        %td= link_to 'Edit', edit_color_path(color)
+        %td= link_to 'Destroy', color, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%br
+
+.btn
+  = link_to 'New Color', new_color_path
