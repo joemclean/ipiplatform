@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  medium_id: 1
-  format_type_id: 1
-
-two:
-  medium_id: 1
-  format_type_id: 1

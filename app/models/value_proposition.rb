@@ -1,4 +1,5 @@
 class ValueProposition < ActiveRecord::Base
-  attr_accessible :name, :description
   has_many :colors
+  attr_accessible :name, :description
+  validates :name, :description, presence: true
 end
