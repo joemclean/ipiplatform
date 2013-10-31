@@ -28,16 +28,15 @@
             %ul{:style => 'text-align: center; padding: 0px 150px 0px 150px;'}
               =value_proposition.description
             %br
-            %table
+            .center-container
               -value_proposition.colors.each do |color|
-                %td{:style => 'border: 0px;' 'background-color: transparent; text-align:center; margin: 10px'}
-                  .traitbox.span4
-                    %p
-                      =image_tag color.image
-                      %br
-                      %br
-                      %p{:style => 'font-weight: bold; color:#6BB8D4'}
-                        = color.name
+                .absolute-center.traitbox.span4
+                  %p
+                    =image_tag color.image
                     %br
-                    %p{:style => 'align: center'}
-                    = color.description
+                    %br
+                    %p{:style => 'font-weight: bold; color:#6BB8D4'}
+                      = color.name
+                  %br
+                  %p{:style => 'align: center'}
+                  = color.description

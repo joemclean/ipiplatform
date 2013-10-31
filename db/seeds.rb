@@ -6,8 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true)
-User.create(name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false)
+user = User.new
+user.update_attributes({name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true})
+user = User.new
+user.update_attributes({name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false})
 
 blue_responses = ['I excel at understanding intricate problems.',
 'I believe it is important to consider all possibilities before acting',
@@ -148,12 +150,7 @@ industries.each do |industry|
   Industry.create(name: industry)
 end
 
-phases = [
-  'Plan',
-  'Act',
-  'Observe',
-  'Reflect'
-]
+phases = %w(Inception Story\ Writing Estimation Prioritization Delivery Release)
 
 phases.each do |phase_name|
   Phase.create(name: phase_name)

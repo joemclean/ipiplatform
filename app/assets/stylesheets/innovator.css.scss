@@ -3,10 +3,8 @@
 }
 
 .absolute-center  {
-  //width: 100%;
-  //overflow: auto;
-  //margin: auto;
-  //top: 0; left: 0; bottom: 0; right: 0;
   margin-left:auto;
   margin-right:auto;
+  text-align:center;
+  display: block;
 }

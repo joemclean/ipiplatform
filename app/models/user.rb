@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  #attr_accessible :email, :name, :password, :password_confirmation, :avatar
+  attr_accessible :email, :name, :password, :password_confirmation, :is_admin
   has_many :resources
   has_many :upvotes, :dependent => :destroy
   has_many :bookmarks, :dependent => :destroy

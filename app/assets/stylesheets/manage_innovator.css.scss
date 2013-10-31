@@ -1,0 +1,17 @@
+.readonly {
+  display: block;
+}
+
+.editable {
+  display: none;
+}
+
+.editing {
+  .readonly {
+    display: none;
+  }
+
+  .editable {
+    display: block;
+  }
+}

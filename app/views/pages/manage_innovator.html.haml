@@ -1,0 +1,46 @@
+.hero.innovator_hero
+  %h2 Manage Value Propositions and Colors
+  %br
+  %br
+.row
+  -@value_propositions.each do |value_proposition|
+    .value_propositions_container
+      .readonly{:id => "value_proposition_#{value_proposition.id}"}
+        %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+          =value_proposition.name
+          .btn
+            = link_to 'Edit', '', onclick: "toggleEdit(this); return false"
+          %br
+          %ul{:style => 'text-align: left;'}
+            =value_proposition.description
+          %br
+          -value_proposition.colors.each do |color|
+            %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
+              = color.name
+              %br
+              %ul{:style => 'text-align: left;'}
+                %p{:style => 'align: center'}
+                = color.description
+        %br
+        %hr
+        %br
+      .editable{:id => "value_proposition_#{value_proposition.id}"}
+        = form_for(value_proposition, { url: pages_manage_innovator_path(value_proposition), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_form|
+          %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+            = value_proposition_form.text_field :name
+            .btn
+              = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
+            %br
+            %ul{:style => 'text-align: left;'}
+              =value_proposition_form.text_field :description
+            %br
+            =value_proposition_form.fields_for :colors do |colors_form|
+              %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
+                = colors_form.text_field :name
+                %br
+                %ul{:style => 'text-align: left;'}
+                  %p{:style => 'align: center'}
+                  = colors_form.text_field :description
+        %br
+        %hr
+        %br
