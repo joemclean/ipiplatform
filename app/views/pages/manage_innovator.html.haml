@@ -7,10 +7,9 @@
     .value_propositions_container
       .readonly{:id => "value_proposition_#{value_proposition.id}"}
         %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
-          =value_proposition.name
+          = value_proposition.name
           .btn
             = link_to 'Edit', '', onclick: "toggleEdit(this); return false"
-          %br
           %ul{:style => 'text-align: left;'}
             =value_proposition.description
           %br
@@ -26,21 +25,34 @@
         %br
       .editable{:id => "value_proposition_#{value_proposition.id}"}
         = form_for(value_proposition, { url: pages_manage_innovator_path(value_proposition), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_form|
+          .btn
+            = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
           %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+            Value Proposition Name:
             = value_proposition_form.text_field :name
-            .btn
-              = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
             %br
             %ul{:style => 'text-align: left;'}
+              Value Proposition Description:
               =value_proposition_form.text_field :description
             %br
-            =value_proposition_form.fields_for :colors do |colors_form|
-              %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
-                = colors_form.text_field :name
-                %br
-                %ul{:style => 'text-align: left;'}
-                  %p{:style => 'align: center'}
-                  = colors_form.text_field :description
+            %table.table.table-striped{:style => 'border: 0px;'}
+              =value_proposition_form.fields_for :colors do |color_form|
+                %tr
+                  %td.half
+                    %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
+                      Color name:
+                      = color_form.text_field :name
+                      %br
+                      %p{:style => 'align: center'}
+                      Color description:
+                      = color_form.text_field :description
+                      %br
+                      %br
+                      %br
+                      Upload a new image:
+                      = file_field_tag 'image', accept: 'image/png,image/gif,image/jpeg'
+                  %td.half
+                    =image_tag color_form.object.image
         %br
         %hr
         %br
