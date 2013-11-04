@@ -9,7 +9,7 @@
         .div.image_results
           =image_tag color.image, size: '75x75'
           %br
-          =color.name
+          = color.name
     -else
       Take the innovator type survey to fill out your profile.
       %br
@@ -32,11 +32,11 @@
               -value_proposition.colors.each do |color|
                 .absolute-center.traitbox.span4
                   %p
-                    =image_tag color.image
+                    =link_to image_tag(color.image), color
                     %br
                     %br
                     %p{:style => 'font-weight: bold; color:#6BB8D4'}
-                      = color.name
+                      = link_to color.name, color
                   %br
                   %p{:style => 'align: center'}
                   = color.description

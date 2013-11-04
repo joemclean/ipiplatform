@@ -25,6 +25,8 @@ class Resource < ActiveRecord::Base
   has_many :tags, through: :taggings
   
   attr_writer :current_step
+
+  attr_accessible :name
   
   def current_step
     @current_step ||  steps.first

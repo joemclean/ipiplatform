@@ -11,6 +11,7 @@ class ColorsController < ApplicationController
   end
 
   def show
+    @color = Color.find(params[:id])
   end
 
   def new
@@ -49,7 +50,7 @@ class ColorsController < ApplicationController
   def destroy
     @color.destroy
     respond_to do |format|
-      format.html { redirect_to colors_url }
+      format.html { redirect_to value_proposition_path }
       format.json { head :no_content }
     end
   end
