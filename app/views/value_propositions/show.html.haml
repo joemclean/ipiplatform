@@ -24,19 +24,17 @@
         %hr
         %br
       .editable{:id => "value_proposition_#{value_proposition.id}"}
-        = form_for(value_proposition, { url: pages_manage_innovator_path(value_proposition), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_form|
-          .btn
-            = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
+        = form_for(value_proposition, { url: value_proposition_path(value_proposition), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_form|
           %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
             Value Proposition Name:
             = value_proposition_form.text_field :name
             %br
             %ul{:style => 'text-align: left;'}
               Value Proposition Description:
-              =value_proposition_form.text_field :description
+              = value_proposition_form.text_field :description
             %br
             %table.table.table-striped{:style => 'border: 0px;'}
-              =value_proposition_form.fields_for :colors do |color_form|
+              = value_proposition_form.fields_for :colors do |color_form|
                 %tr
                   %td.half
                     %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
@@ -53,6 +51,9 @@
                       = file_field_tag 'image', accept: 'image/png,image/gif,image/jpeg'
                   %td.half
                     =image_tag color_form.object.image
+          = value_proposition_form.submit 'Save'
+          .btn
+            = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
         %br
         %hr
         %br

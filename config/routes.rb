@@ -14,9 +14,7 @@ IpiPlatform::Application.routes.draw do
   get 'surveys/view_results', :as => :view_results
   get 'pages/home'
   get 'pages/publisher'
-  get 'pages/innovator'
-  get 'pages/manage_innovator'
-  patch 'pages/manage_innovator'
+  get 'pages/value_propositions'
   get 'pages/aboutus'
   get 'pages/phases'
   get 'pages/tools'
@@ -29,6 +27,7 @@ IpiPlatform::Application.routes.draw do
   get 'tags/:tag', to: 'resources#index', as: :tag
 
 
+  resources :value_propositions
   resources :colors
   resources :bookmarks
   

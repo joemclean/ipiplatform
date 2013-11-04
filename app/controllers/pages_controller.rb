@@ -1,13 +1,9 @@
 class PagesController < ApplicationController
   
-  def innovator
+  def value_propositions
     @value_propositions = ValueProposition.all
   end
 
-  def manage_innovator
-    @value_propositions = ValueProposition.all
-  end
-  
   def tools
     @resources = Resource.all
   end
