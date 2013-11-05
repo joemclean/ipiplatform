@@ -1,5 +1,5 @@
 class IndustriesController < ApplicationController
-  before_filter :authorized?
+  before_filter :redirect_if_unauthorized
   before_action :set_industry, only: [:show, :edit, :update, :destroy]
 
   def index

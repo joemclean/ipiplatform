@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authorized?, except: [:new, :create, :show]
+  before_filter :redirect_if_unauthorized, except: [:new, :create, :show]
   before_filter :set_user, only: [:edit, :update, :show]
 
   def new

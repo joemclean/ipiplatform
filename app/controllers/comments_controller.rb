@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :signed_in?
+  before_filter :redirect_if_not_signed_in
   before_action :set_resource, only: [:save, :edit, :delete]
   before_action :set_comment, only: [:edit, :delete]
 

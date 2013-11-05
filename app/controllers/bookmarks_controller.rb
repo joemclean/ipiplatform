@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_filter :signed_in?
+  before_filter :redirect_if_not_signed_in
 
   def make_bookmark
     resource = Resource.find(params[:resource_id].to_i)

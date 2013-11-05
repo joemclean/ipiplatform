@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :value_proposition do
-    name 'vp_name'
-    description 'vp description'
+    name 'value_proposition_name'
+    description 'value_proposition_description'
   end
 end

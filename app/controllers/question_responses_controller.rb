@@ -1,5 +1,5 @@
 class QuestionResponsesController < ApplicationController
-  before_filter :authorized?
+  before_filter :redirect_if_unauthorized
   before_action :set_question_response, only: [:edit, :update, :destroy]
   
   def new

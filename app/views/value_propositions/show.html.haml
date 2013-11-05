@@ -26,12 +26,12 @@
       .editable{:id => "value_proposition_#{value_proposition.id}"}
         = form_for(value_proposition, { url: value_proposition_path(value_proposition), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_form|
           %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+            %br
             Value Proposition Name:
             = value_proposition_form.text_field :name
-            %br
-            %ul{:style => 'text-align: left;'}
-              Value Proposition Description:
-              = value_proposition_form.text_area :description
+          %p
+            Value Proposition Description:
+            = value_proposition_form.text_area :description
             %br
             %table.table.table-striped{:style => 'border: 0px;'}
               = value_proposition_form.fields_for :colors do |color_form|
@@ -51,10 +51,14 @@
                       = file_field_tag 'image', accept: 'image/png,image/gif,image/jpeg'
                   %td.half
                     = image_tag color_form.object.image
-                    = link_to 'Destroy', color_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          = value_proposition_form.submit 'Save'
+                    .btn
+                      = link_to 'Delete Color', color_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          .btn
+            = link_to 'Save', '', :onclick=>"document.forms['edit_value_proposition_#{value_proposition.id}'].submit();"
           .btn
             = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
+          .btn
+            = link_to 'Delete Proposition', value_proposition_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
         %br
         %hr
         %br

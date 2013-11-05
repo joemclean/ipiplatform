@@ -1,5 +1,5 @@
 class UpvotesController < ApplicationController
-  before_filter :signed_in?
+  before_filter :redirect_if_not_signed_in
 
   def create
     upvote = Upvote.new

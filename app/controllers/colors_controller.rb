@@ -1,9 +1,9 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
   
-  before_filter :authorized?, except: [:index, :show]
+  before_filter :redirect_if_unauthorized, except: [:index, :show]
 
-  before_filter :signed_in?
+  before_filter :redirect_if_not_signed_in
 
 
   def index
@@ -37,7 +37,7 @@ class ColorsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @color.update(color_params)
+      if @color.update(params)
         format.html { redirect_to @color, notice: 'Color was successfully updated.' }
         format.json { head :no_content }
       else
@@ -57,12 +57,12 @@ class ColorsController < ApplicationController
 
   private
   
-    def set_color
-      @color = Color.find(params[:id])
-    end
+  def set_color
+    @color = Color.find(params[:id])
+  end
 
-    def color_params
-      params.require(:color).permit(:name, :description, :value_proposition.id)
-    end
+  def color_params
+    params.require(:color).permit(:name, :description, :value_proposition.id)
+  end
 
 end
