@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -9,10 +10,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap_and_overrides
  *= require_tree .
  */
 
-@import "bootstrap";
+@import "twitter/bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
 td {
@@ -22,9 +24,12 @@ td {
 
 * {
   font-family: Raleway;
+  font-size: 16px;
 }
 
-body { padding-top: 65px }
+body {
+  padding-top: 75px;
+}
 
 .div.alert_area {
   padding: 10px;
@@ -36,81 +41,6 @@ body { padding-top: 65px }
   }
   background-color: #fff388;
 }
-
-.actions {
-	margin-top: 20px;
-}
-
-.navbar-bottom {
-	margin: 50px 0 0;
-	.navbar-inner {
-		border-radius: 0;
-	}
-}
-
-.navbar-top {
-  margin-bottom: 25px
-}
-
-//SUGGESTIONS BUTTON
-.btn.suggestions_button {
-	margin-top: 10px;
-	font: {
-	color:#fff;
-	family:Raleway;
-	}
-}
-
-.navbar-fixed-top {
-  .navbar-inner {
-    .container {
-      width: 100%;
-    }
-  }
-
-  .btn-group {
-    margin:10px 0px;
-    .btn {
-      border: none;
-      background-color: transparent !important;
-      background-repeat: repeat-x;
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="transparent", endColorstr="transparent");
-      background-image: -khtml-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-      background-image: -moz-linear-gradient(top, transparent, transparent);
-      background-image: -ms-linear-gradient(top, transparent, transparent);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, transparent));
-      background-image: -webkit-linear-gradient(top, transparent, transparent);
-      background-image: -o-linear-gradient(top, transparent, transparent);
-      background-image: linear-gradient(transparent, transparent);
-      color: #fff !important;
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-      -webkit-font-smoothing: antialiased;
-      font: {
-        family:Raleway
-      }
-    }
-  }
-  
-  .user_name {
-    padding: 14px;
-  }
-
-  .brand {
-    position: absolute;
-    left: 31%;
-    //margin-top: 5px;
-    a {
-      color: #DE403C;
-      text-decoration: none;
-      font :{
-        weight: bold;
-        size: 1.5em;
-        family: Raleway;
-      }
-    }
-  }
-}
-
 
 .btn {
   a { 

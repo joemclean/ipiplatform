@@ -1,28 +1,28 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      .btn-group.pull-left
-        .btn
+%header.navbar.navbar-default.navbar-fixed-top.bs-docs-nav
+  .container
+    .navbar-header
+      %button.navbar-toggle{:type => "button", :data_toggle => "collapse", :data_target => ".bs-navbar-collapse"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      =link_to 'ThoughtWorks Innovation Resources', root_path, class: "navbar-brand"
+    %nav.collapse.navbar-collapse.bs-navbar-collapse{ :role =>"navigation"}
+      %ul.nav.navbar-nav
+        %li
           =link_to 'Value Propositions', pages_value_propositions_path
-        .btn
+        %li
           =link_to 'Resources', pages_tools_path
-        .btn
+        %li
           =link_to 'About', pages_aboutus_path
-
-      .brand
-        =link_to 'ThoughtWorks Innovation Resources', root_path
-      .right_box.pull-right
-        .content.user_name
-          -if current_user
+      %ul.nav.navbar-nav.navbar-right
+        -if current_user
+          %li
             = link_to  'Welcome, ' + current_user.name, current_user
-            = ' | '
+          %li
             = link_to "Log Out", session_path("current"), method: "delete"
-
-          -else
+        -else
+          %li
             =link_to 'Sign up', new_user_path
-            =' | '
+          %li
             =link_to 'Sign in', new_session_path
-      .right_box.pull-right
-        .btn-group
-          .btn.suggestions_button
-            =link_to 'Suggestions', suggestions_path, class: 'suggestion'

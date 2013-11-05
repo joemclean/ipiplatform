@@ -1,70 +1,50 @@
-.hero.landing_hero
-	.whitesection
-		In four simple steps
-		%br
-		Sidekick takes the
-		%br
-		confusion out of your
-		%br
-		innovation process.
-		%br
+.jumbotron.landing_hero
+  Welcome to the home for Thoughtworks innovation resources.
 .bluesection
-	.box.span2.offset5
-		Step One
-	%br
-	%br
-	%br
-	Getting to know you
-	.row
-		.col.left.span6
-			=image_tag 'innovator_landing_icons.png'
-		.col.right.span6
-			Sometimes just getting started can be tough. Sidekick makes taking that first step easier by beginning with you. Our Innovation-Type Survey, pinpoints your strengths and weaknesses across five spectrums, illuminating what type of innovator you are and providing direction for the way forward. 
-			%br
-			%br
-			.btn= link_to 'Take the survey!', take_survey_path
+  .box
+    Step One
+  %h2 Getting to know you
+  .row
+    .col.col-sm-6
+      =image_tag 'innovator_landing_icons.png'
+    .col.col-sm-6
+      Sometimes just getting started can be tough. Sidekick makes taking that first step easier by beginning with you. Our Innovation-Type Survey, pinpoints your strengths and weaknesses across five spectrums, illuminating what type of innovator you are and providing direction for the way forward. 
+      %br
+      .btn
+        =link_to 'Take the survey!', take_survey_path
 .whitepurplesection
-	.box.span2.offset5
-		Step Two
-	%br
-	%br
-	%br
-	An innovation process just for you.
-	.row
-		.col.left.span6
-			Innovation can be described as a journey from concept to implementation, and all the steps in between. Now that you know what type of innovator you are, let Sidekick help you figure out an innovation process that works best for you. Choose from a variety processes models that suit your Innovator Type, your industry and the current stage of your project.
-			%br
-			%br
-			.btn= link_to 'Find out more!', pages_phases_path
-		.col.right.span6
-			=image_tag 'step2.png'
+  .box
+    Step Two
+  %h2 An innovation process just for you
+  .row
+    .col.col-sm-6
+      Innovation can be described as a journey from concept to implementation, and all the steps in between. Now that you know what type of innovator you are, let Sidekick help you figure out an innovation process that works best for you. Choose from a variety processes models that suit your Innovator Type, your industry and the current stage of your project.
+      %br
+      .btn
+        =link_to 'Find out more!', pages_phases_path
+    .col.col-sm-6
+      =image_tag 'step2.png'
 .greensection
-	.box.span2.offset5
-		Step Three
-	%br
-	%br
-	%br
-	Plotting where you are on the innovation journey.
-	.row
-		.col.left.span6
-			=image_tag 'step3.png'
-		.col.right.span6
-			After we’ve figured out the process and tools that work best for your type, Sidekick will help you plot the steps moving forward. You’re a smart cookie, and we want to help you succeed by providing you with resources tailored to your needs.
-			%br
-			%br
-			.btn= link_to 'Learn more!'
+  .box
+    Step Three
+  %h2 Plotting where you are on the innovation journey
+  .row
+    .col.col-sm-6
+      =image_tag 'step3.png'
+    .col.col-sm-6
+      After we’ve figured out the process and tools that work best for your type, Sidekick will help you plot the steps moving forward. You’re a smart cookie, and we want to help you succeed by providing you with resources tailored to your needs.
+      %br
+      .btn
+        =link_to 'Learn more!'
 .whitegoldsection
-	.box.span2.offset5
-		Step Four
-	%br
-	%br
-	%br
-	An ever growing library of resources.
-	.row
-		.col.left.span6
-			The right resources are essential to the growth of an idea, and we know how hard it can be to find the exact tools that suit your needs. Count on us for recommendations that will work for any and every stage of your project. We have a growing library of podcasts, e-books, tutorials, articles, activities, and more selected and uploaded by Sidekick users and curated by innovators like you. 
-			%br
-			%br
-			.btn= link_to 'Find out more!', pages_tools_path
-		.col.right.span6
-			=image_tag 'step4.png'
+  .box
+    Step Four
+  %h2 An ever-growing library of resources
+  .row
+    .col.col-sm-6
+      The right resources are essential to the growth of an idea, and we know how hard it can be to find the exact tools that suit your needs. Count on us for recommendations that will work for any and every stage of your project. We have a growing library of podcasts, e-books, tutorials, articles, activities, and more selected and uploaded by Sidekick users and curated by innovators like you. 
+      %br
+      .btn
+        =link_to 'Find out more!', pages_tools_path
+    .col.col-sm-6
+      =image_tag 'step4.png'
