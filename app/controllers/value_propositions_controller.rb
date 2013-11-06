@@ -42,8 +42,10 @@ class ValuePropositionsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @value_proposition.update_attributes(value_propositions_params)
-      params[:value_proposition][:colors_attributes].values.each do |color_params|
-        Color.find(color_params[:id]).update(color_params)
+      if params[:value_proposition][:colors_attributes].present?
+        params[:value_proposition][:colors_attributes].values.each do |color_params|
+          Color.find(color_params[:id]).update(color_params)
+        end
       end
     end
 

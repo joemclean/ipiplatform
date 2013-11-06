@@ -16,7 +16,7 @@
           = color.value_proposition.name
       %td= link_to 'Show', color
       
-      - if current_user.is_admin?
+      - if current_user.present? && current_user.is_admin?
         %td= link_to 'Edit', edit_color_path(color)
         %td= link_to 'Destroy', color, :method => :delete, :data => { :confirm => 'Are you sure?' }
       - else

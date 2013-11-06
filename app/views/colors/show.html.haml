@@ -6,7 +6,7 @@
 %p
   %b Value Proposition:
   - if @color.value_proposition.present?
-    = @color.value_proposition.name
+    = link_to @color.value_proposition.name, value_proposition_path(@color.value_proposition.id)
   -else
     (Empty)
 
@@ -15,13 +15,13 @@
   = @color.description
 %p
   = 'Resources ' + @color.name.pluralize + ' would enjoy:'
-  %ul
+  %ol
     - @color.resources.each do |resource|
       %li
-        =link_to resource.name, resource_path(resource)
+        = link_to resource.name, resource_path(resource)
 
 .btn-group
-  - if current_user.is_admin?
+  - if current_user.present? && current_user.is_admin?
     .btn
       = link_to 'Edit Color', edit_color_path(@color)
   .btn

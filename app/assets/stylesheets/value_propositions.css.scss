@@ -1,0 +1,9 @@
+.resources {
+  display: none;
+}
+
+.viewing {
+  .resources {
+    display: block;
+  }
+}

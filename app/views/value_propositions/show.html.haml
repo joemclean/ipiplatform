@@ -8,8 +8,15 @@
   - if @value_proposition.colors.present?
     %ul
       - for color in @value_proposition.colors
-        %li
-          = link_to color.name, color
+        .color_container
+          %li
+            = link_to color.name, color
+            .btn
+              = link_to 'Resources', '', onclick: "toggleResources(this); return false"
+          .resources
+            - for resource in color.resources
+              %ol
+                %li=link_to resource.name, resource_path(resource)
   -else
     (Empty)
 
@@ -21,8 +28,12 @@
   &nbsp;
 
 .btn-group
-  - if current_user.is_admin?
-    .btn
-      = link_to 'Edit Value Proposition', value_propositions_path(@value_proposition)
   .btn
-    = link_to 'All Value Propositions', value_propositions_path
+    = link_to 'All Value Propositions', pages_value_propositions_path
+  %br
+  %br
+  - if current_user.present? && current_user.is_admin?
+    .btn
+      = link_to 'Edit Value Proposition', edit_value_proposition_path(@value_proposition)
+    .btn
+      = link_to 'Manage all Value Propositions', value_propositions_path

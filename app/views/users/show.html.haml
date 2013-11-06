@@ -23,9 +23,9 @@
 %br
 
 %h3
-  - if current_user.is_admin?
+  - if current_user.present? && current_user.is_admin?
     .btn
-      = link_to 'Manage Value Propositions', value_propositions_path
+      = link_to 'Manage Value Propositions and Colors Together', value_propositions_path
     %br
     .btn
       = link_to 'Manage Colors', colors_path

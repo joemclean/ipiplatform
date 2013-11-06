@@ -51,9 +51,10 @@
               = resource.source
             .span2.pull-right
               .manipulate_resource{:style => 'text-align: right;'}
-                = link_to 'Edit', edit_resource_path(resource) if current_user.is_admin?
-                = ' | '
-                = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.is_admin?
+                -if current_user.present? && current_user.is_admin?
+                  = link_to 'Edit', edit_resource_path(resource)
+                  = ' | '
+                  = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
           %br
           =resource.description
           %br

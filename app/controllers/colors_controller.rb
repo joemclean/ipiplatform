@@ -50,7 +50,7 @@ class ColorsController < ApplicationController
       @color.save
 
       respond_to do |format|
-        format.html { redirect_to edit_color_path, notice: 'Color was successfully updated.' }
+        format.html { redirect_to colors_path, notice: 'Color was successfully updated.' }
         format.json { head :no_content }
       end
 
