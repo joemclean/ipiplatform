@@ -20,7 +20,7 @@
     = f.text_field :tag_list, :class => 'span6'
 
   %h2 Tags
-  %h4= 'What innovator type is this best suited for?'
+  %h4= 'What value proposition color is this best suited for?'
   .field
     = hidden_field_tag "resource[color_ids][]", nil
     -@colors.each do |color|
@@ -36,13 +36,6 @@
       =phase.name 
       %br
   %br
-  %h4= 'Does this have a particular industry focus?'
-  .field
-    = hidden_field_tag "resource[industry_ids][]", nil
-    -@industries.each do |industry|
-      =check_box_tag "resource[industry_ids][]", industry.id, @resource.industry_ids.include?(industry.id)
-      =industry.name 
-      %br
   %br
   %br
   .field

@@ -147,11 +147,11 @@ industries = [
 ]
 
 industries.each do |industry|
-  Industry.create(name: industry)
+  Industry.find_or_create_by_name(name: industry)
 end
 
-phases = %w(Inception Story\ Writing Estimation Prioritization Delivery Release)
+phases = %w(Sales Inception Story\ Writing Estimation Prioritization Delivery Release)
 
 phases.each do |phase_name|
-  Phase.create(name: phase_name)
+  Phase.find_or_create_by_name(name: phase_name)
 end

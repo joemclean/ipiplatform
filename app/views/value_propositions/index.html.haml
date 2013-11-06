@@ -9,7 +9,7 @@
     .value_propositions_container
       .readonly{:id => "value_proposition_#{value_proposition.id}"}
         %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
-          = value_proposition.name
+          = link_to value_proposition.name, value_proposition_path(value_proposition.id)
           .btn
             = link_to 'Edit', '', onclick: "toggleEdit(this); return false"
           %ul{:style => 'text-align: left;'}

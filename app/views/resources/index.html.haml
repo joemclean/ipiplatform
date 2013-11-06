@@ -23,13 +23,6 @@
         =check_box_tag "resource[phase_ids][]", phase.id
         =phase.name
         %br
-    .search_title
-      Industry
-    .industry_filter_box
-      -@industries.each do |industry|
-        =check_box_tag "resource[industry_ids][]", industry.id
-        =industry.name
-        %br
 
   .span9
     =paginate @resources
