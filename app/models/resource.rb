@@ -26,8 +26,6 @@ class Resource < ActiveRecord::Base
   
   attr_writer :current_step
 
-  attr_accessible :name
-  
   def current_step
     @current_step ||  steps.first
   end

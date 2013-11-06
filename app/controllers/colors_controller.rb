@@ -37,7 +37,7 @@ class ColorsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @color.update(params)
+      if @color.update(color_params)
         format.html { redirect_to @color, notice: 'Color was successfully updated.' }
         format.json { head :no_content }
       else
@@ -62,7 +62,7 @@ class ColorsController < ApplicationController
   end
 
   def color_params
-    params.require(:color).permit(:name, :description, :value_proposition.id)
+    params.require(:color).permit(:name, :description, :value_proposition)
   end
 
 end

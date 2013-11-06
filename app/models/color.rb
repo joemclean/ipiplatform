@@ -4,7 +4,6 @@ class Color < ActiveRecord::Base
   has_many :question_responses
   belongs_to :value_proposition
 
-  attr_accessible :name, :description, :image
   validates :name, :description, presence: true
 
   def ids
