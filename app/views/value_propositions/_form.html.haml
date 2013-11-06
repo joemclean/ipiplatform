@@ -1,4 +1,4 @@
-= bootstrap_form_for @value_proposition do |f|
+= form_for @value_proposition do |f|
   - if @value_proposition.errors.any?
     #error_explanation
       %h2= "#{pluralize(@value_proposition.errors.count, "error")} prohibited this value proposition from being saved:"

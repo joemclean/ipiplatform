@@ -1,4 +1,4 @@
-= bootstrap_form_for @color do |f|
+= form_for @color do |f|
   - if @color.errors.any?
     #error_explanation
       %h2= "#{pluralize(@color.errors.count, "error")} prohibited this color from being saved:"

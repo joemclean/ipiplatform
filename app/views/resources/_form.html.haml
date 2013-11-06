@@ -1,4 +1,4 @@
-= bootstrap_form_for @resource do |f| 
+= form_for @resource do |f| 
   - if @resource.errors.any?
     #error_explanation
       %h2= "#{pluralize(@resource.errors.count, "error")} prohibited this resource from being saved:"
