@@ -2,35 +2,22 @@
   %h2 Thoughtworks Value Propositions
   %p
     Every client is different, and Thoughtworks can help those clients innovate in all different ways. This affects how every account is pursued, sold, developed, and measured for success. Each value proposition we present requires a distinct approach to be effective. You can learn about our value propositions here and find helpful resources to assist every stage of these different types of projects.
-  %br
-  .type_quiz_prompt{:style => 'margin: 0 auto;'}
-    -if user_has_taken_quiz
-      -current_user.personality.colors.each do |color|
-        .div.image_results
-          =image_tag color.image, size: '75x75'
-          %br
-          =color.name
-    -else
-      Take the innovator type survey to fill out your profile.
-      %br
-      .btn
-        = link_to 'Take the survey!', take_survey_path
 -@value_propositions.each do |value_proposition|
-  .row
-  %p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
-    =value_proposition.name
-    %br
-    %ul{:style => 'text-align: center; padding: 0px 150px 0px 150px;'}
+  .row{:style => 'margin-top: 50px;'}
+    .col-sm-12
+      %p{:style => 'font-size: 24px; font-weight: bold; color: #6BB8D4;'}
+        =value_proposition.name
+      %br
       =value_proposition.description
-    %br
+  .row
     -value_proposition.colors.each do |color|
-      .col.col-sm-4
-        %p
-          =image_tag color.image
-          %br
-          %br
-          %p{:style => 'font-weight: bold; color:#6BB8D4'}
+      .col-sm-4
+        .panel.panel-default{:style => 'margin: 20px 0px;'}
+          .panel-heading
             = color.name
-        %br
-        %p{:style => 'align: center'}
-        = color.description
+          .panel-body
+            =image_tag color.image, class: "color_image"
+            %p{:style => 'font-weight: bold; color:#6BB8D4'}
+            %br
+            %p{:style => 'align: center'}
+            = color.description
