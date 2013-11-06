@@ -10,7 +10,6 @@ gem 'haml-rails'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails',
                               :branch => '3.0.0'
-gem 'bootstrap_forms'
 gem 'hirb'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
