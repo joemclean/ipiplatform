@@ -1,17 +1,14 @@
 -if current_user
-  .navbar.navbar-bottom
-    .navbar-inner
-      .btn-group.pull-right
-        -if current_user.is_admin
-          .btn
-            =link_to 'Users', users_path
-          .btn
-            =link_to 'Industries', industries_path
+  .well
+    .btn-group
+      -if current_user.is_admin
         .btn
-          =link_to 'Resources', resources_path
+          =link_to 'Users', users_path
         .btn
-          =link_to 'Value Propositions', pages_value_propositions_path
-        .btn
-          =link_to 'Question Responses', question_responses_path
-      %p.navbar-text
-        Back end stuff
+          =link_to 'Industries', industries_path
+      .btn
+        =link_to 'Resources', resources_path
+      .btn
+        =link_to 'Value Propositions', pages_value_propositions_path
+      .btn
+        =link_to 'Question Responses', question_responses_path
