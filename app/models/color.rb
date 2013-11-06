@@ -1,8 +1,9 @@
 class Color < ActiveRecord::Base
-  belongs_to :value_proposition
+  has_many :color_associations, dependent: :destroy
+  has_many :resources, through: :color_associations
   has_many :question_responses
-  #has_many :resources, through: :color_associations
-  attr_accessible :name, :description, :image
+  belongs_to :value_proposition
+
   validates :name, :description, presence: true
 
   def ids

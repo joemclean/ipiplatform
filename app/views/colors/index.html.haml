@@ -17,6 +17,8 @@
       -if current_user.is_admin?
         %td= link_to 'Edit', edit_color_path(color)
         %td= link_to 'Destroy', color, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -else
+        %td{:colspan => 2}
 %br
 
 .btn

@@ -14,7 +14,7 @@
       .col-sm-4
         .panel.panel-default{:style => 'margin: 20px 0px;'}
           .panel-heading
-            = color.name
+            = link_to color.name, color
           .panel-body
             =image_tag color.image, class: "color_image"
             %p{:style => 'font-weight: bold; color:#6BB8D4'}

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_filter :authorized?
+  before_filter :redirect_if_unauthorized
   
   def new
   end

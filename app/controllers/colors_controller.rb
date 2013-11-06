@@ -1,9 +1,9 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
   
-  before_filter :authorized?, except: [:index, :show]
+  before_filter :redirect_if_unauthorized, except: [:index, :show]
 
-  before_filter :signed_in?
+  before_filter :redirect_if_not_signed_in
 
 
   def index
@@ -11,6 +11,7 @@ class ColorsController < ApplicationController
   end
 
   def show
+    @color = Color.find(params[:id])
   end
 
   def new
@@ -49,19 +50,19 @@ class ColorsController < ApplicationController
   def destroy
     @color.destroy
     respond_to do |format|
-      format.html { redirect_to colors_url }
+      format.html { redirect_to value_proposition_path }
       format.json { head :no_content }
     end
   end
 
   private
   
-    def set_color
-      @color = Color.find(params[:id])
-    end
+  def set_color
+    @color = Color.find(params[:id])
+  end
 
-    def color_params
-      params.require(:color).permit(:name, :description, :value_proposition.id)
-    end
+  def color_params
+    params.require(:color).permit(:name, :description, :value_proposition)
+  end
 
 end

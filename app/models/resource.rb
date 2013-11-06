@@ -1,6 +1,6 @@
 class Resource < ActiveRecord::Base
 
-  has_many :color_associations
+  has_many :color_associations, dependent: :destroy
   has_many :colors, through: :color_associations
 
   has_many :resource_industries
@@ -25,7 +25,7 @@ class Resource < ActiveRecord::Base
   has_many :tags, through: :taggings
   
   attr_writer :current_step
-  
+
   def current_step
     @current_step ||  steps.first
   end
