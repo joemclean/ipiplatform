@@ -1,24 +1,42 @@
-= form_for @resource do |f| 
-  - if @resource.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@resource.errors.count, "error")} prohibited this resource from being saved:"
-      %ul
-        - @resource.errors.full_messages.each do |msg|
-          %li= msg
+= form_for @resource do |f|
+  .row
+    - if @resource.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@resource.errors.count, "error")} prohibited this resource from being saved:"
+        %ul
+          - @resource.errors.full_messages.each do |msg|
+            %li= msg
   %h2 Basic Information
-  .field
-    = f.text_field :name, :placeholder => 'Name', :class => 'span6'
-  .field
-    = f.text_field :link, :class => 'span6'
-  .field
-    = f.text_area :description, :placeholder => 'A short description of what this resource is', :class => 'span8', :rows => 5
-  .field
-    = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => 'span8', :rows => 6
-  .field
-    = f.text_field :source, :placeholder => 'Who developed this resource?', :class => 'span6'
-  .field
-    = f.text_field :tag_list, :class => 'span6'
-
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :name
+      = f.text_field :name, :placeholder => 'Name', :class => "form-control"
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :link
+      = f.text_field :link, :class => "form-control"
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :description
+      = f.text_area :description, :placeholder => 'A short description of what this resource is', :class => "form-control", :rows => 5
+  .row    
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :full_description
+      = f.text_area :full_description, :placeholder => 'Full description of what this resource is', :class => "form-control", :rows => 6
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :source
+      = f.text_field :source, :placeholder => 'Who developed this resource?', :class => "form-control"
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :tag_list
+      = f.text_field :tag_list, :class => "form-control"
   %h2 Tags
   %h4= 'What value proposition color is this best suited for?'
   .field

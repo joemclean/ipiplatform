@@ -1,12 +1,13 @@
--if current_user
-  .btn.pull-right
-    = link_to 'New Resource', new_resource_path
-
-%h1
-  Resources
-%hr
 .row
-  .span3.resource_filters
+  -if current_user
+    .btn.pull-right
+      = link_to 'New Resource', new_resource_path
+
+  %h1
+    Resources
+  %hr
+.row
+  .col-sm-3.resource_filters
     %h3
       Filters
     =form_tag do |f|
@@ -24,39 +25,33 @@
         =phase.name
         %br
 
-  .span9
+  .col-sm-9.well
     =paginate @resources
     - @resources.each do |resource|
-      .row
-        .span3
-          =image_tag 'ResourcePlaceHolder.png', size: '160x100'
-          %br
-          %br
-          -resource.tags.each do |tag|
-            =link_to tag.name, tag_path(tag), class: 'tag_tag'
-        .span6{:style => 'margin: 0 0 0 -8px;'}
-          %b
-            = link_to resource.name, resource
-            %br
-          .row  
-            .span4
-              Source: 
-              = resource.source
-            .span2.pull-right
-              .manipulate_resource{:style => 'text-align: right;'}
-                -if current_user.present? && current_user.is_admin?
-                  = link_to 'Edit', edit_resource_path(resource)
-                  = ' | '
-                  = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          %br
-          =resource.description
-          %br
-          %br
-          Phases: | 
-          -resource.phases.each do |phase|
-            =phase.name.upcase + " |"
-          %br
-          -resource.colors.each do |color|
-            =link_to (image_tag color.image, size: '40x40'), color_path(color)
-          %br
-      %hr
+      =image_tag 'ResourcePlaceHolder.png', size: '160x100'
+      %br
+      %br
+      -resource.tags.each do |tag|
+        =link_to tag.name, tag_path(tag), class: 'tag_tag'
+      %b
+      = link_to resource.name, resource
+      %br
+        Source: 
+        = resource.source
+        .manipulate_resource{:style => 'text-align: right;'}
+          -if current_user.present? && current_user.is_admin?
+            = link_to 'Edit', edit_resource_path(resource)
+            = ' | '
+            = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %br
+      =resource.description
+      %br
+      %br
+      Phases: | 
+      -resource.phases.each do |phase|
+        =phase.name.upcase + " |"
+      %br
+      -resource.colors.each do |color|
+        =link_to (image_tag color.image, size: '40x40'), color_path(color)
+      %br
+  %hr
