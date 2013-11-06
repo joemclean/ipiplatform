@@ -1,7 +1,7 @@
 class ValuePropositionsController < ApplicationController
-  before_filter :redirect_if_not_signed_in
+  before_filter :redirect_if_not_signed_in, except: [:show]
 
-  before_filter :redirect_if_unauthorized
+  before_filter :redirect_if_unauthorized, except: [:show]
 
   before_filter :set_value_proposition, except: [:show, :new, :create, :index]
 
@@ -32,11 +32,11 @@ class ValuePropositionsController < ApplicationController
   end
 
   def index
-    redirect_to root_path
+    @value_propositions = ValueProposition.all
   end
 
   def show
-    @value_propositions = ValueProposition.all
+    @value_proposition = ValueProposition.find(params[:id])
   end
 
   def update

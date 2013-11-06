@@ -6,7 +6,7 @@
   .row{:style => 'margin-top: 50px;'}
     .col-sm-12
       %p{:style => 'font-size: 24px; font-weight: bold; color: #6BB8D4;'}
-        =value_proposition.name
+        = link_to value_proposition.name, value_proposition_path(value_proposition.id)
       %br
       =value_proposition.description
   .row
@@ -20,4 +20,5 @@
             %p{:style => 'font-weight: bold; color:#6BB8D4'}
             %br
             %p{:style => 'align: center'}
+            = color.description
             = color.description
