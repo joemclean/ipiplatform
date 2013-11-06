@@ -1,7 +1,7 @@
 class ValuePropositionsController < ApplicationController
-  before_filter :redirect_if_not_signed_in, except: [:show]
+  before_filter :redirect_if_not_signed_in
 
-  before_filter :redirect_if_unauthorized, except: [:show]
+  before_filter :redirect_if_unauthorized
 
   before_filter :set_value_proposition, except: [:show, :new, :create]
 

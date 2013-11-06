@@ -1,9 +1,9 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
 
-  before_filter :redirect_if_unauthorized, except: [:index, :show]
-
   before_filter :redirect_if_not_signed_in
+
+  before_filter :redirect_if_unauthorized, except: [:index]
 
 
   def index
