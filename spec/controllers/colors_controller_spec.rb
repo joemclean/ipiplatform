@@ -67,6 +67,52 @@ describe ColorsController do
     end
   end
 
+  describe '#destroy' do
+    before :each do
+      @value_proposition = FactoryGirl.create(:value_proposition)
+      @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
+      @destroy_params = {id: @color.id}
+    end
+
+    context 'as an admin user' do
+      before :each do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+      end
+
+      it 'should delete a color' do
+        delete :destroy, @destroy_params
+
+        expect(Color.all.count).to eql(0)
+      end
+
+      it 'should be able to detatch associated value proposition' do
+        @value_proposition.colors.count.should eql(1)
+
+        delete :destroy, @destroy_params
+
+        expect(@value_proposition.colors.count).to eql(0)
+      end
+    end
+
+    context 'as a user' do
+      it 'should not be able to delete a color' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        delete :destroy, @destroy_params
+
+        expect(Color.all.count).to eql(1)
+      end
+    end
+
+    context 'while not signed in' do
+      it 'should not be able to delete a color' do
+        delete :destroy, @destroy_params
+
+        expect(Color.all.count).to eql(1)
+      end
+    end
+  end
+
   describe '#create' do
     before :each do
       value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')

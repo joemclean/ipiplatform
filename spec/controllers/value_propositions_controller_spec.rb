@@ -63,7 +63,6 @@ describe ValuePropositionsController do
     end
   end
 
-
   describe '#destroy' do
     context 'as an admin user' do
       before :each do

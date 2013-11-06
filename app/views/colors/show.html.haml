@@ -5,7 +5,10 @@
 
 %p
   %b Value Proposition:
-  = @color.value_proposition.name
+  - if @color.value_proposition.present?
+    = @color.value_proposition.name
+  -else
+    (Empty)
 
 %p
   %b Full Description:
