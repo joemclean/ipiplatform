@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   before_filter :redirect_if_not_signed_in
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
-  before_action :set_resource_associations, only: [:index, :show, :new, :edit]
+  before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create]
 
   def index
     @filter_params = {plan: false, act: false, observe: false, reflect: false}

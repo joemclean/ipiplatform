@@ -132,24 +132,6 @@ value_propositions.each do |name, color_propositions, value_proposition_descript
   end
 end
 
-industries = [
-  'Does not matter',
-  'Education',
-  'Finance',
-  'Travel',
-  'Retail',
-  'Media',
-  'Hospitality',
-  'Healthcare',
-  'Hardware Technology',
-  'Software Technology',
-  'Energy'
-]
-
-industries.each do |industry|
-  Industry.find_or_create_by_name(name: industry)
-end
-
 phases = %w(Sales Inception Story\ Writing Estimation Prioritization Delivery Release)
 
 phases.each do |phase_name|
