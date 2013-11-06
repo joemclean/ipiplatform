@@ -1,6 +1,6 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
-  
+
   before_filter :redirect_if_unauthorized, except: [:index, :show]
 
   before_filter :redirect_if_not_signed_in
@@ -16,6 +16,7 @@ class ColorsController < ApplicationController
 
   def new
     @color = Color.new
+    @value_propositions = ValueProposition.all
   end
 
   def edit
@@ -24,11 +25,18 @@ class ColorsController < ApplicationController
   def create
     @color = Color.new(color_params)
 
-    respond_to do |format|
-      if @color.save
-        format.html { redirect_to @color, notice: 'Color was successfully created.' }
+    begin
+      @color.save
+      @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
+      @color.save
+
+      respond_to do |format|
+        format.html { redirect_to colors_path, notice: 'Color was successfully created.' }
         format.json { render action: 'show', status: :created, location: @color }
-      else
+      end
+
+    rescue
+      respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @color.errors, status: :unprocessable_entity }
       end
@@ -36,11 +44,18 @@ class ColorsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @color.update(color_params)
-        format.html { redirect_to @color, notice: 'Color was successfully updated.' }
+    begin
+      @color.update(color_params)
+      @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
+      @color.save
+
+      respond_to do |format|
+        format.html { redirect_to edit_color_path, notice: 'Color was successfully updated.' }
         format.json { head :no_content }
-      else
+      end
+
+    rescue
+      respond_to do |format|
         format.html { render action: 'edit' }
         format.json { render json: @color.errors, status: :unprocessable_entity }
       end
@@ -50,15 +65,16 @@ class ColorsController < ApplicationController
   def destroy
     @color.destroy
     respond_to do |format|
-      format.html { redirect_to value_proposition_path }
+      format.html { redirect_to colors_path }
       format.json { head :no_content }
     end
   end
 
   private
-  
+
   def set_color
     @color = Color.find(params[:id])
+    @value_propositions = ValueProposition.all
   end
 
   def color_params

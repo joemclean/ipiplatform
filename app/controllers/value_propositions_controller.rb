@@ -28,9 +28,11 @@ class ValuePropositionsController < ApplicationController
   end
 
   def update
-    @value_proposition.update_attributes(value_propositions_params)
-    params[:value_proposition][:colors_attributes].values.each do |color_params|
-      Color.find(color_params[:id]).update(color_params)
+    ActiveRecord::Base.transaction do
+      @value_proposition.update_attributes(value_propositions_params)
+      params[:value_proposition][:colors_attributes].values.each do |color_params|
+        Color.find(color_params[:id]).update(color_params)
+      end
     end
 
     redirect_to value_proposition_path

@@ -4,21 +4,23 @@
   %tr
     %th Name
     %th Description
-    %th
-    %th
-    %th
+    %th Value Proposition
+    %th{colspan: 3} Actions
 
   - @colors.each do |color|
     %tr
       %td= color.name
       %td= color.description
+      %td
+        - if color.value_proposition.present?
+          = color.value_proposition.name
       %td= link_to 'Show', color
       
-      -if current_user.is_admin?
+      - if current_user.is_admin?
         %td= link_to 'Edit', edit_color_path(color)
         %td= link_to 'Destroy', color, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      -else
-        %td{:colspan => 2}
+      - else
+        %td{colspan: 2}
 %br
 
 .btn

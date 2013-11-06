@@ -1,7 +1,11 @@
 %p#notice= notice
 
-%h2 
+%h2
   ='Color: ' + @color.name
+
+%p
+  %b Value Proposition:
+  = @color.value_proposition.name
 
 %p
   %b Full Description:
@@ -14,6 +18,8 @@
         =link_to resource.name, resource_path(resource)
 
 .btn-group
-  //.btn = link_to 'Edit Color', edit_color_path(@color)
+  - if current_user.is_admin?
+    .btn
+      = link_to 'Edit Color', edit_color_path(@color)
   .btn
     = link_to 'All Colors', pages_value_propositions_path
