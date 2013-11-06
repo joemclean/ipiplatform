@@ -111,6 +111,42 @@ describe ValuePropositionsController do
 
   end
 
+  describe '#index' do
+    before :each do
+      @value_proposition = FactoryGirl.create(:value_proposition)
+      @get_params = {id: @value_proposition.id}
+    end
+
+    context 'as an admin user' do
+      it 'should redirect the user to the root path' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+
+        get :index, @get_params
+
+        response.should redirect_to root_path
+      end
+    end
+
+    context 'as a user' do
+      it 'should redirect the user to the root path' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+
+        get :index, @get_params
+
+        response.should redirect_to root_path
+      end
+    end
+
+    context 'while not signed in' do
+      it 'should redirect the user to the new sessions path' do
+        get :index, @get_params
+
+        response.should redirect_to new_session_path
+      end
+    end
+  end
+
   describe '#show' do
     before :each do
       @value_proposition = FactoryGirl.create(:value_proposition)
@@ -132,6 +168,7 @@ describe ValuePropositionsController do
     context 'as a user' do
       it 'should redirect the user to the root path' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+
         get :show, @get_params
 
         response.should redirect_to root_path
