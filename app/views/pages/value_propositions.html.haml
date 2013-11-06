@@ -1,4 +1,4 @@
-.hero.innovator_hero
+.jumbotron.innovator_hero
   %h2 Thoughtworks Value Propositions
   %p
     Every client is different, and Thoughtworks can help those clients innovate in all different ways. This affects how every account is pursued, sold, developed, and measured for success. Each value proposition we present requires a distinct approach to be effective. You can learn about our value propositions here and find helpful resources to assist every stage of these different types of projects.
@@ -15,28 +15,22 @@
       %br
       .btn
         = link_to 'Take the survey!', take_survey_path
-  %br
-  %br
-.row
-  %table.table.table-striped{:style => 'border: 0px;'}
-    -@value_propositions.each do |value_proposition|
-      %tr
-        %td
-          %p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
-            =value_proposition.name
-            %br
-            %ul{:style => 'text-align: center; padding: 0px 150px 0px 150px;'}
-              =value_proposition.description
-            %br
-            .center-container
-              -value_proposition.colors.each do |color|
-                .absolute-center.traitbox.span4
-                  %p
-                    =image_tag color.image
-                    %br
-                    %br
-                    %p{:style => 'font-weight: bold; color:#6BB8D4'}
-                      = color.name
-                  %br
-                  %p{:style => 'align: center'}
-                  = color.description
+-@value_propositions.each do |value_proposition|
+  .row
+  %p{:style => 'text-align: center; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+    =value_proposition.name
+    %br
+    %ul{:style => 'text-align: center; padding: 0px 150px 0px 150px;'}
+      =value_proposition.description
+    %br
+    -value_proposition.colors.each do |color|
+      .col.col-sm-4
+        %p
+          =image_tag color.image
+          %br
+          %br
+          %p{:style => 'font-weight: bold; color:#6BB8D4'}
+            = color.name
+        %br
+        %p{:style => 'align: center'}
+        = color.description
