@@ -4,5 +4,6 @@ FactoryGirl.define do
     password '0000'
     password_confirmation '0000'
     name 'factory girl'
+    is_admin false
   end
 end

@@ -37,7 +37,13 @@
     %br
     = resource.description
     %br
-    = link_to 'Show', resource
+    .btn
+      = link_to 'Show', resource
+    - if current_user.can_edit_and_delete_resource?(current_user, resource)
+      .btn
+        = link_to 'Edit', edit_resource_path(resource.id)
+      .btn
+        = link_to 'Delete', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
     %br   
 
 %h3 Bookmarked Resources

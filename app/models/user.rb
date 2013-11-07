@@ -15,5 +15,9 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=150"
   end
+
+  def can_edit_and_delete_resource? current_user, resource
+    current_user.id.eql? resource.user_id or current_user.is_admin?
+  end
         
 end

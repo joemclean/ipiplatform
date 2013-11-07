@@ -65,6 +65,11 @@
       -if @resource.link
         = link_to 'Go explore the resource!', @resource.link, :target => 'blank'
       %br
+    - if current_user.can_edit_and_delete_resource?(current_user, @resource)
+      .btn
+        = link_to 'Edit this Resource', edit_resource_path
+      .btn
+        = link_to 'Delete this Resource', @resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 .comments_block_in#comments_block
   #comment_toggle

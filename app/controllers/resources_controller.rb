@@ -1,10 +1,10 @@
 class ResourcesController < ApplicationController
   before_filter :redirect_if_not_signed_in
 
-  before_filter :redirect_if_unauthorized, except: [:show, :index, :create, :new]
+  before_filter :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update]
 
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
-  before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create]
+  before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update]
 
   def index
     @filter_params = {plan: false, act: false, observe: false, reflect: false}
@@ -30,19 +30,15 @@ class ResourcesController < ApplicationController
       @resource = Resource.new(resource_params)
       @resource.user = current_user || User.find(params[:user_id])
 
-      if @resource.save
-        params[:color_ids].each do |color_id|
-          @resource.color_associations << ColorAssociation.create(color_id: color_id)
-        end
-
-        params[:phase_ids].each do |phase_id|
-          @resource.phase_associations << PhaseAssociation.create(phase_id: phase_id)
-        end
+      ActiveRecord::Base.transaction do
+        @resource.save
+        update_color_associations
+        update_phase_associations
       end
 
       respond_to do |format|
         format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @resource }
+        format.json { render action: 'show', status: :created, location: resource_path }
       end
 
     rescue
@@ -54,37 +50,76 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @resource.update(resource_params)
-        format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
+    if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
+      begin
+
+        ActiveRecord::Base.transaction do
+          @resource.update(resource_params)
+
+          @resource.color_associations = []
+          update_color_associations
+
+          @resource.phase_associations = []
+          update_phase_associations
+        end
+
+        respond_to do |format|
+          format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
+          format.json { head :no_content }
+        end
+
+      rescue
+        respond_to do |format|
+          format.html { render action: 'edit' }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_path, notice: "Not authorized to edit this resource!" and return
     end
   end
 
   def destroy
-    @resource.destroy
-    respond_to do |format|
-      format.html { redirect_to resources_url }
-      format.json { head :no_content }
+    if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
+
+      @resource.destroy
+
+      redirect_path = current_user.is_admin? ? resources_url : user_path(current_user.id)
+
+      respond_to do |format|
+        format.html { redirect_to redirect_path }
+        format.json { head :no_content }
+      end
+
+    else
+      redirect_to root_path, notice: "Not authorized to destroy this resource!"
     end
   end
 
   private
-    def set_resource
-      @resource = Resource.find(params[:id])
-    end
+  def set_resource
+    @resource = Resource.find(params[:id])
+  end
 
-    def resource_params
-      params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, color_ids: [], phase_ids: [], format_ids: [])
-    end
+  def resource_params
+    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, color_ids: [], phase_ids: [], format_ids: [])
+  end
 
-    def set_resource_associations
-      @colors = Color.all
-      @industries = Industry.all
-      @phases = Phase.all
+  def set_resource_associations
+    @colors = Color.all
+    @industries = Industry.all
+    @phases = Phase.all
+  end
+
+  def update_color_associations
+    params[:color_ids].reject(&:empty?).each do |color_id|
+      @resource.color_associations << ColorAssociation.create(color_id: color_id)
     end
+  end
+
+  def update_phase_associations
+    params[:phase_ids].reject(&:empty?).each do |phase_id|
+      @resource.phase_associations << PhaseAssociation.create(phase_id: phase_id)
+    end
+  end
 end
