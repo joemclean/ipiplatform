@@ -337,8 +337,8 @@ describe ResourcesController do
 
         @resource = FactoryGirl.create(:resource, user: @user)
 
-        @resource.colors = [@yellow_color, @green_color]
-        @resource.phases = [@party_phase, @fiesta_phase]
+        @resource.colors = []
+        @resource.phases = []
 
         controller.stub(:current_user).and_return(@user)
         @update_params = {id: @resource.id,
@@ -379,6 +379,30 @@ describe ResourcesController do
           @resource.reload
 
           expect(@resource.name).to eql(@name)
+        end
+
+        it 'should automatically update color association' do
+          controller.stub(:current_user).and_return(@user)
+
+          patch :update, @update_params
+
+          @resource.reload
+
+          expect(@resource.colors.count).to eql(2)
+          expect(@resource.colors).to include(@yellow_color)
+          expect(@resource.colors).to include(@green_color)
+        end
+
+        it 'should automatically update phase association' do
+          controller.stub(:current_user).and_return(@user)
+
+          patch :update, @update_params
+
+          @resource.reload
+
+          expect(@resource.phases.count).to eql(2)
+          expect(@resource.phases).to include(@party_phase)
+          expect(@resource.phases).to include(@fiesta_phase)
         end
       end
 
