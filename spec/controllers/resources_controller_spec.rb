@@ -67,11 +67,42 @@ describe ResourcesController do
     end
 
     context 'as a user' do
-      it 'should not be able to create a resource' do
+      before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      end
+
+      it 'should create a resource using resource_params' do
         patch :create, @create_params
 
-        expect(Resource.all.count).to eql(0)
+        @resource = Resource.all.first
+
+        expect(Resource.all.count).to eql(1)
+        expect(@resource.name).to eql @name
+        expect(@resource.link).to eql 'resource_link'
+        expect(@resource.description).to eql @description
+        expect(@resource.full_description).to eql 'resource_full_description'
+        expect(@resource.source).to eql 'A cool person'
+        expect(@resource.tag_list).to eql 'resource_tag_list'
+      end
+
+      it 'should be able to attach associated colors' do
+        patch :create, @create_params
+
+        @resource = Resource.all.first
+
+        expect(@resource.colors.count).to eql(2)
+        expect(@resource.colors.first.name).to eql 'yellow'
+        expect(@resource.colors.last.name).to eql 'green'
+      end
+
+      it 'should be able to attach associated phases' do
+        patch :create, @create_params
+
+        @resource = Resource.all.first
+
+        expect(@resource.colors.count).to eql(2)
+        expect(@resource.phases.first.name).to eql 'Party'
+        expect(@resource.phases.last.name).to eql 'Fiesta'
       end
     end
 
@@ -130,8 +161,8 @@ describe ResourcesController do
     context 'as a user' do
       context 'with a resource owned by the user' do
         it 'should delete a resource' do
-         # TODO: Allow for UserA to delete a resource UserA owns
-         # pending
+          # TODO: Allow for UserA to delete a resource UserA owns
+          # pending
         end
       end
 
@@ -194,6 +225,43 @@ describe ResourcesController do
     end
   end
 
+  describe '#new' do
+    context 'as an admin user' do
+      before :each do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+      end
+
+      it 'should view the create-a-resource page' do
+        get :new
+
+        expect(response.status).to be(200)
+        expect(controller.request.path).to eql(new_resource_path)
+      end
+    end
+
+    context 'as a user' do
+      before :each do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      end
+
+      it 'should view the create-a-resource page' do
+        get :new
+
+        expect(response.status).to be(200)
+        expect(controller.request.path).to eql(new_resource_path)
+      end
+    end
+
+    context 'while not signed in' do
+      it 'should not view the create-a-resource page' do
+        get :new
+
+        response.should redirect_to new_session_path
+      end
+    end
+  end
+
   describe '#show' do
     before :each do
       @resource = FactoryGirl.create(:resource)
@@ -218,7 +286,7 @@ describe ResourcesController do
       it 'should show the requested resource' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         controller.stub_chain(:current_user, :id).and_return(1)
-        
+
         get :show, @get_params
 
         expect(response.status).to be(200)
