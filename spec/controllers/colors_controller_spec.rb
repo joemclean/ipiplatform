@@ -124,9 +124,10 @@ describe ColorsController do
 
     context 'as a user' do
       it 'should redirect the user to the root path' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         get :index, @get_params
 
-        response.should redirect_to new_session_path
+        response.should redirect_to root_path
       end
     end
 

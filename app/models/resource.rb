@@ -10,7 +10,7 @@ class Resource < ActiveRecord::Base
   has_many :bookmarks, :dependent => :destroy
   has_many :users, through: :bookmarks
 
-  has_many :phase_associations
+  has_many :phase_associations, dependent: :destroy
   has_many :phases, through: :phase_associations
 
   belongs_to :user

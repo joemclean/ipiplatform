@@ -40,17 +40,15 @@
   %h2 Tags
   %h4= 'What value proposition color is this best suited for?'
   .field
-    = hidden_field_tag "resource[color_ids][]", nil
     -@colors.each do |color|
-      =check_box_tag "resource[color_ids][]", color.id, @resource.color_ids.include?(color.id)
+      =check_box_tag "color_ids[]", color.id, @resource.color_ids.include?(color.id)
       =color.name
       %br
   %br
   %h4= 'What phases is this best suited for?'
   .field
-    = hidden_field_tag "resource[phase_ids][]", nil
     -@phases.each do |phase|
-      =check_box_tag "resource[phase_ids][]", phase.id, @resource.phase_ids.include?(phase.id)
+      =check_box_tag "phase_ids[]", phase.id, @resource.phase_ids.include?(phase.id)
       =phase.name 
       %br
   %br
