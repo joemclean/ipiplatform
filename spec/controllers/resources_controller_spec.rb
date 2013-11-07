@@ -157,13 +157,13 @@ describe ResourcesController do
 
   describe '#index' do
     before :each do
-      @resource = FactoryGirl.create(:resource)
+      resource = FactoryGirl.create(:resource)
 
-      @get_params = {id: @resource.id}
+      @get_params = {id: resource.id}
     end
 
     context 'as an admin user' do
-      it 'should show the list of colors' do
+      it 'should show the list of resources' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
 
@@ -175,13 +175,54 @@ describe ResourcesController do
     end
 
     context 'as a user' do
-      it 'should show the list of colors' do
+      it 'should show the list of resources' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
 
         get :index, @get_params
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(resources_path)
+      end
+    end
+
+    context 'while not signed in' do
+      it 'should redirect the user to the new sessions path' do
+        get :index, @get_params
+
+        response.should redirect_to new_session_path
+      end
+    end
+  end
+
+  describe '#show' do
+    before :each do
+      @resource = FactoryGirl.create(:resource)
+
+      @get_params = {id: @resource.id}
+    end
+
+    context 'as an admin user' do
+      it 'should show the requested resource' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+        controller.stub_chain(:current_user, :id).and_return(1)
+
+        get :show, @get_params
+
+        expect(response.status).to be(200)
+        expect(controller.request.path).to eql(resource_path)
+      end
+    end
+
+    context 'as a user' do
+      it 'should show the requested resource' do
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        controller.stub_chain(:current_user, :id).and_return(1)
+        
+        get :show, @get_params
+
+        expect(response.status).to be(200)
+        expect(controller.request.path).to eql(resource_path)
       end
     end
 

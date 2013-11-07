@@ -15,7 +15,7 @@ class ResourcesController < ApplicationController
     @bookmark = Bookmark.new
     @bookmark.user_id = current_user.id
     @bookmark.resource_id = @resource.id
-    @comments = Comment.find_all_by_resource_id(@resource.id)
+    @comments = Comment.where(resource_id: @resource.id)
   end
 
   def new

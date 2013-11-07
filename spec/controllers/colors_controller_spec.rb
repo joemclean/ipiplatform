@@ -60,8 +60,8 @@ describe ColorsController do
   describe '#destroy' do
     before :each do
       @value_proposition = FactoryGirl.create(:value_proposition)
-      @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
-      @destroy_params = {id: @color.id}
+      color = FactoryGirl.create(:color, value_proposition: @value_proposition)
+      @destroy_params = {id: color.id}
     end
 
     context 'as an admin user' do
@@ -105,9 +105,9 @@ describe ColorsController do
 
   describe '#index' do
     before :each do
-      @value_proposition = FactoryGirl.create(:value_proposition)
-      @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
-      @get_params = {id: @color.id}
+      value_proposition = FactoryGirl.create(:value_proposition)
+      color = FactoryGirl.create(:color, value_proposition: value_proposition)
+      @get_params = {id: color.id}
     end
 
     context 'as an admin user' do
@@ -142,9 +142,9 @@ describe ColorsController do
 
   describe '#show' do
     before :each do
-      @value_proposition = FactoryGirl.create(:value_proposition)
-      @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
-      @get_params = {id: @color.id}
+      value_proposition = FactoryGirl.create(:value_proposition)
+      color = FactoryGirl.create(:color, value_proposition: value_proposition)
+      @get_params = {id: color.id}
     end
 
     context 'as an admin user' do
