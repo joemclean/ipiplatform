@@ -1,31 +1,19 @@
-%h2.resourcetitle
-  =@resource.name
-  %br
-%p
-  =image_tag 'ResourcePlaceHolder.png'
-
+%h1.resourcetitle
+  =@resource.name 
+%hr
 .row.showresource
-  .col.left.span4
+  .col-sm-4
     %p.authorBox='Uploaded by: ' + @resource.author.name
-    %b.resourcetraitBox
-      This is a great resource for:
-      %br
-      %b{:style => 'padding: 2px;'}
-        %br
-        Colors
-        %br
-        -@resource.colors.each do |color|
-          =link_to (image_tag color.image, size: '70x70'), color_path(color)
-      %b{:style => 'padding: 2px;'}
-        %br
-        %br
+    %h3
+      Colors
+    -@resource.colors.each do |color|
+      =link_to (image_tag color.image, size: '70x70'), color_path(color)
     %br
-    %br
-    %b.resourcetraitBox
+    %h3
       Tool popularity
-    %p{:style => 'margin: 4px;'}
+    %p
       -if @resource.upvotes.count < 1
-        =''
+        ='No likes yet.'
       -if @resource.upvotes.count == 1
         =@resource.upvotes.count
         ='user likes this resource!'
@@ -33,65 +21,52 @@
         =@resource.upvotes.count
         ='users like this resource!'
     %br
-    %br
     = raw @resource.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
 
-  .col.right.span8
-    -unless @resource.user_upvote(current_user).count > 0
-      .btn.like
-        = link_to image_tag('Star.png') + " Like!", resource_upvotes_path(@resource), :method => :post
-    -else
-      .btn.btn-success
-        = link_to image_tag('Star-Success.png') + " I like it!", clear_upvote_path(resource_id: @resource.id)
-    -unless @bookmark.exists?
-      .btn
-        = link_to image_tag('bookmark.png') + " Bookmark tool!", make_bookmark_path(resource_id: @resource.id)
-    -else
-      .btn.btn-success
-        =link_to image_tag('bookmarked.png') + "Bookmarked!", unmake_bookmark_path(resource_id: @resource.id)
-    .btn
-      = link_to 'Explore other resources', resources_path
-    -if current_user.present? && current_user.is_admin?
-      .btn
-        = link_to ' Edit Resource', edit_resource_path(@resource)
-    %br
-    %br
+  .col-sm-8
     %p.full_description
       = @resource.full_description
-    %br
-    %br
-    %br
-    .explore{:style => 'text-align: center;'}
-      -if @resource.link
-        = link_to 'Go explore the resource!', @resource.link, :target => 'blank'
-      %br
-    - if current_user.can_edit_and_delete_resource?(current_user, @resource)
-      .btn
-        = link_to 'Edit this Resource', edit_resource_path
-      .btn
-        = link_to 'Delete this Resource', @resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%hr
+//Like
+-if @resource.user_upvote(current_user).count > 0
+  .btn.btn-warning
+    = link_to image_tag('Star-Success.png') + " I like it", clear_upvote_path(resource_id: @resource.id)
+-else
+  .btn.like.btn-default
+    = link_to image_tag('Star.png') + " Like", resource_upvotes_path(@resource), :method => :post
 
-.comments_block_in#comments_block
-  #comment_toggle
-    %span#retractor
-      Comment
+//Bookmark
+-if @bookmark.exists?
+  .btn.btn-success
+    = link_to image_tag('bookmark.png') + "Bookmarked", unmake_bookmark_path(resource_id: @resource.id)
+-else
+  .btn.btn-default
+    = link_to image_tag('bookmark.png') + " Bookmark tool", make_bookmark_path(resource_id: @resource.id)
 
-  .new_comment
-    =form_tag(resource_comments_save_path(@resource), method: :post, :id => 'new_comment') do
-      =hidden_field_tag 'resource_id', @resource.id
-      =text_area_tag 'comment_text', nil, rows: 2, cols: 10, :class => 'new_comment_text'
-      %br
-      =submit_tag 'Save Comment', class: 'btn'
-  .comments
-    -@comments.each do |comment|
-      .comment
-        %h5.author
-          =comment.author.name
-        =comment.text
-        
-        -if current_user.id == comment.author.id
-          %br
-          =link_to ' Delete', resource_comments_delete_path(resource_id: @resource.id, comment_id: comment.id), :class => 'delete_link'
+//Admin
+- if current_user.can_edit_and_delete_resource?(current_user, @resource)
+  .btn.btn-default
+    = link_to 'Edit this Resource', edit_resource_path
+  .btn.btn-default
+    = link_to 'Delete this Resource', @resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%h3 Comments
+
+.new_comment
+  =form_tag(resource_comments_save_path(@resource), method: :post, :id => 'new_comment') do
+    =hidden_field_tag 'resource_id', @resource.id
+    =text_area_tag 'comment_text', nil, rows: 2, cols: 10, :class => 'new_comment_text form-control'
+    %br
+    =submit_tag 'Save Comment', class: 'btn btn-primary'
+.comments
+  -@comments.each do |comment|
+    .comment
+      %h5.author
+        =comment.author.name
+      =comment.text
+      
+      -if current_user.id == comment.author.id
+        %br
+        =link_to ' Delete', resource_comments_delete_path(resource_id: @resource.id, comment_id: comment.id), :class => 'delete_link'
 
         
 
