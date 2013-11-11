@@ -28,30 +28,31 @@
   .col-sm-9.well
     =paginate @resources
     - @resources.each do |resource|
-      =image_tag 'ResourcePlaceHolder.png', size: '160x100'
-      %br
-      %br
-      -resource.tags.each do |tag|
-        =link_to tag.name, tag_path(tag), class: 'tag_tag'
-      %b
-      = link_to resource.name, resource
-      %br
-        Source: 
-        = resource.source
-        .manipulate_resource{:style => 'text-align: right;'}
-          -if current_user.present? && current_user.is_admin?
-            = link_to 'Edit', edit_resource_path(resource)
-            = ' | '
-            = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      %br
-      =resource.description
-      %br
-      %br
-      Phases: | 
-      -resource.phases.each do |phase|
-        =phase.name.upcase + " |"
-      %br
-      -resource.colors.each do |color|
-        =link_to (image_tag color.image, size: '40x40'), color_path(color)
-      %br
+      .container{id: "resource_#{resource.id}"}
+        =image_tag 'ResourcePlaceHolder.png', size: '160x100'
+        %br
+        %br
+        -resource.tags.each do |tag|
+          =link_to tag.name, tag_path(tag), class: 'tag_tag'
+        %b
+        = link_to resource.name, resource
+        %br
+          Source:
+          = resource.source
+          .manipulate_resource{:style => 'text-align: right;'}
+            -if current_user.present? && current_user.is_admin?
+              = link_to 'Edit', edit_resource_path(resource)
+              = ' | '
+              = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %br
+        =resource.description
+        %br
+        %br
+        Phases: |
+        -resource.phases.each do |phase|
+          =phase.name.upcase + " |"
+        %br
+        -resource.colors.each do |color|
+          =link_to (image_tag color.image, size: '40x40'), color_path(color)
+        %br
   %hr
