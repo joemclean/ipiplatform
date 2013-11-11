@@ -4,7 +4,7 @@ class Color < ActiveRecord::Base
   has_many :question_responses
   belongs_to :value_proposition
 
-  validates :name, :description, presence: true
+  validates :name, :description, :value_proposition, presence: true
 
   def ids
     color_ids = []

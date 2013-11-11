@@ -13,5 +13,11 @@ describe Color do
 
       expect(color.valid?).to be_false
     end
+
+    it 'should have a value proposition it belongs to' do
+      color = FactoryGirl.build_stubbed(:color, value_proposition: nil)
+
+      expect(color.valid?).to be_false
+    end
   end
 end
