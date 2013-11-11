@@ -5,19 +5,20 @@ describe ColorsController do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
-      value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
-      @create_params = {color: {
-        name: @name,
-        description: @description,
-      },
-                        value_proposition_id: value_proposition.id
-      }
+      @value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
+      @create_params = { color: {
+                                name: @name,
+                                description: @description,
+                                },
+                         value_proposition_id: @value_proposition.id
+                        }
     end
 
     context 'as an admin user' do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+        ValueProposition.stub(:find).and_return(@value_proposition)
       end
 
       it 'should create a color' do
@@ -30,12 +31,9 @@ describe ColorsController do
       end
 
       it 'should be able to attach associated value proposition' do
+        ValueProposition.should_receive(:find).exactly(1).times
+
         patch :create, @create_params
-
-        @color = Color.all.first
-
-        expect(@color.value_proposition.name).to eql 'Hats and bowties'
-        expect(@color.value_proposition.description).to eql 'are good for events'
       end
     end
 
@@ -182,20 +180,21 @@ describe ColorsController do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
-      other_value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
+      @other_value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
       @color = FactoryGirl.create(:color, value_proposition: FactoryGirl.create(:value_proposition))
       @params = {id: @color.id,
                  color: {
                    name: @name,
                    description: @description,
                  },
-                 value_proposition_id: other_value_proposition.id
+                 value_proposition_id: @other_value_proposition.id
       }
     end
     context 'as an admin user' do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+        ValueProposition.stub(:find).and_return(@other_value_proposition)
       end
 
       it 'should update colors' do
@@ -208,12 +207,9 @@ describe ColorsController do
       end
 
       it 'should be able to replace associated value proposition' do
+        ValueProposition.should_receive(:find).exactly(1).times
+
         patch :update, @params
-
-        @color.reload
-
-        expect(@color.value_proposition.name).to eql 'Hats and bowties'
-        expect(@color.value_proposition.description).to eql 'are good for events'
       end
     end
 

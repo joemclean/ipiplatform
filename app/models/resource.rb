@@ -26,6 +26,8 @@ class Resource < ActiveRecord::Base
   
   attr_writer :current_step
 
+  validates :name, :description, :full_description, :link, :source, :user_id, presence: true
+
   def current_step
     @current_step ||  steps.first
   end

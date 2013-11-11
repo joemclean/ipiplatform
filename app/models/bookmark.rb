@@ -4,7 +4,7 @@ class Bookmark < ActiveRecord::Base
   belongs_to :resource
   
   def resource
-    resource = Resource.find(self.resource_id)
+    Resource.find(self.resource_id)
   end
   
   def exists?
