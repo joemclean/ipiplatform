@@ -38,7 +38,7 @@
         = f.label :tag_list
       = f.text_field :tag_list, :class => "form-control"
   %h2 Value Proposition Colors
-  %h4= 'What value proposition color is this best suited for?'
+  %h4= 'What value proposition color(s) is this best suited for?'
   .field
     = hidden_field_tag "color_ids[]", nil
     -@colors.each do |color|
@@ -46,7 +46,7 @@
       =color.name
       %br
   %br
-  %h4= 'What phases is this best suited for?'
+  %h4= 'What phase(s) is this best suited for?'
   .field
     = hidden_field_tag "phase_ids[]", nil
     -@phases.each do |phase|

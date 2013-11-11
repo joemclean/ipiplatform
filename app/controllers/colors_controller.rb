@@ -26,7 +26,7 @@ class ColorsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       @color.save
-      @color.value_proposition = ValueProposition.find(params[:value_proposition_id]) if params[:value_proposition_id].present?
+      @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
       @color_saved = @color.save
     end
 
@@ -47,7 +47,11 @@ class ColorsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @color.update(color_params)
-      @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
+      if params[:value_proposition_id].present?
+        @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
+      else
+        @color.value_proposition = nil
+      end
       @color_saved = @color.save
     end
 
