@@ -1,4 +1,4 @@
-class Resources < Page
+class ResourcePage < Page
 
   def initialize(page)
     super page
@@ -9,7 +9,7 @@ class Resources < Page
   end
 
   def navigate_to_show_page resource_id
-    @page.visit("resources/#{resource_id}")
+    @page.visit("#{self.path}/#{resource_id}")
   end
 
   def path

@@ -12,3 +12,12 @@ end
 Given(/^a resource exists$/) do
   @resource = FactoryGirl.create(:resource)
 end
+
+Given(/^a value proposition exists$/) do
+  @value_proposition = FactoryGirl.create(:value_proposition)
+end
+
+Given(/^a value proposition color exists$/) do
+  @color = FactoryGirl.create(:color)
+end
+
