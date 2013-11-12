@@ -9,7 +9,40 @@ When(/^I go to one resource's show page$/) do
   @resource_page.navigate_to_show_page @resource.id
 end
 
+When(/^I visit resource creation page$/) do
+  page.find('#new_resource').click
+end
+
+When(/^I fill in required resource fields$/) do
+  step "I fill in \"resource_name\" with \"name\""
+  step "I fill in \"resource_link\" with \"link\""
+  step "I fill in \"resource_description\" with \"desc\""
+  step "I fill in \"resource_full_description\" with \"full desc\""
+  step "I fill in \"resource_source\" with \"source\""
+end
+
+When(/^I fill in all resource fields$/) do
+  step "I fill in required resource fields"
+  step "I fill in \"resource_tag_list\" with \"tag\""
+  step "I check the color_id_#{@color.id} box"
+  step "I check the phase_id_#{@phase.id} box"
+end
+
+When(/^I submit a new resource$/) do
+  page.find('#create_resource').click
+end
+
+Then(/^I see an error on all required fields$/) do
+  expect(page.find('.field_with_errors #resource_name')).to be_true
+  expect(page.find('.field_with_errors #resource_link')).to be_true
+  expect(page.find('.field_with_errors #resource_description')).to be_true
+  expect(page.find('.field_with_errors #resource_full_description')).to be_true
+  expect(page.find('.field_with_errors #resource_source')).to be_true
+end
+
 Then(/^I see one resource$/) do
+  @resource = Resource.first if @resource.nil?
+
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
 
@@ -17,12 +50,17 @@ Then(/^I see details about the resource$/) do
   expect(page.has_xpath?(one_resource_title_xpath)).to be_true
 end
 
+Then(/^I should be on the new resources page$/) do
+  current_path = URI.parse(current_url).path
+  expect(current_path).to eql('/resources/new')
+end
+
 
 private
 
   def one_resource_xpath
     "//*[@id=\"resource_#{@resource.id}\"]"
-    end
+  end
 
   def one_resource_title_xpath
     "//*[@id=\"resource_#{@resource.id}_title\"]"
