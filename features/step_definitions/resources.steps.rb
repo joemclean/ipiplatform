@@ -28,8 +28,8 @@ When(/^I fill in all resource fields$/) do
   step "I check the phase_id_#{@phase.id} box"
 end
 
-When(/^I submit a new resource$/) do
-  page.find('#create_resource').click
+When(/^I submit the resource$/) do
+  page.find('#submit_resource').click
 end
 
 Then(/^I see an error on all required fields$/) do
@@ -40,9 +40,16 @@ Then(/^I see an error on all required fields$/) do
   expect(page.find('.field_with_errors #resource_source')).to be_true
 end
 
+When(/^I go to edit the resource$/) do
+    page.find("#edit_resource_#{@resource.id}").click
+end
+
+When(/^I change the resource name$/) do
+  step "I fill in \"resource_name\" with \"#{new_resource_title}\""
+end
+
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
-
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
 
@@ -51,8 +58,20 @@ Then(/^I see details about the resource$/) do
 end
 
 Then(/^I should be on the new resources page$/) do
-  current_path = URI.parse(current_url).path
   expect(current_path).to eql('/resources/new')
+end
+
+Then(/^I see the resource's new name$/) do
+  expect(page.has_xpath?(one_resource_title_xpath)).to be_true
+  expect(find(:id, "resource_#{@resource.id}_title").text).to eql(new_resource_title)
+end
+
+Then(/^I see a notification that the resource was updated$/) do
+  expect(page.has_xpath?(notification_xpath)).to be_true
+end
+
+Then(/^I am on the resources show page$/) do
+  expect(current_path).to eql("/resources/#{@resource.id}")
 end
 
 
@@ -64,4 +83,16 @@ private
 
   def one_resource_title_xpath
     "//*[@id=\"resource_#{@resource.id}_title\"]"
+  end
+
+  def new_resource_title
+    'Greatest Resource'
+  end
+
+  def notification_xpath
+    "//*[@class=\"flash\"]"
+  end
+
+  def current_path
+    URI.parse(current_url).path
   end
