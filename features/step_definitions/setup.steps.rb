@@ -21,3 +21,7 @@ Given(/^a value proposition color exists$/) do
   @color = FactoryGirl.create(:color)
 end
 
+Given(/^a value proposition and a color exist$/) do
+  @value_proposition = FactoryGirl.create(:value_proposition)
+  @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
+end

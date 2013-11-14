@@ -16,8 +16,7 @@ Feature: User Navigation
     Then I see details about the resource
 
   Scenario: Users can see value propositions and colors on the general value proposition index page (pages/value_propositions/)
-    Given a value proposition exists
-    And a value proposition color exists
+    Given a value proposition and a color exist
     When I go to the general value proposition index page
     Then I see one value proposition
     And I see one value proposition color

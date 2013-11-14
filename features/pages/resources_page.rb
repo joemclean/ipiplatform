@@ -13,6 +13,6 @@ class ResourcePage < Page
   end
 
   def path
-    'resources'
+    '/resources'
   end
 end

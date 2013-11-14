@@ -13,6 +13,6 @@ class GeneralValuePropositionPage < Page
   end
 
   def path
-    'pages/value_propositions'
+    '/pages/value_propositions'
   end
 end
