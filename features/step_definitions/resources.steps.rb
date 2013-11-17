@@ -3,9 +3,13 @@ When(/^I go to the resources index page$/) do
   @resource_page.navigate
 end
 
+When (/^I go to (.*?) color show page$/) do |color|
+  @color_show_page = ColorShowPage.new(page)
+  @color_show_page.navigate_to_show_page @color.id
+end
+
 When(/^I go to one resource's show page$/) do
   step 'I see one resource'
-
   @resource_page.navigate_to_show_page @resource.id
 end
 
@@ -53,6 +57,21 @@ Then(/^I see one resource$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
 
+Then (/^I see resources of (.*?) colors?$/) do |color_name|
+  if color_name.include?('all')
+    Resource.all.each do |resource|
+      @resource = resource
+      expect(page.has_xpath?(one_resource_xpath)).to be_true
+    end
+  else
+    color = Color.find_by_name(color_name)
+    color.resources.each do |resource|
+      @resource = resource
+      expect(page.has_css?("#vp_#{color.id}_#{resource.id}")).to be_true
+    end
+  end
+end
+
 Then(/^I see details about the resource$/) do
   expect(page.has_xpath?(one_resource_title_xpath)).to be_true
 end
@@ -77,22 +96,27 @@ end
 
 private
 
-  def one_resource_xpath
-    "//*[@id=\"resource_#{@resource.id}\"]"
-  end
+def one_resource_xpath
+  "//*[@id=\"resource_#{@resource.id}\"]"
+end
 
-  def one_resource_title_xpath
-    "//*[@id=\"resource_#{@resource.id}_title\"]"
-  end
+def one_resource_title_xpath
+  "//*[@id=\"resource_#{@resource.id}_title\"]"
+end
 
-  def new_resource_title
-    'Greatest Resource'
-  end
 
-  def notification_xpath
-    "//*[@class=\"flash\"]"
-  end
+def one_resource_title_xpath
+  "//*[@id=\"resource_#{@resource.id}_title\"]"
+end
 
-  def current_path
-    URI.parse(current_url).path
-  end
+def new_resource_title
+  'Greatest Resource'
+end
+
+def notification_xpath
+  "//*[@class=\"flash\"]"
+end
+
+def current_path
+  URI.parse(current_url).path
+end

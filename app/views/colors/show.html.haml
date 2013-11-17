@@ -17,7 +17,7 @@
   = 'Resources ' + @color.name.pluralize + ' would enjoy:'
   %ol
     - @color.resources.each do |resource|
-      %li
+      %li{:id => "vp_#{@color.id}_#{resource.id}"}
         = link_to resource.name, resource_path(resource)
 
 .btn-group
