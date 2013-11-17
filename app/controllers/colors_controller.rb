@@ -24,18 +24,20 @@ class ColorsController < ApplicationController
   def create
     @color = Color.new(color_params)
 
-    begin
+    ActiveRecord::Base.transaction do
       @color.save
       @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
-      @color.save
+      @color_saved = @color.save
+    end
 
+    if @color_saved
       respond_to do |format|
         format.html { redirect_to colors_path, notice: 'Color was successfully created.' }
         format.json { render action: 'show', status: :created, location: @color }
       end
-
-    rescue
+    else
       respond_to do |format|
+        @value_propositions = ValueProposition.all
         format.html { render action: 'new' }
         format.json { render json: @color.errors, status: :unprocessable_entity }
       end
@@ -43,17 +45,22 @@ class ColorsController < ApplicationController
   end
 
   def update
-    begin
+    ActiveRecord::Base.transaction do
       @color.update(color_params)
-      @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
-      @color.save
+      if params[:value_proposition_id].present?
+        @color.value_proposition = ValueProposition.find(params[:value_proposition_id])
+      else
+        @color.value_proposition = nil
+      end
+      @color_saved = @color.save
+    end
 
+    if @color_saved
       respond_to do |format|
         format.html { redirect_to colors_path, notice: 'Color was successfully updated.' }
         format.json { head :no_content }
       end
-
-    rescue
+    else
       respond_to do |format|
         format.html { render action: 'edit' }
         format.json { render json: @color.errors, status: :unprocessable_entity }

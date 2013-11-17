@@ -26,6 +26,8 @@ class Resource < ActiveRecord::Base
   
   attr_writer :current_step
 
+  validates :name, :description, :full_description, :link, :source, :user_id, presence: true
+
   def current_step
     @current_step ||  steps.first
   end
@@ -88,6 +90,21 @@ class Resource < ActiveRecord::Base
     end
   end
 
+  def checked_color_tags(params, color)
+    if params[:color_ids].nil?
+      self.color_ids.include?(color.id)
+    else
+      self.color_ids.include?(color.id) or params[:color_ids].include?(color.id.to_s)
+    end
+  end
+
+  def checked_phase_tags(params, phase)
+    if params[:phase_ids].nil?
+      self.phase_ids.include?(phase.id)
+    else
+      self.phase_ids.include?(phase.id) or params[:phase_ids].include?(phase.id.to_s)
+    end
+  end
 
 
 end

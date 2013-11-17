@@ -1,7 +1,7 @@
 .row
   -if current_user
     .btn.pull-right
-      = link_to 'New Resource', new_resource_path
+      = link_to 'New Resource', new_resource_path, id: 'new_resource'
 
   %h1
     Resources
@@ -28,7 +28,7 @@
   .col-sm-9
     =paginate @resources
     - @resources.each do |resource|
-      .well
+      .well.container{id: "resource_#{resource.id}"}
         =image_tag 'ResourcePlaceHolder.png', size: '160x100'
         %br
         %br
@@ -37,11 +37,11 @@
         %b
         = link_to resource.name, resource
         %br
-          Source: 
+          Source:
           = resource.source
           .manipulate_resource{:style => 'text-align: right;'}
             -if current_user.present? && current_user.is_admin?
-              = link_to 'Edit', edit_resource_path(resource)
+              = link_to 'Edit', edit_resource_path(resource), {id: "edit_resource_#{resource.id}"}
               = ' | '
               = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
         %br

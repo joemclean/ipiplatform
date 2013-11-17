@@ -26,22 +26,21 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    begin
-      @resource = Resource.new(resource_params)
-      @resource.user = current_user || User.find(params[:user_id])
+    @resource = Resource.new(resource_params)
+    @resource.user = current_user || User.find(params[:user_id])
 
-      ActiveRecord::Base.transaction do
-        @resource.save
-        update_color_associations
-        update_phase_associations
-      end
+    ActiveRecord::Base.transaction do
+      @resource_saved = @resource.save
+      update_color_associations
+      update_phase_associations
+    end
 
-      respond_to do |format|
+     if @resource_saved
+       respond_to do |format|
         format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
         format.json { render action: 'show', status: :created, location: resource_path }
       end
-
-    rescue
+    else
       respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @color.errors, status: :unprocessable_entity }
@@ -51,29 +50,28 @@ class ResourcesController < ApplicationController
 
   def update
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
-      begin
+      ActiveRecord::Base.transaction do
+        @resource_saved = @resource.update(resource_params)
 
-        ActiveRecord::Base.transaction do
-          @resource.update(resource_params)
+        @resource.color_associations = []
+        update_color_associations
 
-          @resource.color_associations = []
-          update_color_associations
+        @resource.phase_associations = []
+        update_phase_associations
+      end
 
-          @resource.phase_associations = []
-          update_phase_associations
-        end
-
+      if @resource_saved
         respond_to do |format|
           format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
           format.json { head :no_content }
         end
-
-      rescue
+      else
         respond_to do |format|
           format.html { render action: 'edit' }
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
+
     else
       redirect_to root_path, notice: "Not authorized to edit this resource!" and return
     end
