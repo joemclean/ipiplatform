@@ -4,13 +4,6 @@ class PagesController < ApplicationController
     @value_propositions = ValueProposition.all
   end
 
-  def tools
-    @resources = Resource.all
-  end
-
-  def phases
-  end
-  
   def aboutus
   end
 

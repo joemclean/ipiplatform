@@ -16,8 +16,6 @@ IpiPlatform::Application.routes.draw do
   get 'pages/publisher'
   get 'pages/value_propositions'
   get 'pages/aboutus'
-  get 'pages/phases'
-  get 'pages/tools'
   get 'pages/landing'
 
   get 'upvotes/clear_upvote', :as => :clear_upvote
