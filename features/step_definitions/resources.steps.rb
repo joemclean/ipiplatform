@@ -59,16 +59,24 @@ end
 
 Then (/^I see resources of (.*?) colors?$/) do |color_name|
   if color_name.include?('all')
-    Resource.all.each do |resource|
-      @resource = resource
-      expect(page.has_xpath?(one_resource_xpath)).to be_true
-    end
+    step 'I see all resources'
   else
-    color = Color.find_by_name(color_name)
-    color.resources.each do |resource|
-      @resource = resource
-      expect(page.has_css?("#vp_#{color.id}_#{resource.id}")).to be_true
-    end
+    step "I see resources of the color \"#{color_name}\""
+  end
+end
+
+Then (/^I see all resources$/) do
+  Resource.all.each do |resource|
+    @resource = resource
+    expect(page.has_xpath?(one_resource_xpath)).to be_true
+  end
+end
+
+Then (/^I see resources of the color "(.*?)"$/) do |color_name|
+  color = Color.find_by_name(color_name)
+  color.resources.each do |resource|
+    @resource = resource
+    expect(page.has_css?("#vp_#{color.id}_#{resource.id}")).to be_true
   end
 end
 
