@@ -22,6 +22,7 @@ group :test, :development do
   gem 'pry-rails'
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :test do

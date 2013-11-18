@@ -56,10 +56,6 @@ When(/^I go to delete the resource$/) do
   page.find("#delete_resource_#{@resource.id}").click
 end
 
-When(/^I confirm that I wish to delete the resource$/) do
-  page.driver.browser.switch_to.alert.accept
-end
-
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true

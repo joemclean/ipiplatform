@@ -9,7 +9,5 @@ Feature: User Deletes a Resource
   Scenario: A user can delete his/her own resource from the resource index page
     When I go to the resources index page
     And I go to delete the resource
-#    Then I receive an alert confirming that I wish to delete the resource
-    When I confirm that I wish to delete the resource
     Then I am on the resources index page
     And that resource is no longer displayed
