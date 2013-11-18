@@ -96,27 +96,26 @@ end
 
 private
 
-def one_resource_xpath
-  "//*[@id=\"resource_#{@resource.id}\"]"
-end
+  def one_resource_xpath
+    "//*[@id=\"resource_#{@resource.id}\"]"
+  end
 
-def one_resource_title_xpath
-  "//*[@id=\"resource_#{@resource.id}_title\"]"
-end
+  def one_resource_title_xpath
+    "//*[@id=\"resource_#{@resource.id}_title\"]"
+  end
 
+  def one_resource_title_xpath
+    "//*[@id=\"resource_#{@resource.id}_title\"]"
+  end
 
-def one_resource_title_xpath
-  "//*[@id=\"resource_#{@resource.id}_title\"]"
-end
+  def new_resource_title
+    'Greatest Resource'
+  end
 
-def new_resource_title
-  'Greatest Resource'
-end
+  def notification_xpath
+    "//*[@class=\"flash\"]"
+  end
 
-def notification_xpath
-  "//*[@class=\"flash\"]"
-end
-
-def current_path
-  URI.parse(current_url).path
-end
+  def current_path
+    URI.parse(current_url).path
+  end

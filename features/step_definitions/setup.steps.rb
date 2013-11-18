@@ -10,7 +10,7 @@ Given(/^I login as a (.*?)$/) do |user_type|
 end
 
 Given(/^a resource exists$/) do
-  @resource = FactoryGirl.create(:resource)
+  @resource = FactoryGirl.create(:resource, user_id: @user.id)
 end
 
 Given(/^a value proposition exists$/) do

@@ -48,10 +48,10 @@
         %br
         %br
         .manipulate_resource
-          -if current_user.present? && current_user.is_admin?
+          - if current_user.can_edit_and_delete_resource?(current_user, resource)
             .btn-group
               .btn.btn-default
-                = link_to 'Edit', edit_resource_path(resource), {id: "edit_resource_#{resource.id}"}
+                = link_to 'Edit this Resource', edit_resource_path(resource), id: "edit_resource_#{resource.id}"
               .btn.btn-default
-                = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                = link_to 'Delete this Resource', resource, method: :delete, data: { confirm: 'Are you sure?' }
   %hr
