@@ -45,11 +45,19 @@ Then(/^I see an error on all required fields$/) do
 end
 
 When(/^I go to edit the resource$/) do
-    page.find("#edit_resource_#{@resource.id}").click
+  page.find("#edit_resource_#{@resource.id}").click
 end
 
 When(/^I change the resource name$/) do
   step "I fill in \"resource_name\" with \"#{new_resource_title}\""
+end
+
+When(/^I go to delete the resource$/) do
+  page.find("#delete_resource_#{@resource.id}").click
+end
+
+When(/^I confirm that I wish to delete the resource$/) do
+  page.driver.browser.switch_to.alert.accept
 end
 
 Then(/^I see one resource$/) do
@@ -101,6 +109,13 @@ Then(/^I am on the resources show page$/) do
   expect(current_path).to eql("/resources/#{@resource.id}")
 end
 
+Then(/^I am on the resources index page$/) do
+  expect(current_path).to eql('/resources')
+end
+
+Then(/^that resource is no longer displayed$/) do
+  expect(page.has_xpath?(one_resource_xpath)).to be_false
+end
 
 private
 

@@ -82,7 +82,7 @@ class ResourcesController < ApplicationController
 
       @resource.destroy
 
-      redirect_path = current_user.is_admin? ? resources_url : user_path(current_user.id)
+      redirect_path = request.path.include?('resource') ? resources_url : user_path(current_user.id)
 
       respond_to do |format|
         format.html { redirect_to redirect_path }
