@@ -6,8 +6,8 @@
   .row{:style => 'margin-top: 50px;'}
     .container{id: "value_proposition_#{value_proposition.id}"}
       .col-sm-12
-        %p{:style => 'font-size: 24px; font-weight: bold; color: #6BB8D4;'}
-          = link_to value_proposition.name, value_proposition_path(value_proposition.id)
+        %h2
+          =link_to value_proposition.name, value_proposition_path(value_proposition.id)
         %br
         =value_proposition.description
   .row
@@ -15,7 +15,7 @@
       .col-sm-4
         .panel.panel-default{:style => 'margin: 20px 0px;'}
           .container{id: "color_id_#{color.id}"}
-            .panel-heading
+            %h3.panel-heading
               = link_to color.name, color
             .panel-body
               =image_tag color.image, class: "color_image"

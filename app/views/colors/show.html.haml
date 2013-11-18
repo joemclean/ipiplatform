@@ -1,28 +1,33 @@
 %p#notice= notice
+.jumbotron
+  .row
+    .col-sm-2
+      =image_tag @color.image, style: "width:70%; margin: 0px 15% 20px 15%;"
+    .col-sm-10
+      %h2
+        =@color.name
 
-%h2
-  ='Color: ' + @color.name
-
+      %p
+        %b Part of
+        - if @color.value_proposition.present?
+          = link_to @color.value_proposition.name, value_proposition_path(@color.value_proposition.id)
+        -else
+          (Empty)
+  %p
+    = @color.description
+%hr
 %p
-  %b Value Proposition:
-  - if @color.value_proposition.present?
-    = link_to @color.value_proposition.name, value_proposition_path(@color.value_proposition.id)
-  -else
-    (Empty)
-
-%p
-  %b Full Description:
-  = @color.description
-%p
-  = 'Resources ' + @color.name.pluralize + ' would enjoy:'
-  %ol
+  %h3
+    = 'Helpful resources for ' + @color.name.pluralize + ' engagements'
+  %table.table.table-striped
     - @color.resources.each do |resource|
-      %li{:id => "vp_#{@color.id}_#{resource.id}"}
-        = link_to resource.name, resource_path(resource)
+      %tr{:id => "vp_#{@color.id}_#{resource.id}"}
+        %td
+          = link_to resource.name, resource_path(resource)
 
 .btn-group
   - if current_user.present? && current_user.is_admin?
-    .btn
+    .btn.btn-default
       = link_to 'Edit Color', edit_color_path(@color)
-  .btn
+  .btn.btn.btn-default
     = link_to 'All Colors', pages_value_propositions_path

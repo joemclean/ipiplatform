@@ -29,30 +29,29 @@
     =paginate @resources
     - @resources.each do |resource|
       .well.container{id: "resource_#{resource.id}"}
-        =image_tag 'ResourcePlaceHolder.png', size: '160x100'
-        %br
-        %br
-        -resource.tags.each do |tag|
-          =link_to tag.name, tag_path(tag), class: 'tag_tag'
-        %b
-        = link_to resource.name, resource
-        %br
+        %h3
+          = link_to resource.name, resource
+        %p
+          -resource.tags.each do |tag|
+            =link_to tag.name, tag_path(tag), class: 'tag_tag'
+        %p
           Source:
           = resource.source
-          .manipulate_resource{:style => 'text-align: right;'}
-            -if current_user.present? && current_user.is_admin?
-              = link_to 'Edit', edit_resource_path(resource), {id: "edit_resource_#{resource.id}"}
-              = ' | '
-              = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %br
-        =resource.description
-        %br
-        %br
-        Phases: | 
-        -resource.phases.each do |phase|
-          =phase.name.upcase + " |"
-        %br
+        %p
+          =resource.description
+        %p
+          Phases: | 
+          -resource.phases.each do |phase|
+            =phase.name.upcase + " |"
         -resource.colors.each do |color|
           =link_to (image_tag color.image, size: '40x40'), color_path(color)
         %br
+        %br
+        .manipulate_resource
+          -if current_user.present? && current_user.is_admin?
+            .btn-group
+              .btn.btn-default
+                = link_to 'Edit', edit_resource_path(resource), {id: "edit_resource_#{resource.id}"}
+              .btn.btn-default
+                = link_to 'Destroy', resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
   %hr
