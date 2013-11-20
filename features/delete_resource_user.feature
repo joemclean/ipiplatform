@@ -3,7 +3,7 @@ Feature: User Deletes a Resource
   Background:
     Given a user account exists
     And I login as a "user"
-    And a resource exists
+    And the user creates a resource
 
   @javascript
   Scenario: A user can delete his/her own resource from the resource index page

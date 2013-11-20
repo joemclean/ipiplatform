@@ -8,9 +8,12 @@ When (/^I go to (.*?) color show page$/) do |color|
   @color_show_page.navigate_to_show_page @color.id
 end
 
-When(/^I go to one resource's show page$/) do
-  step 'I see one resource'
+When(/^I go to my resource's show page$/) do
   @resource_page.navigate_to_show_page @resource.id
+end
+
+When(/^I go to a different user's resource's show page$/) do
+  @resource_page.navigate_to_show_page @resource2.id
 end
 
 When(/^I visit resource creation page$/) do
@@ -44,8 +47,12 @@ Then(/^I see an error on all required fields$/) do
   expect(page.find('.field_with_errors #resource_source')).to be_true
 end
 
-When(/^I go to edit the resource$/) do
+When(/^I try to edit my resource$/) do
   page.find("#edit_resource_#{@resource.id}").click
+end
+
+Then(/^I do not have the option to edit another user's resource$/) do
+  page.should_not have_selector("#edit_resource_#{@resource2.id}")
 end
 
 When(/^I change the resource name$/) do

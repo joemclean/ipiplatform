@@ -2,15 +2,24 @@ Given(/^a user account exists$/) do
   @user = FactoryGirl.create(:user)
 end
 
+Given(/^a second user account exists$/) do
+  @user2 = FactoryGirl.create(:user)
+end
+
 Given(/^I login as a (.*?)$/) do |user_type|
   step "I navigate to the login page"
   step "I fill in \"email\" with \"#{@user.email}\""
   step "I fill in \"password\" with \"#{@user.password}\""
   step 'I sign in'
+  #expect(page.find('div', :text => 'Logged in!'))
 end
 
-Given(/^a resource exists$/) do
+Given(/^the user creates a resource$/) do
   @resource = FactoryGirl.create(:resource, user_id: @user.id)
+end
+
+Given(/^the second user creates a resource$/) do
+  @resource2 = FactoryGirl.create(:resource, user_id: @user2.id)
 end
 
 Given(/^a value proposition exists$/) do

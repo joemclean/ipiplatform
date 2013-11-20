@@ -11,7 +11,7 @@ Feature: User Viewing Resources
 
   Scenario: Users can view a specific resource
     When I go to the resources index page
-    And I go to one resource's show page
+    And I go to my resource's show page
     Then I see details about the resource
 
   Scenario: Users can see resources associated with specific color on color show page
