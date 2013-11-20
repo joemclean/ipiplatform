@@ -8,6 +8,7 @@ Feature: User Edits a Resource
     And the second user creates a resource
     And I go to the resources index page
 
+
   @javascript
   Scenario: A user can edit his/her own resource from its resource show page
     When I go to my resource's show page

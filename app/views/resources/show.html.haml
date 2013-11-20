@@ -48,7 +48,7 @@
   .btn.btn-default
     = link_to 'Edit this Resource', edit_resource_path, id: "edit_resource_#{@resource.id}"
   .btn.btn-default
-    = link_to 'Delete this Resource', @resource, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to 'Delete this Resource', @resource, method: :delete, data: { confirm: 'Are you sure?' }, id: "delete_resource_#{@resource.id}"
 %h3 Comments
 
 .new_comment

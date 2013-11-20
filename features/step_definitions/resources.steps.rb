@@ -63,6 +63,12 @@ When(/^I go to delete the resource$/) do
   page.find("#delete_resource_#{@resource.id}").click
 end
 
+When(/^I go to delete the resource WHEN USING @BROWSER$/) do
+  step 'I go to delete the resource'
+
+  page.driver.browser.switch_to.alert.accept
+end
+
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true
@@ -118,6 +124,10 @@ end
 
 Then(/^that resource is no longer displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
+end
+
+Then(/^I do not have the option to delete another user's resource$/) do
+  page.should_not have_selector("#delete_resource_#{@resource2.id}")
 end
 
 private
