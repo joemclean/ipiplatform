@@ -11,6 +11,8 @@ class ColorsController < ApplicationController
 
   def show
     @color = Color.find(params[:id])
+    @uploader = @color.image
+    @uploader.success_action_redirect = new_color_path
   end
 
   def new
@@ -84,7 +86,7 @@ class ColorsController < ApplicationController
   end
 
   def color_params
-    params.require(:color).permit(:name, :description, :value_proposition)
+    params.require(:color).permit(:name, :description, :value_proposition, :image)
   end
 
 end

@@ -3,6 +3,7 @@ class Color < ActiveRecord::Base
   has_many :resources, through: :color_associations
   has_many :question_responses
   belongs_to :value_proposition
+  mount_uploader :image, ImageUploader
 
   validates :name, :description, :value_proposition, presence: true
 

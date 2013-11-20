@@ -13,7 +13,9 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 gem 'hirb'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
+gem 'carrierwave_direct'
 gem 'fog'
+gem 'unf'
 gem 'kaminari'
 
 group :test, :development do

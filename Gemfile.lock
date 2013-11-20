@@ -48,6 +48,10 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    carrierwave_direct (0.0.13)
+      carrierwave
+      fog
+      uuidtools
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     cliver (0.2.2)
@@ -225,6 +229,10 @@ GEM
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.3)
+      unf_ext
+    unf_ext (0.0.6)
+    uuidtools (2.1.4)
     websocket (1.0.7)
     websocket-driver (0.3.0)
     xpath (2.0.0)
@@ -237,6 +245,7 @@ DEPENDENCIES
   anjlab-bootstrap-rails!
   bcrypt-ruby (~> 3.0.0)
   carrierwave
+  carrierwave_direct
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
@@ -261,3 +270,4 @@ DEPENDENCIES
   taps
   turbolinks
   uglifier (>= 1.3.0)
+  unf

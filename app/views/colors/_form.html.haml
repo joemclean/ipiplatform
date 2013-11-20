@@ -18,6 +18,5 @@
         %option{ value: '' } Please select one
         - @value_propositions.each do |value_proposition|
           %option{ value: value_proposition.id, selected: value_proposition == @color.value_proposition}= h value_proposition.name
-
   .actions
     = f.submit 'Save'
