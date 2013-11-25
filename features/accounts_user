@@ -1,8 +1,0 @@
-Feature: Create account and log in as a user
-
-  Scenario: User can create an account
-    Given I am on the homepage
-    And I am not logged in
-    When I go to create an account
-    And I fill in all required account fields
-    Then I see a notification that my account was created

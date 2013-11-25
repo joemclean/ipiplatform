@@ -20,7 +20,7 @@
           %li
             = link_to  'Welcome, ' + current_user.name, current_user, id: "user_profile"
           %li
-            = link_to "Log Out", session_path("current"), method: "delete"
+            = link_to "Log Out", session_path("current"), method: "delete", id: "log_out"
         -else
           %li
             =link_to 'Sign up', new_user_path, id: "create_account"

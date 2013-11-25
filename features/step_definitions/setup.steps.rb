@@ -11,7 +11,6 @@ Given(/^I login as a (.*?)$/) do |user_type|
   step "I fill in \"email\" with \"#{@user.email}\""
   step "I fill in \"password\" with \"#{@user.password}\""
   step 'I sign in'
-  #expect(page.find('div', :text => 'Logged in!'))
 end
 
 Given(/^the user creates a resource$/) do
