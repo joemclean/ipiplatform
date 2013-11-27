@@ -1,10 +1,13 @@
 %p#notice= notice
 
 %h2
-  ='Value Proposition: ' + @value_proposition.name
+  =@value_proposition.name
 
 %p
-  %b Colors:
+  %b Full Description:
+  = @value_proposition.description
+
+%p
   - if @value_proposition.colors.present?
     %ul
       - for color in @value_proposition.colors
@@ -21,10 +24,6 @@
               No resources at this time
   -else
     (Empty)
-
-%p
-  %b Full Description:
-  = @value_proposition.description
 
 %p
   &nbsp;

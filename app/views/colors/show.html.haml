@@ -6,9 +6,8 @@
     .col-sm-10
       %h2
         =@color.name
-
       %p
-        %b Part of
+        %b
         - if @color.value_proposition.present?
           = link_to @color.value_proposition.name, value_proposition_path(@color.value_proposition.id)
         -else

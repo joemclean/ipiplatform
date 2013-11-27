@@ -9,7 +9,7 @@
         %h2
           =link_to value_proposition.name, value_proposition_path(value_proposition.id)
         %br
-        =value_proposition.description
+          =value_proposition.description
   .row
     -value_proposition.colors.each do |color|
       .col-sm-4

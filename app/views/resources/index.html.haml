@@ -18,12 +18,12 @@
       -@colors.each do |color|
         =image_tag color.image, size: '50x50', class: 'color_filter', title: color.name
     .search_title
-      Innovation Stages  
-    .phase_filter_box
-      -@phases.each do |phase|
-        =check_box_tag "resource[phase_ids][]", phase.id
-        =phase.name
-        %br
+      -#Innovation Stages
+    -#.phase_filter_box
+    -#  -@phases.each do |phase|
+    -#    =check_box_tag "resource[phase_ids][]", phase.id
+    -#    =phase.name
+    -#    %br
 
   .col-sm-9
     =paginate @resources
@@ -40,9 +40,9 @@
         %p
           =resource.description
         %p
-          Phases: | 
-          -resource.phases.each do |phase|
-            =phase.name.upcase + " |"
+          -#Phases: |
+          -#-resource.phases.each do |phase|
+          -#  =phase.name.upcase + " |"
         -resource.colors.each do |color|
           =link_to (image_tag color.image, size: '40x40'), color_path(color)
         %br
