@@ -13,7 +13,7 @@
     =form_tag do |f|
       =text_field_tag :search, "Keyword search", id: 'search_box', class: 'form-control'
     .search_title
-      Innovator Types
+      Colors
     .color_filter_box
       -@colors.each do |color|
         =image_tag color.image, size: '50x50', class: 'color_filter', title: color.name

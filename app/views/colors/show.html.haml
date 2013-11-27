@@ -27,6 +27,6 @@
 .btn-group
   - if current_user.present? && current_user.is_admin?
     .btn.btn-default
-      = link_to 'Edit Color', edit_color_path(@color)
+      = link_to "Edit #{@color.name}", edit_color_path(@color)
   .btn.btn.btn-default
-    = link_to 'All Colors', pages_value_propositions_path
+    = link_to 'All Value Propositions', pages_value_propositions_path

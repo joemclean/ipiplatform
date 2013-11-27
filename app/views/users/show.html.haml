@@ -1,26 +1,10 @@
 .hero.signin_hero
-  %h2
-    =@user.name
-  %hr
   .container
-    .image-group.pull-left
+    %h2
+      =@user.name
+    .image-group
       =image_tag @user.avatar_url
-      %br
-    .image-group.profile_icon.pull-left
-      -if @user.personality
-        -@user.personality.colors.each do |color|
-          .div.image_results
-            =link_to (image_tag color.image), view_results_path
-            %br
-            =color.name
-      -else
-        Take the innovator type survey to fill out your profile.
-        %br
-        %br
-        .btn
-          = link_to 'Take the survey!', take_survey_path
   %br
-%br
 
 %h3
   - if current_user.present? && current_user.is_admin?
