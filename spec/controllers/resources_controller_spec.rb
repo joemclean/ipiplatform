@@ -42,7 +42,6 @@ describe ResourcesController do
         expect(@resource.description).to eql @description
         expect(@resource.full_description).to eql 'resource_full_description'
         expect(@resource.source).to eql 'A cool person'
-        expect(@resource.tag_list).to eql 'resource_tag_list'
       end
 
       it 'should be able to attach associated colors' do
@@ -82,7 +81,6 @@ describe ResourcesController do
         expect(@resource.description).to eql @description
         expect(@resource.full_description).to eql 'resource_full_description'
         expect(@resource.source).to eql 'A cool person'
-        expect(@resource.tag_list).to eql 'resource_tag_list'
       end
 
       it 'should be able to attach associated colors' do
@@ -93,6 +91,22 @@ describe ResourcesController do
         expect(@resource.colors.count).to eql(2)
         expect(@resource.colors.first.name).to eql 'yellow'
         expect(@resource.colors.last.name).to eql 'green'
+      end
+
+      it 'should be able to attach associated tags' do
+        patch :create, @create_params
+
+        @resource = Resource.all.first
+
+        expect(@resource.tags.count).to eql(1)
+      end
+
+      it 'should create a resource with a specific tag' do
+        patch :create, @create_params
+
+        @resource = Resource.all.first
+
+        expect(@resource.tag_list).to eql 'resource_tag_list'
       end
 
       #it 'should be able to attach associated phases' do
