@@ -24,6 +24,7 @@ IpiPlatform::Application.routes.draw do
 
   get 'tags/:tag', to: 'resources#index', as: :tag
 
+  get 'colors/:id/new_image', to: 'colors#new_image', as: :new_image
 
   resources :value_propositions
   resources :colors

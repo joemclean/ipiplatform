@@ -19,7 +19,7 @@
 - if current_user.present? && current_user.is_admin?
   %p
     Change image
-    = direct_upload_form_for @uploader do |f|
+    = direct_upload_form_for @uploader, :url => { :action => "new_image" }, :html => { :method => 'get' } do |f|
       = f.file_field :image
       = f.submit "Upload Image"
 

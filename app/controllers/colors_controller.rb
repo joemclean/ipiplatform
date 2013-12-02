@@ -3,7 +3,7 @@ class ColorsController < ApplicationController
 
   before_filter :redirect_if_unauthorized, except: [:show]
 
-  before_action :set_color, only: [:show, :edit, :update, :destroy]
+  before_action :set_color, only: [:show, :edit, :update, :destroy, :new_image]
 
   def index
     @colors = Color.all
@@ -12,12 +12,19 @@ class ColorsController < ApplicationController
   def show
     @color = Color.find(params[:id])
     @uploader = @color.image
-    @uploader.success_action_redirect = new_color_path
+    @uploader.success_action_redirect = new_image_url
   end
 
   def new
+    binding.pry
     @color = Color.new
     @value_propositions = ValueProposition.all
+  end
+
+  def new_image
+    bindind.pry
+    @color.update_attribute(:key, params[:key])
+    render 'colors/new_image'
   end
 
   def edit
@@ -88,5 +95,4 @@ class ColorsController < ApplicationController
   def color_params
     params.require(:color).permit(:name, :description, :value_proposition, :image)
   end
-
 end

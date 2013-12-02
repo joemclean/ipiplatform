@@ -16,10 +16,11 @@
           .resources
             - for resource in color.resources
               %ol
-                %li=link_to resource.name, resource_path(resource)
+                %li
+                  =link_to resource.name, resource_path(resource)
             - if color.resources.empty?
               No resources at this time
-  -else
+  - else
     (Empty)
 
 %p
