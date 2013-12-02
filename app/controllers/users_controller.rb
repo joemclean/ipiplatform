@@ -31,10 +31,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @published_resources = Resource.where(:user_id, session[:user_id]).last(5)
-    @upvoted_resources = Upvote.where(:user_id, session[:user_id]).last(5)
+    @published_resources = Resource.where("user_id = #{session[:user_id]}").last(5)
+    @upvoted_resources = Upvote.where("user_id = #{session[:user_id]}").last(5)
     #@bookmarks = Bookmark.find_all_by_user_id(session[:user_id])
-    @bookmarks = Bookmark.where(:user_id, current_user.id).last(5)
+    @bookmarks = Bookmark.where("user_id = #{current_user.id}").last(5)
     
   end
 

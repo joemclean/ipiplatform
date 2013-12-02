@@ -34,3 +34,4 @@ end
 Then(/^an error message is displayed$/) do
   pending
 end
+

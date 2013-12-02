@@ -69,6 +69,10 @@ When(/^I go to delete the resource WHEN USING @BROWSER$/) do
   page.driver.browser.switch_to.alert.accept
 end
 
+Then(/^the second user's edit resource button is visible$/) do
+  page.should have_selector("#edit_resource_#{@resource2.id}")
+end
+
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true

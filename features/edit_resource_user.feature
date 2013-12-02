@@ -1,9 +1,9 @@
-Feature: User Edits a Resource
+Feature: User Edits their Resource
 
   Background:
     Given a user account exists
     And a second user account exists
-    And I login as a "user"
+    And I login as a user
     And the user creates a resource
     And the second user creates a resource
     And I go to the resources index page
