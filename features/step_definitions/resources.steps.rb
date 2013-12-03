@@ -69,6 +69,10 @@ When(/^I go to delete the resource WHEN USING @BROWSER$/) do
   page.driver.browser.switch_to.alert.accept
 end
 
+When(/^I edit the second user's resource$/) do
+  page.find("#edit_resource_#{@resource2.id}").click
+end
+
 Then(/^the second user's edit resource button is visible$/) do
   page.should have_selector("#edit_resource_#{@resource2.id}")
 end
@@ -114,12 +118,21 @@ Then(/^I see the resource's new name$/) do
   expect(find(:id, "resource_#{@resource.id}_title").text).to eql(new_resource_title)
 end
 
+Then (/^I see the second user's resource's new name$/) do
+  expect(page.has_xpath?(second_resource_title_xpath)).to be_true
+  expect(find(:id, "resource_#{@resource2.id}_title").text).to eql(new_resource_title)
+end
+
 Then(/^I see a notification that the resource was updated$/) do
   expect(page.has_xpath?(notification_xpath)).to be_true
 end
 
 Then(/^I am on the resources show page$/) do
   expect(current_path).to eql("/resources/#{@resource.id}")
+end
+
+Then(/^I am on the second user's resource show page$/) do
+  expect(current_path).to eql("/resources/#{@resource2.id}")
 end
 
 Then(/^I am on the resources index page$/) do
@@ -142,6 +155,10 @@ private
 
   def one_resource_title_xpath
     "//*[@id=\"resource_#{@resource.id}_title\"]"
+  end
+
+  def second_resource_title_xpath
+    "//*[@id=\"resource_#{@resource2.id}_title\"]"
   end
 
   def one_resource_title_xpath
