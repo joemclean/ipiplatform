@@ -1,10 +1,13 @@
 %p#notice= notice
 
 %h2
-  ='Value Proposition: ' + @value_proposition.name
+  =@value_proposition.name
 
 %p
-  %b Colors:
+  %b Full Description:
+  = @value_proposition.description
+
+%p
   - if @value_proposition.colors.present?
     %ul
       - for color in @value_proposition.colors
@@ -14,18 +17,14 @@
             .btn
               = link_to 'Resources', '', onclick: "toggleResources(this); return false"
           .resources
-            - for resource in color.resources
-              %ol
+            %ul
+              - for resource in color.resources
                 %li
                   =link_to resource.name, resource_path(resource)
             - if color.resources.empty?
               No resources at this time
   - else
     (Empty)
-
-%p
-  %b Full Description:
-  = @value_proposition.description
 
 %p
   &nbsp;

@@ -7,8 +7,11 @@ class ResourcesController < ApplicationController
   before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update]
 
   def index
-    @filter_params = {plan: false, act: false, observe: false, reflect: false}
-    @resources = Resource.order("name").page(params[:page])
+    if params[:tag].present?
+      @resources = Tag.find(params[:tag]).resources.order("name").page(params[:page])
+    else
+      @resources = Resource.order("name").page(params[:page])
+    end
   end
 
   def show
@@ -32,7 +35,7 @@ class ResourcesController < ApplicationController
     ActiveRecord::Base.transaction do
       @resource_saved = @resource.save
       update_color_associations
-      update_phase_associations
+      #update_phase_associations
     end
 
      if @resource_saved
@@ -56,8 +59,8 @@ class ResourcesController < ApplicationController
         @resource.color_associations = []
         update_color_associations
 
-        @resource.phase_associations = []
-        update_phase_associations
+        #@resource.phase_associations = []
+        #update_phase_associations
       end
 
       if @resource_saved
@@ -106,7 +109,7 @@ class ResourcesController < ApplicationController
   def set_resource_associations
     @colors = Color.all
     @industries = Industry.all
-    @phases = Phase.all
+    #@phases = Phase.all
   end
 
   def update_color_associations
@@ -115,9 +118,8 @@ class ResourcesController < ApplicationController
     end
   end
 
-  def update_phase_associations
-    params[:phase_ids].reject(&:empty?).each do |phase_id|
-      @resource.phase_associations << PhaseAssociation.create(phase_id: phase_id)
-    end
+  #def update_phase_associations
+  #  params[:phase_ids].reject(&:empty?).each do |phase_id|
+  #    @resource.phase_associations << PhaseAssociation.create(phase_id: phase_id)
+  #  end
   end
-end
