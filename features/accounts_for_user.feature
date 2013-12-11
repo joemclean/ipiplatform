@@ -25,3 +25,4 @@ Feature: Create account and log in as a user
     Given I login as a user
     When I change the url to user 2 profile page
     Then an error message is displayed
+    And I am on the homepage

@@ -1,4 +1,4 @@
-class UserProfilePage < Page
+class UsersPage < Page
   def initialize(page, user_id)
     @page = page
     @user_id = user_id

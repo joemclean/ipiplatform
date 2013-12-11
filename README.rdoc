@@ -102,6 +102,12 @@ git push
 git push heroku master
 -----------------------------------------------------------------------
 
+--------------Steps for running tests----------------------------------
+rake test:all
+
+Here, there should be fully passing tests, with no pending tests. 
+-----------------------------------------------------------------------
+
 --------------Useful Tutorials-----------------------------------------
 http://www.tutorialspoint.com/ruby/index.htm
 
@@ -111,4 +117,4 @@ Comprehensive Ruby, CSS, HTML, etc guide (no HAML :( )
 
 www.gitready.com
 
-Useful commands and troubleshooting help for  Git
+Useful commands and troubleshooting help for Git

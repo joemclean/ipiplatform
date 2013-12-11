@@ -4,7 +4,7 @@ When(/^I go to the resources index page$/) do
 end
 
 When (/^I go to (.*?) color show page$/) do |color|
-  @color_show_page = ColorShowPage.new(page)
+  @color_show_page = ColorsPage.new(page)
   @color_show_page.navigate_to_show_page @color.id
 end
 

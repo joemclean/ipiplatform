@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def redirect_if_not_signed_in
-    redirect_to new_session_path, notice: "Please sign in!" and return if current_user.nil?
+    redirect_to new_session_path, notice: 'Please sign in!' and return if current_user.nil?
   end
 
   def redirect_if_unauthorized
-    redirect_to root_path, notice: "Not authorized!" and return unless current_user.present? && current_user.is_admin?
+    redirect_to root_path, notice: 'Not authorized!' and return unless current_user.present? && current_user.is_admin?
   end
 
   def user_has_taken_quiz

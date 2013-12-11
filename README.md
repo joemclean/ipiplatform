@@ -9,3 +9,9 @@ Mike Varona
 Sung Yang
 
 2013 Thoughtworks
+
+Expanded and tested by:
+Aubrey Chipman
+Jeff Wagner
+Karlyn Murphy
+Dexter Teng

@@ -27,11 +27,20 @@ Then(/^I do not have access to my user profile$/) do
 end
 
 When(/^I change the url to user (.*?) profile page$/) do |user_id|
-  @user_profile_page = UserProfilePage.new(page, user_id)
+  @user_profile_page = UsersPage.new(page, user_id)
   @user_profile_page.navigate
 end
 
 Then(/^an error message is displayed$/) do
-  pending
+  expect(page.has_xpath?(alert_xpath)).to be_true
 end
 
+Then(/^I am on my user profile page/) do
+  expect(current_path).to eql("/users/#{@user.id}")
+end
+
+
+private
+  def alert_xpath
+    "//*[@class=\"flash\"]"
+  end

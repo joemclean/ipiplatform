@@ -1,4 +1,4 @@
-class ColorShowPage  < Page
+class ColorsPage < Page
 
     def initialize(page)
       super page
