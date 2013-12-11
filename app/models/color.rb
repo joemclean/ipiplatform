@@ -15,7 +15,11 @@ class Color < ActiveRecord::Base
   end
 
   def image_name
-    image.size.present? ? File.basename(image.path || image.filename) : image
+    if image.filename.present?
+      File.basename(image.path || image.filename)
+    else
+      default_image
+    end
   end
 
 end

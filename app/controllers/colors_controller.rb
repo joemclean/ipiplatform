@@ -12,18 +12,13 @@ class ColorsController < ApplicationController
   def show
     @color = Color.find(params[:id])
     @uploader = @color.image
-    @uploader.success_action_redirect = color_path
+    @uploader.success_action_redirect = color_url
   end
 
   def new
     @color = Color.new
     @value_propositions = ValueProposition.all
   end
-
-  #def new_image
-  #  @color.update_attribute(:key, params[:key])
-  #  render 'colors/show'
-  #end
 
   def edit
   end

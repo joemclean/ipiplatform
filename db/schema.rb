@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030202426) do
+ActiveRecord::Schema.define(version: 20131211200054) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20131030202426) do
   create_table "colors", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "value_proposition_id"
+    t.string   "default_image"
   end
 
   create_table "comments", force: true do |t|
