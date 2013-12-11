@@ -52,59 +52,59 @@ silver_responses = ['I need to be recognized for my efforts',
 'Every project I do should improve my skills']
 
 blue_proposition = [
-    'Traditional TW IT Delivery',
-    'blue description',
-    'visionary.png',
-    blue_responses
+  'Traditional TW IT Delivery',
+  'This client has ambitious ideas and will rely on us to deliver high quality, technically advanced systems on time and in budget.  Our top deliverables are technical prowess, agile leadership, and continuous quality.',
+  'visionary.png',
+  blue_responses
 ]
 
 green_proposition = [
-    'Fast IT Delivery',
-    'green description',
-    'adventurer.png',
-    green_responses
+  'Fast IT Delivery',
+  'green description',
+  'adventurer.png',
+  green_responses
 ]
 
 yellow_proposition = [
-    'Rapid Incremental Innovation',
-    'yellow description',
-    'analyst.png',
-    yellow_responses
+  'Rapid Incremental Innovation',
+  'This established client cares about creativity and speed to hold the lead in a cut throat market: it\'s about out-innovating the competitors.  Our top deliverables are insights, tools, and speed.',
+  'analyst.png',
+  yellow_responses
 ]
 
 orange_proposition = [
-    'Disruptive Greenfield Innovation',
-    'orange description',
-    'enterpriser.png',
-    orange_responses
+  'Disruptive Greenfield Innovation',
+  'This client is likely at the beginning of an exciting new business venture; their problem is radical re-invention of unproven game changing markets.  Our top deliverables are disruptive vision, lean product learning, and iterative pivots.',
+  'enterpriser.png',
+  orange_responses
 ]
 
 red_proposition = [
-    'Complex System Innovation',
-    'red description',
-    'anchor.png',
-    red_responses
+  'Complex System Innovation',
+  'This client is looking for big picture solutions and a full lifecycle execution. Our top deliverables are program vision, integrated solutions, and service design.',
+  'anchor.png',
+  red_responses
 ]
 
 copper_proposition = [
-    'Agile IT',
-    'copper description',
-    'team_player.png',
-    copper_responses
+  'Agile IT',
+  'copper description',
+  'team_player.png',
+  copper_responses
 ]
 
 silver_proposition = [
-    'Full Product Lifecycle Agile',
-    'silver description',
-    'straightliner.png',
-    silver_responses
+  'Full Product Lifecycle Agile',
+  'This client wants innovation capable organizers who work with speed, business engagement, and flexibility.  Our top deliverables are agile process design, side by side delivery, and tools & training.',
+  'straightliner.png',
+  silver_responses
 ]
 
 gold_proposition = [
-    'Enterprise Agile',
-    'gold description',
-    'zigzagger.png',
-    gold_responses
+  'Enterprise Agile',
+  'gold description',
+  'zigzagger.png',
+  gold_responses
 ]
 
 value_propositions = [
