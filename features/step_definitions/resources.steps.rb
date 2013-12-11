@@ -77,6 +77,10 @@ Then(/^the second user's edit resource button is visible$/) do
   page.should have_selector("#edit_resource_#{@resource2.id}")
 end
 
+When(/^I delete the second user's resource$/) do
+  page.find("#delete_resource_#{@resource2.id}").click
+end
+
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true
@@ -139,40 +143,50 @@ Then(/^I am on the resources index page$/) do
   expect(current_path).to eql('/resources')
 end
 
-Then(/^that resource is no longer displayed$/) do
-  expect(page.has_xpath?(one_resource_xpath)).to be_false
+Then(/^the second user's resource is no longer displayed$/) do
+  expect(page.has_xpath?(second_resource_xpath)).to be_false
 end
 
 Then(/^I do not have the option to delete another user's resource$/) do
   page.should_not have_selector("#delete_resource_#{@resource2.id}")
 end
 
+Then(/^the second user's delete resource button is visible$/) do
+  page.should have_selector("#delete_resource_#{@resource2.id}")
+end
+
 private
 
-  def one_resource_xpath
-    "//*[@id=\"resource_#{@resource.id}\"]"
+def one_resource_xpath
+  "//*[@id=\"resource_#{@resource.id}\"]"
   end
 
-  def one_resource_title_xpath
-    "//*[@id=\"resource_#{@resource.id}_title\"]"
-  end
+def second_resource_xpath
+  "//*[@id=\"resource_#{@resource2.id}\"]"
+end
 
-  def second_resource_title_xpath
-    "//*[@id=\"resource_#{@resource2.id}_title\"]"
-  end
+def one_resource_title_xpath
+  "//*[@id=\"resource_#{@resource.id}_title\"]"
+end
 
-  def one_resource_title_xpath
-    "//*[@id=\"resource_#{@resource.id}_title\"]"
-  end
+def second_resource_title_xpath
+  "//*[@id=\"resource_#{@resource2.id}_title\"]"
+end
 
-  def new_resource_title
-    'Greatest Resource'
-  end
+def one_resource_title_xpath
+  "//*[@id=\"resource_#{@resource.id}_title\"]"
+end
 
-  def notification_xpath
-    "//*[@class=\"flash\"]"
-  end
+def new_resource_title
+  'Greatest Resource'
+end
 
-  def current_path
-    URI.parse(current_url).path
-  end
+def notification_xpath
+  "//*[@class=\"flash\"]"
+end
+
+def current_path
+  URI.parse(current_url).path
+end
+
+
