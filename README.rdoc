@@ -105,7 +105,7 @@ git push heroku master
 --------------Steps for running tests----------------------------------
 rake test:all
 
-Here, there should be fully passing tests, with no pending tests. 
+Here, there should be fully passing tests, with no pending tests.
 -----------------------------------------------------------------------
 
 --------------Useful Tutorials-----------------------------------------

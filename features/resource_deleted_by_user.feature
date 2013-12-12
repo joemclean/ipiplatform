@@ -8,14 +8,12 @@ Feature: User Deletes a Resource
     And the second user creates a resource
     And I go to the resources index page
 
-  @javascript
   Scenario: A user can delete his/her own resource from the resource index page
     When I go to the resources index page
     And I go to delete the resource
     Then I am on the resources index page
     And that resource is no longer displayed
 
-  @javascript
   Scenario: A user can delete his/her own resource from the resource show page
     When I go to the resources index page
     And I go to my resource's show page

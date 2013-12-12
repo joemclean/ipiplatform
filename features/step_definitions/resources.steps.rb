@@ -155,6 +155,10 @@ Then(/^the second user's delete resource button is visible$/) do
   page.should have_selector("#delete_resource_#{@resource2.id}")
 end
 
+Then(/^that resource is no longer displayed$/) do
+  expect(page.has_xpath?(one_resource_xpath)).to be_false
+end
+
 private
 
 def one_resource_xpath
