@@ -38,6 +38,12 @@ describe Resource do
       expect(resource.valid?).to be_false
     end
 
+    it 'does not require an image' do
+      resource = FactoryGirl.build_stubbed(:resource, image: nil)
+
+      expect(resource.valid?).to be_true
+    end
+
     it 'should be created with FactoryGirl' do
       resource = FactoryGirl.build_stubbed(:resource)
 

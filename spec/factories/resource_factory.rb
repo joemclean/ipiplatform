@@ -1,11 +1,12 @@
 FactoryGirl.define do
   factory :resource do
     name 'resource_name'
-    link 'resource_link'
     description 'resource_description'
+    image 'image'
     full_description 'resource_full_description'
-    user_id 1
+    link 'resource_link'
     source 'resource_source'
     tag_list 'resource_tag_list'
+    user_id 1
   end
 end

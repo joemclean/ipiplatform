@@ -1,17 +1,28 @@
-%h1.resourcetitle{id: "resource_#{@resource.id}_title"}
-  =@resource.name 
-%hr
+%p#notice= notice
+.jumbotron
+  .row
+    .col-sm-2
+      =image_tag @resource.image, style: "width:70%; margin: 0px 15% 20px 15%;"
+    .col-sm-10
+      %h2{id: "resource_#{@resource.id}_title"}
+        =@resource.name
+      %hr
+      .row.showresource
+        .col-sm-4
+          %p.authorBox='Uploaded by: ' + @resource.author.name
+  .col-sm-8
+    %p
+      = @resource.full_description
 .row.showresource
   .col-sm-4
-    %p.authorBox='Uploaded by: ' + @resource.author.name
     %h3
       Colors
     -@resource.colors.each do |color|
-      =link_to (image_tag color.image, size: '70x70'), color_path(color)
+      =link_to (image_tag color.image_name, size: '70x70'), color_path(color)
     %br
     %h3
       Link to Resource
-    %a{:href=> "#{@resource.link}"} #{@resource.link}
+    %a{:href=> "#{@resource.link}"} #{@resource.name} (#{@resource.link})
     %h3
       Tool popularity
     %p
@@ -28,7 +39,7 @@
 
   .col-sm-8
     %p.full_description
-      = @resource.full_description
+      = @resource.description
 %hr
 //Like
 -if @resource.user_upvote(current_user).count > 0

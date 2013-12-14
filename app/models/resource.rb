@@ -28,6 +28,8 @@ class Resource < ActiveRecord::Base
 
   validates :name, :description, :full_description, :link, :source, :user_id, presence: true
 
+  mount_uploader :image, ImageUploader
+
   def current_step
     @current_step ||  steps.first
   end

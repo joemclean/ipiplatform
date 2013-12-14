@@ -37,6 +37,12 @@
       %label.control-label
         = f.label :tag_list
       = f.text_field :tag_list, :class => "form-control"
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :image
+      = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'
+
   %h2 Value Proposition Colors
   %h4= 'What value proposition color(s) is this best suited for?'
   .field
