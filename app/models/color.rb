@@ -4,13 +4,19 @@ class Color < ActiveRecord::Base
   has_many :question_responses
   belongs_to :value_proposition
 
-  validates :name, :description, :value_proposition, presence: true
+  validates :name, :description, :value_proposition, :image, presence: true
+
+  mount_uploader :image, ImageUploader
 
   def ids
     color_ids = []
     Color.all.each do |color|
       color_ids << color.id
     end
+  end
+
+  def image_name
+    image.path
   end
 
 end

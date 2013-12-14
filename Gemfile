@@ -15,6 +15,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
 gem 'fog'
 gem 'kaminari'
+gem 'rmagick'
 
 group :test, :development do
   gem 'rspec-rails'

@@ -84,7 +84,7 @@ class ColorsController < ApplicationController
   end
 
   def color_params
-    params.require(:color).permit(:name, :description, :value_proposition)
+    params.require(:color).permit(:name, :description, :value_proposition, :image)
   end
 
 end

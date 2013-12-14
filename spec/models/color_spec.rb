@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Color do
-  describe 'validations' do
+  describe 'create' do
     it 'should have a name' do
       color = FactoryGirl.build_stubbed(:color, name: nil)
 
@@ -16,6 +16,12 @@ describe Color do
 
     it 'should have a value proposition it belongs to' do
       color = FactoryGirl.build_stubbed(:color, value_proposition: nil)
+
+      expect(color.valid?).to be_false
+    end
+
+    it 'should have an image!' do
+      color = FactoryGirl.build_stubbed(:color, image: nil)
 
       expect(color.valid?).to be_false
     end

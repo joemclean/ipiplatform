@@ -20,5 +20,10 @@ module IpiPlatform
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Amazon S3 settings
+    config.aws_bucket_name = ENV["AWS_S3_BUCKET"]
+    config.aws_access_key = ENV["AWS_ACCESS_KEY_ID"]
+    config.aws_secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
   end
 end
