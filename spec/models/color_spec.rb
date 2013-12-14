@@ -19,11 +19,5 @@ describe Color do
 
       expect(color.valid?).to be_false
     end
-
-    it 'should have an image!' do
-      color = FactoryGirl.build_stubbed(:color, image: nil)
-
-      expect(color.valid?).to be_false
-    end
   end
 end

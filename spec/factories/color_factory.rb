@@ -7,7 +7,7 @@ FactoryGirl.define do
   factory :color do
     name 'color_name'
     description 'color_description'
-    image file_upload_with('default_image')
+    default_image 'default_image'
 
     association :value_proposition, strategy: :build
   end

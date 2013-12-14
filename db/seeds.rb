@@ -116,7 +116,7 @@ value_propositions = [
 value_propositions.each do |name, color_propositions, value_proposition_description|
   value_proposition = ValueProposition.find_or_create_by_name(name: name, description: value_proposition_description)
   color_propositions.each do |name, color_description, image, question_responses|
-    color = value_proposition.colors.find_or_create_by_name(name: name, description: color_description, image: image)
+    color = value_proposition.colors.find_or_create_by_name(name: name, description: color_description, default_image: image)
     question_responses.each do |response|
       question_response = QuestionResponse.find_or_create_by_response(response: response)
       question_response.update_attribute(:color_id, color.id)

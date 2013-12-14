@@ -4,7 +4,7 @@ class Color < ActiveRecord::Base
   has_many :question_responses
   belongs_to :value_proposition
 
-  validates :name, :description, :value_proposition, :image, presence: true
+  validates :name, :description, :value_proposition, presence: true
 
   mount_uploader :image, ImageUploader
 
@@ -16,7 +16,7 @@ class Color < ActiveRecord::Base
   end
 
   def image_name
-    image.path
+    image.url.present? ? image.url : default_image
   end
 
 end
