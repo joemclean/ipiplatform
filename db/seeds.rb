@@ -1,5 +1,5 @@
-user = User.new
-user.update_attributes({name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true})
+admin = User.new
+admin.update_attributes({name: 'Default Admin', email: 'admin@example.com', password: '0000', password_confirmation: '0000', is_admin: true})
 user = User.new
 user.update_attributes({name: 'Default User', email: 'test@example.com', password: '0000', password_confirmation: '0000', is_admin: false})
 
@@ -129,3 +129,15 @@ phases = %w(Sales Inception Story\ Writing Estimation Prioritization Delivery Re
 phases.each do |phase_name|
   Phase.find_or_create_by_name(name: phase_name)
 end
+
+resource = Resource.find_or_create_by_name({
+            user_id: user.id,
+            name: 'Awesome Default Resource',
+            link: 'www.google.com',
+            description: 'This resource will solve all your needs.',
+            full_description: 'Well, this resource will go a long way to solving all your needs.',
+            source: 'An awesome person',
+            tag_list: 'awesome',
+            default_image: 'Star-Success.png'
+           })
+resource.color_ids = [Color.all.first.id]

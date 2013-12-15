@@ -170,6 +170,13 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        patch :create, @create_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not be able to create a resource' do
         patch :create, @create_params
 
@@ -247,6 +254,13 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        delete :destroy, @destroy_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not be able to delete a resource' do
         delete :destroy, @destroy_params
 
@@ -561,14 +575,13 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
-      it 'should not be able to update a resource' do
+      before :each do
         @user = FactoryGirl.create(:user, is_admin: true)
         @resource = FactoryGirl.create(:resource, user: @user)
 
         @resource.colors = [@yellow_color, @green_color]
         #@resource.phases = [@party_phase, @fiesta_phase]
 
-        controller.stub(:current_user).and_return(@user)
         @update_params = {  id: @resource.id,
                             user_id: @user.id,
                             color_ids: [@yellow_color.id, @green_color.id],
@@ -582,8 +595,17 @@ describe ResourcesController do
                               tag_list: 'resource_tag_list'
                             },
                             image: 'image.jpg'
-                          }
+        }
+      end
 
+      it 'should redirect the user' do
+        patch :update, @update_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
+      it 'should not be able to update a resource' do
         patch :update, @update_params
 
         expect(@resource.name).to eql('resource_name')
@@ -622,6 +644,13 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        get :index, @get_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should redirect the user to the new sessions path' do
         get :index, @get_params
 
@@ -659,6 +688,13 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        get :new
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not view the create-a-resource page' do
         get :new
 
@@ -700,8 +736,15 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        get :show, @get_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should redirect the user to the new sessions path' do
-        get :index, @get_params
+        get :show, @get_params
 
         response.should redirect_to new_session_path
       end

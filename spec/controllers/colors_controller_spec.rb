@@ -47,6 +47,13 @@ describe ColorsController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        patch :create, @create_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not be able to create a color' do
         patch :create, @create_params
 
@@ -93,6 +100,13 @@ describe ColorsController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        delete :destroy, @destroy_params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not be able to delete a color' do
         delete :destroy, @destroy_params
 
@@ -226,6 +240,13 @@ describe ColorsController do
     end
 
     context 'while not signed in' do
+      it 'should redirect the user' do
+        patch :update, @params
+
+        expect(response.status).to be(302)
+        response.should redirect_to new_session_path
+      end
+
       it 'should not be able to update a color' do
         patch :update, @params
 

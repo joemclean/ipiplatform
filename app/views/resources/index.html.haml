@@ -16,7 +16,7 @@
       Colors
     .color_filter_box
       -@colors.each do |color|
-        =image_tag color.image_name, size: '50x50', class: 'color_filter', title: color.name
+        = image_tag color.image_name, size: '50x50', class: 'color_filter', title: color.name
     .search_title
       -#Innovation Stages
     -#.phase_filter_box
@@ -29,29 +29,32 @@
     =paginate @resources
     - @resources.each do |resource|
       .well.container{id: "resource_#{resource.id}"}
-        %h3
-          = link_to resource.name, resource
-        %p
-          -resource.tags.each do |tag|
-            =link_to tag.name, tag_path(tag), class: 'tag_tag'
-        %p
-          Source:
-          = resource.source
-        %p
-          =resource.description
-        %p
-          -#Phases: |
-          -#-resource.phases.each do |phase|
-          -#  =phase.name.upcase + " |"
-        -resource.colors.each do |color|
-          =link_to (image_tag color.image, size: '40x40'), color_path(color)
-        %br
-        %br
-        .manipulate_resource
-          - if current_user.can_edit_and_delete_resource?(current_user, resource)
-            .btn-group
-              .btn.btn-default
-                = link_to 'Edit this Resource', edit_resource_path(resource), id: "edit_resource_#{resource.id}"
-              .btn.btn-default
-                = link_to 'Delete this Resource', resource, method: :delete, data: { confirm: 'Are you sure?' }, id: "delete_resource_#{resource.id}"
+        .col-sm-4
+          =link_to (image_tag resource.image_name, class: 'resource_image'), resource_path(resource)
+        .col-sm-8
+          %h3
+            = link_to resource.name, resource
+          %p
+            -resource.tags.each do |tag|
+              =link_to tag.name, tag_path(tag), class: 'tag_tag'
+          %p
+            Source:
+            = resource.source
+          %p
+            =resource.description
+          %p
+            -#Phases: |
+            -#-resource.phases.each do |phase|
+            -#  =phase.name.upcase + " |"
+          -resource.colors.each do |color|
+            =link_to (image_tag color.image_name, size: '40x40'), color_path(color)
+          %br
+          %br
+          .manipulate_resource
+            - if current_user.can_edit_and_delete_resource?(current_user, resource)
+              .btn-group
+                .btn.btn-default
+                  = link_to 'Edit this Resource', edit_resource_path(resource), id: "edit_resource_#{resource.id}"
+                .btn.btn-default
+                  = link_to 'Delete this Resource', resource, method: :delete, data: { confirm: 'Are you sure?' }, id: "delete_resource_#{resource.id}"
   %hr

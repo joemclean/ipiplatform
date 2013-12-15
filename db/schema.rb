@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214230332) do
+ActiveRecord::Schema.define(version: 20131215005606) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20131214230332) do
     t.string   "source"
     t.string   "tag_list"
     t.string   "image"
+    t.string   "default_image"
   end
 
   create_table "spectrums", force: true do |t|

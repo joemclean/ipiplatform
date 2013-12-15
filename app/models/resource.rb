@@ -105,5 +105,7 @@ class Resource < ActiveRecord::Base
     end
   end
 
-
+  def image_name
+    image.url.present? ? image.url : default_image
+  end
 end

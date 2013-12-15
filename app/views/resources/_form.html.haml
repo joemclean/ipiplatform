@@ -41,6 +41,7 @@
     .form-group.col-sm-6
       %label.control-label
         = f.label :image
+        = image_tag @resource.image_name, class: 'resource_image'
       = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'
 
   %h2 Value Proposition Colors

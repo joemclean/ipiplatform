@@ -2,7 +2,7 @@
 .jumbotron
   .row
     .col-sm-2
-      =image_tag @resource.image, style: "width:70%; margin: 0px 15% 20px 15%;"
+      =image_tag @resource.image_name, class: 'resource_image'
     .col-sm-10
       %h2{id: "resource_#{@resource.id}_title"}
         =@resource.name
