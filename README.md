@@ -15,3 +15,7 @@ Aubrey Chipman
 Jeff Wagner
 Karlyn Murphy
 Dexter Teng
+
+Requires:
+brew install imagemagick
+brew install phantomjs
