@@ -134,22 +134,6 @@ describe ResourcesController do
         expect(@resource.tag_list).to eql 'resource_tag_list'
       end
 
-      it 'should be able to attach associated tags' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tags.count).to eql(1)
-      end
-
-      it 'should create a resource with a specific tag' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tag_list).to eql 'resource_tag_list'
-      end
-
       it 'should be able to attach associated image' do
         patch :create, @create_params
 
@@ -312,7 +296,6 @@ describe ResourcesController do
         end
 
         it 'should update any resource' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -322,7 +305,6 @@ describe ResourcesController do
         end
 
         it 'should automatically update color association' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -333,31 +315,7 @@ describe ResourcesController do
           expect(@resource.colors).to include(@green_color)
         end
 
-        it 'should be able to attach associated tags' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tags.count).to eql(1)
-        end
-
-        it 'should create a resource with a specific tag' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tag_list).to eql 'resource_tag_list'
-        end
-
-        it 'should be able to attach associated image' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.image.class).to eql(ImageUploader)
-        end
-
-        #it 'should automatically update phase association' do
+       #it 'should automatically update phase association' do
         #  controller.stub(:current_user).and_return(@user)
         #
         #  patch :update, @update_params
@@ -398,7 +356,6 @@ describe ResourcesController do
         end
 
         it 'should update any resource' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -408,7 +365,6 @@ describe ResourcesController do
         end
 
         it 'should automatically update color association' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -417,30 +373,6 @@ describe ResourcesController do
           expect(@resource.colors.count).to eql(2)
           expect(@resource.colors).to include(@yellow_color)
           expect(@resource.colors).to include(@green_color)
-        end
-
-        it 'should be able to attach associated tags' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tags.count).to eql(1)
-        end
-
-        it 'should create a resource with a specific tag' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tag_list).to eql 'resource_tag_list'
-        end
-
-        it 'should be able to attach associated image' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.image.class).to eql(ImageUploader)
         end
 
         #it 'should automatically update phase association' do
@@ -486,7 +418,6 @@ describe ResourcesController do
 
       context 'with a resource owned by the user' do
         it 'should update a resource' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -496,7 +427,6 @@ describe ResourcesController do
         end
 
         it 'should automatically update color association' do
-          controller.stub(:current_user).and_return(@user)
 
           patch :update, @update_params
 
@@ -506,31 +436,6 @@ describe ResourcesController do
           expect(@resource.colors).to include(@yellow_color)
           expect(@resource.colors).to include(@green_color)
         end
-
-        it 'should be able to attach associated tags' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tags.count).to eql(1)
-        end
-
-        it 'should create a resource with a specific tag' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.tag_list).to eql 'resource_tag_list'
-        end
-
-        it 'should be able to attach associated image' do
-          patch :create, @update_params
-
-          @resource = Resource.all.first
-
-          expect(@resource.image.class).to eql(ImageUploader)
-        end
-
 
         #it 'should automatically update phase association' do
         #  controller.stub(:current_user).and_return(@user)
@@ -547,7 +452,6 @@ describe ResourcesController do
 
       context 'with a resource owned by someone else' do
         it 'should not be able to update a resource' do
-          controller.stub(:current_user).and_return(@user)
 
           other_user = FactoryGirl.create(:user, name: 'Wilson')
           other_users_resource = FactoryGirl.create(:resource, user: other_user)
