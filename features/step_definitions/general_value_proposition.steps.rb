@@ -1,4 +1,4 @@
-When(/^I go to the general value proposition index page$/) do
+When(/^I go to the general value proposition category index page$/) do
   @general_value_proposition_page = GeneralValuePropositionPage.new(page)
   @general_value_proposition_page.navigate
 end

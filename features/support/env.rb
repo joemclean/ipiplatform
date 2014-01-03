@@ -1,8 +1,8 @@
 require 'cucumber/rails'
 require 'capybara/poltergeist'
 
+Capybara.javascript_driver = :poltergeist
 #Capybara.default_driver = :selenium #uncomment this to use selenium
-Capybara.javascript_driver = :poltergeist #uncomment this to use poltergeist
 
 require File.join(Rails.root, 'features', 'pages', 'page')
 ActionController::Base.allow_rescue = false

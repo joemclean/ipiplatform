@@ -5,7 +5,8 @@
 
 %p
   %b Full Description:
-  = @value_proposition.description
+  %div{:id => "value_proposition_description_#{@value_proposition.id}"}
+    = @value_proposition.description
 
 %p
   - if @value_proposition.colors.present?

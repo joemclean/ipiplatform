@@ -4,12 +4,13 @@
     Every client is different, and Thoughtworks can help those clients innovate in all different ways. This affects how every account is pursued, sold, developed, and measured for success. Each value proposition we present requires a distinct approach to be effective. You can learn about our value propositions here and find helpful resources to assist every stage of these different types of projects.
 -@value_propositions.each do |value_proposition|
   .row{:style => 'margin-top: 50px;'}
-    .container{id: "value_proposition_#{value_proposition.id}"}
+    .container{id: "value_proposition_category_container_#{value_proposition.id}"}
       .col-sm-12
         %h2
-          =link_to value_proposition.name, value_proposition_path(value_proposition.id)
+          =link_to value_proposition.name, value_proposition_path(value_proposition.id), :id => "value_proposition_category_#{value_proposition.id}"
         %br
-          =value_proposition.description
+          %div{:id => "value_proposition_description_#{value_proposition.id}"}
+            =value_proposition.description
   .row
     -value_proposition.colors.each do |color|
       .col-sm-4

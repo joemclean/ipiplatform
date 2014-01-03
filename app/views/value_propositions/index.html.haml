@@ -11,7 +11,7 @@
         %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
           = link_to value_proposition.name, value_proposition_path(value_proposition.id)
           .btn
-            = link_to 'Edit', '', onclick: "toggleEdit(this); return false"
+            = link_to 'Edit', '', :id => "edit_button_#{value_proposition.id}", onclick: "toggleEdit(this); return false"
           %ul{:style => 'text-align: left;'}
             =value_proposition.description
           %br
@@ -56,7 +56,7 @@
                     .btn
                       = link_to 'Delete Color', color_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
           .btn
-            = link_to 'Save', '', :onclick=>"document.forms['edit_value_proposition_#{value_proposition.id}'].submit();"
+            = link_to 'Save', '', :id => "save_button_#{value_proposition.id}", :onclick=>"document.forms['edit_value_proposition_#{value_proposition.id}'].submit();"
           .btn
             = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
           .btn

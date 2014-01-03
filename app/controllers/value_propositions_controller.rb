@@ -48,7 +48,6 @@ class ValuePropositionsController < ApplicationController
         end
       end
     end
-
     redirect_to value_proposition_path
   end
 

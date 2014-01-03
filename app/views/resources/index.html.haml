@@ -33,7 +33,7 @@
           =link_to (image_tag resource.image_name, class: 'resource_image'), resource_path(resource)
         .col-sm-8
           %h3
-            = link_to resource.name, resource
+            = link_to resource.name, resource, id: "resource_name_#{resource.id}"
           %p
             -resource.tags.each do |tag|
               =link_to tag.name, tag_path(tag), class: 'tag_tag'
