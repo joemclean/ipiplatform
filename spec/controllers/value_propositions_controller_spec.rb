@@ -126,6 +126,7 @@ describe ValuePropositionsController do
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(value_propositions_path)
+        assigns(:value_propositions).should_not be_nil
       end
     end
 

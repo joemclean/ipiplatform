@@ -15,9 +15,9 @@ end
 private
 
   def one_value_proposition_xpath
-    "//*[@id=\"value_proposition_#{@value_proposition.id}\"]"
+    "//*[@id=\"value_proposition_category_#{@value_proposition.id}\"]"
   end
 
   def one_color_xpath
-    "//*[@id=\"value_proposition_#{@color.id}\"]"
+    "//*[@id=\"color_id_#{@color.id}\"]"
   end
