@@ -10,9 +10,6 @@ class Resource < ActiveRecord::Base
   has_many :bookmarks, :dependent => :destroy
   has_many :users, through: :bookmarks
 
-  has_many :phase_associations, dependent: :destroy
-  has_many :phases, through: :phase_associations
-
   belongs_to :user
 
   has_many :resource_formats
@@ -97,13 +94,6 @@ class Resource < ActiveRecord::Base
     end
   end
 
-  def checked_phase_tags(params, phase)
-    if params[:phase_ids].nil?
-      self.phase_ids.include?(phase.id)
-    else
-      self.phase_ids.include?(phase.id) or params[:phase_ids].include?(phase.id.to_s)
-    end
-  end
 
   def image_name
     image.url.present? ? image.url : default_image

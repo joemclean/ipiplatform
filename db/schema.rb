@@ -62,18 +62,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.integer "trait_id"
   end
 
-  create_table "phase_associations", force: true do |t|
-    t.integer "phase_id"
-    t.integer "resource_id"
-  end
-
-  create_table "phases", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "question_responses", force: true do |t|
     t.text     "response"
     t.datetime "created_at"
@@ -113,13 +101,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.string   "tag_list"
     t.string   "image"
     t.string   "default_image"
-  end
-
-  create_table "spectrums", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "suggestions", force: true do |t|

@@ -124,12 +124,6 @@ value_propositions.each do |name, color_propositions, value_proposition_descript
   end
 end
 
-phases = %w(Sales Inception Story\ Writing Estimation Prioritization Delivery Release)
-
-phases.each do |phase_name|
-  Phase.find_or_create_by_name(name: phase_name)
-end
-
 resource = Resource.find_or_create_by_name({
             user_id: user.id,
             name: 'Awesome Default Resource',

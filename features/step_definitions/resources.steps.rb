@@ -32,7 +32,6 @@ When(/^I fill in all resource fields$/) do
   step "I fill in required resource fields"
   step "I fill in \"resource_tag_list\" with \"tag\""
   step "I check the color_id_#{@color.id} box"
-  #step "I check the phase_id_#{@phase.id} box"
 end
 
 When(/^I submit the resource$/) do

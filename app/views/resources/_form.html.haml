@@ -52,13 +52,7 @@
       =check_box_tag "color_ids[]", color.id, @resource.checked_color_tags(params, color), id: "color_id_#{color.id}"
       =color.name
       %br
-  -#%h4= 'What phase(s) is this best suited for?'
-  -#.field
-  -#  = hidden_field_tag "phase_ids[]", nil, id: 'nil_phase'
-  -#  -@phases.each do |phase|
-  -#    =check_box_tag "phase_ids[]", phase.id, @resource.checked_phase_tags(params, phase), id: "phase_id_#{phase.id}"
-  -#    =phase.name
-      %br
+
   %br
   %br
   .field

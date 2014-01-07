@@ -6,14 +6,11 @@ describe ResourcesController do
       user = FactoryGirl.create(:user)
       yellow_color = FactoryGirl.create(:color, name: 'yellow')
       green_color = FactoryGirl.create(:color, name: 'green')
-      #party_phase = FactoryGirl.create(:phase, name: 'Party')
-      #fiesta_phase = FactoryGirl.create(:phase, name: 'Fiesta')
 
       @description = 'as in tasty carrots'
       @name = 'orange'
       @create_params = {user_id: user.id,
                         color_ids: [yellow_color.id, green_color.id],
-                        #phase_ids: [party_phase.id, fiesta_phase.id],
                         resource: {
                           name: @name,
                           link: 'resource_link',
@@ -79,15 +76,6 @@ describe ResourcesController do
         expect(@resource.image.class).to eql(ImageUploader)
       end
 
-      #it 'should be able to attach associated phases' do
-      #  patch :create, @create_params
-      #
-      #  @resource = Resource.all.first
-      #
-      #  expect(@resource.colors.count).to eql(2)
-      #  #expect(@resource.phases.first.name).to eql 'Party'
-      #  #expect(@resource.phases.last.name).to eql 'Fiesta'
-      #end
     end
 
     context 'as a user' do
@@ -142,15 +130,6 @@ describe ResourcesController do
         expect(@resource.image.class).to eql(ImageUploader)
       end
 
-      #it 'should be able to attach associated phases' do
-      #  patch :create, @create_params
-      #
-      #  @resource = Resource.all.first
-      #
-      #  expect(@resource.colors.count).to eql(2)
-      #  expect(@resource.phases.first.name).to eql 'Party'
-      #  expect(@resource.phases.last.name).to eql 'Fiesta'
-      #end
     end
 
     context 'while not signed in' do
@@ -173,12 +152,9 @@ describe ResourcesController do
     before :each do
       yellow_color = FactoryGirl.create(:color, name: 'yellow')
       green_color = FactoryGirl.create(:color, name: 'green')
-      #party_phase = FactoryGirl.create(:phase, name: 'Party')
-      #fiesta_phase = FactoryGirl.create(:phase, name: 'Fiesta')
 
       @resource = FactoryGirl.create(:resource)
       @resource.colors = [yellow_color, green_color]
-      #@resource.phases = [party_phase, fiesta_phase]
 
       @destroy_params = {id: @resource.id}
     end
@@ -205,13 +181,6 @@ describe ResourcesController do
         expect(@resource.colors.count).to eql(0)
       end
 
-      #it 'should automatically delete phase association' do
-      #  @resource.phases.count.should eql(2)
-      #
-      #  delete :destroy, @destroy_params
-      #
-      #  expect(@resource.phases.count).to eql(0)
-      #end
     end
 
     context 'as a user' do
@@ -257,8 +226,6 @@ describe ResourcesController do
     before :each do
       @yellow_color = FactoryGirl.create(:color, name: 'yellow')
       @green_color = FactoryGirl.create(:color, name: 'green')
-      #@party_phase = FactoryGirl.create(:phase, name: 'Party')
-      #@fiesta_phase = FactoryGirl.create(:phase, name: 'Fiesta')
 
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -276,13 +243,11 @@ describe ResourcesController do
           @resource = FactoryGirl.create(:resource, user: @user)
 
           @resource.colors = []
-          #@resource.phases = []
 
           controller.stub(:current_user).and_return(@user)
           @update_params = {  id: @resource.id,
                               user_id: @user.id,
                               color_ids: [@yellow_color.id, @green_color.id],
-                              #phase_ids: [@party_phase.id, @fiesta_phase.id],
                               resource: {
                                 name: @name,
                                 link: 'resource_link',
@@ -315,17 +280,6 @@ describe ResourcesController do
           expect(@resource.colors).to include(@green_color)
         end
 
-       #it 'should automatically update phase association' do
-        #  controller.stub(:current_user).and_return(@user)
-        #
-        #  patch :update, @update_params
-        #
-        #  @resource.reload
-        #
-        #  expect(@resource.phases.count).to eql(2)
-        #  expect(@resource.phases).to include(@party_phase)
-        #  expect(@resource.phases).to include(@fiesta_phase)
-        #end
       end
 
       context 'with a resource owned by another user' do
@@ -336,13 +290,11 @@ describe ResourcesController do
           @resource = FactoryGirl.create(:resource, user: @other_user)
 
           @resource.colors = []
-          #@resource.phases = []
 
           controller.stub(:current_user).and_return(@user)
           @update_params = {id: @resource.id,
                             user_id: @other_user.id,
                             color_ids: [@yellow_color.id, @green_color.id],
-                            #phase_ids: [@party_phase.id, @fiesta_phase.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',
@@ -374,18 +326,6 @@ describe ResourcesController do
           expect(@resource.colors).to include(@yellow_color)
           expect(@resource.colors).to include(@green_color)
         end
-
-        #it 'should automatically update phase association' do
-        #  controller.stub(:current_user).and_return(@user)
-        #
-        #  patch :update, @update_params
-        #
-        #  @resource.reload
-        #
-        #  expect(@resource.phases.count).to eql(2)
-        #  expect(@resource.phases).to include(@party_phase)
-        #  expect(@resource.phases).to include(@fiesta_phase)
-        #end
       end
     end
 
@@ -397,13 +337,11 @@ describe ResourcesController do
         @resource = FactoryGirl.create(:resource, user: @user)
 
         @resource.colors = []
-        #@resource.phases = []
 
         controller.stub(:current_user).and_return(@user)
         @update_params = {id: @resource.id,
                           user_id: @user.id,
                           color_ids: [@yellow_color.id, @green_color.id],
-                          #phase_ids: [@party_phase.id, @fiesta_phase.id],
                           resource: {
                             name: @name,
                             link: 'resource_link',
@@ -437,17 +375,6 @@ describe ResourcesController do
           expect(@resource.colors).to include(@green_color)
         end
 
-        #it 'should automatically update phase association' do
-        #  controller.stub(:current_user).and_return(@user)
-        #
-        #  patch :update, @update_params
-        #
-        #  @resource.reload
-        #
-        #  expect(@resource.phases.count).to eql(2)
-        #  expect(@resource.phases).to include(@party_phase)
-        #  expect(@resource.phases).to include(@fiesta_phase)
-        #end
       end
 
       context 'with a resource owned by someone else' do
@@ -458,7 +385,6 @@ describe ResourcesController do
           update_params = {id: other_users_resource.id,
                            user_id: other_user.id,
                            color_ids: [@yellow_color.id, @green_color.id],
-                           #phase_ids: [@party_phase.id, @fiesta_phase.id],
                            resource: {
                              name: @name,
                              link: 'resource_link',
@@ -484,12 +410,10 @@ describe ResourcesController do
         @resource = FactoryGirl.create(:resource, user: @user)
 
         @resource.colors = [@yellow_color, @green_color]
-        #@resource.phases = [@party_phase, @fiesta_phase]
 
         @update_params = {  id: @resource.id,
                             user_id: @user.id,
                             color_ids: [@yellow_color.id, @green_color.id],
-                            #phase_ids: [@party_phase.id, @fiesta_phase.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',

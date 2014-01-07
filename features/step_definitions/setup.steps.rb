@@ -41,9 +41,6 @@ Given(/^a value proposition and a color exist$/) do
   @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
 end
 
-Given(/^a phase exists$/) do
-  @phase = FactoryGirl.create(:phase)
-end
 
 Given(/^a resource with a (.*?) color exists$/) do |color_name|
   @color = FactoryGirl.create(:color, name: color_name)
