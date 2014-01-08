@@ -45,6 +45,5 @@ And(/^I delete the value proposition category$/) do
 end
 
 Then(/^I do not see the value proposition category$/) do
-  save_screenshot('/filedeleted.png')
   expect(page.has_css?("#value_proposition_category_1")).to be_false
 end
