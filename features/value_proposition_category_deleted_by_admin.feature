@@ -6,7 +6,6 @@ Feature: Deleting an existing value proposition category as an admin
     And a value proposition exists
 
   @javascript
-    @browser
   Scenario:  Admin can delete an existing value proposition category
     When I visit the admin profile page
     And I go to manage value proposition categories

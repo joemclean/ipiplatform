@@ -41,7 +41,6 @@ end
 
 And(/^I delete the value proposition category$/) do
   find('#delete_button_1').click
-  page.driver.browser.switch_to.alert.accept
 end
 
 Then(/^I do not see the value proposition category$/) do
