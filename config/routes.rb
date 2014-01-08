@@ -3,15 +3,9 @@ IpiPlatform::Application.routes.draw do
   get 'personalities/create'
   get 'personalities/update'
 
-  resources :industries
   resources :sessions
   resources :users
 
-  get 'questions/new'
-  get 'surveys/new'
-  get 'surveys/take_survey', :as => :take_survey
-  get 'surveys/get_results', :as => :get_results
-  get 'surveys/view_results', :as => :view_results
   get 'pages/home'
   get 'pages/publisher'
   get 'pages/value_propositions'
@@ -36,7 +30,6 @@ IpiPlatform::Application.routes.draw do
   end
   
   resources :suggestions
-  resources :question_responses
-  
+
   root 'pages#landing'
 end

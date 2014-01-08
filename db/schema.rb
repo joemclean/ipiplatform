@@ -56,19 +56,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.integer "trait_id"
   end
 
-  create_table "question_responses", force: true do |t|
-    t.text     "response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "color_id"
-  end
-
-  create_table "questions", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "survey_id"
-  end
-
   create_table "resource_formats", force: true do |t|
     t.integer  "format_id"
     t.integer  "resource_id"
@@ -93,11 +80,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
   create_table "suggestions", force: true do |t|
     t.string   "author"
     t.text     "thoughts"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "surveys", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
