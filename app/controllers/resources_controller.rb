@@ -105,7 +105,6 @@ class ResourcesController < ApplicationController
 
   def set_resource_associations
     @colors = Color.all
-    @industries = Industry.all
   end
 
   def update_color_associations

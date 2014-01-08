@@ -7,11 +7,3 @@
     =check_box_tag "resource[color_ids][]", color.id, @resource.color_ids.include?(color.id)
     =color.name
     %br
-%br
-%h4= 'Does this have a particular industry focus?'
-.field
-  = hidden_field_tag "resource[industry_ids][]", nil
-  -@industries.each do |industry|
-    =check_box_tag "resource[industry_ids][]", industry.id, @resource.industry_ids.include?(industry.id)
-    =industry.name 
-    %br

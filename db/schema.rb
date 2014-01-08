@@ -45,12 +45,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.text     "text"
   end
 
-  create_table "industries", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "personalities", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -80,13 +74,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "resource_industries", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.integer  "industry_id"
   end
 
   create_table "resources", force: true do |t|
