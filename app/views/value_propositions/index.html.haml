@@ -60,7 +60,7 @@
           .btn
             = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
           .btn
-            = link_to 'Delete Proposition', value_proposition_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            = link_to 'Delete Proposition', value_proposition_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }, :id => "delete_button_#{value_proposition.id}"
         %br
         %hr
         %br

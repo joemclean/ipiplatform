@@ -38,3 +38,13 @@ end
 Then(/^I see the value proposition category has been edited$/) do
   expect(find(:id, "value_proposition_category_#{@value_proposition.id}").text).to eql('Changed Value Proposition Category')
 end
+
+And(/^I delete the value proposition category$/) do
+  find('#delete_button_1').click
+  page.driver.browser.switch_to.alert.accept
+end
+
+Then(/^I do not see the value proposition category$/) do
+  save_screenshot('/filedeleted.png')
+  expect(page.has_css?("#value_proposition_category_1")).to be_false
+end

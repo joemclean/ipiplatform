@@ -66,7 +66,13 @@ describe ValuePropositionsController do
         expect(ValueProposition.all.empty?).to be_true
       end
 
-      it 'should not be able to delete associated color(s)' do
+      it 'should redirect to value propositions index' do
+        delete :destroy, @destroy_params
+
+        response.should redirect_to value_propositions_path
+      end
+
+      it 'should be able to delete associated color(s)' do
         Color.any_instance.should_receive(:destroy).exactly(1).times
 
         delete :destroy, @destroy_params
@@ -86,7 +92,7 @@ describe ValuePropositionsController do
         expect(ValueProposition.all.count).to eql 1
       end
 
-      it 'should be able to delete associated color(s)' do
+      it 'should not be able to delete associated color(s)' do
         Color.any_instance.should_not_receive(:destroy)
 
         delete :destroy, @destroy_params
@@ -102,7 +108,7 @@ describe ValuePropositionsController do
         expect(ValueProposition.all.count).to eql 1
       end
 
-      it 'should be able to delete associated color(s)' do
+      it 'should not be able to delete associated color(s)' do
         Color.any_instance.should_not_receive(:destroy)
 
         delete :destroy, @destroy_params

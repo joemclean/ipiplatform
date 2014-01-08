@@ -26,7 +26,7 @@ class ValuePropositionsController < ApplicationController
   def destroy
     @value_proposition.destroy
     respond_to do |format|
-      format.html { redirect_to value_proposition_path }
+      format.html { redirect_to value_propositions_path }
       format.json { head :no_content }
     end
   end

@@ -6,7 +6,7 @@ Feature: Editing an existing value proposition category as an admin
     And a value proposition exists
 
   @javascript
-  Scenario:  Admin can edit an existing value proposition
+  Scenario:  Admin can edit an existing value proposition category
     When I visit the admin profile page
     And I go to manage value proposition categories
     And I go to edit an existing value proposition category
