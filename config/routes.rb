@@ -1,7 +1,4 @@
 IpiPlatform::Application.routes.draw do
-  
-  get 'personalities/create'
-  get 'personalities/update'
 
   resources :sessions
   resources :users

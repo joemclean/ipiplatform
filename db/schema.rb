@@ -45,17 +45,6 @@ ActiveRecord::Schema.define(version: 20131215005606) do
     t.text     "text"
   end
 
-  create_table "personalities", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "personality_traits", force: true do |t|
-    t.integer "personality_id"
-    t.integer "trait_id"
-  end
-
   create_table "resource_formats", force: true do |t|
     t.integer  "format_id"
     t.integer  "resource_id"

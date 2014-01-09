@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_many :upvotes, :dependent => :destroy
   has_many :bookmarks, :dependent => :destroy
   has_many :resources, through: :bookmarks
-  has_one :personality
 
   has_many :comments
 
