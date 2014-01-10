@@ -28,7 +28,7 @@ Given(/^the second user creates a resource$/) do
   @resource2 = FactoryGirl.create(:resource, user_id: @user2.id)
 end
 
-Given(/^a value proposition exists$/) do
+Given(/^a value proposition category exists$/) do
   @value_proposition = FactoryGirl.create(:value_proposition)
 end
 

@@ -16,7 +16,7 @@ And(/^I fill in all required value proposition category fields$/) do
 end
 
 And(/^I save the new value proposition category$/) do
-  find("#save_new_value_proposition").click
+  find('#save_new_value_proposition').click
 end
 
 Then(/^I see the value proposition category I just created$/) do
