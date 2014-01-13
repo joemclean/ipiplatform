@@ -18,7 +18,6 @@ end
 When(/^I go to the general value proposition index page$/) do
   @general_value_proposition_page = GeneralValuePropositionPage.new(page)
   @general_value_proposition_page.navigate
-  save_screenshot('~/newestPhoto.png', :full => true)
 end
 
 Then(/^I see the value proposition I just created$/) do
@@ -43,4 +42,13 @@ end
 
 Then(/^I see the value proposition has been edited$/) do
   expect(find(:id, 'color_link_1').text).to eql('Changed Value Proposition')
+end
+
+
+And(/^I delete the value proposition$/) do
+  find('#delete_color_1').click
+end
+
+Then(/^I do not see the value proposition$/) do
+  expect(page.has_css?("#color_link_1")).to be_false
 end
