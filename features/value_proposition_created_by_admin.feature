@@ -8,7 +8,7 @@ Feature: Creating new value proposition as an admin
  @javascript
   Scenario: Admin can create a new value proposition
     When I visit the admin profile page
-    When I go to manage value propositions
+    When I go to manage colors
     When I create a new value proposition
     When I fill in all required value proposition fields
     When I save the new value proposition

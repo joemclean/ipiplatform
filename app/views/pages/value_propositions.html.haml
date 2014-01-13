@@ -17,7 +17,7 @@
         .panel.panel-default{:style => 'margin: 20px 0px;'}
           .container{id: "color_id_#{color.id}"}
             %h3.panel-heading
-              = link_to color.name, color
+              = link_to color.name, color, id: "color_link_#{color.id}"
             .panel-body
               =image_tag color.image_name, class: "color_image"
               %p{:style => 'font-weight: bold; color:#6BB8D4'}

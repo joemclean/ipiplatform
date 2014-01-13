@@ -1,5 +1,5 @@
-When(/^I go to manage value propositions$/) do
-  page.find('#manage_value_propositions').click
+When(/^I go to manage value propositions and colors together$/) do
+  page.find('#manage_value_propositions_and_colors').click
 end
 
 When(/^I create a new value proposition$/) do
@@ -18,8 +18,29 @@ end
 When(/^I go to the general value proposition index page$/) do
   @general_value_proposition_page = GeneralValuePropositionPage.new(page)
   @general_value_proposition_page.navigate
+  save_screenshot('~/newestPhoto.png', :full => true)
 end
 
 Then(/^I see the value proposition I just created$/) do
   page.should have_css('#color_id_1')
+end
+
+When(/^I go to edit an existing value proposition$/) do
+  find('#edit_color_1').click
+end
+
+When(/^I change the name of the value proposition$/) do
+  step "I fill in \"color_name\" with \"Changed Value Proposition\""
+end
+
+When(/^I save the edited value proposition$/) do
+  find('#save').click
+end
+
+When(/^I go to manage colors$/) do
+  page.find('#manage_value_propositions').click
+end
+
+Then(/^I see the value proposition has been edited$/) do
+  expect(find(:id, 'color_link_1').text).to eql('Changed Value Proposition')
 end
