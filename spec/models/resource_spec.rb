@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'fakefs/spec_helpers'
+require 'support/fog_helper'
 
 describe Resource do
   describe 'validations' do
@@ -49,5 +51,29 @@ describe Resource do
 
       expect(resource.valid?).to be_true
     end
+  end
+
+  describe "#save" do
+    include FakeFS::SpecHelpers
+
+    before :each do
+      @resource = FactoryGirl.build(:resource)
+    end
+
+    context 'for non-production environment' do
+      it 'should upload image to dev-bucket on s3' do
+        FakeFS.activate!
+        FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
+        File.open('test_image.jpg', 'w') do |f|
+          f.puts('foo') # this is required or uploader_test.file.url will be nil
+        end
+
+        @resource.image = File.open('test_image.jpg')
+        @resource.save!
+        @resource.image.url.should match /.*\/dev-bucket-ipi.*uploads\/image\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+        FakeFS.deactivate!
+      end
+    end
+
   end
 end

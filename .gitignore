@@ -30,3 +30,4 @@ rerun.txt
 pickle-email-*.html
 .idea/*
 /vendor/cache/*
+config/fog_credentials.yml
