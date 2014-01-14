@@ -43,6 +43,13 @@
         = f.label :image
         = image_tag @resource.image_name, class: 'resource_image'
       = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :file
+    = image_tag @resource.file_name, class: 'resource_image'
+  = f.file_field :file, accept: ''
+
 
   %h2 Value Proposition Colors
   %h4= 'What value proposition color(s) is this best suited for?'

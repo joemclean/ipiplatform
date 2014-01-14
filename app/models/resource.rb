@@ -20,12 +20,13 @@ class Resource < ActiveRecord::Base
 
   has_many :taggings
   has_many :tags, through: :taggings
-  
+
   attr_writer :current_step
 
   validates :name, :description, :full_description, :link, :source, :user_id, presence: true
 
   mount_uploader :image, ImageUploader
+  mount_uploader :file, FileUploader
 
   def author
     if self.user_id
@@ -47,7 +48,7 @@ class Resource < ActiveRecord::Base
     Tag.select("tags.*, count(taggings.tag_id) as count").
       joins(:taggings).group("taggings.tag_id")
   end
-  
+
   def tag_list=(names)
     self[:tag_list] = names
     self.tags = names.split(",").map do |n|
@@ -67,4 +68,9 @@ class Resource < ActiveRecord::Base
   def image_name
     image.url.present? ? image.url : default_image
   end
+
+  def file_name
+    file.url
+  end
+
 end
