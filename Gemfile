@@ -15,6 +15,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
 gem 'fog'
 gem "fakefs", :require => "fakefs/safe"
+gem 'unf'
 gem 'kaminari'
 gem 'rmagick'
 
