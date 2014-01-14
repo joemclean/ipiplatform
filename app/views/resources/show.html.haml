@@ -23,6 +23,11 @@
     %h3
       Link to Resource
     %a{:href=> "#{@resource.link}"} #{@resource.name} (#{@resource.link})
+    
+    %h3
+      Resource's File
+    =link_to "Click Here To Download", @resource.file_name
+
     %h3
       Tool popularity
     %p
