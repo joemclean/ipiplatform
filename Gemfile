@@ -18,6 +18,7 @@ gem "fakefs", :require => "fakefs/safe"
 gem 'unf'
 gem 'kaminari'
 gem 'rmagick'
+gem 'figaro'
 
 group :test, :development do
   gem 'rspec-rails'

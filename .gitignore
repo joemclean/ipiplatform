@@ -31,3 +31,6 @@ pickle-email-*.html
 .idea/*
 /vendor/cache/*
 /public/uploads/*
+
+# Ignore application configuration
+/config/application.yml
