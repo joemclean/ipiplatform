@@ -56,6 +56,14 @@ class Resource < ActiveRecord::Base
     end
   end
 
+  def cleaned_link
+    if !(self.link.start_with?('http://'))
+      return "http://#{self.link}"
+    else
+      return self.link
+    end
+  end
+
   def checked_color_tags(params, color)
     if params[:color_ids].nil?
       self.color_ids.include?(color.id)

@@ -22,8 +22,8 @@
     %br
     %h3
       Link to Resource
-    %a{:href=> "#{@resource.link}"} #{@resource.name} (#{@resource.link})
-    
+    %a{:href=> "#{@resource.cleaned_link}"} #{@resource.name} (#{@resource.link})
+
     %h3
       Resource's File
     =link_to "Click Here To Download", @resource.file_name
