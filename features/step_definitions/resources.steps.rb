@@ -29,7 +29,7 @@ When(/^I fill in required resource fields$/) do
 end
 
 When(/^I fill in all resource fields$/) do
-  step "I fill in required resource fields"
+  step 'I fill in required resource fields'
   step "I fill in \"resource_tag_list\" with \"tag\""
   step "I check the color_id_#{@color.id} box"
 end
@@ -78,6 +78,14 @@ end
 
 When(/^I delete the second user's resource$/) do
   page.find("#delete_resource_#{@resource2.id}").click
+end
+
+When(/^I go to upload an image$/) do
+  #page.find('#resource_image').click
+end
+
+When(/^I upload the image to the image upload$/) do
+  page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
 end
 
 Then(/^I see one resource$/) do
@@ -158,6 +166,10 @@ Then(/^that resource is no longer displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
 end
 
+Then(/^I see the image$/) do
+  expect(page.find("resource_image_#{Resource.first.id}")).to be_true
+end
+
 private
 
 def one_resource_xpath
@@ -193,3 +205,6 @@ def current_path
 end
 
 
+When(/^I use the garbage step$/) do
+  binding.pry
+end
