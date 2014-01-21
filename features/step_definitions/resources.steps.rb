@@ -146,7 +146,7 @@ Then(/^I am on the second user's resource show page$/) do
   expect(current_path).to eql("/resources/#{@resource2.id}")
 end
 
-Then(/^I am on the resources index page$/) do
+Then(/^I am on the new resources index page$/) do
   expect(current_path).to eql('/resources')
 end
 
@@ -166,8 +166,12 @@ Then(/^that resource is no longer displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
 end
 
-Then(/^I see the image$/) do
-  expect(page.find("resource_image_#{Resource.first.id}")).to be_true
+Then(/^I select the image$/) do
+  expect(page.find("resource_image_#{Resource.first.id}")).click
+end
+
+Then(/^I go to the new resource's page$/) do
+  expect(current_path).to eql('/resources/1')
 end
 
 private
@@ -204,7 +208,24 @@ def current_path
   URI.parse(current_url).path
 end
 
-
 When(/^I use the garbage step$/) do
   binding.pry
+end
+
+
+When(/^I go to upload a file$/) do
+page.find('#resource_file').click
+end
+
+When(/^I upload the file to the file upload$/) do
+ page.attach_file('resource_file', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
+end
+
+
+Then(/^I select the file$/) do
+expect(page.find("resource_file_#{Resource.first.id}")).click
+end
+
+Then(/^I am on the resources index page$/) do
+  expect(current_path).to eql('/resources')
 end
