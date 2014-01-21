@@ -63,6 +63,7 @@ describe Resource do
         FakeFS.activate!
         FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
         @resource = FactoryGirl.build(:resource)
+
       end
 
       after :each do

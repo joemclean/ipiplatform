@@ -45,60 +45,11 @@ ActiveRecord::Schema.define(version: 20140114175105) do
     t.text     "text"
   end
 
-  create_table "industries", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "personalities", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "personality_traits", force: true do |t|
-    t.integer "personality_id"
-    t.integer "trait_id"
-  end
-
-  create_table "phase_associations", force: true do |t|
-    t.integer "phase_id"
-    t.integer "resource_id"
-  end
-
-  create_table "phases", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "question_responses", force: true do |t|
-    t.text     "response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "color_id"
-  end
-
-  create_table "questions", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "survey_id"
-  end
-
   create_table "resource_formats", force: true do |t|
     t.integer  "format_id"
     t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "resource_industries", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "resource_id"
-    t.integer  "industry_id"
   end
 
   create_table "resources", force: true do |t|
@@ -113,25 +64,12 @@ ActiveRecord::Schema.define(version: 20140114175105) do
     t.string   "tag_list"
     t.string   "image"
     t.string   "default_image"
-    t.string   "resource_file"
     t.string   "file"
-  end
-
-  create_table "spectrums", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "suggestions", force: true do |t|
     t.string   "author"
     t.text     "thoughts"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "surveys", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
