@@ -16,8 +16,8 @@ describe Color do
       expect(color.valid?).to be_false
     end
 
-    it 'should have a value proposition it belongs to' do
-      color = FactoryGirl.build_stubbed(:color, value_proposition: nil)
+    it 'should have a value proposition category it belongs to' do
+      color = FactoryGirl.build_stubbed(:color, value_proposition_category: nil)
 
       expect(color.valid?).to be_false
     end
@@ -27,8 +27,8 @@ describe Color do
     include FakeFS::SpecHelpers
 
     before :each do
-      @value_proposition = FactoryGirl.create(:value_proposition)
-      @color_test = FactoryGirl.build(:color, value_proposition: @value_proposition)
+      @value_proposition_category = FactoryGirl.create(:value_proposition_category)
+      @color_test = FactoryGirl.build(:color, value_proposition_category: @value_proposition_category)
     end
 
     context 'for non-production environment' do

@@ -5,12 +5,12 @@ describe ColorsController do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
-      @value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
+      @value_proposition_category = FactoryGirl.create(:value_proposition_category, name: 'Hats and bowties', description: 'are good for events')
       @create_params = { color: {
                                 name: @name,
                                 description: @description,
                                 },
-                         value_proposition_id: @value_proposition.id
+                         value_proposition_category_id: @value_proposition_category.id
                         }
     end
 
@@ -18,7 +18,7 @@ describe ColorsController do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        ValueProposition.stub(:find).and_return(@value_proposition)
+        ValuePropositionCategory.stub(:find).and_return(@value_proposition_category)
       end
 
       it 'should create a color' do
@@ -30,8 +30,8 @@ describe ColorsController do
         expect(@color.description).to eql @description
       end
 
-      it 'should be able to attach associated value proposition' do
-        ValueProposition.should_receive(:find).exactly(1).times
+      it 'should be able to attach associated value proposition category' do
+        ValuePropositionCategory.should_receive(:find).exactly(1).times
 
         patch :create, @create_params
       end
@@ -64,8 +64,8 @@ describe ColorsController do
 
   describe '#destroy' do
     before :each do
-      @value_proposition = FactoryGirl.create(:value_proposition)
-      color = FactoryGirl.create(:color, value_proposition: @value_proposition)
+      @value_proposition_category = FactoryGirl.create(:value_proposition_category)
+      color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
       @destroy_params = {id: color.id}
     end
 
@@ -81,12 +81,12 @@ describe ColorsController do
         expect(Color.all.count).to eql(0)
       end
 
-      it 'should be able to detatch associated value proposition' do
-        @value_proposition.colors.count.should eql(1)
+      it 'should be able to detatch associated value proposition category' do
+        @value_proposition_category.colors.count.should eql(1)
 
         delete :destroy, @destroy_params
 
-        expect(@value_proposition.colors.count).to eql(0)
+        expect(@value_proposition_category.colors.count).to eql(0)
       end
     end
 
@@ -117,8 +117,8 @@ describe ColorsController do
 
   describe '#index' do
     before :each do
-      value_proposition = FactoryGirl.create(:value_proposition)
-      color = FactoryGirl.create(:color, value_proposition: value_proposition)
+      value_proposition = FactoryGirl.create(:value_proposition_category)
+      color = FactoryGirl.create(:color, value_proposition_category: value_proposition)
       @get_params = {id: color.id}
     end
 
@@ -154,8 +154,8 @@ describe ColorsController do
 
   describe '#show' do
     before :each do
-      value_proposition = FactoryGirl.create(:value_proposition)
-      color = FactoryGirl.create(:color, value_proposition: value_proposition)
+      value_proposition_category = FactoryGirl.create(:value_proposition_category)
+      color = FactoryGirl.create(:color, value_proposition_category: value_proposition_category)
       @get_params = {id: color.id}
     end
 
@@ -194,21 +194,21 @@ describe ColorsController do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
-      @other_value_proposition = FactoryGirl.create(:value_proposition, name: 'Hats and bowties', description: 'are good for events')
-      @color = FactoryGirl.create(:color, value_proposition: FactoryGirl.create(:value_proposition))
+      @other_value_proposition_category = FactoryGirl.create(:value_proposition_category, name: 'Hats and bowties', description: 'are good for events')
+      @color = FactoryGirl.create(:color, value_proposition_category: FactoryGirl.create(:value_proposition_category))
       @params = {id: @color.id,
                  color: {
                    name: @name,
                    description: @description,
                  },
-                 value_proposition_id: @other_value_proposition.id
+                 value_proposition_category_id: @other_value_proposition_category.id
       }
     end
     context 'as an admin user' do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        ValueProposition.stub(:find).and_return(@other_value_proposition)
+        ValuePropositionCategory.stub(:find).and_return(@other_value_proposition_category)
       end
 
       it 'should update colors' do
@@ -220,8 +220,8 @@ describe ColorsController do
         expect(@color.description).to eql @description
       end
 
-      it 'should be able to replace associated value proposition' do
-        ValueProposition.should_receive(:find).exactly(1).times
+      it 'should be able to replace associated value proposition category' do
+        ValuePropositionCategory.should_receive(:find).exactly(1).times
 
         patch :update, @params
       end

@@ -6,25 +6,25 @@ class ValuePropositionsController < ApplicationController
   before_filter :set_value_proposition, except: [:show, :new, :create, :index]
 
   def new
-    @value_proposition = ValueProposition.new
+    @value_proposition_category = ValueProposition.new
   end
 
   def create
-    @value_proposition = ValueProposition.new(value_propositions_params)
+    @value_proposition_category = ValueProposition.new(value_propositions_params)
 
     respond_to do |format|
-      if @value_proposition.save
-        format.html { redirect_to @value_proposition, notice: 'Value proposition was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @value_proposition }
+      if @value_proposition_category.save
+        format.html { redirect_to @value_proposition_category, notice: 'Value proposition was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @value_proposition_category }
       else
         format.html { render action: 'new' }
-        format.json { render json: @value_proposition.errors, status: :unprocessable_entity }
+        format.json { render json: @value_proposition_category.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @value_proposition.destroy
+    @value_proposition_category.destroy
     respond_to do |format|
       format.html { redirect_to value_propositions_path }
       format.json { head :no_content }
@@ -36,14 +36,14 @@ class ValuePropositionsController < ApplicationController
   end
 
   def show
-    @value_proposition = ValueProposition.find(params[:id])
+    @value_proposition_category = ValueProposition.find(params[:id])
   end
 
   def update
     ActiveRecord::Base.transaction do
-      @value_proposition.update_attributes(value_propositions_params)
-      if params[:value_proposition][:colors_attributes].present?
-        params[:value_proposition][:colors_attributes].values.each do |color_params|
+      @value_proposition_category.update_attributes(value_propositions_params)
+      if params[:value_proposition_category][:colors_attributes].present?
+        params[:value_proposition_category][:colors_attributes].values.each do |color_params|
           Color.find(color_params[:id]).update(color_params)
         end
       end
@@ -54,10 +54,10 @@ class ValuePropositionsController < ApplicationController
 
   private
   def set_value_proposition
-   @value_proposition = ValueProposition.find(params[:id])
+   @value_proposition_category = ValueProposition.find(params[:id])
   end
 
   def value_propositions_params
-    params.require(:value_proposition).permit(:name, :description, :color)
+    params.require(:value_proposition_category).permit(:name, :description, :color)
   end
 end

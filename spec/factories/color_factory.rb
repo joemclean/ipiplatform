@@ -8,6 +8,6 @@ FactoryGirl.define do
     name 'color_name'
     description 'color_description'
 
-    association :value_proposition, strategy: :build
+    association :value_proposition_category, strategy: :build
   end
 end

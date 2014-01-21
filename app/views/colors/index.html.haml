@@ -12,8 +12,8 @@
       %td= color.name
       %td= color.description
       %td
-        - if color.value_proposition.present?
-          = color.value_proposition.name
+        - if color.value_proposition_category.present?
+          = color.value_proposition_category.name
       %td= link_to 'Show', color
       
       - if current_user.present? && current_user.is_admin?

@@ -1,17 +1,17 @@
 %p#notice= notice
 
 %h2
-  =@value_proposition.name
+  =@value_proposition_category.name
 
 %p
   %b Full Description:
-  %div{:id => "value_proposition_description_#{@value_proposition.id}"}
-    = @value_proposition.description
+  %div{:id => "value_proposition_description_#{@value_proposition_category.id}"}
+    = @value_proposition_category.description
 
 %p
-  - if @value_proposition.colors.present?
+  - if @value_proposition_category.colors.present?
     %ul
-      - for color in @value_proposition.colors
+      - for color in @value_proposition_category.colors
         .color_container
           %li
             = link_to color.name, color
@@ -37,6 +37,6 @@
   %br
   - if current_user.present? && current_user.is_admin?
     .btn
-      = link_to 'Edit Value Proposition', edit_value_proposition_path(@value_proposition)
+      = link_to 'Edit Value Proposition', edit_value_proposition_path(@value_proposition_category)
     .btn
       = link_to 'Manage all Value Propositions', value_propositions_path

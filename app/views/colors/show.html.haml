@@ -8,8 +8,8 @@
         =@color.name
       %p
         %b
-        - if @color.value_proposition.present?
-          = link_to @color.value_proposition.name, value_proposition_path(@color.value_proposition.id)
+        - if @color.value_proposition_category.present?
+          = link_to @color.value_proposition_category.name, value_proposition_path(@color.value_proposition_category.id)
         -else
           (Empty)
   %p

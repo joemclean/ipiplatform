@@ -1,9 +1,9 @@
-= form_for @value_proposition do |f|
-  - if @value_proposition.errors.any?
+= form_for @value_proposition_category do |f|
+  - if @value_proposition_category.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@value_proposition.errors.count, "error")} prohibited this value proposition from being saved:"
+      %h2= "#{pluralize(@value_proposition_category.errors.count, "error")} prohibited this value proposition from being saved:"
       %ul
-        - @value_proposition.errors.full_messages.each do |msg|
+        - @value_proposition_category.errors.full_messages.each do |msg|
           %li= msg
 
   .field

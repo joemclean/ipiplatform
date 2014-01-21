@@ -3,20 +3,20 @@ When(/^I visit the admin profile page$/) do
 end
 
 And(/^I go to manage value proposition categories$/) do
-  page.find('#manage_value_propositions_and_colors').click
+  page.find('#manage_value_propositions_categories_and_colors').click
 end
 
 And(/^I create a new value proposition category$/) do
-  page.find('#create_value_proposition').click
+  page.find('#create_value_proposition_category').click
 end
 
 And(/^I fill in all required value proposition category fields$/) do
-  step "I fill in \"value_proposition_name\" with \"New Value Proposition\""
-  step "I fill in \"value_proposition_description\" with \"description\""
+  step "I fill in \"value_proposition_category_name\" with \"New Value Proposition\""
+  step "I fill in \"value_proposition_category_description\" with \"description\""
 end
 
 And(/^I save the new value proposition category$/) do
-  find('#save_new_value_proposition').click
+  find('#save_new_value_proposition_category').click
 end
 
 Then(/^I see the value proposition category I just created$/) do
@@ -28,7 +28,7 @@ And(/^I go to edit an existing value proposition category$/) do
 end
 
 And(/^I change the name of the value proposition category$/) do
-  step "I fill in \"value_proposition_name\" with \"Changed Value Proposition Category\""
+  step "I fill in \"value_proposition_category_name\" with \"Changed Value Proposition Category\""
 end
 
 And(/^I save the edited value proposition category$/) do
@@ -36,7 +36,7 @@ And(/^I save the edited value proposition category$/) do
 end
 
 Then(/^I see the value proposition category has been edited$/) do
-  expect(find(:id, "value_proposition_category_#{@value_proposition.id}").text).to eql('Changed Value Proposition Category')
+  expect(find(:id, "value_proposition_category_#{@value_proposition_category.id}").text).to eql('Changed Value Proposition Category')
 end
 
 And(/^I delete the value proposition category$/) do

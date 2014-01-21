@@ -29,16 +29,16 @@ Given(/^the second user creates a resource$/) do
 end
 
 Given(/^a value proposition category exists$/) do
-  @value_proposition = FactoryGirl.create(:value_proposition)
+  @value_proposition_category = FactoryGirl.create(:value_proposition_category)
 end
 
-Given(/^a value proposition color exists$/) do
+Given(/^a color exists$/) do
   @color = FactoryGirl.create(:color)
 end
 
-Given(/^a value proposition and a color exist$/) do
-  @value_proposition = FactoryGirl.create(:value_proposition)
-  @color = FactoryGirl.create(:color, value_proposition: @value_proposition)
+Given(/^a value proposition category and a color exist$/) do
+  @value_proposition_category = FactoryGirl.create(:value_proposition_category)
+  @color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
 end
 
 
