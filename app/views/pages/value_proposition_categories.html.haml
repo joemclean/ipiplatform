@@ -1,0 +1,26 @@
+.jumbotron.innovator_hero
+  %h2 Thoughtworks Value Proposition Categories
+  %p
+    Every client is different, and Thoughtworks can help those clients innovate in all different ways. This affects how every account is pursued, sold, developed, and measured for success. Each value proposition category we present requires a distinct approach to be effective. You can learn about our value propositions here and find helpful resources to assist every stage of these different types of projects.
+-@value_proposition_categories.each do |value_proposition_category|
+  .row{:style => 'margin-top: 50px;'}
+    .container{id: "value_proposition_category_container_#{value_proposition_category.id}"}
+      .col-sm-12
+        %h2
+          =link_to value_proposition_category.name, value_proposition_category_path(value_proposition_category.id), :id => "value_proposition_category_#{value_proposition_category.id}"
+        %br
+          %div{:id => "value_proposition_description_#{value_proposition_category.id}"}
+            =value_proposition_category.description
+  .row
+    -value_proposition_category.colors.each do |color|
+      .col-sm-4
+        .panel.panel-default{:style => 'margin: 20px 0px;'}
+          .container{id: "color_id_#{color.id}"}
+            %h3.panel-heading
+              = link_to color.name, color, id: "color_link_#{color.id}"
+            .panel-body
+              =image_tag color.image_name, class: "color_image"
+              %p{:style => 'font-weight: bold; color:#6BB8D4'}
+              %br
+              %p{:style => 'align: center'}
+              = color.description

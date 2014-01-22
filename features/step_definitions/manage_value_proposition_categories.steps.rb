@@ -3,7 +3,7 @@ When(/^I visit the admin profile page$/) do
 end
 
 And(/^I go to manage value proposition categories$/) do
-  page.find('#manage_value_propositions_categories_and_colors').click
+  page.find('#manage_value_proposition_categories_and_colors').click
 end
 
 And(/^I create a new value proposition category$/) do

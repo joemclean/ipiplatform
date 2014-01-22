@@ -9,10 +9,10 @@
 %h3
   - if current_user.present? && current_user.is_admin?
     .btn
-      = link_to 'Manage Value Propositions and Colors Together', value_propositions_path, id: 'manage_value_propositions_and_colors'
+      = link_to 'Manage Value Proposition Categories and Colors Together', value_proposition_categories_path, id: 'manage_value_proposition_categories_and_colors'
     %br
     .btn
-      = link_to 'Manage Colors', colors_path, id: 'manage_value_propositions'
+      = link_to 'Manage Colors', colors_path, id: 'manage_colors'
     %br
     .btn
       = link_to 'Manage Resources', resources_path

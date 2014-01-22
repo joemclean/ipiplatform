@@ -9,7 +9,6 @@
 #    And I fill in required resource fields
 #
 #  @javascript
-#  @browser
 #  Scenario: User successfully uploads a file to a new resource
 #    When I go to upload a file
 #    When I upload the file to the file upload

@@ -45,20 +45,20 @@ gold_proposition = [
   'zigzagger.png'
 ]
 
-value_propositions = [
-    ['Technical Value Propositions', [blue_proposition, green_proposition], 'Technical Value Propositions Description'],
-    ['Business Innovation Value Propositions', [yellow_proposition, orange_proposition, red_proposition], 'Business Innovation Value Propositions Description'],
+value_proposition_categories = [
+    ['Technical Value Proposition Categories', [blue_proposition, green_proposition], 'Technical Value Proposition Categories Description'],
+    ['Business Innovation Value Proposition Categories', [yellow_proposition, orange_proposition, red_proposition], 'Business Innovation Value Proposition Categories Description'],
     ['Process Innovation Propositions', [copper_proposition, silver_proposition, gold_proposition], 'Process Innovation Propositions Description']
 ]
 
-value_propositions.each do |name, color_propositions, value_proposition_description|
-  value_proposition = ValueProposition.find_or_create_by_name(name: name, description: value_proposition_description)
+value_proposition_categories.each do |name, color_propositions, value_proposition_category_description|
+  value_proposition_category = ValuePropositionCategory.find_or_create_by(name: name, description: value_proposition_category_description)
   color_propositions.each do |name, color_description, image, question_responses|
-    color = value_proposition.colors.find_or_create_by_name(name: name, description: color_description, default_image: image)
+    color = value_proposition_category.colors.find_or_create_by_name(name: name, description: color_description, default_image: image)
   end
 end
 
-resource = Resource.find_or_create_by_name({
+resource = Resource.find_or_create_by({
             user_id: user.id,
             name: 'Awesome Default Resource',
             link: 'www.google.com',

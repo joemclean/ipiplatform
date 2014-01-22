@@ -1,4 +1,4 @@
-class ValuePropositionsController < ApplicationController
+class ValuePropositionCategoriesController < ApplicationController
   before_filter :redirect_if_not_signed_in, except: [:show]
 
   before_filter :redirect_if_unauthorized, except: [:show]
@@ -6,11 +6,11 @@ class ValuePropositionsController < ApplicationController
   before_filter :set_value_proposition, except: [:show, :new, :create, :index]
 
   def new
-    @value_proposition_category = ValueProposition.new
+    @value_proposition_category = ValuePropositionCategory.new
   end
 
   def create
-    @value_proposition_category = ValueProposition.new(value_propositions_params)
+    @value_proposition_category = ValuePropositionCategory.new(value_proposition_categories_params)
 
     respond_to do |format|
       if @value_proposition_category.save
@@ -26,38 +26,40 @@ class ValuePropositionsController < ApplicationController
   def destroy
     @value_proposition_category.destroy
     respond_to do |format|
-      format.html { redirect_to value_propositions_path }
+      format.html { redirect_to value_proposition_categories_path }
       format.json { head :no_content }
     end
   end
 
   def index
-    @value_propositions = ValueProposition.all
+    @value_proposition_categories = ValuePropositionCategory.all
   end
 
   def show
-    @value_proposition_category = ValueProposition.find(params[:id])
+    @value_proposition_category = ValuePropositionCategory.find(params[:id])
   end
 
   def update
     ActiveRecord::Base.transaction do
-      @value_proposition_category.update_attributes(value_propositions_params)
+      @value_proposition_category.update_attributes(value_proposition_categories_params)
+
       if params[:value_proposition_category][:colors_attributes].present?
         params[:value_proposition_category][:colors_attributes].values.each do |color_params|
           Color.find(color_params[:id]).update(color_params)
         end
       end
+
     end
-    redirect_to value_proposition_path
+    redirect_to value_proposition_category_path
   end
 
 
   private
   def set_value_proposition
-   @value_proposition_category = ValueProposition.find(params[:id])
+   @value_proposition_category = ValuePropositionCategory.find(params[:id])
   end
 
-  def value_propositions_params
+  def value_proposition_categories_params
     params.require(:value_proposition_category).permit(:name, :description, :color)
   end
 end

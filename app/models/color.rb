@@ -1,9 +1,9 @@
 class Color < ActiveRecord::Base
   has_many :color_associations, dependent: :destroy
   has_many :resources, through: :color_associations
-  belongs_to :value_proposition
+  belongs_to :value_proposition_category
 
-  validates :name, :description, :value_proposition, presence: true
+  validates :name, :description, :value_proposition_category, presence: true
 
   mount_uploader :image, ImageUploader
 

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   
-  def value_propositions
-    @value_propositions = ValueProposition.all
+  def value_proposition_categories
+    @value_proposition_categories = ValuePropositionCategory.all
   end
 
   def aboutus

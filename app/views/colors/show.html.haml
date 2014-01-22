@@ -9,7 +9,7 @@
       %p
         %b
         - if @color.value_proposition_category.present?
-          = link_to @color.value_proposition_category.name, value_proposition_path(@color.value_proposition_category.id)
+          = link_to @color.value_proposition_category.name, value_proposition_category_path(@color.value_proposition_category.id)
         -else
           (Empty)
   %p
@@ -29,4 +29,4 @@
     .btn.btn-default
       = link_to "Edit #{@color.name}", edit_color_path(@color)
   .btn.btn.btn-default
-    = link_to 'All Value Propositions', pages_value_propositions_path
+    = link_to 'All Value Proposition Categories', pages_value_proposition_categories_path

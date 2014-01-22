@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ValueProposition do
+describe ValuePropositionCategory do
   describe 'validations' do
     it 'should have a name' do
       value_proposition_category = FactoryGirl.build_stubbed(:value_proposition_category, name: nil)

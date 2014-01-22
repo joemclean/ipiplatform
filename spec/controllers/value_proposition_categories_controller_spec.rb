@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ValuePropositionsController do
+describe ValuePropositionCategoriesController do
 
   describe '#create' do
     context 'as an admin user' do

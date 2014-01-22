@@ -1,0 +1,66 @@
+.hero.innovator_hero
+  %h2 Manage Value Proposition Categories and Colors
+  %br
+  %br
+  .btn
+    = link_to 'Create Value Proposition Category', new_value_proposition_category_path, id: 'create_value_proposition_category'
+.row
+  -@value_proposition_categories.each do |value_proposition_category|
+    .value_proposition_categories_container
+      .readonly{:id => "value_proposition_category_#{value_proposition_category.id}"}
+        %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+          = link_to value_proposition_category.name, value_proposition_category_path(value_proposition_category.id)
+          .btn
+            = link_to 'Edit', '', :id => "edit_button_#{value_proposition_category.id}", onclick: "toggleEdit(this); return false"
+          %ul{:style => 'text-align: left;'}
+            =value_proposition_category.description
+          %br
+          -value_proposition_category.colors.each do |color|
+            %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
+              = color.name
+              %br
+              %ul{:style => 'text-align: left;'}
+                %p{:style => 'align: center'}
+                = color.description
+        %br
+        %hr
+        %br
+      .editable{:id => "value_proposition_category_#{value_proposition_category.id}"}
+        = form_for(value_proposition_category, { url: value_proposition_category_path(value_proposition_category), html: { onsubmit: 'submitItemEdit(this); return false;' } }) do |value_proposition_category_form|
+          %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
+            %br
+            Value Proposition Category Name:
+            = value_proposition_category_form.text_field :name
+          %p
+            Value Proposition Category Description:
+            = value_proposition_category_form.text_area :description
+            %br
+            %table.table.table-striped{:style => 'border: 0px;'}
+              = value_proposition_category_form.fields_for :colors do |color_form|
+                %tr
+                  %td.half
+                    %p{:style => 'font-weight: bold; color:#6BB8D4; font-size: 1.2em;'}
+                      Color name:
+                      = color_form.text_field :name
+                      %br
+                      %p{:style => 'align: center'}
+                      Color description:
+                      = color_form.text_area :description
+                      %br
+                      %br
+                      %br
+                      Upload a new image:
+                      = file_field_tag 'image', accept: 'image/png,image/gif,image/jpeg'
+                  %td.half
+                    = image_tag color_form.object.image
+                    .btn
+                      = link_to 'Delete Color', color_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          .btn
+            = link_to 'Save', '', :id => "save_button_#{value_proposition_category.id}", :onclick=>"document.forms['edit_value_proposition_category_#{value_proposition_category.id}'].submit();"
+          .btn
+            = link_to 'Cancel', '', onclick: "toggleEdit(this); return false"
+          .btn
+            = link_to 'Delete Value Proposition Category', value_proposition_category_form.object, :method => :delete, :data => { :confirm => 'Are you sure?' }, :id => "delete_button_#{value_proposition_category.id}"
+        %br
+        %hr
+        %br

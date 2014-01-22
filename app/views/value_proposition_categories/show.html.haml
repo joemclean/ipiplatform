@@ -32,11 +32,11 @@
 
 .btn-group
   .btn
-    = link_to 'All Value Propositions', pages_value_propositions_path
+    = link_to 'All Value Proposition Categories', pages_value_proposition_categories_path
   %br
   %br
   - if current_user.present? && current_user.is_admin?
     .btn
-      = link_to 'Edit Value Proposition', edit_value_proposition_path(@value_proposition_category)
+      = link_to 'Edit Value Proposition Category', edit_value_proposition_category_path(@value_proposition_category)
     .btn
-      = link_to 'Manage all Value Propositions', value_propositions_path
+      = link_to 'Manage all Value Proposition Category', value_proposition_categories_path

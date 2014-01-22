@@ -15,7 +15,7 @@ class ColorsController < ApplicationController
 
   def new
     @color = Color.new
-    @value_propositions = ValueProposition.all
+    @value_proposition_categories = ValuePropositionCategory.all
   end
 
   def edit
@@ -26,7 +26,7 @@ class ColorsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       @color.save
-      @color.value_proposition_category = ValueProposition.find(params[:value_proposition_id])
+      @color.value_proposition_category = ValuePropositionCategory.find(params[:value_proposition_category_id])
       @color_saved = @color.save
     end
 
@@ -37,7 +37,7 @@ class ColorsController < ApplicationController
       end
     else
       respond_to do |format|
-        @value_propositions = ValueProposition.all
+        @value_proposition_categories = ValuePropositionCategory.all
         format.html { render action: 'new' }
         format.json { render json: @color.errors, status: :unprocessable_entity }
       end
@@ -47,8 +47,8 @@ class ColorsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @color.update(color_params)
-      if params[:value_proposition_id].present?
-        @color.value_proposition_category = ValueProposition.find(params[:value_proposition_id])
+      if params[:value_proposition_category_id].present?
+        @color.value_proposition_category = ValuePropositionCategory.find(params[:value_proposition_category_id])
       else
         @color.value_proposition_category = nil
       end
@@ -80,7 +80,7 @@ class ColorsController < ApplicationController
 
   def set_color
     @color = Color.find(params[:id])
-    @value_propositions = ValueProposition.all
+    @value_proposition_categories = ValuePropositionCategory.all
   end
 
   def color_params

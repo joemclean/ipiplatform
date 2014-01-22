@@ -5,7 +5,7 @@ IpiPlatform::Application.routes.draw do
 
   get 'pages/home'
   get 'pages/publisher'
-  get 'pages/value_propositions'
+  get 'pages/value_proposition_categories'
   get 'pages/aboutus'
   get 'pages/landing'
 
@@ -16,7 +16,7 @@ IpiPlatform::Application.routes.draw do
   get 'tags/:tag', to: 'resources#index', as: :tag
 
 
-  resources :value_propositions
+  resources :value_proposition_categories
   resources :colors
   resources :bookmarks
   
