@@ -257,6 +257,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
+  multi_json
   pg
   poltergeist
   pry-rails
