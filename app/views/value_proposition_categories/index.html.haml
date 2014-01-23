@@ -30,7 +30,7 @@
           %p{:style => 'text-align: left; font-size: 24px; font-weight: bold; color: #6BB8D4; margin-top: 15px'}
             %br
             Value Proposition Category Name:
-            = value_proposition_category_form.text_field :name
+            = value_proposition_category_form.text_field :name, :id => "value_proposition_category_name_#{value_proposition_category.id}"
           %p
             Value Proposition Category Description:
             = value_proposition_category_form.text_area :description

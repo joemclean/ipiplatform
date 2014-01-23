@@ -1,5 +1,6 @@
 Feature: Value Proposition Category Index
 
+
   Background:
     Given a user account exists
     And I login as a "user"

@@ -11,7 +11,7 @@ And(/^I create a new value proposition category$/) do
 end
 
 And(/^I fill in all required value proposition category fields$/) do
-  step "I fill in \"value_proposition_category_name\" with \"New Value Proposition\""
+  step "I fill in \"value_proposition_category_name\" with \"New Value Proposition Category\""
   step "I fill in \"value_proposition_category_description\" with \"description\""
 end
 
@@ -20,7 +20,7 @@ And(/^I save the new value proposition category$/) do
 end
 
 Then(/^I see the value proposition category I just created$/) do
-  expect(page.has_css?("#value_proposition_category_1")).to be_true
+  expect(page.has_css?("#value_proposition_category_name_1")).to be_true
 end
 
 And(/^I go to edit an existing value proposition category$/) do
@@ -28,7 +28,7 @@ And(/^I go to edit an existing value proposition category$/) do
 end
 
 And(/^I change the name of the value proposition category$/) do
-  step "I fill in \"value_proposition_category_name\" with \"Changed Value Proposition Category\""
+  step "I fill in \"value_proposition_category_name_#{@value_proposition_category.id}\" with \"Changed Value Proposition Category\""
 end
 
 And(/^I save the edited value proposition category$/) do
@@ -36,7 +36,7 @@ And(/^I save the edited value proposition category$/) do
 end
 
 Then(/^I see the value proposition category has been edited$/) do
-  expect(find(:id, "value_proposition_category_#{@value_proposition_category.id}").text).to eql('Changed Value Proposition Category')
+  expect(find(:id, "value_proposition_category_name_#{@value_proposition_category.id}").text).to eql('Changed Value Proposition Category')
 end
 
 And(/^I delete the value proposition category$/) do

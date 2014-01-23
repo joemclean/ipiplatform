@@ -7,9 +7,9 @@
     .container{id: "value_proposition_category_container_#{value_proposition_category.id}"}
       .col-sm-12
         %h2
-          =link_to value_proposition_category.name, value_proposition_category_path(value_proposition_category.id), :id => "value_proposition_category_#{value_proposition_category.id}"
+          =link_to value_proposition_category.name, value_proposition_category_path(value_proposition_category.id), :id => "value_proposition_category_name_#{value_proposition_category.id}"
         %br
-          %div{:id => "value_proposition_description_#{value_proposition_category.id}"}
+          %div{:id => "value_proposition_category_description_#{value_proposition_category.id}"}
             =value_proposition_category.description
   .row
     -value_proposition_category.colors.each do |color|

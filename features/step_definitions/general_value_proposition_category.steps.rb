@@ -9,7 +9,7 @@ end
 private
 
   def one_value_proposition_category_xpath
-    "//*[@id=\"value_proposition_category_#{@value_proposition_category.id}\"]"
+    "//*[@id=\"value_proposition_category_name_#{@value_proposition_category.id}\"]"
   end
 
   def one_color_xpath

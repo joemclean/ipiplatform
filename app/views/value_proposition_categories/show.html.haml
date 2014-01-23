@@ -1,7 +1,8 @@
 %p#notice= notice
 
 %h2
-  =@value_proposition_category.name
+  %div{id: "value_proposition_category_name_#{@value_proposition_category.id}"}
+    =@value_proposition_category.name
 
 %p
   %b Full Description:
