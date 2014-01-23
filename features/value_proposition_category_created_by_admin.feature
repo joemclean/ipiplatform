@@ -3,7 +3,7 @@ Feature: Creating new value proposition category as an admin
   Background:
     Given an admin account exists
     And I login as an admin
-@browser
+
   Scenario: Admin can create a new value proposition category
     When I visit the admin profile page
     And I go to manage value proposition categories
