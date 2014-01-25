@@ -113,6 +113,12 @@ a.homepage_button {
   .box {
     background-color: #4291AD;
   }
+  .team {
+    display: block;
+    .individuals {
+      height: 150px;
+    }
+  }
 }
 
 .whitepurplesection {
