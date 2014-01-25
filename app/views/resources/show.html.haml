@@ -1,5 +1,5 @@
 %p#notice= notice
-.jumbotron
+.jumbotron.row
   .row
     .col-sm-2
       =image_tag @resource.image_name, class: 'resource_image'
@@ -10,7 +10,6 @@
       .row.showresource
         .col-sm-4
           %p.authorBox='Uploaded by: ' + @resource.author.name
-  .col-sm-8
     %p
       = @resource.full_description
 .row.showresource

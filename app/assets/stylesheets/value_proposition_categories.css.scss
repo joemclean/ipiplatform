@@ -1,3 +1,8 @@
+// Place all the styles related to the value proposition categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 .resources {
   display: none;
 }
@@ -6,4 +11,28 @@
   .resources {
     display: block;
   }
+}
+
+.readonly {
+  display: block;
+}
+
+.editable {
+  display: none;
+}
+
+.editing {
+  .readonly {
+    display: none;
+  }
+
+  .editable {
+    display: block;
+  }
+}
+
+.half {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
 }
