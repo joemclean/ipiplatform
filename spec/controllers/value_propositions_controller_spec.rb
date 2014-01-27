@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe ColorsController do
+describe ValuePropositionsController do
   describe '#create' do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
       @value_proposition_category = FactoryGirl.create(:value_proposition_category, name: 'Hats and bowties', description: 'are good for events')
-      @create_params = { color: {
+      @create_params = { value_proposition: {
                                 name: @name,
                                 description: @description,
                                 },
@@ -21,13 +21,13 @@ describe ColorsController do
         ValuePropositionCategory.stub(:find).and_return(@value_proposition_category)
       end
 
-      it 'should create a color' do
+      it 'should create a value proposition' do
         patch :create, @create_params
 
-        @color = Color.all.first
+        @value_proposition = ValueProposition.all.first
 
-        expect(@color.name).to eql 'orange'
-        expect(@color.description).to eql @description
+        expect(@value_proposition.name).to eql 'orange'
+        expect(@value_proposition.description).to eql @description
       end
 
       it 'should be able to attach associated value proposition category' do
@@ -38,11 +38,11 @@ describe ColorsController do
     end
 
     context 'as a user' do
-      it 'should not be able to create a color' do
+      it 'should not be able to create a value proposition' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         patch :create, @create_params
 
-        expect(Color.all.count).to eql(0)
+        expect(ValueProposition.all.count).to eql(0)
       end
     end
 
@@ -54,10 +54,10 @@ describe ColorsController do
         response.should redirect_to new_session_path
       end
 
-      it 'should not be able to create a color' do
+      it 'should not be able to create a value proposition' do
         patch :create, @create_params
 
-        expect(Color.all.count).to eql(0)
+        expect(ValueProposition.all.count).to eql(0)
       end
     end
   end
@@ -65,8 +65,8 @@ describe ColorsController do
   describe '#destroy' do
     before :each do
       @value_proposition_category = FactoryGirl.create(:value_proposition_category)
-      color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
-      @destroy_params = {id: color.id}
+      value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)
+      @destroy_params = {id: value_proposition.id}
     end
 
     context 'as an admin user' do
@@ -75,27 +75,27 @@ describe ColorsController do
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
       end
 
-      it 'should delete a color' do
+      it 'should delete a value proposition' do
         delete :destroy, @destroy_params
 
-        expect(Color.all.count).to eql(0)
+        expect(ValueProposition.all.count).to eql(0)
       end
 
       it 'should be able to detatch associated value proposition category' do
-        @value_proposition_category.colors.count.should eql(1)
+        @value_proposition_category.value_propositions.count.should eql(1)
 
         delete :destroy, @destroy_params
 
-        expect(@value_proposition_category.colors.count).to eql(0)
+        expect(@value_proposition_category.value_propositions.count).to eql(0)
       end
     end
 
     context 'as a user' do
-      it 'should not be able to delete a color' do
+      it 'should not be able to delete a value proposition' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         delete :destroy, @destroy_params
 
-        expect(Color.all.count).to eql(1)
+        expect(ValueProposition.all.count).to eql(1)
       end
     end
 
@@ -107,30 +107,30 @@ describe ColorsController do
         response.should redirect_to new_session_path
       end
 
-      it 'should not be able to delete a color' do
+      it 'should not be able to delete a value proposition' do
         delete :destroy, @destroy_params
 
-        expect(Color.all.count).to eql(1)
+        expect(ValueProposition.all.count).to eql(1)
       end
     end
   end
 
   describe '#index' do
     before :each do
-      value_proposition = FactoryGirl.create(:value_proposition_category)
-      color = FactoryGirl.create(:color, value_proposition_category: value_proposition)
-      @get_params = {id: color.id}
+      value_proposition_category = FactoryGirl.create(:value_proposition_category)
+      value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
+      @get_params = {id: value_proposition.id}
     end
 
     context 'as an admin user' do
-      it 'should show the list of colors' do
+      it 'should show the list of value propositions' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
 
         get :index, @get_params
 
         expect(response.status).to be(200)
-        expect(controller.request.path).to eql(colors_path)
+        expect(controller.request.path).to eql(value_propositions_path)
       end
     end
 
@@ -155,37 +155,37 @@ describe ColorsController do
   describe '#show' do
     before :each do
       value_proposition_category = FactoryGirl.create(:value_proposition_category)
-      color = FactoryGirl.create(:color, value_proposition_category: value_proposition_category)
-      @get_params = {id: color.id}
+      value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
+      @get_params = {id: value_proposition.id}
     end
 
     context 'as an admin user' do
-      it 'should show the requested color' do
+      it 'should show the requested value proposition' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
 
         get :show, @get_params
 
         expect(response.status).to be(200)
-        expect(controller.request.path).to eql(color_path)
+        expect(controller.request.path).to eql(value_proposition_path)
       end
     end
 
     context 'as a user' do
-      it 'should show the requested color' do
+      it 'should show the requested value proposition' do
         get :show, @get_params
 
         expect(response.status).to be(200)
-        expect(controller.request.path).to eql(color_path)
+        expect(controller.request.path).to eql(value_proposition_path)
       end
     end
 
     context 'while not signed in' do
-      it 'should show the requested color' do
+      it 'should show the requested value proposition' do
         get :show, @get_params
 
         expect(response.status).to be(200)
-        expect(controller.request.path).to eql(color_path)
+        expect(controller.request.path).to eql(value_proposition_path)
       end
     end
   end
@@ -195,9 +195,9 @@ describe ColorsController do
       @description = 'as in tasty carrots'
       @name = 'orange'
       @other_value_proposition_category = FactoryGirl.create(:value_proposition_category, name: 'Hats and bowties', description: 'are good for events')
-      @color = FactoryGirl.create(:color, value_proposition_category: FactoryGirl.create(:value_proposition_category))
-      @params = {id: @color.id,
-                 color: {
+      @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: FactoryGirl.create(:value_proposition_category))
+      @params = {id: @value_proposition.id,
+                 value_proposition: {
                    name: @name,
                    description: @description,
                  },
@@ -211,13 +211,13 @@ describe ColorsController do
         ValuePropositionCategory.stub(:find).and_return(@other_value_proposition_category)
       end
 
-      it 'should update colors' do
+      it 'should update value propositions' do
         patch :update, @params
 
-        @color.reload
+        @value_proposition.reload
 
-        expect(@color.name).to eql 'orange'
-        expect(@color.description).to eql @description
+        expect(@value_proposition.name).to eql 'orange'
+        expect(@value_proposition.description).to eql @description
       end
 
       it 'should be able to replace associated value proposition category' do
@@ -228,14 +228,14 @@ describe ColorsController do
     end
 
     context 'as a user' do
-      it 'should not be able to update a color' do
+      it 'should not be able to update a value proposition' do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         patch :update, @params
 
-        @color.reload
+        @value_proposition.reload
 
-        expect(@color.name).to eql('color_name')
-        expect(@color.description).to eql('color_description')
+        expect(@value_proposition.name).to eql('value_proposition_name')
+        expect(@value_proposition.description).to eql('value_proposition_description')
       end
     end
 
@@ -247,13 +247,13 @@ describe ColorsController do
         response.should redirect_to new_session_path
       end
 
-      it 'should not be able to update a color' do
+      it 'should not be able to update a value proposition' do
         patch :update, @params
 
-        @color.reload
+        @value_proposition.reload
 
-        expect(@color.name).to eql('color_name')
-        expect(@color.description).to eql('color_description')
+        expect(@value_proposition.name).to eql('value_proposition_name')
+        expect(@value_proposition.description).to eql('value_proposition_description')
       end
     end
   end

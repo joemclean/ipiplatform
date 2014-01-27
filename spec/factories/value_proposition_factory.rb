@@ -4,9 +4,9 @@ def file_upload_with file_name
 end
 
 FactoryGirl.define do
-  factory :color do
-    name 'color_name'
-    description 'color_description'
+  factory :value_proposition do
+    name 'value_proposition_name'
+    description 'value_proposition_description'
 
     association :value_proposition_category, strategy: :build
   end

@@ -1,0 +1,32 @@
+%p#notice= notice
+.jumbotron
+  .row
+    .col-sm-2
+      =image_tag @value_proposition.image_name, style: "width:70%; margin: 0px 15% 20px 15%;"
+    .col-sm-10
+      %h2
+        =@value_proposition.name
+      %p
+        %b
+        - if @value_proposition.value_proposition_category.present?
+          = link_to @value_proposition.value_proposition_category.name, value_proposition_category_path(@value_proposition.value_proposition_category.id)
+        -else
+          (Empty)
+  %p
+    = @value_proposition.description
+%hr
+%p
+  %h3
+    = 'Helpful resources for ' + @value_proposition.name.pluralize + ' engagements'
+  %table.table.table-striped
+    - @value_proposition.resources.each do |resource|
+      %tr{:id => "vp_#{@value_proposition.id}_#{resource.id}"}
+        %td
+          = link_to resource.name, resource_path(resource)
+
+.btn-group
+  - if current_user.present? && current_user.is_admin?
+    .btn.btn-default
+      = link_to "Edit #{@value_proposition.name}", edit_value_proposition_path(@value_proposition)
+  .btn.btn.btn-default
+    = link_to 'All Value Proposition Categories', pages_value_proposition_categories_path

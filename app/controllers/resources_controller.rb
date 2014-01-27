@@ -32,9 +32,10 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     @resource.user = current_user || User.find(params[:user_id])
 
+
     ActiveRecord::Base.transaction do
       @resource_saved = @resource.save
-      update_color_associations
+      update_value_proposition_associations
     end
 
      if @resource_saved
@@ -45,7 +46,7 @@ class ResourcesController < ApplicationController
     else
       respond_to do |format|
         format.html { render action: 'new' }
-        format.json { render json: @color.errors, status: :unprocessable_entity }
+        format.json { render json: @value_proposition.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,8 +56,8 @@ class ResourcesController < ApplicationController
       ActiveRecord::Base.transaction do
         @resource_saved = @resource.update(resource_params)
 
-        @resource.color_associations = []
-        update_color_associations
+        @resource.value_proposition_associations = []
+        update_value_proposition_associations
 
       end
 
@@ -100,16 +101,16 @@ class ResourcesController < ApplicationController
   end
 
   def resource_params
-    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, color_ids: [], format_ids: [])
+    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, value_proposition_ids: [], format_ids: [])
   end
 
   def set_resource_associations
-    @colors = Color.all
+    @value_proposition = ValueProposition.all
   end
 
-  def update_color_associations
-    params[:color_ids].reject(&:empty?).each do |color_id|
-      @resource.color_associations << ColorAssociation.create(color_id: color_id)
+  def update_value_proposition_associations
+    params[:value_proposition_ids].reject(&:empty?).each do |value_proposition_id|
+      @resource.value_proposition_associations << ValuePropositionAssociation.create(value_proposition_id: value_proposition_id)
     end
   end
 

@@ -51,10 +51,10 @@ value_proposition_categories = [
     ['Process Innovation Propositions', [copper_proposition, silver_proposition, gold_proposition], 'Process Innovation Propositions Description']
 ]
 
-value_proposition_categories.each do |name, color_propositions, value_proposition_category_description|
+value_proposition_categories.each do |name, value_proposition, value_proposition_category_description|
   value_proposition_category = ValuePropositionCategory.find_or_create_by(name: name, description: value_proposition_category_description)
-  color_propositions.each do |name, color_description, image, question_responses|
-    color = value_proposition_category.colors.find_or_create_by_name(name: name, description: color_description, default_image: image)
+  value_proposition.each do |name, value_proposition_description, image, question_responses|
+    value_proposition = value_proposition_category.value_propositions.find_or_create_by_name(name: name, description: value_proposition_description, default_image: image)
   end
 end
 
@@ -68,4 +68,4 @@ resource = Resource.find_or_create_by({
             tag_list: 'awesome',
             default_image: 'Star-Success.png'
            })
-resource.color_ids = [Color.all.first.id]
+resource.value_proposition_ids = [ValueProposition.all.first.id]

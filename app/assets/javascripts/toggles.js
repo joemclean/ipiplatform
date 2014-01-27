@@ -3,5 +3,5 @@ function toggleEdit(element) {
 }
 
 function toggleResources(element) {
-    $(element).closest('.color_container').toggleClass('viewing');
+    $(element).closest('.value_proposition_container').toggleClass('viewing');
 }

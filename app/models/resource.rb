@@ -1,7 +1,7 @@
 class Resource < ActiveRecord::Base
 
-  has_many :color_associations, dependent: :destroy
-  has_many :colors, through: :color_associations
+  has_many :value_proposition_associations, dependent: :destroy
+  has_many :value_propositions, through: :value_proposition_associations
 
   has_many :resource_industries
   has_many :industries, through: :resource_industries
@@ -66,11 +66,11 @@ class Resource < ActiveRecord::Base
     end
   end
 
-  def checked_color_tags(params, color)
-    if params[:color_ids].nil?
-      self.color_ids.include?(color.id)
+  def checked_value_proposition_tags(params, value_proposition)
+    if params[:value_proposition_ids].nil?
+      self.value_proposition_ids.include?(value_proposition.id)
     else
-      self.color_ids.include?(color.id) or params[:color_ids].include?(color.id.to_s)
+      self.value_proposition_ids.include?(value_proposition.id) or params[:value_proposition_ids].include?(value_proposition.id.to_s)
     end
   end
 

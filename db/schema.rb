@@ -20,23 +20,6 @@ ActiveRecord::Schema.define(version: 20140114175105) do
     t.datetime "updated_at"
   end
 
-  create_table "color_associations", force: true do |t|
-    t.integer  "resource_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "color_id"
-  end
-
-  create_table "colors", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "value_proposition_category_id"
-    t.string   "default_image"
-  end
-
   create_table "comments", force: true do |t|
     t.integer  "resource_id"
     t.integer  "user_id"
@@ -116,11 +99,28 @@ ActiveRecord::Schema.define(version: 20140114175105) do
     t.boolean  "is_admin",        default: false
   end
 
+  create_table "value_proposition_associations", force: true do |t|
+    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "value_proposition_id"
+  end
+
   create_table "value_proposition_categories", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "value_propositions", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "value_proposition_category_id"
+    t.string   "default_image"
   end
 
 end

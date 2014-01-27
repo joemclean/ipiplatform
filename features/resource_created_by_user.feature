@@ -4,7 +4,7 @@ Feature: Creating resources as a user
     Given a user account exists
     And I login as a user
     And I go to the resources index page
-    And a color exists
+    And a value proposition exists
 
   Scenario: User can create a resource
     When I visit resource creation page

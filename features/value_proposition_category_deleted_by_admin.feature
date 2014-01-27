@@ -3,7 +3,7 @@ Feature: Deleting an existing value proposition category as an admin
   Background:
     Given an admin account exists
     And I login as an admin
-    And a value proposition category exists
+    And a value proposition category and a value proposition exist
 
   @javascript
   Scenario:  Admin can delete an existing value proposition category

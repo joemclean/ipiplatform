@@ -2,8 +2,8 @@ Then(/^I see one value proposition category$/) do
   expect(page.has_xpath?(one_value_proposition_category_xpath)).to be_true
 end
 
-Then(/^I see one color$/) do
-  expect(page.has_xpath?(one_color_xpath)).to be_true
+Then(/^I see one value proposition$/) do
+  expect(page.has_xpath?(one_value_proposition_xpath)).to be_true
 end
 
 private
@@ -12,6 +12,6 @@ private
     "//*[@id=\"value_proposition_category_name_#{@value_proposition_category.id}\"]"
   end
 
-  def one_color_xpath
-    "//*[@id=\"color_id_#{@color.id}\"]"
+  def one_value_proposition_xpath
+    "//*[@id=\"value_proposition_id_#{@value_proposition.id}\"]"
   end

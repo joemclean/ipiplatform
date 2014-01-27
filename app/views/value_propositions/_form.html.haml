@@ -1,9 +1,9 @@
-= form_for @color do |f|
-  - if @color.errors.any?
+= form_for @value_proposition do |f|
+  - if @value_proposition.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@color.errors.count, "error")} prohibited this color from being saved:"
+      %h2= "#{pluralize(@value_proposition.errors.count, "error")} prohibited this value proposition from being saved:"
       %ul
-        - @color.errors.full_messages.each do |msg|
+        - @value_proposition.errors.full_messages.each do |msg|
           %li= msg
 
   .field
@@ -16,7 +16,7 @@
     - if @value_proposition_categories.present?
       %select{name: 'value_proposition_category_id'}
         - @value_proposition_categories.each do |value_proposition_category|
-          %option{ value: value_proposition_category.id, selected: value_proposition_category == @color.value_proposition_category}= h value_proposition_category.name
+          %option{ value: value_proposition_category.id, selected: value_proposition_category == @value_proposition.value_proposition_category}= h value_proposition_category.name
   .field
     = f.label 'Image upload'
     = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'

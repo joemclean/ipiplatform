@@ -51,13 +51,13 @@
       = f.file_field :file, accept: ''
 
 
-  %h2 Value Proposition Colors
-  %h4= 'What value proposition color(s) is this best suited for?'
+  %h2 Value Propositions
+  %h4= 'What value propositions is this best suited for?'
   .field
-    = hidden_field_tag "color_ids[]", nil, id: 'nil_color'
-    -@colors.each do |color|
-      =check_box_tag "color_ids[]", color.id, @resource.checked_color_tags(params, color), id: "color_id_#{color.id}"
-      =color.name
+    = hidden_field_tag "value_proposition_ids[]", nil, id: 'nil_value_proposition'
+    -@value_proposition.each do |value_proposition|
+      =check_box_tag "value_proposition_ids[]", value_proposition.id, @resource.checked_value_proposition_tags(params, value_proposition), id: "value_proposition_id_#{value_proposition.id}"
+      =value_proposition.name
       %br
 
   %br

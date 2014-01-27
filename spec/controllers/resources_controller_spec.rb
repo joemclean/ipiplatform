@@ -4,13 +4,13 @@ describe ResourcesController do
   describe '#create' do
     before :each do
       user = FactoryGirl.create(:user)
-      yellow_color = FactoryGirl.create(:color, name: 'yellow')
-      green_color = FactoryGirl.create(:color, name: 'green')
+      yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
+      green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
 
       @description = 'as in tasty carrots'
       @name = 'orange'
       @create_params = {user_id: user.id,
-                        color_ids: [yellow_color.id, green_color.id],
+                        value_proposition_ids: [yellow_value_proposition.id, green_value_proposition.id],
                         resource: {
                           name: @name,
                           link: 'resource_link',
@@ -42,14 +42,14 @@ describe ResourcesController do
         expect(@resource.source).to eql 'A cool person'
       end
 
-      it 'should be able to attach associated colors' do
+      it 'should be able to attach associated value propositions' do
         patch :create, @create_params
 
         @resource = Resource.all.first
 
-        expect(@resource.colors.count).to eql(2)
-        expect(@resource.colors.first.name).to eql 'yellow'
-        expect(@resource.colors.last.name).to eql 'green'
+        expect(@resource.value_propositions.count).to eql(2)
+        expect(@resource.value_propositions.first.name).to eql 'yellow'
+        expect(@resource.value_propositions.last.name).to eql 'green'
       end
 
       it 'should be able to attach associated tags' do
@@ -96,14 +96,14 @@ describe ResourcesController do
         expect(@resource.source).to eql 'A cool person'
       end
 
-      it 'should be able to attach associated colors' do
+      it 'should be able to attach associated value propositions' do
         patch :create, @create_params
 
         @resource = Resource.all.first
 
-        expect(@resource.colors.count).to eql(2)
-        expect(@resource.colors.first.name).to eql 'yellow'
-        expect(@resource.colors.last.name).to eql 'green'
+        expect(@resource.value_propositions.count).to eql(2)
+        expect(@resource.value_propositions.first.name).to eql 'yellow'
+        expect(@resource.value_propositions.last.name).to eql 'green'
       end
 
       it 'should be able to attach associated tags' do
@@ -150,11 +150,11 @@ describe ResourcesController do
 
   describe '#destroy' do
     before :each do
-      yellow_color = FactoryGirl.create(:color, name: 'yellow')
-      green_color = FactoryGirl.create(:color, name: 'green')
+      yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
+      green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
 
       @resource = FactoryGirl.create(:resource)
-      @resource.colors = [yellow_color, green_color]
+      @resource.value_propositions = [yellow_value_proposition, green_value_proposition]
 
       @destroy_params = {id: @resource.id}
     end
@@ -173,12 +173,12 @@ describe ResourcesController do
         expect(Resource.all.count).to eql(0)
       end
 
-      it 'should automatically delete color association' do
-        @resource.colors.count.should eql(2)
+      it 'should automatically delete value proposition association' do
+        @resource.value_propositions.count.should eql(2)
 
         delete :destroy, @destroy_params
 
-        expect(@resource.colors.count).to eql(0)
+        expect(@resource.value_propositions.count).to eql(0)
       end
 
     end
@@ -224,8 +224,8 @@ describe ResourcesController do
 
   describe '#update' do
     before :each do
-      @yellow_color = FactoryGirl.create(:color, name: 'yellow')
-      @green_color = FactoryGirl.create(:color, name: 'green')
+      @yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
+      @green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
 
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -242,12 +242,12 @@ describe ResourcesController do
           @user = FactoryGirl.create(:user, is_admin: true)
           @resource = FactoryGirl.create(:resource, user: @user)
 
-          @resource.colors = []
+          @resource.value_propositions = []
 
           controller.stub(:current_user).and_return(@user)
           @update_params = {  id: @resource.id,
                               user_id: @user.id,
-                              color_ids: [@yellow_color.id, @green_color.id],
+                              value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                               resource: {
                                 name: @name,
                                 link: 'resource_link',
@@ -269,15 +269,15 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
-        it 'should automatically update color association' do
+        it 'should automatically update value proposition association' do
 
           patch :update, @update_params
 
           @resource.reload
 
-          expect(@resource.colors.count).to eql(2)
-          expect(@resource.colors).to include(@yellow_color)
-          expect(@resource.colors).to include(@green_color)
+          expect(@resource.value_propositions.count).to eql(2)
+          expect(@resource.value_propositions).to include(@yellow_value_proposition)
+          expect(@resource.value_propositions).to include(@green_value_proposition)
         end
 
       end
@@ -289,12 +289,12 @@ describe ResourcesController do
 
           @resource = FactoryGirl.create(:resource, user: @other_user)
 
-          @resource.colors = []
+          @resource.value_propositions= []
 
           controller.stub(:current_user).and_return(@user)
           @update_params = {id: @resource.id,
                             user_id: @other_user.id,
-                            color_ids: [@yellow_color.id, @green_color.id],
+                            value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',
@@ -316,15 +316,15 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
-        it 'should automatically update color association' do
+        it 'should automatically update value proposition association' do
 
           patch :update, @update_params
 
           @resource.reload
 
-          expect(@resource.colors.count).to eql(2)
-          expect(@resource.colors).to include(@yellow_color)
-          expect(@resource.colors).to include(@green_color)
+          expect(@resource.value_propositions.count).to eql(2)
+          expect(@resource.value_propositions).to include(@yellow_value_proposition)
+          expect(@resource.value_propositions).to include(@green_value_proposition)
         end
       end
     end
@@ -336,12 +336,12 @@ describe ResourcesController do
 
         @resource = FactoryGirl.create(:resource, user: @user)
 
-        @resource.colors = []
+        @resource.value_propositions = []
 
         controller.stub(:current_user).and_return(@user)
         @update_params = {id: @resource.id,
                           user_id: @user.id,
-                          color_ids: [@yellow_color.id, @green_color.id],
+                          value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                           resource: {
                             name: @name,
                             link: 'resource_link',
@@ -364,15 +364,15 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
-        it 'should automatically update color association' do
+        it 'should automatically update value proposition association' do
 
           patch :update, @update_params
 
           @resource.reload
 
-          expect(@resource.colors.count).to eql(2)
-          expect(@resource.colors).to include(@yellow_color)
-          expect(@resource.colors).to include(@green_color)
+          expect(@resource.value_propositions.count).to eql(2)
+          expect(@resource.value_propositions).to include(@yellow_value_proposition)
+          expect(@resource.value_propositions).to include(@green_value_proposition)
         end
 
       end
@@ -384,7 +384,7 @@ describe ResourcesController do
           other_users_resource = FactoryGirl.create(:resource, user: other_user)
           update_params = {id: other_users_resource.id,
                            user_id: other_user.id,
-                           color_ids: [@yellow_color.id, @green_color.id],
+                           value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                            resource: {
                              name: @name,
                              link: 'resource_link',
@@ -409,11 +409,11 @@ describe ResourcesController do
         @user = FactoryGirl.create(:user, is_admin: true)
         @resource = FactoryGirl.create(:resource, user: @user)
 
-        @resource.colors = [@yellow_color, @green_color]
+        @resource.value_propositions = [@yellow_value_proposition, @green_value_proposition]
 
         @update_params = {  id: @resource.id,
                             user_id: @user.id,
-                            color_ids: [@yellow_color.id, @green_color.id],
+                            value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',

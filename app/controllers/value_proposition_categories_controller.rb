@@ -43,9 +43,9 @@ class ValuePropositionCategoriesController < ApplicationController
     ActiveRecord::Base.transaction do
       @value_proposition_category.update_attributes(value_proposition_categories_params)
 
-      if params[:value_proposition_category][:colors_attributes].present?
-        params[:value_proposition_category][:colors_attributes].values.each do |color_params|
-          Color.find(color_params[:id]).update(color_params)
+      if params[:value_proposition_category][:value_propositions_attributes].present?
+        params[:value_proposition_category][:value_propositions_attributes].values.each do |value_proposition_params|
+          ValueProposition.find(value_proposition_params[:id]).update(value_proposition_params)
         end
       end
 
@@ -60,6 +60,6 @@ class ValuePropositionCategoriesController < ApplicationController
   end
 
   def value_proposition_categories_params
-    params.require(:value_proposition_category).permit(:name, :description, :color)
+    params.require(:value_proposition_category).permit(:name, :description, :value_proposition)
   end
 end

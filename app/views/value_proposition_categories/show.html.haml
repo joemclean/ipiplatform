@@ -10,20 +10,20 @@
     = @value_proposition_category.description
 
 %p
-  - if @value_proposition_category.colors.present?
+  - if @value_proposition_category.value_propositions.present?
     %ul
-      - for color in @value_proposition_category.colors
-        .color_container
+      - for value_proposition in @value_proposition_category.value_propositions
+        .value_proposition_container
           %li
-            = link_to color.name, color
+            = link_to value_proposition.name, value_proposition
             .btn
               = link_to 'Resources', '', onclick: "toggleResources(this); return false"
           .resources
             %ul
-              - for resource in color.resources
+              - for resource in value_proposition.resources
                 %li
                   =link_to resource.name, resource_path(resource)
-            - if color.resources.empty?
+            - if value_proposition.resources.empty?
               No resources at this time
   -else
     (Empty)

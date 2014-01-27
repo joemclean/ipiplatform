@@ -32,20 +32,20 @@ Given(/^a value proposition category exists$/) do
   @value_proposition_category = FactoryGirl.create(:value_proposition_category)
 end
 
-Given(/^a color exists$/) do
-  @color = FactoryGirl.create(:color)
+Given(/^a value proposition exists$/) do
+  @value_proposition = FactoryGirl.create(:value_proposition)
 end
 
-Given(/^a value proposition category and a color exist$/) do
+Given(/^a value proposition category and a value proposition exist$/) do
   @value_proposition_category = FactoryGirl.create(:value_proposition_category)
-  @color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
+  @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)
 end
 
 
-Given(/^a resource with a (.*?) color exists$/) do |color_name|
-  @color = FactoryGirl.create(:color, name: color_name)
+Given(/^a resource with a (.*?) value proposition exists$/) do |value_proposition_name|
+  @value_proposition = FactoryGirl.create(:value_proposition, name: value_proposition_name)
   @resource = FactoryGirl.create(:resource)
-  @resource.colors << @color
+  @resource.value_propositions << @value_proposition
 end
 
 private

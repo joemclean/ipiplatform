@@ -42,12 +42,12 @@ describe ValuePropositionCategoriesController do
   describe '#destroy' do
     before :each do
       @value_proposition_category = FactoryGirl.create(:value_proposition_category)
-      @color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
+      @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)
       @destroy_params = {id: @value_proposition_category.id,
                          value_proposition_category:
                            {name: 'Bunnies', description: 'like to eat carrots',
-                            colors_attributes:
-                              {'0' => {id: @color.id, name: 'orange', description: 'as in tasty carrots'}
+                            value_propositions_attributes:
+                              {'0' => {id: @value_proposition.id, name: 'orange', description: 'as in tasty carrots'}
                               }
                            }
       }
@@ -55,7 +55,7 @@ describe ValuePropositionCategoriesController do
 
     context 'as an admin user' do
       before :each do
-        Color.any_instance.stub(:destroy)
+        ValueProposition.any_instance.stub(:destroy)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
       end
@@ -72,8 +72,8 @@ describe ValuePropositionCategoriesController do
         response.should redirect_to value_proposition_categories_path
       end
 
-      it 'should be able to delete associated color(s)' do
-        Color.any_instance.should_receive(:destroy).exactly(1).times
+      it 'should be able to delete associated value proposition(s)' do
+        ValueProposition.any_instance.should_receive(:destroy).exactly(1).times
 
         delete :destroy, @destroy_params
       end
@@ -92,8 +92,8 @@ describe ValuePropositionCategoriesController do
         expect(ValuePropositionCategory.all.count).to eql 1
       end
 
-      it 'should not be able to delete associated color(s)' do
-        Color.any_instance.should_not_receive(:destroy)
+      it 'should not be able to delete associated value proposition(s)' do
+        ValueProposition.any_instance.should_not_receive(:destroy)
 
         delete :destroy, @destroy_params
       end
@@ -108,8 +108,8 @@ describe ValuePropositionCategoriesController do
         expect(ValuePropositionCategory.all.count).to eql 1
       end
 
-      it 'should not be able to delete associated color(s)' do
-        Color.any_instance.should_not_receive(:destroy)
+      it 'should not be able to delete associated value proposition(s)' do
+        ValueProposition.any_instance.should_not_receive(:destroy)
 
         delete :destroy, @destroy_params
       end
@@ -192,12 +192,12 @@ describe ValuePropositionCategoriesController do
   describe '#update' do
     before :each do
       @value_proposition_category = FactoryGirl.create(:value_proposition_category)
-      @color = FactoryGirl.create(:color, value_proposition_category: @value_proposition_category)
+      @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)
       @params = {id: @value_proposition_category.id,
                  value_proposition_category:
                    {name: 'Bunnies', description: 'like to eat carrots',
-                    colors_attributes:
-                      {'0' => {id: @color.id, name: 'orange', description: 'as in tasty carrots'}
+                    value_propositions_attributes:
+                      {'0' => {id: @value_proposition.id, name: 'orange', description: 'as in tasty carrots'}
                       }
                    }
       }
@@ -205,7 +205,7 @@ describe ValuePropositionCategoriesController do
 
     context 'as an admin user' do
       before :each do
-        Color.any_instance.stub(:update)
+        ValueProposition.any_instance.stub(:update)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
       end
@@ -219,8 +219,8 @@ describe ValuePropositionCategoriesController do
         expect(@value_proposition_category.description).to eql('like to eat carrots')
       end
 
-      it 'should be able to update color attributes' do
-        Color.any_instance.should_receive(:update).exactly(1).times
+      it 'should be able to update value proposition attributes' do
+        ValueProposition.any_instance.should_receive(:update).exactly(1).times
 
         patch :update, @params
       end

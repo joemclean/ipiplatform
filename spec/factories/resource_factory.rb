@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :resource do
+    Resource::Tag
+    Resource::Tagging
     name 'resource_name'
     description 'resource_description'
     image 'image'

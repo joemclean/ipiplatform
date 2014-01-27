@@ -12,15 +12,15 @@
           %div{:id => "value_proposition_category_description_#{value_proposition_category.id}"}
             =value_proposition_category.description
   .row
-    -value_proposition_category.colors.each do |color|
+    -value_proposition_category.value_propositions.each do |value_proposition|
       .col-sm-4
         .panel.panel-default{:style => 'margin: 20px 0px;'}
-          .container{id: "color_id_#{color.id}"}
+          .container{id: "value_proposition_id_#{value_proposition.id}"}
             %h3.panel-heading
-              = link_to color.name, color, id: "color_link_#{color.id}"
+              = link_to value_proposition.name, value_proposition, id: "value_proposition_link_#{value_proposition.id}"
             .panel-body
-              =image_tag color.image_name, class: "color_image"
+              =image_tag value_proposition.image_name, class: "value_proposition_image"
               %p{:style => 'font-weight: bold; color:#6BB8D4'}
               %br
               %p{:style => 'align: center'}
-              = color.description
+              = value_proposition.description

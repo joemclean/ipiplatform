@@ -3,9 +3,9 @@ When(/^I go to the resources index page$/) do
   @resource_page.navigate
 end
 
-When (/^I go to (.*?) color show page$/) do |color|
-  @color_show_page = ColorsPage.new(page)
-  @color_show_page.navigate_to_show_page @color.id
+When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
+  @value_proposition_show_page = ValuePropositionPage.new(page)
+  @value_proposition_show_page.navigate_to_show_page @value_proposition.id
 end
 
 When(/^I go to my resource's show page$/) do
@@ -31,7 +31,7 @@ end
 When(/^I fill in all resource fields$/) do
   step 'I fill in required resource fields'
   step "I fill in \"resource_tag_list\" with \"tag\""
-  step "I check the color_id_#{@color.id} box"
+  step "I check the value_proposition_id_#{@value_proposition.id} box"
 end
 
 When(/^I submit the resource$/) do
@@ -93,11 +93,11 @@ Then(/^I see one resource$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
 
-Then (/^I see resources of (.*?) colors?$/) do |color_name|
-  if color_name.include?('all')
+Then (/^I see resources of (.*?) value propositions?$/) do |value_proposition_name|
+  if value_proposition_name.include?('all')
     step 'I see all resources'
   else
-    step "I see resources of the color \"#{color_name}\""
+    step "I see resources of the value proposition \"#{value_proposition_name}\""
   end
 end
 
@@ -108,11 +108,11 @@ Then (/^I see all resources$/) do
   end
 end
 
-Then (/^I see resources of the color "(.*?)"$/) do |color_name|
-  color = Color.find_by_name(color_name)
-  color.resources.each do |resource|
+Then (/^I see resources of the value proposition "(.*?)"$/) do |value_proposition_name|
+  value_proposition = ValueProposition.find_by_name(value_proposition_name)
+  value_proposition.resources.each do |resource|
     @resource = resource
-    expect(page.has_css?("#vp_#{color.id}_#{resource.id}")).to be_true
+    expect(page.has_css?("#vp_#{value_proposition.id}_#{resource.id}")).to be_true
   end
 end
 

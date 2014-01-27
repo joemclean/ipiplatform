@@ -17,7 +17,7 @@ IpiPlatform::Application.routes.draw do
 
 
   resources :value_proposition_categories
-  resources :colors
+  resources :value_propositions
   resources :bookmarks
   
   resources :resources do

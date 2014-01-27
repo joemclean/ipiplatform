@@ -13,10 +13,10 @@
     =form_tag do |f|
       =text_field_tag :search, "Keyword search", id: 'search_box', class: 'form-control'
     .search_title
-      Colors
-    .color_filter_box
-      -@colors.each do |color|
-        = image_tag color.image_name, size: '50x50', class: 'color_filter', title: color.name
+      Value Proposition
+    .value_proposition_filter_box
+      -@value_proposition.each do |value_proposition|
+        = image_tag value_proposition.image_name, size: '50x50', class: 'value_proposition_filter', title: value_proposition.name
     .search_title
 
   .col-sm-9
@@ -38,8 +38,8 @@
             =resource.description
           %p
 
-          -resource.colors.each do |color|
-            =link_to (image_tag color.image_name, size: '40x40'), color_path(color)
+          -resource.value_propositions.each do |value_proposition|
+            =link_to (image_tag value_proposition.image_name, size: '40x40'), value_proposition_path(value_proposition)
           %br
           %br
           .manipulate_resource

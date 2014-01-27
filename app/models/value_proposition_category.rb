@@ -1,5 +1,5 @@
 class ValuePropositionCategory < ActiveRecord::Base
-  has_many :colors, dependent: :destroy
+  has_many :value_propositions, dependent: :destroy
   validates :name, :description, presence: true
-  accepts_nested_attributes_for :colors, update_only: true
+  accepts_nested_attributes_for :value_propositions, update_only: true
 end

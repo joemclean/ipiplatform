@@ -1,6 +1,6 @@
-class CreateColors < ActiveRecord::Migration
+class CreateValuePropositions < ActiveRecord::Migration
   def change
-    create_table :colors do |t|
+    create_table :value_propositions do |t|
       t.string :name
       t.string :description
       t.string :image

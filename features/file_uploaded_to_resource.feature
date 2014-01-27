@@ -1,10 +1,12 @@
+# # value proposition not linked to steps, steps may still say color
+
 #Feature: Uploading a file to a resource
 #
 #  Background:
 #    Given a user account exists
 #    And I login as a user
 #    And I go to the resources index page
-#    And a value proposition and a color exist
+#    And a value proposition and a value proposition exist
 #    And I visit resource creation page
 #    And I fill in required resource fields
 #
