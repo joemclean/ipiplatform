@@ -17,5 +17,11 @@ Karlyn Murphy
 Dexter Teng
 
 Requires:
+
 brew install imagemagick
+
 brew install phantomjs
+
+To populate heroku's environment variables with S3 credentials (make sure config/application.yml exists) do:
+
+rake figaro:heroku[ipiplatform]
