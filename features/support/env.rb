@@ -1,6 +1,8 @@
 require 'cucumber/rails'
 require 'capybara/poltergeist'
 
+Capybara.default_wait_time = 3
+
 Capybara.javascript_driver = :poltergeist
 #Capybara.default_driver = :selenium #uncomment this to use selenium
 
