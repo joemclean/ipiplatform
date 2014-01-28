@@ -50,7 +50,7 @@ Then(/^I see the value proposition I just created$/) do
 end
 
 Then(/^I see the value proposition has been edited$/) do
-  expect(find(:id, 'value_proposition_link_1').text).to eql('Changed Value Proposition')
+  find('#value_proposition_link_1').should have_content("Changed Value Proposition")
 end
 
 Then(/^I delete the value proposition$/) do
