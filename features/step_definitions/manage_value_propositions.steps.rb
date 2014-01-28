@@ -19,6 +19,7 @@ When(/^I go to the general value proposition category index page$/) do
   @general_value_proposition_category_page = GeneralValuePropositionCategoryPage.new(page)
   @general_value_proposition_category_page.navigate
 end
+
 #
 #When(/^I go to edit an existing value proposition$/) do
 #  find('#edit_value_proposition_1').click
@@ -41,8 +42,7 @@ When(/^I go to manage all value propositions$/) do
 end
 
 When(/^I save the first edited value proposition$/) do
-  page.find('#save_button_1').click
-
+  page.execute_script("$('#save_button_1').click()")
 end
 
 Then(/^I see the value proposition I just created$/) do
