@@ -4,6 +4,7 @@ Feature: Editing an existing value proposition category as an admin
     Given an admin account exists
     And I login as an admin
     And a value proposition category exists
+
   @javascript
   Scenario:  Admin can edit an existing value proposition category
     When I visit the admin profile page
