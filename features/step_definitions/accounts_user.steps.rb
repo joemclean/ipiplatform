@@ -39,6 +39,14 @@ Then(/^I am on my user profile page/) do
   expect(current_path).to eql("/users/#{@user.id}")
 end
 
+Then(/^I should be on the home page$/) do
+  expect(current_path).to eql('/')
+end
+
+Then(/^I should be on the general value proposition category index page$/) do
+  expect(current_path).to eql('/pages/value_proposition_categories')
+end
+
 
 private
   def alert_xpath
