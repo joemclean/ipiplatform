@@ -7,7 +7,7 @@ Feature: Uploading an image to a resource
     And a value proposition category and a value proposition exist
     And I visit resource creation page
     And I fill in required resource fields
-  @browser
+
   @javascript
   Scenario: User successfully uploads an image to a resource
     When I go to upload an image
