@@ -167,7 +167,7 @@ Then(/^that resource is no longer displayed$/) do
 end
 
 Then(/^I select the image$/) do
-  expect(page.find("resource_image_#{Resource.first.id}")).click
+  page.find('#resource_image_1').click
 end
 
 Then(/^I go to the new resource's page$/) do
