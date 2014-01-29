@@ -8,7 +8,7 @@ CarrierWave.configure do |config|
      :aws_access_key_id     => ENV['AWS_ACCESS_KEY'],
      :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
   config.fog_directory  =  fog_dir
-  config.fog_public     = false
+  config.fog_public     = true
   config.fog_attributes = {'x-amz-server-side-encryption' => 'AES256'}
 end
 
