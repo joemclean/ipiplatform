@@ -150,11 +150,11 @@ Then(/^I am on the new resources index page$/) do
   expect(current_path).to eql('/resources')
 end
 
-Then(/^the second user's resource is no longer displayed$/) do
+Then(/^the second user's resource should no longer be displayed$/) do
   expect(page.has_xpath?(second_resource_xpath)).to be_false
 end
 
-Then(/^I do not have the option to delete another user's resource$/) do
+Then(/^I should not have the option to delete another user's resource$/) do
   page.should_not have_selector("#delete_resource_#{@resource2.id}")
 end
 
@@ -162,7 +162,7 @@ Then(/^the second user's delete resource button is visible$/) do
   page.should have_selector("#delete_resource_#{@resource2.id}")
 end
 
-Then(/^that resource is no longer displayed$/) do
+Then(/^that resource should no longer be displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
 end
 
@@ -226,6 +226,6 @@ Then(/^I select the file$/) do
 expect(page.find("resource_file_#{Resource.first.id}")).click
 end
 
-Then(/^I am on the resources index page$/) do
+Then(/^I should be on the resources index page$/) do
   expect(current_path).to eql('/resources')
 end

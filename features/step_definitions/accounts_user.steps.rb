@@ -14,7 +14,7 @@ When(/^I fill in all required account fields$/) do
   find(".submitbutton").click
 end
 
-Then(/^I have access to my user profile$/) do
+Then(/^I should have access to my user profile$/) do
   expect(page.has_css?("#user_profile")).to be_true
 end
 
@@ -22,7 +22,7 @@ When(/^I go to log out$/) do
   find("#log_out").click
 end
 
-Then(/^I do not have access to my user profile$/) do
+Then(/^I should not have access to my user profile$/) do
   expect(page.has_css?("#user_profile")).to be_false
 end
 

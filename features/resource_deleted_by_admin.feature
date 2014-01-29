@@ -11,5 +11,5 @@ Feature: Admin Deletes any Resource
     When I go to the resources index page
     Then the second user's delete resource button is visible
     When I delete the second user's resource
-    Then I am on the resources index page
-    And the second user's resource is no longer displayed
+    Then I should be on the resources index page
+    And the second user's resource should no longer be displayed
