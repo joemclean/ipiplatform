@@ -46,6 +46,12 @@ describe Resource do
       expect(resource.valid?).to be_true
     end
 
+    it 'does not require an attached file' do
+      resource = FactoryGirl.build_stubbed(:resource, file: nil)
+
+      expect(resource.valid?).to be_true
+    end
+
     it 'should be created with FactoryGirl' do
       resource = FactoryGirl.build_stubbed(:resource)
 
@@ -53,52 +59,51 @@ describe Resource do
     end
   end
 
-  describe "#save" do
+  describe '#save' do
     include FakeFS::SpecHelpers
-
-
     context 'for non-production environment' do
 
       before :each do
         FakeFS.activate!
         FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
         @resource = FactoryGirl.build(:resource)
-
       end
 
       after :each do
         FakeFS.deactivate!
       end
 
-      it 'should upload image to dev-bucket on s3' do
-        File.open('test_image.jpg', 'w') do |f|
-          f.puts('foo') # this is required or uploader_test.file.url will be nil
-        end
-
-        @resource.image = File.open('test_image.jpg')
-        @resource.save!
-        @resource.image.url.should match /.*\/dev-bucket-ipi.*uploads\/image\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
-      end
-
-      it 'should upload a file to dev-bucket on s3' do
-        File.open('test_file.txt', 'w') do |f|
-          f.puts('foo') # this is required or uploader_test.file.url will be nil
-        end
-
-        @resource.file = File.open('test_file.txt')
-        @resource.save!
-        @resource.file.url.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
-      end
-
-      context "file is uploaded/present" do
-        it 'should return the file s3 url' do
-          File.open('test_file.txt', 'w') do |f|
+      context 'image' do
+        it 'should be uploaded to dev-bucket on s3' do
+          File.open('test_image.jpg', 'w') do |f|
             f.puts('foo') # this is required or uploader_test.file.url will be nil
           end
 
+          @resource.image = File.open('test_image.jpg')
+          @resource.save!
+          @resource.image.url.should match /.*\/dev-bucket-ipi.*uploads\/image\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+        end
+      end
+
+      context 'file' do
+        before :each do
+          File.open('test_file.txt', 'w') do |f|
+            f.puts('foo') # this is required or uploader_test.file.url will be nil
+          end
+        end
+
+        it 'should be uploaded to dev-bucket on s3' do
           @resource.file = File.open('test_file.txt')
           @resource.save!
-          @resource.file_name.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+          @resource.file.url.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+        end
+
+        context 'file is uploaded/present' do
+          it 'should return the file s3 url' do
+            @resource.file = File.open('test_file.txt')
+            @resource.save!
+            @resource.file_name.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+          end
         end
       end
     end
