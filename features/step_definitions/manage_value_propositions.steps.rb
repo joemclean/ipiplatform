@@ -7,8 +7,8 @@ When(/^I create a new value proposition$/) do
 end
 
 When(/^I fill in all required value proposition fields$/) do
-  step "I fill in \"value_proposition_name\" with \"New Value Proposition\""
-  step "I fill in \"value_proposition_description\" with \"description\""
+  step 'I fill in value_proposition_name with New Value Proposition'
+  step 'I fill in value_proposition_description with description'
 end
 
 When(/^I save the new value proposition$/) do
@@ -26,11 +26,11 @@ end
 #end
 
 When(/^I change the name of the value proposition$/) do
-  step "I fill in \"value_proposition_name\" with \"Changed Value Proposition\""
+  step 'I fill in value_proposition_name with Changed Value Proposition'
 end
 
 When(/^I change the name of the first value proposition$/) do
-  step "I fill in \"value_proposition_name_1\" with \"Changed Value Proposition\""
+  step 'I fill in value_proposition_name_1 with Changed Value Proposition'
 end
 
 When(/^I save the edited value proposition$/) do

@@ -11,12 +11,12 @@ Given(/^a second user account exists$/) do
 end
 
 Given(/^I login as an? (.*?)$/) do |user_type|
-  step "I navigate to the login page"
+  step 'I am on the login page'
 
   user = create_user_type(user_type)
 
-  step "I fill in \"email\" with \"#{user.email}\""
-  step "I fill in \"password\" with \"#{user.password}\""
+  step "I fill in email with #{user.email}"
+  step "I fill in password with #{user.password}"
   step 'I sign in'
 end
 

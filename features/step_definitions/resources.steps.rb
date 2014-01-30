@@ -21,16 +21,16 @@ When(/^I visit resource creation page$/) do
 end
 
 When(/^I fill in required resource fields$/) do
-  step "I fill in \"resource_name\" with \"name\""
-  step "I fill in \"resource_link\" with \"link\""
-  step "I fill in \"resource_description\" with \"desc\""
-  step "I fill in \"resource_full_description\" with \"full desc\""
-  step "I fill in \"resource_source\" with \"source\""
+  step 'I fill in resource_name with name'
+  step 'I fill in resource_link with link'
+  step 'I fill in resource_description with desc'
+  step 'I fill in resource_full_description with full desc'
+  step 'I fill in resource_source with source'
 end
 
 When(/^I fill in all resource fields$/) do
   step 'I fill in required resource fields'
-  step "I fill in \"resource_tag_list\" with \"tag\""
+  step 'I fill in resource_tag_list with tag'
   step "I check the value_proposition_id_#{@value_proposition.id} box"
 end
 
@@ -55,7 +55,7 @@ Then(/^I do not have the option to edit another user's resource$/) do
 end
 
 When(/^I change the resource name$/) do
-  step "I fill in \"resource_name\" with \"#{new_resource_title}\""
+  step "I fill in resource_name with #{new_resource_title}"
 end
 
 When(/^I go to delete the resource$/) do
@@ -93,7 +93,7 @@ Then (/^I see resources of (.*?) value propositions?$/) do |value_proposition_na
   if value_proposition_name.include?('all')
     step 'I see all resources'
   else
-    step "I see resources of the value proposition \"#{value_proposition_name}\""
+    step "I see resources of the value proposition #{value_proposition_name}"
   end
 end
 
@@ -104,7 +104,7 @@ Then (/^I see all resources$/) do
   end
 end
 
-Then (/^I see resources of the value proposition "(.*?)"$/) do |value_proposition_name|
+Then (/^I see resources of the value proposition (.*?)$/) do |value_proposition_name|
   value_proposition = ValueProposition.find_by_name(value_proposition_name)
   value_proposition.resources.each do |resource|
     @resource = resource

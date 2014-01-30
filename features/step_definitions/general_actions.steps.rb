@@ -2,7 +2,7 @@ Given(/^I sign in$/) do
   step "I click the \"login_submit\" button"
 end
 
-When (/^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/) do |field, value|
+When (/^(?:|I )fill in ([^\"]*) with ([^\"]*)$/) do |field, value|
   fill_in(field, :with => value)
 end
 
