@@ -80,10 +80,6 @@ When(/^I delete the second user's resource$/) do
   page.find("#delete_resource_#{@resource2.id}").click
 end
 
-When(/^I go to upload an image$/) do
-  #page.find('#resource_image').click
-end
-
 When(/^I upload the image to the image upload$/) do
   page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
 end
@@ -166,11 +162,11 @@ Then(/^that resource should no longer be displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
 end
 
-Then(/^I select the image$/) do
+When(/^I select the image$/) do
   page.find('#resource_image_1').click
 end
 
-Then(/^I go to the new resource's page$/) do
+Then(/^I should be directed to the new resource's page$/) do
   expect(current_path).to eql('/resources/1')
 end
 
@@ -221,11 +217,23 @@ When(/^I upload the file to the file upload$/) do
  page.attach_file('resource_file', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
 end
 
-
 Then(/^I select the file$/) do
-expect(page.find("resource_file_#{Resource.first.id}")).click
+page.find('#resource_file_1').click
 end
 
 Then(/^I should be on the resources index page$/) do
   expect(current_path).to eql('/resources')
+end
+
+And(/^I select the new resource$/) do
+  page.find('#resource_name_1').click
+end
+
+Then(/^the uploaded image is displayed$/) do
+  page.find('#resource_image_1')['src'].should_not be_nil
+end
+
+Then(/^I should be able to download the file$/) do
+  page.find('#resource_file_1')['href'].should_not be_nil
+
 end

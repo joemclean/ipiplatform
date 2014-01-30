@@ -25,7 +25,7 @@
 
     %h3
       Resource's File
-    =link_to "Click Here To Download", @resource.file_name
+    =link_to "Click Here To Download", @resource.file_name, id: "resource_file_#{@resource.id}"
 
     %h3
       Tool popularity

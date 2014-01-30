@@ -1,26 +1,16 @@
-# # value proposition not linked to steps, steps may still say color
 
-#Feature: Uploading a file to a resource
-#
-#  Background:
-#    Given a user account exists
-#    And I login as a user
-#    And I go to the resources index page
-#    And a value proposition and a value proposition exist
-#    And I visit resource creation page
-#    And I fill in required resource fields
-#
-#  @javascript
-#  Scenario: User successfully uploads a file to a new resource
-#    When I go to upload a file
-#    When I upload the file to the file upload
-#    When I submit the resource
-#    And I go to the resources index page
-#    Then I select the file
-#    Then I go to the new resource's page
+Feature: Uploading a file to a resource
 
-# Scenario: User uploads a disallowed file in the resource image field
-#    When I go to upload a file
-#    And select a file to upload
-#    And I submit the resource
-#    Then
+Background:
+Given a user account exists
+Given I login as a user
+Given I go to the resources index page
+Given a value proposition category and a value proposition exist
+Given I visit resource creation page
+Given I fill in required resource fields
+@javascript
+Scenario: User successfully uploads an file to a resource
+When I upload the file to the file upload
+When I submit the resource
+When I select the new resource
+Then I should be able to download the file
