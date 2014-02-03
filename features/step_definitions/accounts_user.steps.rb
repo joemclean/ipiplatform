@@ -13,6 +13,7 @@ end
 When(/^I go to log out$/) do
   find("#log_out").click
 end
+
 Then(/^I should have access to my user profile$/) do
   assert page.has_css?("#user_profile")
 end
@@ -25,10 +26,6 @@ Then(/^an? (.*?) error message is displayed$/) do |error_type|
   assert page.has_css?("div.flash")
   find('div.flash').should have_content('You are not authorized to view that page.') if error_type == 'authorization'
   find('div.flash').should have_content('Invalid username or password.') if error_type == 'login'
-end
-
-Then(/^I am on my user profile page/) do
-  expect(current_path).to eql("/users/#{@user.id}")
 end
 
 Then(/^I should be on the homepage$/) do

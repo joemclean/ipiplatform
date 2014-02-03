@@ -24,7 +24,7 @@
     - @resources.each do |resource|
       .well.container{id: "resource_#{resource.id}"}
         .col-sm-4
-          =link_to (image_tag resource.image_name, id: "resource_image_#{resource.id}"), resource_path(resource)
+          =link_to (image_tag resource.image_name, id: "resource_image_#{resource.id}", size: '100x100'), resource_path(resource)
         .col-sm-8
           %h3
             = link_to resource.name, resource, id: "resource_name_#{resource.id}"
