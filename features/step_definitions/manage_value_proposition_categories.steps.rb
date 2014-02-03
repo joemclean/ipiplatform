@@ -2,20 +2,20 @@ When(/^I visit the admin profile page$/) do
   page.find("#user_profile").click
 end
 
-And(/^I go to manage value proposition categories$/) do
+When(/^I go to manage value proposition categories$/) do
   page.find('#manage_value_proposition_categories').click
 end
 
-And(/^I create a new value proposition category$/) do
+When(/^I go to create a new value proposition category$/) do
   page.find('#create_value_proposition_category').click
 end
 
-And(/^I fill in all required value proposition category fields$/) do
+When(/^I fill in all required value proposition category fields$/) do
   step 'I fill in value_proposition_category_name with New Value Proposition Category'
   step 'I fill in value_proposition_category_description with description'
 end
 
-And(/^I save the new value proposition category$/) do
+When(/^I save the new value proposition category$/) do
   find('#save_new_value_proposition_category').click
 end
 

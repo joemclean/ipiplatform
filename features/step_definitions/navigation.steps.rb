@@ -16,3 +16,8 @@ end
 When(/^I change the url to user (.*?) profile page$/) do |user_id|
   step "I am on the user #{user_id} profile page"
 end
+
+When(/^I am on the resources index page$/) do
+  @resource_page = ResourcePage.new(page)
+  @resource_page.navigate
+end

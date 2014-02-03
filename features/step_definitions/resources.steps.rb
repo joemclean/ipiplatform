@@ -1,7 +1,4 @@
-When(/^I go to the resources index page$/) do
-  @resource_page = ResourcePage.new(page)
-  @resource_page.navigate
-end
+
 
 When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
   @value_proposition_show_page = ValuePropositionPage.new(page)
@@ -9,14 +6,15 @@ When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
 end
 
 When(/^I go to my resource's show page$/) do
-  @resource_page.navigate_to_show_page @resource.id
+  page.find('#resource_name_1').click
 end
+
 
 When(/^I go to a different user's resource's show page$/) do
-  @resource_page.navigate_to_show_page @resource2.id
+  page.find('#resource_name_2').click
 end
 
-When(/^I visit resource creation page$/) do
+When(/^I navigate to the resource creation page$/) do
   page.find('#new_resource').click
 end
 
@@ -38,14 +36,6 @@ When(/^I submit the resource$/) do
   page.find('#submit_resource').click
 end
 
-Then(/^I see an error on all required fields$/) do
-  expect(page.find('.field_with_errors #resource_name')).to be_true
-  expect(page.find('.field_with_errors #resource_link')).to be_true
-  expect(page.find('.field_with_errors #resource_description')).to be_true
-  expect(page.find('.field_with_errors #resource_full_description')).to be_true
-  expect(page.find('.field_with_errors #resource_source')).to be_true
-end
-
 When(/^I try to edit my resource$/) do
   page.find("#edit_resource_#{@resource.id}").click
 end
@@ -64,16 +54,11 @@ end
 
 When(/^I go to delete the resource WHEN USING @BROWSER$/) do
   step 'I go to delete the resource'
-
   page.driver.browser.switch_to.alert.accept
 end
 
 When(/^I edit the second user's resource$/) do
   page.find("#edit_resource_#{@resource2.id}").click
-end
-
-Then(/^the second user's edit resource button is visible$/) do
-  page.should have_selector("#edit_resource_#{@resource2.id}")
 end
 
 When(/^I delete the second user's resource$/) do
@@ -82,6 +67,18 @@ end
 
 When(/^I upload the image to the image upload$/) do
   page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
+end
+
+Then(/^I see an error on all required fields$/) do
+  expect(page.find('.field_with_errors #resource_name')).to be_true
+  expect(page.find('.field_with_errors #resource_link')).to be_true
+  expect(page.find('.field_with_errors #resource_description')).to be_true
+  expect(page.find('.field_with_errors #resource_full_description')).to be_true
+  expect(page.find('.field_with_errors #resource_source')).to be_true
+end
+
+Then(/^the second user's edit resource button is visible$/) do
+  page.should have_selector("#edit_resource_#{@resource2.id}")
 end
 
 Then(/^I see one resource$/) do
@@ -180,10 +177,6 @@ def second_resource_xpath
   "//*[@id=\"resource_#{@resource2.id}\"]"
 end
 
-def one_resource_title_xpath
-  "//*[@id=\"resource_#{@resource.id}_title\"]"
-end
-
 def second_resource_title_xpath
   "//*[@id=\"resource_#{@resource2.id}_title\"]"
 end
@@ -225,7 +218,7 @@ Then(/^I should be on the resources index page$/) do
   expect(current_path).to eql('/resources')
 end
 
-And(/^I select the new resource$/) do
+When(/^I select the new resource$/) do
   page.find('#resource_name_1').click
 end
 
@@ -236,4 +229,8 @@ end
 Then(/^I should be able to download the file$/) do
   page.find('#resource_file_1')['href'].should_not be_nil
 
+end
+
+Then(/^I go to the resources index page$/) do
+  page.find('#resources_index').click
 end
