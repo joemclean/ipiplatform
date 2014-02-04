@@ -40,7 +40,7 @@ describe ValueProposition do
 
         @value_proposition_test.image = File.open('test_image.jpg')
         @value_proposition_test.save!
-        @value_proposition_test.image.url.should match /.*\/dev-bucket-ipi.*uploads\/image\/value_proposition\/1-value_proposition_name/ #test to make sure that it is not production-bucket
+        @value_proposition_test.image.url.should match /.*\/#{ENV['AWS_DEV_BUCKET']}.*uploads\/image\/value_proposition\/1-value_proposition_name/ #test to make sure that it is not production-bucket
         FakeFS.deactivate!
       end
     end

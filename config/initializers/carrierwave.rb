@@ -1,6 +1,6 @@
 Fog.credentials_path = Rails.root.join('config/fog_credentials.yml')
 
-fog_dir = Rails.env.production? ? 'production-bucket-ipi' : 'dev-bucket-ipi'
+fog_dir = Rails.env.production? ? ENV['AWS_PROD_BUCKET']: ENV['AWS_DEV_BUCKET']
 
 CarrierWave.configure do |config|
   config.storage :fog
@@ -17,4 +17,7 @@ if Rails.env.test?
     config.enable_processing = false
     config.fog_credentials = { :provider => 'AWS' }
   end
+  Fog.mock!
+  connection = Fog::Storage.new(:provider => 'AWS')
+  connection.directories.create(:key => ENV['AWS_DEV_BUCKET'])
 end

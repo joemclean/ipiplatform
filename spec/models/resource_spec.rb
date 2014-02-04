@@ -80,7 +80,7 @@ describe Resource do
 
           @resource.image = File.open('test_image.jpg')
           @resource.save!
-          @resource.image.url.should match /.*\/dev-bucket-ipi.*uploads\/image\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+          @resource.image.url.should match /.*\/#{ENV['AWS_DEV_BUCKET']}.*uploads\/image\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
         end
       end
 
@@ -94,14 +94,14 @@ describe Resource do
         it 'should be uploaded to dev-bucket on s3' do
           @resource.file = File.open('test_file.txt')
           @resource.save!
-          @resource.file.url.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+          @resource.file.url.should match /.*\/#{ENV['AWS_DEV_BUCKET']}.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
         end
 
         context 'file is uploaded/present' do
           it 'should return the file s3 url' do
             @resource.file = File.open('test_file.txt')
             @resource.save!
-            @resource.file_name.should match /.*\/dev-bucket-ipi.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
+            @resource.file_name.should match /.*\/#{ENV['AWS_DEV_BUCKET']}.*uploads\/file\/resource\/1-resource_name/ #test to make sure that it is not production-bucket
           end
         end
       end
