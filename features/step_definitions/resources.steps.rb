@@ -62,7 +62,7 @@ When(/^I upload the image to the image upload$/) do
   page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
 end
 
-Then(/^I see an error on all required fields$/) do
+Then(/^I should see an error on all required fields$/) do
   expect(page.find('.field_with_errors #resource_name')).to be_true
   expect(page.find('.field_with_errors #resource_link')).to be_true
   expect(page.find('.field_with_errors #resource_description')).to be_true
@@ -70,7 +70,7 @@ Then(/^I see an error on all required fields$/) do
   expect(page.find('.field_with_errors #resource_source')).to be_true
 end
 
-Then(/^I see one resource$/) do
+Then(/^I should see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
@@ -202,7 +202,7 @@ When(/^I select the new resource$/) do
   click_link_or_button('resource_name_1')
 end
 
-Then(/^the uploaded image is displayed$/) do
+Then(/^the uploaded image should be displayed$/) do
   find('#resource_image_1')['src'].should_not be_nil
 end
 

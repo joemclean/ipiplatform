@@ -12,18 +12,18 @@ Feature: Creating resources as a user
     And I fill in required resource fields
     And I submit the resource
     And I go to the resources index page
-    Then I see one resource
+    Then I should see one resource
 
   Scenario: Resource requires certain attributes
     When I navigate to the resource creation page
     And I submit the resource
-    Then I see an error on all required fields
+    Then I should see an error on all required fields
 
   Scenario: User creates a resource with all fields
     When I navigate to the resource creation page
     And I fill in all resource fields
     And I submit the resource
     And I go to the resources index page
-    Then I see one resource
+    Then I should see one resource
 
 
