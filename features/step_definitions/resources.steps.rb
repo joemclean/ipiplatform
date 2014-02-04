@@ -30,20 +30,19 @@ When(/^I submit the resource$/) do
 end
 
 When(/^I try to edit my resource$/) do
-  find("#edit_resource_#{@resource.id}").click
+  click_link_or_button("edit_resource_#{@resource.id}")
 end
 
-Then(/^I do not have the option to edit another user's resource$/) do
+Then(/^I should not have the option to edit another user's resource$/) do
   page.should_not have_selector("#edit_resource_#{@resource2.id}")
 end
 
 When(/^I change the resource name$/) do
   fill_in 'resource_name', :with => 'new_resource_title'
-
 end
 
 When(/^I go to delete the resource$/) do
-  page.find("#delete_resource_#{@resource.id}").click
+  click_link_or_button("delete_resource_#{@resource.id}")
 end
 
 When(/^I go to delete the resource WHEN USING @BROWSER$/) do
@@ -52,16 +51,15 @@ When(/^I go to delete the resource WHEN USING @BROWSER$/) do
 end
 
 When(/^I edit the second user's resource$/) do
-  page.find("#edit_resource_#{@resource2.id}").click
+  click_link_or_button("edit_resource_#{@resource2.id}")
 end
 
 When(/^I delete the second user's resource$/) do
-  page.find("#delete_resource_#{@resource2.id}").click
+  click_link_or_button("delete_resource_#{@resource2.id}")
 end
 
 When(/^I upload the image to the image upload$/) do
   page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
-  #page.attach_file(resource_image, '/app/assets/images/ResourcePlaceHolder.png')
 end
 
 Then(/^I see an error on all required fields$/) do
@@ -72,31 +70,27 @@ Then(/^I see an error on all required fields$/) do
   expect(page.find('.field_with_errors #resource_source')).to be_true
 end
 
-Then(/^the second user's edit resource button is visible$/) do
-  page.should have_selector("#edit_resource_#{@resource2.id}")
-end
-
 Then(/^I see one resource$/) do
   @resource = Resource.first if @resource.nil?
   expect(page.has_xpath?(one_resource_xpath)).to be_true
 end
 
-Then (/^I see resources of (.*?) value propositions?$/) do |value_proposition_name|
+Then (/^I should see resources of (.*?) value propositions?$/) do |value_proposition_name|
   if value_proposition_name.include?('all')
-    step 'I see all resources'
+    step 'I should see all resources'
   else
-    step "I see resources of the value proposition #{value_proposition_name}"
+    step "I should see resources of the value proposition #{value_proposition_name}"
   end
 end
 
-Then (/^I see all resources$/) do
+Then (/^I should see all resources$/) do
   Resource.all.each do |resource|
     @resource = resource
     expect(page.has_xpath?(one_resource_xpath)).to be_true
   end
 end
 
-Then (/^I see resources of the value proposition (.*?)$/) do |value_proposition_name|
+Then (/^I should see resources of the value proposition (.*?)$/) do |value_proposition_name|
   value_proposition = ValueProposition.find_by_name(value_proposition_name)
   value_proposition.resources.each do |resource|
     @resource = resource
@@ -104,7 +98,7 @@ Then (/^I see resources of the value proposition (.*?)$/) do |value_proposition_
   end
 end
 
-Then(/^I see details about the resource$/) do
+Then(/^I should see details about the resource$/) do
   expect(page.has_xpath?(one_resource_title_xpath)).to be_true
 end
 
@@ -112,25 +106,25 @@ Then(/^I should be on the new resources page$/) do
   expect(current_path).to eql('/resources/new')
 end
 
-Then(/^I see the resource's new name$/) do
+Then(/^I should see the resource's new name$/) do
   expect(page.has_xpath?(one_resource_title_xpath)).to be_true
   expect(find(:id, "resource_#{@resource.id}_title").text).to eql('new_resource_title')
 end
 
-Then (/^I see the second user's resource's new name$/) do
+Then (/^I should see the second user's resource's new name$/) do
   expect(page.has_xpath?(second_resource_title_xpath)).to be_true
   expect(find(:id, "resource_#{@resource2.id}_title").text).to eql('new_resource_title')
 end
 
-Then(/^I see a notification that the resource was updated$/) do
+Then(/^I should see a notification that the resource was updated$/) do
   expect(page.has_xpath?(notification_xpath)).to be_true
 end
 
-Then(/^I am on the resources show page$/) do
+Then(/^I should be on the resources show page$/) do
   expect(current_path).to eql("/resources/#{@resource.id}")
 end
 
-Then(/^I am on the second user's resource show page$/) do
+Then(/^I should be on the second user's resource show page$/) do
   expect(current_path).to eql("/resources/#{@resource2.id}")
 end
 
@@ -146,16 +140,12 @@ Then(/^I should not have the option to delete another user's resource$/) do
   page.should_not have_selector("#delete_resource_#{@resource2.id}")
 end
 
-Then(/^the second user's delete resource button is visible$/) do
-  page.should have_selector("#delete_resource_#{@resource2.id}")
-end
-
 Then(/^that resource should no longer be displayed$/) do
   expect(page.has_xpath?(one_resource_xpath)).to be_false
 end
 
 When(/^I select the image$/) do
-  find('#resource_image_1').click
+  click_link_or_button('#resource_image_1')
 end
 
 Then(/^I should be directed to the new resource's page$/) do
@@ -192,18 +182,16 @@ When(/^I use the garbage step$/) do
   binding.pry
 end
 
-
 When(/^I go to upload a file$/) do
-  find('#resource_file').click
+  click_link_or_button('resource_file')
 end
 
 When(/^I upload the file to the file upload$/) do
  page.attach_file('resource_file', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
-  #page.attach_file(resource_image, '/app/assets/images/ResourcePlaceHolder.png')
 end
 
 Then(/^I select the file$/) do
-  find('#resource_file_1').click
+  click_link_or_button('resource_file_1')
 end
 
 Then(/^I should be on the resources index page$/) do
@@ -211,7 +199,7 @@ Then(/^I should be on the resources index page$/) do
 end
 
 When(/^I select the new resource$/) do
-  find('#resource_name_1').click
+  click_link_or_button('resource_name_1')
 end
 
 Then(/^the uploaded image is displayed$/) do
@@ -220,9 +208,8 @@ end
 
 Then(/^I should be able to download the file$/) do
   find('#resource_file_1')['href'].should_not be_nil
-
 end
 
 Then(/^I go to the resources index page$/) do
-  find('#resources_index').click
+  click_link_or_button('resources_index')
 end

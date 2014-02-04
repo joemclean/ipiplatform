@@ -36,11 +36,11 @@ When(/^I save the first edited value proposition$/) do
   page.execute_script("$('#save_button_1').click()")
 end
 
-Then(/^I see the value proposition I just created$/) do
+Then(/^I should see the value proposition I just created$/) do
   page.should have_css('#value_proposition_id_1')
 end
 
-Then(/^I see the value proposition has been edited$/) do
+Then(/^I should see the value proposition has been edited$/) do
   page.find('#value_proposition_link_1').should have_content('Changed Value Proposition')
 end
 
@@ -48,6 +48,6 @@ Then(/^I delete the value proposition$/) do
   find('#delete_value_proposition_1').click
 end
 
-Then(/^I do not see the value proposition$/) do
+Then(/^I should not see the value proposition$/) do
   expect(page.has_css?("#value_proposition_link_1")).to be_false
 end

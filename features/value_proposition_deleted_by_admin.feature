@@ -11,5 +11,5 @@ Feature: Deleting an existing value proposition as an admin
     And I go to manage all value propositions
     And I delete the value proposition
     When I go to the general value proposition category index page
-    Then I do not see the value proposition
+    Then I should not see the value proposition
 

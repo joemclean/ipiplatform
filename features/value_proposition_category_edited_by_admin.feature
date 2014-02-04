@@ -12,4 +12,4 @@ Feature: Editing an existing value proposition category as an admin
     And I go to edit an existing value proposition category
     And I change the name of the value proposition category
     And I save the edited value proposition category
-    Then I see the value proposition category has been edited
+    Then I should see the value proposition category has been edited

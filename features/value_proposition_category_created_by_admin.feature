@@ -11,4 +11,4 @@ Feature: Creating new value proposition category as an admin
     And I fill in all required value proposition category fields
     And I save the new value proposition category
     And I go to the general value proposition category index page
-    Then I see the value proposition category I just created
+    Then I should see the value proposition category I just created

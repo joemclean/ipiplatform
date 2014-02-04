@@ -7,5 +7,5 @@ Feature: Value Proposition Category Index
 
   Scenario: Users can see value proposition categories and value propositions on value proposition category index page
     When I go to the general value proposition category index page
-    Then I see one value proposition category
-    And I see one value proposition
+    Then I should see one value proposition category
+    And I should see one value proposition

@@ -1,8 +1,8 @@
-Then(/^I see one value proposition category$/) do
+Then(/^I should see one value proposition category$/) do
   expect(page.has_xpath?(one_value_proposition_category_xpath)).to be_true
 end
 
-Then(/^I see one value proposition$/) do
+Then(/^I should see one value proposition$/) do
   expect(page.has_xpath?(one_value_proposition_xpath)).to be_true
 end
 

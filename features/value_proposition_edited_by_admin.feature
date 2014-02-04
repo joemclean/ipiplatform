@@ -12,4 +12,4 @@ Feature: Editing new value proposition as an admin
     When I change the name of the first value proposition
     When I save the first edited value proposition
     When I go to the general value proposition category index page
-    Then I see the value proposition has been edited
+    Then I should see the value proposition has been edited
