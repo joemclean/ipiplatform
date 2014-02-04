@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   before_filter :redirect_if_not_signed_in
 
-  before_filter :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update]
+  before_filter :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update, :filter]
 
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update, :filter]
