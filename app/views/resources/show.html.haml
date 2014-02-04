@@ -25,7 +25,8 @@
 
     %h3
       Resource's File
-    =link_to "Click Here To Download", @resource.file_name, id: "resource_file_#{@resource.id}"
+
+    =!@resource.file_name.nil? ? (link_to "Click Here To Download", @resource.file_name, id: "resource_file_#{@resource.id}"): "No file attached yet."
 
     %h3
       Tool popularity
