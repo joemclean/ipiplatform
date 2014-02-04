@@ -1,5 +1,5 @@
 When(/^I create a new value proposition$/) do
-  find('#create_new_value_proposition').click
+  click_link_or_button 'create_new_value_proposition'
 end
 
 When(/^I fill in all required value proposition fields$/) do
@@ -8,7 +8,7 @@ When(/^I fill in all required value proposition fields$/) do
 end
 
 When(/^I save the new value proposition$/) do
-  find('#save').click
+  click_link_or_button 'save'
 end
 
 When(/^I go to the general value proposition category index page$/) do
@@ -17,7 +17,7 @@ When(/^I go to the general value proposition category index page$/) do
 end
 
 When(/^I change the name of the value proposition$/) do
-  step 'I fill in value_proposition_name with Changed Value Proposition'
+  page.fill_in 'value_proposition_name', :with => 'Changed Value Proposition'
 end
 
 When(/^I change the name of the first value proposition$/) do
@@ -25,11 +25,11 @@ When(/^I change the name of the first value proposition$/) do
 end
 
 When(/^I save the edited value proposition$/) do
-  find('#save').click
+  click_link_or_button 'save'
 end
 
 When(/^I go to manage all value propositions$/) do
-  find('#manage_value_propositions').click
+  click_link_or_button 'manage_value_propositions'
 end
 
 When(/^I save the first edited value proposition$/) do
@@ -41,7 +41,7 @@ Then(/^I see the value proposition I just created$/) do
 end
 
 Then(/^I see the value proposition has been edited$/) do
-  find('#value_proposition_link_1').should have_content("Changed Value Proposition")
+  page.find('#value_proposition_link_1').should have_content('Changed Value Proposition')
 end
 
 Then(/^I delete the value proposition$/) do
