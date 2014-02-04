@@ -76,7 +76,7 @@ class Resource < ActiveRecord::Base
 
 
   def image_name
-    image.url.present? ? image.url : default_image
+    image.url.present? ? image.url : 'DMcclure.png'
   end
 
   def file_name
