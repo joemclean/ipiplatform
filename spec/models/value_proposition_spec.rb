@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'fakefs/spec_helpers'
-require 'support/fog_helper'
 
 describe ValueProposition do
   describe 'create' do
