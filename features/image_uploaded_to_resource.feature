@@ -7,6 +7,7 @@ Feature: Uploading an image to a resource
     Given a value proposition category and a value proposition exist
     Given I navigate to the resource creation page
     Given I fill in required resource fields
+  @wip
   @javascript
   Scenario: User successfully uploads an image to a resource
     When I upload the image to the image upload

@@ -1,18 +1,14 @@
-#When(/^I go to manage value proposition categories and colors together$/) do
-#  page.find('#manage_value_proposition_categories_and_colors').click
-#end
-
 When(/^I create a new value proposition$/) do
-  page.find('#create_new_value_proposition').click
+  find('#create_new_value_proposition').click
 end
 
 When(/^I fill in all required value proposition fields$/) do
-  step 'I fill in value_proposition_name with New Value Proposition'
-  step 'I fill in value_proposition_description with description'
+  page.fill_in 'value_proposition_name', :with => 'New Value Proposition'
+  page.fill_in 'value_proposition_description', :with => 'description'
 end
 
 When(/^I save the new value proposition$/) do
-  page.find('#save').click
+  find('#save').click
 end
 
 When(/^I go to the general value proposition category index page$/) do
@@ -20,17 +16,12 @@ When(/^I go to the general value proposition category index page$/) do
   @general_value_proposition_category_page.navigate
 end
 
-#
-#When(/^I go to edit an existing value proposition$/) do
-#  find('#edit_value_proposition_1').click
-#end
-
 When(/^I change the name of the value proposition$/) do
   step 'I fill in value_proposition_name with Changed Value Proposition'
 end
 
 When(/^I change the name of the first value proposition$/) do
-  step 'I fill in value_proposition_name_1 with Changed Value Proposition'
+  page.fill_in 'value_proposition_name_1', :with => 'Changed Value Proposition'
 end
 
 When(/^I save the edited value proposition$/) do
@@ -38,7 +29,7 @@ When(/^I save the edited value proposition$/) do
 end
 
 When(/^I go to manage all value propositions$/) do
-  page.find('#manage_value_propositions').click
+  find('#manage_value_propositions').click
 end
 
 When(/^I save the first edited value proposition$/) do

@@ -17,7 +17,4 @@ if Rails.env.test?
     config.enable_processing = false
     config.fog_credentials = { :provider => 'AWS' }
   end
-  Fog.mock!
-  connection = Fog::Storage.new(:provider => 'AWS')
-  connection.directories.create(:key => 'dev-bucket-ipi')
 end

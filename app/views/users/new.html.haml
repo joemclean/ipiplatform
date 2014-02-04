@@ -29,7 +29,7 @@
           =f.label :password_confirmation
           =f.password_field :password_confirmation, class: 'passwordfield'
         .actions
-          =f.submit 'Create an account', class: 'submitbutton'
+          =f.submit 'Create an account', class: 'submitbutton', id: 'new_user_submit'
     .col.right
       = image_tag 'edison.png', class: 'primary'
       %br

@@ -11,8 +11,8 @@ When(/^I go to create a new value proposition category$/) do
 end
 
 When(/^I fill in all required value proposition category fields$/) do
-  step 'I fill in value_proposition_category_name with New Value Proposition Category'
-  step 'I fill in value_proposition_category_description with description'
+  page.fill_in 'value_proposition_category_name', :with => 'New Value Proposition Category'
+  page.fill_in 'value_proposition_category_description', :with => 'description'
 end
 
 When(/^I save the new value proposition category$/) do
@@ -29,7 +29,7 @@ end
 
 And(/^I change the name of the value proposition category$/) do
   expect(has_css?("#value_proposition_category_name_#{@value_proposition_category.id}")).to be_true
-  step "I fill in value_proposition_category_name_#{@value_proposition_category.id} with Changed Value Proposition Category"
+  page.fill_in "value_proposition_category_name_#{@value_proposition_category.id}", :with => 'Changed Value Proposition Category'
 end
 
 And(/^I save the edited value proposition category$/) do

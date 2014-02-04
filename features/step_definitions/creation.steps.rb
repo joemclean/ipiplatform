@@ -10,16 +10,6 @@ Given(/^a second user account exists$/) do
   @user2 = FactoryGirl.create(:user)
 end
 
-Given(/^I login as an? (.*?)$/) do |user_type|
-  step 'I am on the login page'
-
-  user = create_user_type(user_type)
-
-  step "I fill in email with #{user.email}"
-  step "I fill in password with #{user.password}"
-  step 'I sign in'
-end
-
 Given(/^the user creates a resource$/) do
   @resource = FactoryGirl.create(:resource, user_id: @user.id)
 end

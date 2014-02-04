@@ -1,17 +1,26 @@
+Given(/^I login as an? (.*?)$/) do |user_type|
+  @login_page = LoginPage.new(page)
+  @login_page.navigate
+  user = create_user_type(user_type)
+  fill_in 'email', :with => user.email
+  fill_in 'password', :with => user.password
+  click_link_or_button 'login_submit'
+end
+
 When(/^I go to create an account$/) do
-  find("#create_account").click
+  click_link_or_button 'create_account'
 end
 
 When(/^I fill in all required account fields$/) do
-  step 'I fill in user_name with name'
-  step 'I fill in user_email with email'
-  step 'I fill in user_password with password'
-  step 'I fill in user_password_confirmation with password'
-  find(".submitbutton").click
+  fill_in 'user_name', :with => 'name'
+  fill_in 'user_email', :with => 'email'
+  fill_in 'user_password', :with => 'password'
+  fill_in 'user_password_confirmation', :with => 'password'
+  click_link_or_button 'new_user_submit'
 end
 
 When(/^I go to log out$/) do
-  find("#log_out").click
+  click_link_or_button 'log_out'
 end
 
 Then(/^I should have access to my user profile$/) do

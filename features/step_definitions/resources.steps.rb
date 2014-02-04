@@ -1,43 +1,36 @@
 
-
-When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
-  @value_proposition_show_page = ValuePropositionPage.new(page)
-  @value_proposition_show_page.navigate_to_show_page @value_proposition.id
-end
-
 When(/^I go to my resource's show page$/) do
-  page.find('#resource_name_1').click
+  click_link_or_button 'resource_name_1'
 end
-
 
 When(/^I go to a different user's resource's show page$/) do
-  page.find('#resource_name_2').click
+  click_link_or_button 'resource_name_2'
 end
 
 When(/^I navigate to the resource creation page$/) do
-  page.find('#new_resource').click
+  click_link_or_button 'new_resource'
 end
 
 When(/^I fill in required resource fields$/) do
-  step 'I fill in resource_name with name'
-  step 'I fill in resource_link with link'
-  step 'I fill in resource_description with desc'
-  step 'I fill in resource_full_description with full desc'
-  step 'I fill in resource_source with source'
+  page.fill_in 'resource_name', :with => 'name'
+  page.fill_in 'resource_link', :with => 'link'
+  page.fill_in 'resource_description', :with => 'desc'
+  page.fill_in 'resource_full_description', :with => 'full desc'
+  page.fill_in 'resource_source', :with => 'source'
 end
 
 When(/^I fill in all resource fields$/) do
   step 'I fill in required resource fields'
-  step 'I fill in resource_tag_list with tag'
-  step "I check the value_proposition_id_#{@value_proposition.id} box"
+  page.fill_in 'resource_tag_list', :with => 'tag'
+  check 'value_proposition_id_1'
 end
 
 When(/^I submit the resource$/) do
-  page.find('#submit_resource').click
+  click_link_or_button('submit_resource')
 end
 
 When(/^I try to edit my resource$/) do
-  page.find("#edit_resource_#{@resource.id}").click
+  find("#edit_resource_#{@resource.id}").click
 end
 
 Then(/^I do not have the option to edit another user's resource$/) do
@@ -45,7 +38,8 @@ Then(/^I do not have the option to edit another user's resource$/) do
 end
 
 When(/^I change the resource name$/) do
-  step "I fill in resource_name with #{new_resource_title}"
+  fill_in 'resource_name', :with => 'new_resource_title'
+
 end
 
 When(/^I go to delete the resource$/) do
@@ -67,6 +61,7 @@ end
 
 When(/^I upload the image to the image upload$/) do
   page.attach_file('resource_image', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
+  #page.attach_file(resource_image, '/app/assets/images/ResourcePlaceHolder.png')
 end
 
 Then(/^I see an error on all required fields$/) do
@@ -119,12 +114,12 @@ end
 
 Then(/^I see the resource's new name$/) do
   expect(page.has_xpath?(one_resource_title_xpath)).to be_true
-  expect(find(:id, "resource_#{@resource.id}_title").text).to eql(new_resource_title)
+  expect(find(:id, "resource_#{@resource.id}_title").text).to eql('new_resource_title')
 end
 
 Then (/^I see the second user's resource's new name$/) do
   expect(page.has_xpath?(second_resource_title_xpath)).to be_true
-  expect(find(:id, "resource_#{@resource2.id}_title").text).to eql(new_resource_title)
+  expect(find(:id, "resource_#{@resource2.id}_title").text).to eql('new_resource_title')
 end
 
 Then(/^I see a notification that the resource was updated$/) do
@@ -160,7 +155,7 @@ Then(/^that resource should no longer be displayed$/) do
 end
 
 When(/^I select the image$/) do
-  page.find('#resource_image_1').click
+  find('#resource_image_1').click
 end
 
 Then(/^I should be directed to the new resource's page$/) do
@@ -185,10 +180,6 @@ def one_resource_title_xpath
   "//*[@id=\"resource_#{@resource.id}_title\"]"
 end
 
-def new_resource_title
-  'Greatest Resource'
-end
-
 def notification_xpath
   "//*[@class=\"flash\"]"
 end
@@ -203,15 +194,16 @@ end
 
 
 When(/^I go to upload a file$/) do
-page.find('#resource_file').click
+  find('#resource_file').click
 end
 
 When(/^I upload the file to the file upload$/) do
  page.attach_file('resource_file', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
+  #page.attach_file(resource_image, '/app/assets/images/ResourcePlaceHolder.png')
 end
 
 Then(/^I select the file$/) do
-page.find('#resource_file_1').click
+  find('#resource_file_1').click
 end
 
 Then(/^I should be on the resources index page$/) do
@@ -219,18 +211,18 @@ Then(/^I should be on the resources index page$/) do
 end
 
 When(/^I select the new resource$/) do
-  page.find('#resource_name_1').click
+  find('#resource_name_1').click
 end
 
 Then(/^the uploaded image is displayed$/) do
-  page.find('#resource_image_1')['src'].should_not be_nil
+  find('#resource_image_1')['src'].should_not be_nil
 end
 
 Then(/^I should be able to download the file$/) do
-  page.find('#resource_file_1')['href'].should_not be_nil
+  find('#resource_file_1')['href'].should_not be_nil
 
 end
 
 Then(/^I go to the resources index page$/) do
-  page.find('#resources_index').click
+  find('#resources_index').click
 end
