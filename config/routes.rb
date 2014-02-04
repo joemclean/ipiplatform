@@ -14,18 +14,18 @@ IpiPlatform::Application.routes.draw do
   get 'bookmarks/unmake_bookmark', :as => :unmake_bookmark
 
   get 'tags/:tag', to: 'resources#index', as: :tag
-
+  post 'resources/filter', to: 'resources#filter', as: :filter
 
   resources :value_proposition_categories
   resources :value_propositions
   resources :bookmarks
-  
+
   resources :resources do
     resources :upvotes
     post 'comments/save'
     get 'comments/delete'
   end
-  
+
   resources :suggestions
 
   root 'pages#landing'

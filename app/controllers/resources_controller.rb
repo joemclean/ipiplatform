@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
   before_filter :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update]
 
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
-  before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update]
+  before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update, :filter]
 
   def index
     if params[:tag].present?
@@ -12,6 +12,17 @@ class ResourcesController < ApplicationController
     else
       @resources = Resource.order("name").page(params[:page])
     end
+  end
+
+  def filter
+    if params[:value_proposition].present?
+      @resources = Resource.all.includes(:value_propositions).where("value_propositions.name LIKE ?", "%"+params[:value_proposition]+"%").references(:value_propositions).each {|resource| resource.reload}
+
+      @resources = Kaminari.paginate_array(@resources).page(params[:page])
+    else
+      @resources = Resource.order("name").page(params[:page])
+    end
+    render :index
   end
 
   def show

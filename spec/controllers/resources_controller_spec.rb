@@ -257,7 +257,7 @@ describe ResourcesController do
                                 tag_list: 'resource_tag_list'
                               },
                               image: 'image.jpg'
-                            }
+          }
         end
 
         it 'should update any resource' do
@@ -304,7 +304,7 @@ describe ResourcesController do
                               tag_list: 'resource_tag_list'
                             },
                             image: 'image.jpg'
-                          }
+          }
         end
 
         it 'should update any resource' do
@@ -444,7 +444,6 @@ describe ResourcesController do
   describe '#index' do
     before :each do
       resource = FactoryGirl.create(:resource)
-
       @get_params = {id: resource.id}
     end
 
@@ -457,7 +456,9 @@ describe ResourcesController do
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(resources_path)
+        assert_not_nil assigns(:resources)
       end
+
     end
 
     context 'as a user' do
@@ -577,5 +578,40 @@ describe ResourcesController do
         response.should redirect_to new_session_path
       end
     end
+  end
+
+  describe "#filter" do
+    before :each do
+      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+      @yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
+      @yellowish_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellowish')
+
+      @resource_yellow = FactoryGirl.create(:resource,name: "resource_yellow")
+      @resource_yellowish = FactoryGirl.create(:resource,name: "resource_yellowish")
+      @resource_green = FactoryGirl.create(:resource,name: "resource_green")
+
+      @resource_yellow.update({value_proposition_ids: [@yellow_value_proposition.id]})
+      @resource_yellowish.update({value_proposition_ids: [@yellowish_value_proposition.id]})
+    end
+
+    context "a filter query exists" do
+      it 'returns resources with the given filter' do
+        post :filter, {value_proposition: "yellow"}
+
+        assigns(:resources).should =~([@resource_yellow, @resource_yellowish])
+        response.should render_template("index")
+      end
+    end
+
+    context "a filter does not exist" do
+      it 'returns all the resources' do
+        post :filter
+
+        assigns(:resources).should =~([@resource_yellow, @resource_yellowish, @resource_green])
+        response.should render_template("index")
+      end
+    end
+
   end
 end
