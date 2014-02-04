@@ -3,25 +3,17 @@ class Resource < ActiveRecord::Base
   has_many :value_proposition_associations, dependent: :destroy
   has_many :value_propositions, through: :value_proposition_associations
 
-  has_many :resource_industries
-  has_many :industries, through: :resource_industries
-
   has_many :upvotes, :dependent => :destroy
   has_many :bookmarks, :dependent => :destroy
   has_many :users, through: :bookmarks
 
   belongs_to :user
 
-  has_many :resource_formats
-  has_many :formats, through: :resource_formats
-
   has_many :comments
   has_many :users, through: :comments
 
   has_many :taggings
   has_many :tags, through: :taggings
-
-  attr_writer :current_step
 
   validates :name, :description, :full_description, :link, :source, :user_id, presence: true
 
