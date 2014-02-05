@@ -1,8 +1,3 @@
-#Given(/^I am on the login page$/) do
-#  @login_page = LoginPage.new(page)
-#  @login_page.navigate
-#end
-
 Given(/^I am on the homepage/) do
   @home_page = HomePage.new(page)
   @home_page.navigate
@@ -25,4 +20,8 @@ end
 When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
   @value_proposition_show_page = ValuePropositionPage.new(page)
   @value_proposition_show_page.navigate_to_show_page @value_proposition.id
+end
+
+When(/^I use the garbage step$/) do
+  binding.pry
 end
