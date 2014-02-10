@@ -51,7 +51,7 @@ class ResourcesController < ApplicationController
 
      if @resource_saved
        respond_to do |format|
-        format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
+        format.html { redirect_to resource_path(@resource), notice: 'Resource was successfully created.' }
         format.json { render action: 'show', status: :created, location: resource_path }
       end
     else
@@ -112,7 +112,7 @@ class ResourcesController < ApplicationController
   end
 
   def resource_params
-    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, value_proposition_ids: [], format_ids: [])
+    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, :step_id, value_proposition_ids: [], format_ids: [])
   end
 
   def set_resource_associations

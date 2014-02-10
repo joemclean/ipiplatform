@@ -9,6 +9,7 @@ describe ResourcesController do
 
       @description = 'as in tasty carrots'
       @name = 'orange'
+      @step = FactoryGirl.create(:step, id: 0)
       @create_params = {user_id: user.id,
                         value_proposition_ids: [yellow_value_proposition.id, green_value_proposition.id],
                         resource: {
@@ -17,7 +18,8 @@ describe ResourcesController do
                           description: @description,
                           full_description: 'resource_full_description',
                           source: 'A cool person',
-                          tag_list: 'resource_tag_list'
+                          tag_list: 'resource_tag_list',
+                          step_id: @step.id
                         },
                         image: 'image.jpg'
       }
@@ -29,43 +31,58 @@ describe ResourcesController do
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
       end
 
-      it 'should create a resource using resource_params' do
-        patch :create, @create_params
+      context 'resource is valid' do
+        it 'should create a resource using resource_params' do
+          patch :create, @create_params
 
-        @resource = Resource.all.first
+          @resource = Resource.all.first
 
-        expect(Resource.all.count).to eql(1)
-        expect(@resource.name).to eql @name
-        expect(@resource.link).to eql 'resource_link'
-        expect(@resource.description).to eql @description
-        expect(@resource.full_description).to eql 'resource_full_description'
-        expect(@resource.source).to eql 'A cool person'
+          expect(Resource.all.count).to eql(1)
+          expect(@resource.name).to eql @name
+          expect(@resource.link).to eql 'resource_link'
+          expect(@resource.description).to eql @description
+          expect(@resource.full_description).to eql 'resource_full_description'
+          expect(@resource.source).to eql 'A cool person'
+          expect(@resource.step_id).to eql @step.id
+        end
+
+        it 'should be able to attach associated tags' do
+          patch :create, @create_params
+
+          @resource = Resource.all.first
+
+          expect(@resource.tags.count).to eql(1)
+        end
+
+        it 'should create a resource with a specific tag' do
+          patch :create, @create_params
+
+          @resource = Resource.all.first
+
+          expect(@resource.tag_list).to eql 'resource_tag_list'
+        end
+
+        it 'should be able to attach associated image' do
+          patch :create, @create_params
+
+          @resource = Resource.all.first
+
+          expect(@resource.image.class).to eql(ImageUploader)
+        end
+
+        it 'should redirect to resource show page' do
+          patch :create, @create_params
+          response.should redirect_to(resource_path(Resource.all.first))
+        end
       end
 
-      it 'should be able to attach associated tags' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tags.count).to eql(1)
+      context 'resource is invalid' do
+        it 'should render new resource template' do
+          Resource.any_instance.stub(:valid?).and_return(false)
+          patch :create, @create_params
+          response.should render_template('new')
+        end
       end
-
-      it 'should create a resource with a specific tag' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tag_list).to eql 'resource_tag_list'
-      end
-
-      it 'should be able to attach associated image' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.image.class).to eql(ImageUploader)
-      end
-
     end
 
     context 'as a user' do
