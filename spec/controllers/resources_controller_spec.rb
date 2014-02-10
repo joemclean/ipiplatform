@@ -42,16 +42,6 @@ describe ResourcesController do
         expect(@resource.source).to eql 'A cool person'
       end
 
-      it 'should be able to attach associated value propositions' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.value_propositions.count).to eql(2)
-        expect(@resource.value_propositions.first.name).to eql 'yellow'
-        expect(@resource.value_propositions.last.name).to eql 'green'
-      end
-
       it 'should be able to attach associated tags' do
         patch :create, @create_params
 
@@ -489,17 +479,19 @@ describe ResourcesController do
   end
 
   describe '#new' do
+
     context 'as an admin user' do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
       end
 
-      it 'should view the create-a-resource page' do
-        get :new
-
-        expect(response.status).to be(200)
-        expect(controller.request.path).to eql(new_resource_path)
+      it 'assigns a new resource to @resource' do
+        step = FactoryGirl.create(:step, id: 0)
+        get :new, {:step_id => step.id}
+        assigns(:resource).should be_a_new(Resource)
+        assigns(:resource).step_id.should eql(step.id)
+        response.should render_template(:new)
       end
     end
 
@@ -509,7 +501,7 @@ describe ResourcesController do
       end
 
       it 'should view the create-a-resource page' do
-        get :new
+        get :new, {:step_id => 0}
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(new_resource_path)
@@ -518,14 +510,14 @@ describe ResourcesController do
 
     context 'while not signed in' do
       it 'should redirect the user' do
-        get :new
+        get :new, {:step_id => 0}
 
         expect(response.status).to be(302)
         response.should redirect_to new_session_path
       end
 
       it 'should not view the create-a-resource page' do
-        get :new
+        get :new, {:step_id => 0}
 
         response.should redirect_to new_session_path
       end

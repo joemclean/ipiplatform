@@ -19,6 +19,7 @@ gem 'unf'
 gem 'kaminari'
 gem 'rmagick'
 gem 'figaro'
+gem 'shoulda'
 
 group :test, :development do
   gem 'rspec-rails'

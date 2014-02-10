@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114175105) do
+ActiveRecord::Schema.define(version: 20140206163525) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(version: 20140114175105) do
     t.string   "image"
     t.string   "default_image"
     t.string   "file"
+    t.integer  "step_id"
+  end
+
+  create_table "steps", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "suggestions", force: true do |t|

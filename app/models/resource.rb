@@ -8,6 +8,7 @@ class Resource < ActiveRecord::Base
   has_many :users, through: :bookmarks
 
   belongs_to :user
+  belongs_to :step
 
   has_many :comments
   has_many :users, through: :comments

@@ -1,5 +1,7 @@
 IpiPlatform::Application.routes.draw do
 
+  resources :steps
+
   resources :sessions
   resources :users
 
@@ -15,18 +17,16 @@ IpiPlatform::Application.routes.draw do
 
   get 'tags/:tag', to: 'resources#index', as: :tag
   post 'resources/filter', to: 'resources#filter', as: :filter
-
+  get 'resources/new/:step_id', to: 'resources#new', as: :new_resource
   resources :value_proposition_categories
   resources :value_propositions
   resources :bookmarks
 
-  resources :resources do
+  resources :resources, :except => :new do
     resources :upvotes
     post 'comments/save'
     get 'comments/delete'
   end
-
-  resources :suggestions
 
   root 'pages#landing'
 end

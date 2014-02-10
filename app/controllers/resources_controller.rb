@@ -33,7 +33,7 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    @resource = Resource.new()
+    @resource = Resource.new(step_id: params[:step_id])
   end
 
   def edit

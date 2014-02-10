@@ -49,17 +49,7 @@
         = f.label :file
         =link_to @resource.file_name, @resource.file_name
       = f.file_field :file, accept: ''
-
-
-  %h2 Value Propositions
-  %h4= 'What value propositions is this best suited for?'
-  .field
-    = hidden_field_tag "value_proposition_ids[]", nil, id: 'nil_value_proposition'
-    -@value_proposition.each do |value_proposition|
-      =check_box_tag "value_proposition_ids[]", value_proposition.id, @resource.checked_value_proposition_tags(params, value_proposition), id: "value_proposition_id_#{value_proposition.id}"
-      =value_proposition.name
-      %br
-
+  
   %br
   %br
   .field
