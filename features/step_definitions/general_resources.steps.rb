@@ -22,7 +22,6 @@ end
 When(/^I fill in all resource fields$/) do
   step 'I fill in required resource fields'
   page.fill_in 'resource_tag_list', :with => 'tag'
-  check 'value_proposition_id_1'
 end
 
 When(/^I submit the resource$/) do
@@ -31,6 +30,15 @@ end
 
 When(/^I go to the resources index page$/) do
   click_link_or_button 'resources_index'
+end
+
+Then(/^I should see all the resource fields$/) do
+  page.should have_content 'name'
+  page.should have_content 'link'
+  page.should have_content 'desc'
+  page.should have_content 'full desc'
+  page.should have_content 'source'
+  page.should have_content 'tag'
 end
 
 Then(/^I should see an error on all required fields$/) do

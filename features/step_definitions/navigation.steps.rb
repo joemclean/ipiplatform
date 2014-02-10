@@ -17,6 +17,12 @@ When(/^I am on the resources index page$/) do
   @resource_page.navigate
 end
 
+Given(/^I am on the add resource page for the last step$/) do
+  @new_resource_page = NewResourcePage.new(page, Step.last.id)
+  @new_resource_page.navigate
+end
+
+
 When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
   @value_proposition_show_page = ValuePropositionPage.new(page)
   @value_proposition_show_page.navigate_to_show_page @value_proposition.id

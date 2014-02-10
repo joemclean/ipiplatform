@@ -103,16 +103,6 @@ describe ResourcesController do
         expect(@resource.source).to eql 'A cool person'
       end
 
-      it 'should be able to attach associated value propositions' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.value_propositions.count).to eql(2)
-        expect(@resource.value_propositions.first.name).to eql 'yellow'
-        expect(@resource.value_propositions.last.name).to eql 'green'
-      end
-
       it 'should be able to attach associated tags' do
         patch :create, @create_params
 
@@ -276,17 +266,6 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
-        it 'should automatically update value proposition association' do
-
-          patch :update, @update_params
-
-          @resource.reload
-
-          expect(@resource.value_propositions.count).to eql(2)
-          expect(@resource.value_propositions).to include(@yellow_value_proposition)
-          expect(@resource.value_propositions).to include(@green_value_proposition)
-        end
-
       end
 
       context 'with a resource owned by another user' do
@@ -323,16 +302,6 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
-        it 'should automatically update value proposition association' do
-
-          patch :update, @update_params
-
-          @resource.reload
-
-          expect(@resource.value_propositions.count).to eql(2)
-          expect(@resource.value_propositions).to include(@yellow_value_proposition)
-          expect(@resource.value_propositions).to include(@green_value_proposition)
-        end
       end
     end
 
@@ -370,18 +339,6 @@ describe ResourcesController do
 
           expect(@resource.name).to eql(@name)
         end
-
-        it 'should automatically update value proposition association' do
-
-          patch :update, @update_params
-
-          @resource.reload
-
-          expect(@resource.value_propositions.count).to eql(2)
-          expect(@resource.value_propositions).to include(@yellow_value_proposition)
-          expect(@resource.value_propositions).to include(@green_value_proposition)
-        end
-
       end
 
       context 'with a resource owned by someone else' do

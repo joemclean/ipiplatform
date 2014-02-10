@@ -26,6 +26,10 @@ Given(/^a value proposition exists$/) do
   @value_proposition = FactoryGirl.create(:value_proposition)
 end
 
+Given(/^a step exists$/) do
+  @step = FactoryGirl.create(:step)
+end
+
 Given(/^a value proposition category and a value proposition exist$/) do
   @value_proposition_category = FactoryGirl.create(:value_proposition_category)
   @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)

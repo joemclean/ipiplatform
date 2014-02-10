@@ -107,7 +107,7 @@ Then(/^I should be directed to the new resource's page$/) do
 end
 
 Then(/^the uploaded image should be displayed$/) do
-  find('#resource_image_1')['src'].should_not be_nil
+  find('.resource_image')['src'].should_not be_nil
 end
 
 Then(/^I should be able to download the file$/) do

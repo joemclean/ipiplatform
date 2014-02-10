@@ -43,14 +43,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     @resource.user = current_user || User.find(params[:user_id])
 
-
-    ActiveRecord::Base.transaction do
-      @resource_saved = @resource.save
-      update_value_proposition_associations
-    end
-
-     if @resource_saved
-       respond_to do |format|
+    if @resource.save
+        respond_to do |format|
         format.html { redirect_to resource_path(@resource), notice: 'Resource was successfully created.' }
         format.json { render action: 'show', status: :created, location: resource_path }
       end
@@ -64,15 +58,8 @@ class ResourcesController < ApplicationController
 
   def update
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
-      ActiveRecord::Base.transaction do
-        @resource_saved = @resource.update(resource_params)
 
-        @resource.value_proposition_associations = []
-        update_value_proposition_associations
-
-      end
-
-      if @resource_saved
+      if @resource.update(resource_params)
         respond_to do |format|
           format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
           format.json { head :no_content }
@@ -119,10 +106,4 @@ class ResourcesController < ApplicationController
     @value_proposition = ValueProposition.all
   end
 
-  def update_value_proposition_associations
-    params[:value_proposition_ids].reject(&:empty?).each do |value_proposition_id|
-      @resource.value_proposition_associations << ValuePropositionAssociation.create(value_proposition_id: value_proposition_id)
-    end
-  end
-
-  end
+end
