@@ -3,17 +3,13 @@ Feature: User Viewing Resources
   Background:
     Given a user account exists
     And I login as a "user"
-    And a resource with a red value proposition exists
+    And the user creates a resource
 
   Scenario: Users can see all resources
     When I go to the resources index page
-    Then I should see resources of all value propositions
+    Then I should see all resources 
 
   Scenario: Users can view a specific resource
     When I go to the resources index page
     And I go to my resource's show page
     Then I should see details about the resource
-
-  Scenario: Users can see resources associated with specific value proposition on value proposition show page
-    When I go to red value proposition show page
-    Then I should see resources of red value proposition

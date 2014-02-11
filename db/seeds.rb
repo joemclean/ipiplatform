@@ -58,6 +58,8 @@ value_proposition_categories.each do |name, value_proposition, value_proposition
   end
 end
 
+step = Step.find_or_create_by(name: 'Strategy', description: 'some description')
+
 resource = Resource.find_or_create_by({
             user_id: user.id,
             name: 'Awesome Default Resource',
@@ -66,6 +68,6 @@ resource = Resource.find_or_create_by({
             full_description: 'Well, this resource will go a long way to solving all your needs.',
             source: 'An awesome person',
             tag_list: 'awesome',
-            default_image: 'Star-Success.png'
+            default_image: 'Star-Success.png',
+            step_id: step.id
            })
-resource.value_proposition_ids = [ValueProposition.all.first.id]

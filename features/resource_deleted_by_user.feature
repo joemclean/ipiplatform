@@ -4,6 +4,7 @@ Feature: User Deletes a Resource
     Given a user account exists
     And a second user account exists
     And I login as a "user"
+    And a step exists
     And the user creates a resource
     And the second user creates a resource
     And I go to the resources index page

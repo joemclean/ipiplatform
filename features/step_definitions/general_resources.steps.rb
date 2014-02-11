@@ -39,6 +39,7 @@ Then(/^I should see all the resource fields$/) do
   page.should have_content 'full desc'
   page.should have_content 'source'
   page.should have_content 'tag'
+  page.should have_content Step.last.name
 end
 
 Then(/^I should see an error on all required fields$/) do

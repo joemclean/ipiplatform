@@ -11,11 +11,13 @@ Given(/^a second user account exists$/) do
 end
 
 Given(/^the user creates a resource$/) do
-  @resource = FactoryGirl.create(:resource, user_id: @user.id)
+  @step = @step || FactoryGirl.create(:step)
+  @resource = FactoryGirl.create(:resource, user_id: @user.id, step_id: @step.id)
 end
 
 Given(/^the second user creates a resource$/) do
-  @resource2 = FactoryGirl.create(:resource, user_id: @user2.id)
+  @step = @step || FactoryGirl.create(:step)
+  @resource2 = FactoryGirl.create(:resource, user_id: @user2.id, step_id: @step.id)
 end
 
 Given(/^a value proposition category exists$/) do
