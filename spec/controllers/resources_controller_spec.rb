@@ -70,9 +70,9 @@ describe ResourcesController do
           expect(@resource.image.class).to eql(ImageUploader)
         end
 
-        it 'should redirect to resource show page' do
+        it 'should redirect to step edit page' do
           patch :create, @create_params
-          response.should redirect_to(resource_path(Resource.all.first))
+          response.should redirect_to(edit_step_path(@create_params[:resource][:step_id]))
         end
       end
 
@@ -578,6 +578,5 @@ describe ResourcesController do
         response.should render_template("index")
       end
     end
-
   end
 end

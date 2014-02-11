@@ -11,5 +11,6 @@ Background:
 Scenario: User successfully uploads an image to a resource
   When I upload the image to the image upload
   When I submit the resource
+  When I navigate to the last resource show page
   Then the uploaded image should be displayed
 

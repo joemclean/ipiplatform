@@ -45,7 +45,7 @@ class ResourcesController < ApplicationController
 
     if @resource.save
         respond_to do |format|
-        format.html { redirect_to resource_path(@resource), notice: 'Resource was successfully created.' }
+        format.html { redirect_to edit_step_path(@resource.step), notice: 'Resource was successfully created.' }
         format.json { render action: 'show', status: :created, location: resource_path }
       end
     else

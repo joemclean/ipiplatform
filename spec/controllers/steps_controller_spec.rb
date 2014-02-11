@@ -88,9 +88,23 @@ describe StepsController do
 
       it "assigns the requested step as @step" do
         step = Step.create! valid_attributes
+
         put :update, {:id => step.to_param, :step => valid_attributes}, valid_session
         assigns(:step).should eq(step)
       end
+
+      it "assigns resources for invalid parms" do
+        step = Step.create! valid_attributes
+        resource1 = FactoryGirl.create(:resource, name: "Resource1")
+        step.resources= [resource1]
+        step.save
+
+        put :update, {:id => step.to_param, :step => { "name" => ""}}, valid_session
+        assigns(:step).should eq(step)
+        assigns(:resources).should =~ [resource1]
+
+      end
+
 
       it "redirects to the step" do
         step = Step.create! valid_attributes
@@ -130,6 +144,20 @@ describe StepsController do
       step = Step.create! valid_attributes
       delete :destroy, {:id => step.to_param}, valid_session
       response.should redirect_to(steps_url)
+    end
+  end
+
+  describe '#edit' do
+    it 'assigns resources' do
+      step = FactoryGirl.create(:step)
+      resource1 = FactoryGirl.create(:resource, name: "Resource1")
+      resource2 = FactoryGirl.create(:resource, name: "Resource2")
+      step.resources = [resource1, resource2]
+      step.save
+
+      get :edit, {id: step.id}
+
+      assigns(:resources).should =~([resource1, resource2])
     end
   end
 

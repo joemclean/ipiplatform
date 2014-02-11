@@ -31,3 +31,8 @@ end
 When(/^I use the garbage step$/) do
   binding.pry
 end
+
+When(/^I navigate to the last resource show page$/) do
+  @resource_show_page = ResourcePage.new(page)
+  @resource_show_page.navigate_to_show_page Resource.last.id
+end

@@ -1,7 +1,9 @@
 %h1 Editing step
 
 = render 'form'
-
+- @resources.each do |resource|
+  = resource.name 
+  %br
 = link_to 'Show', @step
 \|
 = link_to 'Back', steps_path

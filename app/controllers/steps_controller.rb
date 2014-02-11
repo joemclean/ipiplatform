@@ -22,6 +22,7 @@ class StepsController < ApplicationController
   end
 
   def edit
+      @resources = @step.resources
   end
 
   def create
@@ -44,6 +45,7 @@ class StepsController < ApplicationController
         format.html { redirect_to @step, notice: 'Step was successfully updated.' }
         format.json { head :no_content }
       else
+        @resources = @step.resources
         format.html { render action: 'edit' }
         format.json { render json: @step.errors, status: :unprocessable_entity }
       end

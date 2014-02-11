@@ -13,4 +13,5 @@ Feature: Creating resources as a user
   Scenario: User creates a resource with all fields
     When I fill in all resource fields
     And I submit the resource
+    And I navigate to the last resource show page
     Then I should see all the resource fields

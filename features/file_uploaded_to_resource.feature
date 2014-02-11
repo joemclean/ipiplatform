@@ -11,4 +11,5 @@ Background:
 Scenario: User successfully uploads an file to a resource
   When I upload the file to the file upload
   When I submit the resource
+  When I navigate to the last resource show page
   Then I should be able to download the file
