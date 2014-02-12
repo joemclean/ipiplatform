@@ -28,6 +28,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem "site_prism", "~> 2.4"
 end
 
 group :test do

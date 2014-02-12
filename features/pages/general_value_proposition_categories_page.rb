@@ -1,18 +1,6 @@
-class GeneralValuePropositionCategoryPage < Page
+class GeneralValuePropositionCategoryPage < SitePrism::Page
+  set_url "/pages/value_proposition_categories"
 
-  def initialize(page)
-    super page
-  end
+  element :value_proposition, "#value_proposition_id_1"
 
-  def navigate
-    @page.visit(path)
-  end
-
-  def navigate_to_show_page value_proposition_category_id
-    @page.visit("#{self.path}/#{value_proposition_category_id}")
-  end
-
-  def path
-    '/pages/value_proposition_categories'
-  end
 end

@@ -14,17 +14,17 @@ green_proposition = [
   'adventurer.png']
 
 yellow_proposition = [
-  'Rapid Incremental Innovation',
+  'Continuous Innovation',
   'This established client cares about creativity and speed to hold the lead in a cut throat market: it\'s about out-innovating the competitors.  Our top deliverables are insights, tools, and speed.',
   'analyst.png']
 
 orange_proposition = [
-  'Disruptive Greenfield Innovation',
+  'New Product  Innovation',
   'This client is likely at the beginning of an exciting new business venture; their problem is radical re-invention of unproven game changing markets.  Our top deliverables are disruptive vision, lean product learning, and iterative pivots.',
   'enterpriser.png']
 
 red_proposition = [
-  'Complex System Innovation',
+  'Enterprise Innovation',
   'This client is looking for big picture solutions and a full lifecycle execution. Our top deliverables are program vision, integrated solutions, and service design.',
   'anchor.png']
 

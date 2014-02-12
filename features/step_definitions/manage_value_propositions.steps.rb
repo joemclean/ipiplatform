@@ -12,8 +12,8 @@ When(/^I save the new value proposition$/) do
 end
 
 When(/^I go to the general value proposition category index page$/) do
-  @general_value_proposition_category_page = GeneralValuePropositionCategoryPage.new(page)
-  @general_value_proposition_category_page.navigate
+  @general_value_proposition_category_page = GeneralValuePropositionCategoryPage.new
+  @general_value_proposition_category_page.load
 end
 
 When(/^I change the name of the value proposition$/) do
@@ -37,7 +37,7 @@ When(/^I save the first edited value proposition$/) do
 end
 
 Then(/^I should see the value proposition I just created$/) do
-  page.should have_css('#value_proposition_id_1')
+  @general_value_proposition_category_page.should have_value_proposition
 end
 
 Then(/^I should see the value proposition has been edited$/) do
