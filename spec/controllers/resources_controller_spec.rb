@@ -166,16 +166,26 @@ describe ResourcesController do
 
       it 'should delete any resource' do
 
-        request.should_receive(:referrer).and_return(user_path(@user))
+        request.stub(:referrer).and_return(resource_path(@resource))
 
         delete :destroy, @destroy_params
 
         expect(Resource.all.count).to eql(0)
+      end
+
+      it 'should redirect to previous url' do
+
+        request.should_receive(:referrer).and_return(user_path(@user))
+        Resource.any_instance.stub(:destroy)
+
+        delete :destroy, @destroy_params
+
         response.should redirect_to(user_path(@user))
       end
 
       it 'should automatically delete value proposition association' do
         @resource.value_propositions.count.should eql(2)
+        request.stub(:referrer).and_return(resource_path(@resource))
 
         delete :destroy, @destroy_params
 
@@ -191,6 +201,7 @@ describe ResourcesController do
           user = FactoryGirl.create(:user)
           controller.stub(:current_user).and_return(user)
 
+          request.stub(:referrer).and_return(user_path(user))
           delete :destroy, @destroy_params
           expect(Resource.all.count).to eql(0)
         end

@@ -15,13 +15,6 @@ Feature: User Deletes a Resource
     Then I should be on the resources index page
     And that resource should no longer be displayed
 
-  Scenario: A user can delete his/her own resource from the resource show page
-    When I go to the resources index page
-    And I go to my resource's show page
-    And I go to delete the resource
-    Then I should be on the resources index page
-    And that resource should no longer be displayed
-
   Scenario: A user cannot delete other users' resources from the resource index page
     Then I should not have the option to delete another user's resource
 
