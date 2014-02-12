@@ -160,14 +160,18 @@ describe ResourcesController do
       before :each do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
         ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        user = FactoryGirl.create(:user, is_admin: true)
-        controller.stub(:current_user).and_return(user)
+        @user = FactoryGirl.create(:user, is_admin: true)
+        controller.stub(:current_user).and_return(@user)
       end
 
       it 'should delete any resource' do
+
+        request.should_receive(:referrer).and_return(user_path(@user))
+
         delete :destroy, @destroy_params
 
         expect(Resource.all.count).to eql(0)
+        response.should redirect_to(user_path(@user))
       end
 
       it 'should automatically delete value proposition association' do
