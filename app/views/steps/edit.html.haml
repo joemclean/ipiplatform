@@ -1,11 +1,19 @@
 %h1 Editing step
 
 = render 'form'
-- @resources.each do |resource|
-  = resource.name 
-  %br
+
+%h3 Resources
+.row
+  .col-md-8
+    - @resources.each do |resource|
+      .col-md-3{:style => 'margin-bottom: 10px;'}
+        .panel.panel-default{:style => 'padding: 2px; background-color: #dddddd;'}
+          = resource.name
+          .pull-right
+            = link_to 'Edit', edit_resource_path(resource)
+  .col-md-2
+    = link_to 'Add New Resource', new_resource_path(@step), :class => "btn btn-default"
+    %br
 = link_to 'Show', @step
 \|
 = link_to 'Back', steps_path
-\|
-= link_to 'Add New Resource', new_resource_path(@step)
