@@ -7,6 +7,11 @@ describe Step do
       expect(step.valid?).to be_false
     end
   end
+
+  describe 'associations' do
+    it { should belong_to(:value_proposition) }
+  end
+
   it "should respond to resources" do
     step = FactoryGirl.build(:step)
     resource = FactoryGirl.build(:resource)

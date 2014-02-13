@@ -16,6 +16,16 @@ When(/^I go to the general value proposition category index page$/) do
   @general_value_proposition_category_page.load
 end
 
+When(/^I go to the edit value proposition page for the value proposition$/) do
+  @edit_value_proposition_page = EditValuePropositionPage.new
+  @edit_value_proposition_page.load(id: @value_proposition.id)
+end
+
+When(/^I click the link to the new step page$/) do
+  @new_step_page = NewStepPage.new
+  @edit_value_proposition_page.add_step_link.click
+end
+
 When(/^I change the name of the value proposition$/) do
   page.fill_in 'value_proposition_name', :with => 'Changed Value Proposition'
 end
@@ -50,4 +60,13 @@ end
 
 Then(/^I should not see the value proposition$/) do
   expect(page.has_css?("#value_proposition_link_1")).to be_false
+end
+
+Then(/^I should be redirected to the edit value proposition page for the value proposition$/) do
+  @edit_value_proposition_page.should be_displayed
+end
+
+Then(/^I should see the step$/) do
+  @edit_value_proposition_page.should have_steps
+
 end

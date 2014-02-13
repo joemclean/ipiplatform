@@ -19,6 +19,7 @@ class ValuePropositionsController < ApplicationController
   end
 
   def edit
+    @steps = ValueProposition.find(params[:id]).steps
   end
 
   def create

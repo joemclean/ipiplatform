@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe StepsController do
 
- let(:valid_attributes) { { "name" => "MyString" } }
+ let(:valid_attributes) { { name: "MyString" } }
+ let(:valid_attributes_with_vp_id) { { name: "MyString", value_proposition_id: 0 } }
 
  let(:valid_session) { {} }
 
@@ -24,8 +25,12 @@ describe StepsController do
 
   describe "GET new" do
     it "assigns a new step as @step" do
-      get :new, {}, valid_session
+      get :new, {value_proposition_id: 0}, valid_session
       assigns(:step).should be_a_new(Step)
+    end
+    it "assigns the value proposition id  as @value_proposition_id" do
+      get :new, {value_proposition_id: 0}, valid_session
+      assigns(:value_proposition_id).should == "0"
     end
   end
 
@@ -51,9 +56,13 @@ describe StepsController do
         assigns(:step).should be_persisted
       end
 
-      it "redirects to the created step" do
-        post :create, {:step => valid_attributes}, valid_session
-        response.should redirect_to(Step.last)
+      it "redi]rects to the created step" do
+        mock_step = double(Step)
+        mock_step.stub(:save).and_return(true)
+        Step.stub(:new).and_return(mock_step)
+
+        post :create, {:step => valid_attributes_with_vp_id}, valid_session
+        response.should redirect_to(edit_value_proposition_path(valid_attributes_with_vp_id[:value_proposition_id]))
       end
     end
 

@@ -10,6 +10,7 @@ class StepsController < ApplicationController
 
   def new
     @step = Step.new
+    @value_proposition_id = params[:value_proposition_id]
   end
 
   def new_resource
@@ -28,14 +29,10 @@ class StepsController < ApplicationController
   def create
     @step = Step.new(step_params)
 
-    respond_to do |format|
-      if @step.save
-        format.html { redirect_to @step, notice: 'Step was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @step }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @step.errors, status: :unprocessable_entity }
-      end
+    if @step.save
+      redirect_to edit_value_proposition_url(step_params[:value_proposition_id]), notice: 'Step was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
@@ -68,6 +65,6 @@ class StepsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def step_params
-      params.require(:step).permit(:name, :description)
+      params.require(:step).permit(:name, :description, :value_proposition_id)
     end
 end

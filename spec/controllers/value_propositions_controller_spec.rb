@@ -257,4 +257,20 @@ describe ValuePropositionsController do
       end
     end
   end
+
+  describe "GET edit" do
+    it "as admin should assign steps for value proposition as @steps" do
+      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+
+      mock_value_proposition = double(ValueProposition)
+      ValueProposition.stub(:find).and_return(mock_value_proposition)
+      mock_steps = [double(Step)]
+      mock_value_proposition.stub(:steps).and_return(mock_steps)
+
+      get :edit, { :id => 0 }
+
+      assigns(:steps).should == mock_steps
+    end
+  end
 end

@@ -1,6 +1,7 @@
 class ValueProposition < ActiveRecord::Base
   has_many :value_proposition_associations, dependent: :destroy
   has_many :resources, through: :value_proposition_associations
+  has_many :steps
   belongs_to :value_proposition_category
 
   validates :name, :description, :value_proposition_category, presence: true

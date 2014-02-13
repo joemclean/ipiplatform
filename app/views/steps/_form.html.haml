@@ -15,6 +15,7 @@
       %label.control-label
         = f.label :description
       = f.text_area :description, :class => "form-control"
+  = f.hidden_field :value_proposition_id, value: @value_proposition_id 
   .actions
     = f.submit 'Save', :class => "btn btn-default"
     %br

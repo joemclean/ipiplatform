@@ -22,6 +22,14 @@ describe ValueProposition do
     end
   end
 
+  describe 'associations' do
+    it 'should have many steps' do
+      t = ValueProposition.reflect_on_association(:steps)
+      t.macro.should == :has_many
+    end
+  end
+
+
   describe '#save' do
     include FakeFS::SpecHelpers
 
