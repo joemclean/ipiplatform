@@ -252,7 +252,8 @@ describe ResourcesController do
       context 'with a resource owned by the admin' do
         before :each do
           @user = FactoryGirl.create(:user, is_admin: true)
-          @resource = FactoryGirl.create(:resource, user: @user)
+          @step = FactoryGirl.create(:step)
+          @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
 
           @resource.value_propositions = []
 
@@ -266,7 +267,8 @@ describe ResourcesController do
                                 description: @description,
                                 full_description: 'resource_full_description',
                                 source: 'A cool person',
-                                tag_list: 'resource_tag_list'
+                                tag_list: 'resource_tag_list',
+                                step_id: @step.id
                               },
                               image: 'image.jpg'
           }
@@ -281,6 +283,12 @@ describe ResourcesController do
           expect(@resource.name).to eql(@name)
         end
 
+        it 'should redirect to the edit step page' do
+          patch :update, @update_params
+
+          response.should redirect_to(edit_step_path(@step))
+        end
+
       end
 
       context 'with a resource owned by another user' do
@@ -288,7 +296,8 @@ describe ResourcesController do
           @user = FactoryGirl.create(:user, is_admin: true)
           @other_user = FactoryGirl.create(:user, name: 'Bob')
 
-          @resource = FactoryGirl.create(:resource, user: @other_user)
+          @step = FactoryGirl.create(:step)
+          @resource = FactoryGirl.create(:resource, user: @other_user, step_id: @step.id)
 
           @resource.value_propositions= []
 
@@ -302,7 +311,8 @@ describe ResourcesController do
                               description: @description,
                               full_description: 'resource_full_description',
                               source: 'A cool person',
-                              tag_list: 'resource_tag_list'
+                              tag_list: 'resource_tag_list',
+                              step_id: @step.id
                             },
                             image: 'image.jpg'
           }
@@ -324,8 +334,8 @@ describe ResourcesController do
       before :each do
         @user = FactoryGirl.create(:user)
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-
-        @resource = FactoryGirl.create(:resource, user: @user)
+        @step = FactoryGirl.create(:step)
+        @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
 
         @resource.value_propositions = []
 
@@ -339,7 +349,8 @@ describe ResourcesController do
                             description: @description,
                             full_description: 'resource_full_description',
                             source: 'A cool person',
-                            tag_list: 'resource_tag_list'
+                            tag_list: 'resource_tag_list',
+                            step_id: @step.id
                           },
                           image: 'image.jpg'
         }

@@ -15,6 +15,10 @@ Given(/^the user creates a resource$/) do
   @resource = FactoryGirl.create(:resource, user_id: @user.id, step_id: @step.id)
 end
 
+Given(/^the admin creates a resource$/) do
+  @step = @step || FactoryGirl.Create(:step)
+  @resource = FactoryGirl.create(:resource, user_id: @admin.id, step_id: @step.id)
+end
 Given(/^the second user creates a resource$/) do
   @step = @step || FactoryGirl.create(:step)
   @resource2 = FactoryGirl.create(:resource, user_id: @user2.id, step_id: @step.id)

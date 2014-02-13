@@ -36,3 +36,8 @@ When(/^I navigate to the last resource show page$/) do
   @resource_show_page = ResourcePage.new(page)
   @resource_show_page.navigate_to_show_page Resource.last.id
 end
+
+When(/^I am on the edit step page$/) do
+  @step_edit_page = StepEditPage.new
+  @step_edit_page.load(id: Step.last.id)
+end

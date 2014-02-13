@@ -75,8 +75,18 @@ Then(/^I should be on the resources index page$/) do
   expect(current_path).to eql('/resources')
 end
 
-private
+When(/^I select the resource to edit$/) do
+  @step_edit_page.resource_to_edit.click
+end
 
+When(/^I edit the resource name$/) do
+  @step_edit_page.resource_name.set "Edited resource name"
+end
+
+Then(/^I should see the edited resource name$/) do
+  @step_edit_page.resource_name_edited.text.should eql "Edited resource name"
+end
+private
 def one_resource_xpath
   "//*[@id=\"resource_#{@resource.id}\"]"
   end

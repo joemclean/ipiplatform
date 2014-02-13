@@ -61,7 +61,7 @@ class ResourcesController < ApplicationController
 
       if @resource.update(resource_params)
         respond_to do |format|
-          format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
+          format.html { redirect_to edit_step_path(@resource.step.id), notice: 'Resource was successfully updated.' }
           format.json { head :no_content }
         end
       else
