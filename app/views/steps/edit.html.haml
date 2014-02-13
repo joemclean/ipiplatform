@@ -8,10 +8,12 @@
     - @resources.each do |resource|
       .col-md-3{:style => 'margin-bottom: 10px;'}
         .panel.panel-default.well.clearfix{:style => 'padding: 2px;'}
-          = link_to resource.name, resource_path(resource), class: "step_resources", value: resource.name
+          = link_to resource.name, resource_path(resource), class: "step_resources"
           .clearfix
           .pull-right
             = link_to 'Edit', edit_resource_path(resource), class: "small-link edit"
+            \|
+            = link_to 'Delete', resource, method: :delete, data: { confirm: 'Are you sure?' }, class: "small-link delete" 
   .col-md-2
     = link_to 'Add New Resource', new_resource_path(@step), :class => "btn btn-default"
     %br
