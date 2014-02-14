@@ -5,20 +5,32 @@
       %ul
         - @value_proposition.errors.full_messages.each do |msg|
           %li= msg
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :name
+      = f.text_field :name, class: 'span6 form-control'
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :description
+      = f.text_area :description, class: 'span8 form-control', rows: 5
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label 'Value Proposition Category '
+      %br
+      - if @value_proposition_categories.present?
+        %select{name: 'value_proposition_category_id'}
+          - @value_proposition_categories.each do |value_proposition_category|
+            %option{ value: value_proposition_category.id, selected: value_proposition_category == @value_proposition.value_proposition_category}= h value_proposition_category.name
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label 'Image upload'
+      = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'
 
-  .field
-    = f.text_field :name, :class => 'span6'
-  .field
-    = f.text_area :description, :class => 'span8', :rows => 5
-  .field
-    = f.label 'Value Proposition Category '
-    %br
-    - if @value_proposition_categories.present?
-      %select{name: 'value_proposition_category_id'}
-        - @value_proposition_categories.each do |value_proposition_category|
-          %option{ value: value_proposition_category.id, selected: value_proposition_category == @value_proposition.value_proposition_category}= h value_proposition_category.name
-  .field
-    = f.label 'Image upload'
-    = f.file_field :image, accept: 'image/png,image/gif,image/jpeg'
   .actions
-    = f.submit 'Save', id: 'save'
+    = f.submit 'Save', id: 'save', class: "btn btn-default"
+    %br
+    %br

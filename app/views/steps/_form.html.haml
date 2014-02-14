@@ -9,14 +9,14 @@
     .form-group.col-sm-6
       %label.control-label
         = f.label :name
-      = f.text_field :name, :placeholder => 'Name', :class => "form-control"
+      = f.text_field :name, placeholder: 'Name', class: "form-control"
   .row
     .form-group.col-sm-6
       %label.control-label
         = f.label :description
-      = f.text_area :description, :class => "form-control"
+      = f.text_area :description, class: "form-control"
   = f.hidden_field :value_proposition_id, value: @value_proposition_id 
   .actions
-    = f.submit 'Save', :class => "btn btn-default"
+    = f.submit 'Save', class: "btn btn-default"
     %br
     %br
