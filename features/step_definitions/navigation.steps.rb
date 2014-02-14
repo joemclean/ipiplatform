@@ -38,6 +38,6 @@ When(/^I navigate to the last resource show page$/) do
 end
 
 When(/^I am on the edit step page$/) do
-  @step_edit_page = StepEditPage.new
-  @step_edit_page.load(id: Step.last.id)
+  @edit_step_page = EditStepPage.new
+  @edit_step_page.load(id: Step.last.id)
 end
