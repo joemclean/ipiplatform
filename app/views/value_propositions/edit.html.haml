@@ -6,9 +6,9 @@
 .row
   .col-md-8
     - @steps.each do |step|
-      .col-md-3{:style => 'margin-bottom: 10px;'}
+      .step.col-md-3{:style => 'margin-bottom: 10px;'}
         .panel.panel-default.well.clearfix{:style => 'padding: 2px;'}
-          = link_to step.name, step_path(step), class: "step", value: step.name
+          = link_to step.name, step_path(step), class: "show-step", value: step.name
           .clearfix
           .pull-right
             = link_to 'Edit', edit_step_path(step), class: "small-link edit"

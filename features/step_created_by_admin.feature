@@ -1,4 +1,4 @@
-Feature: Creating steps as a user
+Feature: Creating steps as an admin
 
 Background:
   Given an admin account exists

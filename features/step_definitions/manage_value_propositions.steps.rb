@@ -67,6 +67,6 @@ Then(/^I should be redirected to the edit value proposition page for the value p
 end
 
 Then(/^I should see the step$/) do
-  @edit_value_proposition_page.should have_steps
+  @edit_value_proposition_page.should have_show_step_links
 
 end

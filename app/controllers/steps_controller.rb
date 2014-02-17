@@ -12,7 +12,6 @@ class StepsController < ApplicationController
     @step = Step.new
     @value_proposition_id = params[:value_proposition_id]
   end
-
   def new_resource
    @resource = Resource.new
    @step_id = params[:step_id]
@@ -23,7 +22,8 @@ class StepsController < ApplicationController
   end
 
   def edit
-      @resources = @step.resources
+    @resources = @step.resources
+    @value_proposition_id = @step.value_proposition_id
   end
 
   def create
@@ -37,15 +37,11 @@ class StepsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @step.update(step_params)
-        format.html { redirect_to @step, notice: 'Step was successfully updated.' }
-        format.json { head :no_content }
-      else
-        @resources = @step.resources
-        format.html { render action: 'edit' }
-        format.json { render json: @step.errors, status: :unprocessable_entity }
-      end
+    if @step.update(step_params)
+      redirect_to edit_value_proposition_path(step_params[:value_proposition_id]), notice: 'Step was successfully updated.'
+    else
+      @resources = @step.resources
+      render action: 'edit'
     end
   end
 

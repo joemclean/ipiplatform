@@ -28,7 +28,7 @@ describe StepsController do
       get :new, {value_proposition_id: 0}, valid_session
       assigns(:step).should be_a_new(Step)
     end
-    it "assigns the value proposition id  as @value_proposition_id" do
+    it "assigns the value proposition id of the step as @value_proposition_id" do
       get :new, {value_proposition_id: 0}, valid_session
       assigns(:value_proposition_id).should == "0"
     end
@@ -39,6 +39,17 @@ describe StepsController do
       step = Step.create! valid_attributes
       get :edit, {:id => step.to_param}, valid_session
       assigns(:step).should eq(step)
+    end
+
+    it "assigns the value proposition id of the step as @value_proposition_id" do
+      mock_step = double(Step)
+      mock_step.stub(:resources)
+      mock_step.stub(:value_proposition_id).and_return(1)
+      Step.stub(:find).and_return(mock_step)
+
+      get :edit, {id: 0}, valid_session
+
+      assigns(:value_proposition_id).should == 1
     end
   end
 
@@ -56,7 +67,7 @@ describe StepsController do
         assigns(:step).should be_persisted
       end
 
-      it "redi]rects to the created step" do
+      it "redirects to edit value proposition" do
         mock_step = double(Step)
         mock_step.stub(:save).and_return(true)
         Step.stub(:new).and_return(mock_step)
@@ -114,11 +125,13 @@ describe StepsController do
 
       end
 
+      it "redirects to edit value proposition" do
+        mock_step = double(Step)
+        mock_step.stub(:update).and_return(true)
+        Step.stub(:find).and_return(mock_step)
 
-      it "redirects to the step" do
-        step = Step.create! valid_attributes
-        put :update, {:id => step.to_param, :step => valid_attributes}, valid_session
-        response.should redirect_to(step)
+        put :update, {:id => 0, :step => valid_attributes_with_vp_id}, valid_session
+        response.should redirect_to(edit_value_proposition_path(valid_attributes_with_vp_id[:value_proposition_id]))
       end
     end
 
