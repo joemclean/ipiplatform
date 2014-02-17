@@ -6,9 +6,18 @@
         - @value_proposition_category.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.text_field :name, :class => 'span6'
-  .field
-    = f.text_area :description, :class => 'span8', :rows => 5
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :name
+      = f.text_field :name, placeholde: 'Name of Category', class: 'form-control'
+
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = f.label :description
+      = f.text_area :description, class: 'form-control', rows: '5'
   .actions
     = f.submit 'Save', id: 'save_new_value_proposition_category', class: "btn btn-default"
+    %br
+    %br
