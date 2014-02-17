@@ -26,15 +26,8 @@
         .step_resources.well.small-well
           %span
             = link_to resource.name, resource_path(resource)
-%p
-  %h3
-    = 'Helpful resources for ' + @value_proposition.name.pluralize + ' engagements'
-  %table.table.table-striped
-    - @value_proposition.resources.each do |resource|
-      %tr{:id => "vp_#{@value_proposition.id}_#{resource.id}"}
-        %td
-          = link_to resource.name, resource_path(resource)
-
+%br
+%br
 .btn-group
   - if current_user.present? && current_user.is_admin?
     .btn.btn-default

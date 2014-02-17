@@ -46,8 +46,8 @@ gold_proposition = [
 ]
 
 value_proposition_categories = [
-    ['Technical Value Proposition Categories', [blue_proposition, green_proposition], 'Technical Value Proposition Categories Description'],
-    ['Business Innovation Value Proposition Categories', [yellow_proposition, orange_proposition, red_proposition], 'Business Innovation Value Proposition Categories Description'],
+    ['Technical Value Propositions', [blue_proposition, green_proposition], 'Technical Value Proposition Categories Description'],
+    ['Business Innovation Value Propositions', [yellow_proposition, orange_proposition, red_proposition], 'Business Innovation Value Proposition Categories Description'],
     ['Process Innovation Propositions', [copper_proposition, silver_proposition, gold_proposition], 'Process Innovation Propositions Description']
 ]
 
