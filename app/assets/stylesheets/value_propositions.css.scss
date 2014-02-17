@@ -23,12 +23,15 @@
   padding: 0;
   display: inline-block;
   text-align: center;
-  width: 70px;
-  min-height: 60px;
+  width: 75px;
+  line-height: 15px;
+  vertical-align: top;
 }
 
 .step_resources.well.small-well span{
+  height: 50px;
   display: table-cell;
   vertical-align: middle;
+  text-align: center;
 }
 

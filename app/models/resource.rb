@@ -1,7 +1,5 @@
 class Resource < ActiveRecord::Base
 
-  has_many :value_proposition_associations, dependent: :destroy
-  has_many :value_propositions, through: :value_proposition_associations
 
   has_many :upvotes, :dependent => :destroy
   has_many :bookmarks, :dependent => :destroy

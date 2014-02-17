@@ -25,7 +25,7 @@
       - step.resources.each do |resource|
         .step_resources.well.small-well
           %span
-            =resource.name
+            = link_to resource.name, resource_path(resource)
 %p
   %h3
     = 'Helpful resources for ' + @value_proposition.name.pluralize + ' engagements'

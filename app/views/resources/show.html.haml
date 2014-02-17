@@ -19,8 +19,8 @@
     =@resource.step.name  
     %h3
       Value Proposition
-    -@resource.value_propositions.each do |value_proposition|
-      =link_to (image_tag value_proposition.image_name, size: '70x70'), value_proposition_path(value_proposition)
+    - value_proposition = @resource.step.value_proposition 
+    =link_to (image_tag value_proposition.image_name, size: '70x70'), value_proposition_path(value_proposition)
     %br
     %h3
       Link to Resource
