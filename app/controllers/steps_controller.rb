@@ -47,10 +47,7 @@ class StepsController < ApplicationController
 
   def destroy
     @step.destroy
-    respond_to do |format|
-      format.html { redirect_to steps_url }
-      format.json { head :no_content }
-    end
+    redirect_to edit_value_proposition_path(@step.value_proposition_id)
   end
 
   private

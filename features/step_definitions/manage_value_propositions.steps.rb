@@ -16,11 +16,6 @@ When(/^I go to the general value proposition category index page$/) do
   @general_value_proposition_category_page.load
 end
 
-When(/^I go to the edit value proposition page for the value proposition$/) do
-  @edit_value_proposition_page = EditValuePropositionPage.new
-  @edit_value_proposition_page.load(id: @value_proposition.id)
-end
-
 When(/^I click the link to the new step page$/) do
   @new_step_page = NewStepPage.new
   @edit_value_proposition_page.add_step_link.click

@@ -41,3 +41,8 @@ When(/^I am on the edit step page$/) do
   @edit_step_page = EditStepPage.new
   @edit_step_page.load(id: Step.last.id)
 end
+
+When(/^I go to the edit value proposition page for the value proposition$/) do
+  @edit_value_proposition_page = EditValuePropositionPage.new
+  @edit_value_proposition_page.load(id: @value_proposition.id)
+end

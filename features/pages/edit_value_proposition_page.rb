@@ -7,4 +7,5 @@ class EditValuePropositionPage < SitePrism::Page
 
   elements :show_step_links, ".show-step"
   elements :edit_step_links, "a.edit"
+  elements :delete_step_links, "a.delete"
 end

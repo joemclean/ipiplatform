@@ -23,3 +23,11 @@ end
 When(/^I edit the step name$/) do
   @edit_step_page.name.set("edited step name")
 end
+
+When(/^I select the step to delete/) do
+  @edit_value_proposition_page.delete_step_links[0].click
+end
+
+Then(/^the step should no longer be displayed$/) do
+  @edit_value_proposition_page.show_step_links.size.should eql 0
+end

@@ -162,10 +162,12 @@ describe StepsController do
       }.to change(Step, :count).by(-1)
     end
 
-    it "redirects to the steps list" do
-      step = Step.create! valid_attributes
-      delete :destroy, {:id => step.to_param}, valid_session
-      response.should redirect_to(steps_url)
+    it "redirects to edit value proposition" do
+      mock_step = stub_model(Step, value_proposition_id: 1)
+      mock_step.stub(:destroy)
+      Step.stub(:find).and_return(mock_step)
+      delete :destroy, {:id => 0}, valid_session
+      response.should redirect_to(edit_value_proposition_path(mock_step.value_proposition_id))
     end
   end
 
