@@ -10,5 +10,7 @@ FactoryGirl.define do
     source 'resource_source'
     tag_list 'resource_tag_list'
     user_id 1
+
+    association :step, strategy: :build
   end
 end

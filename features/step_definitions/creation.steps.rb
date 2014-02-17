@@ -52,6 +52,13 @@ Given(/^a resource with a (.*?) value proposition exists$/) do |value_propositio
   @resource.value_propositions << @value_proposition
 end
 
+Given(/^a step exists for the last value proposition$/) do
+  @step = FactoryGirl.create(:step, value_proposition: ValueProposition.last )
+end
+
+Given(/^a resource exists for the last step$/) do
+  @resoure = FactoryGirl.create(:resource, step: Step.last)
+end
 private
 
 def create_user_type(user_type)

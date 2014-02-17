@@ -17,6 +17,17 @@
 %hr
 %p
   %h3
+    Journey
+  - @value_proposition.steps.each do |step|
+    .col
+      .vp_steps.well
+        = step.name
+      - step.resources.each do |resource|
+        .step_resources.well.small-well
+          %span
+            =resource.name
+%p
+  %h3
     = 'Helpful resources for ' + @value_proposition.name.pluralize + ' engagements'
   %table.table.table-striped
     - @value_proposition.resources.each do |resource|

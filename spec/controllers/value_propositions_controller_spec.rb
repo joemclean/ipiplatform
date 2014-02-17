@@ -155,8 +155,8 @@ describe ValuePropositionsController do
   describe '#show' do
     before :each do
       value_proposition_category = FactoryGirl.create(:value_proposition_category)
-      value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
-      @get_params = {id: value_proposition.id}
+     @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
+      @get_params = {id: @value_proposition.id}
     end
 
     context 'as an admin user' do
@@ -168,6 +168,16 @@ describe ValuePropositionsController do
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(value_proposition_path)
+      end
+      it 'should assign steps and resource' do
+        step = FactoryGirl.create(:step, value_proposition: @value_proposition)
+        resource1 = FactoryGirl.create(:resource, step: step)
+        resource2 = FactoryGirl.create(:resource, name: 'resource2', step: step)
+        get :show, @get_params
+
+        assigns(:value_proposition).steps =~ [step]
+        assigns(:value_proposition).steps.first.resources =~ [resource1, resource2]
+
       end
     end
 

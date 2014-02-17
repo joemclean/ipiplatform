@@ -10,6 +10,13 @@ Then(/^I should see the edited step name$/) do
   @edit_value_proposition_page.show_step_links.first.text.should == "edited step name"
 end
 
+Then(/^I should see the steps of the value proposition$/) do
+  @show_value_proposition_page.steps.size.should eql 1
+end
+
+Then(/^I should see the resources of the value proposition$/) do
+  @show_value_proposition_page.resources.size.should eql 2
+end
 private
 
   def one_value_proposition_category_xpath

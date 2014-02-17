@@ -4,5 +4,7 @@ FactoryGirl.define do
   factory :step do
     name "MyString"
     description "MyText"
+
+    association :value_proposition, strategy: :build
   end
 end

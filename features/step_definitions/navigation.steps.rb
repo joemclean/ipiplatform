@@ -23,9 +23,9 @@ Given(/^I am on the add resource page for the last step$/) do
 end
 
 
-When (/^I go to (.*?) value proposition show page$/) do |value_proposition|
-  @value_proposition_show_page = ValuePropositionPage.new(page)
-  @value_proposition_show_page.navigate_to_show_page @value_proposition.id
+When (/^I go to the last value proposition show page$/) do
+  @show_value_proposition_page = ShowValuePropositionPage.new
+  @show_value_proposition_page.load(id: ValueProposition.last.id)
 end
 
 When(/^I use the garbage step$/) do
