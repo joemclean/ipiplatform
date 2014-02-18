@@ -32,7 +32,7 @@ When(/^I go to the resources index page$/) do
   click_link_or_button 'resources_index'
 end
 
-Then(/^I should see all the resource fields$/) do
+Then(/^I should see all the resource fields with step$/) do
   page.should have_content 'name'
   page.should have_content 'link'
   page.should have_content 'desc'
@@ -40,6 +40,15 @@ Then(/^I should see all the resource fields$/) do
   page.should have_content 'source'
   page.should have_content 'tag'
   page.should have_content Step.last.name
+  end
+
+Then(/^I should see all the resource fields without step$/) do
+  page.should have_content 'name'
+  page.should have_content 'link'
+  page.should have_content 'desc'
+  page.should have_content 'full desc'
+  page.should have_content 'source'
+  page.should have_content 'tag'
 end
 
 Then(/^I should see an error on all required fields$/) do
@@ -81,6 +90,11 @@ end
 
 When(/^I select the resource to delete/) do
   @edit_step_page.resources_to_delete[0].click
+end
+
+When(/I click the new resource button$/) do
+  @resources_page.new_resource_button.click
+
 end
 
 When(/^I edit the resource name$/) do

@@ -1,18 +1,6 @@
-class ResourcePage < Page
+class ResourcesPage < SitePrism::Page
+  set_url "/resources"
 
-  def initialize(page)
-    super page
-  end
+  element :new_resource_button, "a[id='new_resource']"
 
-  def navigate
-    @page.visit(path)
-  end
-
-  def navigate_to_show_page resource_id
-    @page.visit("#{self.path}/#{resource_id}")
-  end
-
-  def path
-    '/resources'
-  end
 end

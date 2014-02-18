@@ -13,12 +13,17 @@ When(/^I change the url to user (.*?) profile page$/) do |user_id|
 end
 
 When(/^I am on the resources index page$/) do
-  @resource_page = ResourcePage.new(page)
-  @resource_page.navigate
+  @resources_page = ResourcesPage.new
+  @resources_page.load
 end
 
 Given(/^I am on the add resource page for the last step$/) do
   @new_resource_page = NewResourcePage.new(page, Step.last.id)
+  @new_resource_page.navigate
+  end
+
+Given(/^I am on the add resource page$/) do
+  @new_resource_page = NewResourcePage.new(page, nil)
   @new_resource_page.navigate
 end
 
@@ -33,8 +38,8 @@ When(/^I use the garbage step$/) do
 end
 
 When(/^I navigate to the last resource show page$/) do
-  @resource_show_page = ResourcePage.new(page)
-  @resource_show_page.navigate_to_show_page Resource.last.id
+  @show_resource_page = ShowResourcePage.new
+  @show_resource_page.load(id: Resource.last.id)
 end
 
 When(/^I am on the edit step page$/) do

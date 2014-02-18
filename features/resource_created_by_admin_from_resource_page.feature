@@ -1,10 +1,10 @@
-Feature: Creating resources as a user
+Feature: Creating resources as an admin
 
   Background:
-    Given a user account exists
-    And I login as a user
-    And a step exists
-    And I am on the add resource page for the last step
+    Given an admin account exists
+    And I login as an admin
+    And I am on the resources index page
+    And I click the new resource button
 
   Scenario: Resource requires certain attributes
     When I submit the resource
@@ -14,4 +14,4 @@ Feature: Creating resources as a user
     When I fill in all resource fields
     And I submit the resource
     And I navigate to the last resource show page
-    Then I should see all the resource fields
+    Then I should see all the resource fields without step
