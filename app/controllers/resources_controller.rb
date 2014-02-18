@@ -43,10 +43,13 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     @resource.user = current_user || User.find(params[:user_id])
 
+
+
     if @resource.save
-        respond_to do |format|
-        format.html { redirect_to edit_step_path(@resource.step), notice: 'Resource was successfully created.' }
-        format.json { render action: 'show', status: :created, location: resource_path }
+      if @resource.step.nil?
+        redirect_to resources_path, notice: 'Resource was successfully created.'
+      else
+        redirect_to edit_step_path(@resource.step), notice: 'Resource was successfully created.'
       end
     else
       respond_to do |format|

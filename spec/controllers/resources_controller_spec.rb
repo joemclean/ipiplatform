@@ -45,6 +45,14 @@ describe ResourcesController do
           expect(@resource.source).to eql 'A cool person'
           expect(@resource.step_id).to eql @step.id
         end
+        it 'should create a resource using resource_params without step id' do
+          @create_params[:resource][:step_id] = nil
+          patch :create, @create_params
+
+          @resource = Resource.all.first
+          expect(@resource.step_id).to eql nil
+          response.should redirect_to(resources_path)
+        end
 
         it 'should be able to attach associated tags' do
           patch :create, @create_params
