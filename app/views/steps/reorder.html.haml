@@ -1,0 +1,8 @@
+%p Drag and drop to reorder.
+%h1 Reordering steps
+%ul
+  - @steps.each do |step| 
+    %li
+      = step.name
+%br
+= link_to 'Back', edit_value_proposition_path(@value_proposition_id)

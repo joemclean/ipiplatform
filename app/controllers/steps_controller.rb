@@ -50,6 +50,12 @@ class StepsController < ApplicationController
     redirect_to edit_value_proposition_path(@step.value_proposition_id)
   end
 
+  def reorder
+    params.require(:value_proposition_id)
+    @steps = ValueProposition.find(params[:value_proposition_id]).steps
+    @value_proposition_id = params[:value_proposition_id]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_step

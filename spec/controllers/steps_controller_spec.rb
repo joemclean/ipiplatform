@@ -171,7 +171,7 @@ describe StepsController do
     end
   end
 
-  describe '#edit' do
+  describe 'GET edit' do
     it 'assigns resources' do
       step = FactoryGirl.create(:step)
       resource1 = FactoryGirl.create(:resource, name: "Resource1")
@@ -185,4 +185,22 @@ describe StepsController do
     end
   end
 
+  describe 'GET reorder' do
+    before :each do
+      @mock_value_proposition = double(:value_proposition)
+      ValueProposition.stub(:find).and_return(@mock_value_proposition)
+      @mock_steps = [double(:step)]
+      @mock_value_proposition.stub(:steps).and_return(@mock_steps)
+    end
+
+    it 'assings all steps for a given value proposition as @steps' do
+      get :reorder, {value_proposition_id: 0}
+      assigns(:steps).should eql @mock_steps
+    end
+
+    it "assigns the value proposition id as @value_proposition_id" do
+      get :reorder, {value_proposition_id: 0}
+      assigns(:value_proposition_id).should == "0"
+    end
+  end
 end

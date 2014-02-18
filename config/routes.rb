@@ -1,6 +1,10 @@
 IpiPlatform::Application.routes.draw do
 
-  resources :steps, except: :new
+  resources :steps, except: :new do
+    collection do
+      get :reorder
+    end
+  end
 
   resources :sessions
   resources :users
@@ -25,7 +29,7 @@ IpiPlatform::Application.routes.draw do
   resources :value_propositions
   resources :bookmarks
 
-  resources :resources, :except => :new do
+  resources :resources, except: :new do
     resources :upvotes
     post 'comments/save'
     get 'comments/delete'
