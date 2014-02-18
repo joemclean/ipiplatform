@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ValuePropositionsController do
-  describe '#create' do
+  describe 'POST create' do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -155,7 +155,7 @@ describe ValuePropositionsController do
   describe '#show' do
     before :each do
       value_proposition_category = FactoryGirl.create(:value_proposition_category)
-     @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
+      @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: value_proposition_category)
       @get_params = {id: @value_proposition.id}
     end
 
@@ -169,6 +169,7 @@ describe ValuePropositionsController do
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(value_proposition_path)
       end
+
       it 'should assign steps and resource' do
         step = FactoryGirl.create(:step, value_proposition: @value_proposition)
         resource1 = FactoryGirl.create(:resource, step: step)
@@ -178,6 +179,18 @@ describe ValuePropositionsController do
         assigns(:value_proposition).steps =~ [step]
         assigns(:value_proposition).steps.first.resources =~ [resource1, resource2]
 
+      end
+
+      it 'should assign steps ordered be position' do
+        mock_steps = [double(Step)]
+        mock_steps.should_receive(:order).with(:position).and_return(mock_steps)
+        mock_value_proposition = double(ValueProposition)
+        mock_value_proposition.stub(:steps).and_return(mock_steps)
+        ValueProposition.stub(:find).and_return(mock_value_proposition)
+
+        get :show, @get_params
+
+        assigns(:steps).should eql mock_steps
       end
     end
 
@@ -269,18 +282,19 @@ describe ValuePropositionsController do
   end
 
   describe "GET edit" do
-    it "as admin should assign steps for value proposition as @steps" do
+    it 'should assign steps ordered be position' do
       ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
       ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
 
-      mock_value_proposition = double(ValueProposition)
-      ValueProposition.stub(:find).and_return(mock_value_proposition)
       mock_steps = [double(Step)]
+      mock_steps.should_receive(:order).with(:position).and_return(mock_steps)
+      mock_value_proposition = double(ValueProposition)
       mock_value_proposition.stub(:steps).and_return(mock_steps)
+      ValueProposition.stub(:find).and_return(mock_value_proposition)
 
       get :edit, { :id => 0 }
 
-      assigns(:steps).should == mock_steps
+      assigns(:steps).should eql mock_steps
     end
   end
 end

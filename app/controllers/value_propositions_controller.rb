@@ -11,6 +11,7 @@ class ValuePropositionsController < ApplicationController
 
   def show
     @value_proposition = ValueProposition.find(params[:id])
+    @steps = @value_proposition.steps.order(:position)
   end
 
   def new
@@ -19,7 +20,7 @@ class ValuePropositionsController < ApplicationController
   end
 
   def edit
-    @steps = ValueProposition.find(params[:id]).steps
+    @steps = ValueProposition.find(params[:id]).steps.order(:position)
   end
 
   def create

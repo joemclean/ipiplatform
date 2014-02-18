@@ -193,14 +193,19 @@ describe StepsController do
       @mock_value_proposition.stub(:steps).and_return(@mock_steps)
     end
 
-    it 'assings all steps for a given value proposition as @steps' do
-      get :reorder, {value_proposition_id: 0}
-      assigns(:steps).should eql @mock_steps
-    end
-
     it "assigns the value proposition id as @value_proposition_id" do
+      @mock_steps.stub(:order)
       get :reorder, {value_proposition_id: 0}
       assigns(:value_proposition_id).should == "0"
     end
+
+    it 'should assign steps ordered by position' do
+      @mock_steps.should_receive(:order).with(:position).and_return(@mock_steps)
+
+      get :reorder, {value_proposition_id: 0}
+
+      assigns(:steps).should eql @mock_steps
+    end
+
   end
 end

@@ -52,7 +52,7 @@ class StepsController < ApplicationController
 
   def reorder
     params.require(:value_proposition_id)
-    @steps = ValueProposition.find(params[:value_proposition_id]).steps
+    @steps = ValueProposition.find(params[:value_proposition_id]).steps.order(:position)
     @value_proposition_id = params[:value_proposition_id]
   end
 
