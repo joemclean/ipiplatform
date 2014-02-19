@@ -13,6 +13,8 @@
       Filters
     =form_tag(filter_path, method: "post") do |f|
       =text_field_tag :resource_search, nil, id: 'resource_search', class: 'form-control', placeholder: "Resource search"
+      %br
+      =submit_tag 'Search', id: "submit_resource_search", class: 'btn btn-default pull-right'
 
   .col-sm-9
     =paginate @resources

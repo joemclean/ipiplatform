@@ -4,14 +4,11 @@ describe ResourcesController do
   describe '#create' do
     before :each do
       user = FactoryGirl.create(:user)
-      yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
-      green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
 
       @description = 'as in tasty carrots'
       @name = 'orange'
       @step = FactoryGirl.create(:step, id: 0)
       @create_params = {user_id: user.id,
-                        value_proposition_ids: [yellow_value_proposition.id, green_value_proposition.id],
                         resource: {
                           name: @name,
                           link: 'resource_link',
@@ -155,11 +152,7 @@ describe ResourcesController do
 
   describe '#destroy' do
     before :each do
-      yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
-      green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
-
       @resource = FactoryGirl.create(:resource)
-      @resource.value_propositions = [yellow_value_proposition, green_value_proposition]
 
       @destroy_params = {id: @resource.id}
     end
@@ -190,16 +183,6 @@ describe ResourcesController do
 
         response.should redirect_to(user_path(@user))
       end
-
-      it 'should automatically delete value proposition association' do
-        @resource.value_propositions.count.should eql(2)
-        request.stub(:referrer).and_return(resource_path(@resource))
-
-        delete :destroy, @destroy_params
-
-        expect(@resource.value_propositions.count).to eql(0)
-      end
-
     end
 
     context 'as a user' do
@@ -244,9 +227,6 @@ describe ResourcesController do
 
   describe '#update' do
     before :each do
-      @yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
-      @green_value_proposition = FactoryGirl.create(:value_proposition, name: 'green')
-
       @description = 'as in tasty carrots'
       @name = 'orange'
     end
@@ -263,12 +243,9 @@ describe ResourcesController do
           @step = FactoryGirl.create(:step)
           @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
 
-          @resource.value_propositions = []
-
           controller.stub(:current_user).and_return(@user)
           @update_params = {  id: @resource.id,
                               user_id: @user.id,
-                              value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                               resource: {
                                 name: @name,
                                 link: 'resource_link',
@@ -297,6 +274,15 @@ describe ResourcesController do
           response.should redirect_to(edit_step_path(@step))
         end
 
+        context 'resource without a step' do
+          it 'redirects to the resources index page' do
+            @update_params[:resource][:step_id] = nil
+
+            patch :update, @update_params
+
+            response.should redirect_to(resources_path)
+          end
+        end
       end
 
       context 'with a resource owned by another user' do
@@ -307,12 +293,9 @@ describe ResourcesController do
           @step = FactoryGirl.create(:step)
           @resource = FactoryGirl.create(:resource, user: @other_user, step_id: @step.id)
 
-          @resource.value_propositions= []
-
           controller.stub(:current_user).and_return(@user)
           @update_params = {id: @resource.id,
                             user_id: @other_user.id,
-                            value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',
@@ -345,12 +328,9 @@ describe ResourcesController do
         @step = FactoryGirl.create(:step)
         @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
 
-        @resource.value_propositions = []
-
         controller.stub(:current_user).and_return(@user)
         @update_params = {id: @resource.id,
                           user_id: @user.id,
-                          value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                           resource: {
                             name: @name,
                             link: 'resource_link',
@@ -382,7 +362,6 @@ describe ResourcesController do
           other_users_resource = FactoryGirl.create(:resource, user: other_user)
           update_params = {id: other_users_resource.id,
                            user_id: other_user.id,
-                           value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                            resource: {
                              name: @name,
                              link: 'resource_link',
@@ -407,11 +386,8 @@ describe ResourcesController do
         @user = FactoryGirl.create(:user, is_admin: true)
         @resource = FactoryGirl.create(:resource, user: @user)
 
-        @resource.value_propositions = [@yellow_value_proposition, @green_value_proposition]
-
         @update_params = {  id: @resource.id,
                             user_id: @user.id,
-                            value_proposition_ids: [@yellow_value_proposition.id, @green_value_proposition.id],
                             resource: {
                               name: @name,
                               link: 'resource_link',

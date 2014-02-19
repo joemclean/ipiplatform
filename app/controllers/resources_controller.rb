@@ -15,8 +15,9 @@ class ResourcesController < ApplicationController
   end
 
   def filter
-    if params[:resource_search].present?
-      @resources = Resource.where("name LIKE ? OR description LIKE ? OR full_description LIKE ? OR source LIKE ? OR tag_list LIKE ?", "%"+params[:resource_search]+"%", "%"+params[:resource_search]+"%",  "%"+params[:resource_search]+"%", "%"+params[:resource_search]+"%","%"+params[:resource_search]+"%" )
+    resource_search = params[:resource_search]
+    if resource_search.present?
+      @resources = Resource.where("name LIKE ? OR description LIKE ? OR full_description LIKE ? OR source LIKE ? OR tag_list LIKE ?", "%" + resource_search + "%", "%" + resource_search + "%", "%" + resource_search + "%", "%" + resource_search + "%","%" + resource_search + "%")
 
       @resources = Kaminari.paginate_array(@resources).page(params[:page])
     else
@@ -63,8 +64,9 @@ class ResourcesController < ApplicationController
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
 
       if @resource.update(resource_params)
+        path = @resource.step.nil? ? resources_path : edit_step_path(@resource.step.id)
         respond_to do |format|
-          format.html { redirect_to edit_step_path(@resource.step.id), notice: 'Resource was successfully updated.' }
+          format.html { redirect_to path, notice: 'Resource was successfully updated.' }
           format.json { head :no_content }
         end
       else

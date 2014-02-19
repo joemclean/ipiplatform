@@ -2,7 +2,7 @@
 
 = render 'form'
 
-- if @resource.step_id.nil?
+- if @resource.step.nil?
   = link_to 'Back', resources_path
 - else
   = link_to 'Back', edit_step_path(@resource.step_id)

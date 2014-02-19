@@ -248,6 +248,12 @@ describe ValuePropositionsController do
 
         patch :update, @params
       end
+
+      it 'should redirect to value proposition show page' do
+        patch :update, @params
+
+        response.should redirect_to(value_proposition_path(@value_proposition.id))
+      end
     end
 
     context 'as a user' do

@@ -33,7 +33,7 @@ class ValuePropositionsController < ApplicationController
     end
 
     if @value_proposition_saved
-      respond_to do |format|
+       respond_to do |format|
         format.html { redirect_to value_propositions_path, notice: 'Value proposition was successfully created.' }
         format.json { render action: 'show', status: :created, location: @value_proposition }
       end
@@ -59,7 +59,7 @@ class ValuePropositionsController < ApplicationController
 
     if @value_proposition_saved
       respond_to do |format|
-        format.html { redirect_to value_propositions_path, notice: 'Value proposition was successfully updated.' }
+        format.html { redirect_to value_proposition_path(@value_proposition), notice: 'Value proposition was successfully updated.' }
         format.json { head :no_content }
       end
     else
