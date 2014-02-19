@@ -45,17 +45,7 @@ class ValuePropositionsController < ApplicationController
   end
 
   def update
-    ActiveRecord::Base.transaction do
-      @value_proposition.update(value_proposition_params)
-      if params[:value_proposition_category_id].present?
-        @value_proposition.value_proposition_category = ValuePropositionCategory.find(params[:value_proposition_category_id])
-      else
-        @value_proposition.value_proposition_category = nil
-      end
-      @value_proposition_saved = @value_proposition.save
-    end
-
-    if @value_proposition_saved
+    if @value_proposition.update(value_proposition_params)
       redirect_to value_proposition_path(@value_proposition), notice: 'Value proposition was successfully updated.'
     else
       render action: 'edit'
@@ -84,5 +74,4 @@ class ValuePropositionsController < ApplicationController
   def value_proposition_params
     params.require(:value_proposition).permit(:name, :description, :value_proposition_category, :image)
   end
-
 end

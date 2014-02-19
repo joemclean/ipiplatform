@@ -213,40 +213,42 @@ describe ValuePropositionsController do
     end
   end
 
-  describe '#update' do
+  describe 'PATCH update' do
     before :each do
-      @description = 'as in tasty carrots'
-      @name = 'orange'
-      @other_value_proposition_category = FactoryGirl.create(:value_proposition_category, name: 'Hats and bowties', description: 'are good for events')
-      @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: FactoryGirl.create(:value_proposition_category))
-      @params = {id: @value_proposition.id,
-                 value_proposition: {
-                   name: @name,
-                   description: @description,
-                 },
-                 value_proposition_category_id: @other_value_proposition_category.id
-      }
+      @value_proposition_params = { name: "name",
+                                    description: "description",
+                                    value_proposition_category_id: 1 }
+      @update_params = { id: 0, value_proposition: @value_proposition_params }
+
+      @mock_value_proposition = double(ValueProposition)
+      ValueProposition.stub(:find).and_return(@mock_value_proposition)
     end
-    context 'as an admin user' do
+
+    context 'as an admin' do
       before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        ValuePropositionCategory.stub(:find).and_return(@other_value_proposition_category)
+        ApplicationController.any_instance.stub(:redirect_if_not_signed_in)
+        ApplicationController.any_instance.stub(:redirect_if_unauthorized)
       end
 
-      it 'should update value propositions' do
-        patch :update, @params
+      context 'when update returns true' do
+        it 'should update value proposition' do
+          @mock_value_proposition.should_receive(:update)
+          patch :update, @update_params
+        end
 
-        @value_proposition.reload
-
-        expect(@value_proposition.name).to eql 'orange'
-        expect(@value_proposition.description).to eql @description
+        it 'should redirect to value proposition index' do
+          @mock_value_proposition.stub(:update).and_return(true)
+          patch :update, @update_params
+          response.should redirect_to value_propositions_path
+        end
       end
 
-      it 'should be able to replace associated value proposition category' do
-        ValuePropositionCategory.should_receive(:find).exactly(1).times
-
-        patch :update, @params
+      context 'when update returns false' do
+        it 'should re-render edit template' do
+          @mock_value_proposition.stub(:update).and_return(false)
+          patch :update, @update_params
+          response.should render_template('edit')
+        end
       end
 
       it 'should redirect to value proposition show page' do
@@ -257,32 +259,30 @@ describe ValuePropositionsController do
     end
 
     context 'as a user' do
-      it 'should not be able to update a value proposition' do
+      before do
         ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        patch :update, @params
+      end
 
-        @value_proposition.reload
+      it 'should not update value proposition' do
+        @mock_value_proposition.should_not_receive(:update)
+        patch :update, @update_params
+      end
 
-        expect(@value_proposition.name).to eql('value_proposition_name')
-        expect(@value_proposition.description).to eql('value_proposition_description')
+      it 'should redirect to root' do
+        patch :update, @update_params
+        response.should redirect_to root_path
       end
     end
 
     context 'while not signed in' do
-      it 'should redirect the user' do
-        patch :update, @params
-
-        expect(response.status).to be(302)
-        response.should redirect_to new_session_path
+      it 'should not update value proposition' do
+        @mock_value_proposition.should_not_receive(:update)
+        patch :update, @update_params
       end
 
-      it 'should not be able to update a value proposition' do
-        patch :update, @params
-
-        @value_proposition.reload
-
-        expect(@value_proposition.name).to eql('value_proposition_name')
-        expect(@value_proposition.description).to eql('value_proposition_description')
+      it 'should redirect to new session' do
+        patch :update, @update_params
+        response.should redirect_to new_session_path
       end
     end
   end
