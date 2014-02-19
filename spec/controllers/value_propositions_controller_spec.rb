@@ -232,7 +232,7 @@ describe ValuePropositionsController do
 
       context 'when update returns true' do
         it 'should update value proposition' do
-          @mock_value_proposition.should_receive(:update)
+          @mock_value_proposition.should_receive(:update).and_return(true)
           patch :update, @update_params
         end
 
@@ -244,10 +244,22 @@ describe ValuePropositionsController do
       end
 
       context 'when update returns false' do
-        it 'should re-render edit template' do
+        before :each do
           @mock_value_proposition.stub(:update).and_return(false)
+          @mocked_steps = [double(Step)]
+          ValueProposition.stub_chain(:find, :steps).and_return(@mocked_steps)
+        end
+
+        it 'should re-render edit template' do
+          @mocked_steps.stub(:order)
           patch :update, @update_params
           response.should render_template('edit')
+        end
+
+        it 'should assign ordered steps' do
+          @mocked_steps.should_receive(:order).with(:position).and_return(@mocked_steps)
+          patch :update, @update_params
+          assigns(:steps).should eql @mocked_steps
         end
       end
 

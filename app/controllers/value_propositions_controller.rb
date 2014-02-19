@@ -48,6 +48,7 @@ class ValuePropositionsController < ApplicationController
     if @value_proposition.update(value_proposition_params)
       redirect_to value_proposition_path(@value_proposition), notice: 'Value proposition was successfully updated.'
     else
+      load_steps
       render action: 'edit'
     end
   end
