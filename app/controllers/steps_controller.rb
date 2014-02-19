@@ -56,6 +56,13 @@ class StepsController < ApplicationController
     @value_proposition_id = params[:value_proposition_id]
   end
 
+  def sort
+    params[:step].each_with_index do |id, index|
+      Step.find(id).insert_at(index+1)
+    end
+    render nothing: true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_step

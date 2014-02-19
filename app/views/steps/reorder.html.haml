@@ -4,10 +4,11 @@
       axis: 'y',
       update: function (event, ui) {
         var data = $(this).sortable("serialize");
-        //$.post($(this).data("update-url"), $(this).sortable("serialize"));
+        $.post($(this).data("update-url"), $(this).sortable("serialize"));
       }
     });
   });
+
 %p Drag and drop to reorder.
 %h1 Reordering steps
 %ul{id: 'sortable', :'data-update-url'=> "#{sort_steps_url}"}

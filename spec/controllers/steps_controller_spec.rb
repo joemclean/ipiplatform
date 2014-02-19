@@ -206,6 +206,17 @@ describe StepsController do
 
       assigns(:steps).should eql @mock_steps
     end
+  end
 
+  describe "POST sort" do
+    it "inserts each step param in list at param index plus one" do
+      steps = [double(Step), double(Step), double(Step)]
+      Step.stub(:find).and_return(steps[0], steps[1], steps[2])
+      steps[0].should_receive(:insert_at).with(1)
+      steps[1].should_receive(:insert_at).with(2)
+      steps[2].should_receive(:insert_at).with(3)
+
+      post :sort, { step: [5, 6, 7] }, valid_session
+    end
   end
 end
