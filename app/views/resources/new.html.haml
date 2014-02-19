@@ -1,5 +1,7 @@
 %h1 New resource
 
 = render 'form'
-
-= link_to 'Back', edit_step_path(@resource.step_id)
+-if @resource.step_id
+  = link_to 'Back', edit_step_path(@resource.step_id)
+-else
+  = link_to 'Back', resources_path

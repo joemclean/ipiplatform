@@ -58,7 +58,7 @@ value_proposition_categories.each do |name, value_proposition, value_proposition
   end
 end
 
-step = Step.find_or_create_by(name: 'Strategy', description: 'some description')
+step = Step.find_or_create_by(name: 'Strategy', description: 'some description', value_proposition_id: ValueProposition.first.id)
 
 resource = Resource.find_or_create_by({
             user_id: user.id,
