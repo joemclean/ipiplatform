@@ -1,9 +1,9 @@
 class ValuePropositionsController < ApplicationController
-  before_filter :redirect_if_not_signed_in, except: [:show]
-
-  before_filter :redirect_if_unauthorized, except: [:show]
+  before_action :redirect_if_not_signed_in, except: [:show]
+  before_action :redirect_if_unauthorized, except: [:show]
 
   before_action :set_value_proposition, only: [:show, :edit, :update, :destroy]
+  before_action :load_steps, only: [:show, :edit]
 
   def index
     @value_proposition = ValueProposition.all
@@ -11,7 +11,6 @@ class ValuePropositionsController < ApplicationController
 
   def show
     @value_proposition = ValueProposition.find(params[:id])
-    @steps = @value_proposition.steps.order(:position)
   end
 
   def new
@@ -20,7 +19,6 @@ class ValuePropositionsController < ApplicationController
   end
 
   def edit
-    @steps = ValueProposition.find(params[:id]).steps.order(:position)
   end
 
   def create
@@ -58,15 +56,9 @@ class ValuePropositionsController < ApplicationController
     end
 
     if @value_proposition_saved
-      respond_to do |format|
-        format.html { redirect_to value_proposition_path(@value_proposition), notice: 'Value proposition was successfully updated.' }
-        format.json { head :no_content }
-      end
+      redirect_to value_proposition_path(@value_proposition), notice: 'Value proposition was successfully updated.'
     else
-      respond_to do |format|
-        format.html { render action: 'edit' }
-        format.json { render json: @value_proposition.errors, status: :unprocessable_entity }
-      end
+      render action: 'edit'
     end
   end
 
@@ -79,6 +71,10 @@ class ValuePropositionsController < ApplicationController
   end
 
   private
+
+  def load_steps
+    @steps = ValueProposition.find(params[:id]).steps.order(:position)
+  end
 
   def set_value_proposition
     @value_proposition = ValueProposition.find(params[:id])
