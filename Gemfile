@@ -20,6 +20,7 @@ gem 'kaminari'
 gem 'rmagick'
 gem 'figaro'
 gem 'shoulda'
+gem "acts_as_list", "~> 0.3.0"
 
 group :test, :development do
   gem 'rspec-rails'
