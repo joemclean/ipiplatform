@@ -15,8 +15,8 @@ class ResourcesController < ApplicationController
   end
 
   def filter
-    if params[:value_proposition].present?
-      @resources = Resource.all.includes(:value_propositions).where("value_propositions.name LIKE ?", "%"+params[:value_proposition]+"%").references(:value_propositions).each {|resource| resource.reload}
+    if params[:resource_search].present?
+      @resources = Resource.where("name LIKE ? OR description LIKE ? OR full_description LIKE ? OR source LIKE ? OR tag_list LIKE ?", "%"+params[:resource_search]+"%", "%"+params[:resource_search]+"%",  "%"+params[:resource_search]+"%", "%"+params[:resource_search]+"%","%"+params[:resource_search]+"%" )
 
       @resources = Kaminari.paginate_array(@resources).page(params[:page])
     else

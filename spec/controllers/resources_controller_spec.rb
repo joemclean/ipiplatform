@@ -580,35 +580,19 @@ describe ResourcesController do
     end
   end
 
-  describe "#filter" do
+  describe "GET filter" do
     before :each do
       ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
       ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-      @yellow_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellow')
-      @yellowish_value_proposition = FactoryGirl.create(:value_proposition, name: 'yellowish')
-
-      @resource_yellow = FactoryGirl.create(:resource,name: "resource_yellow")
-      @resource_yellowish = FactoryGirl.create(:resource,name: "resource_yellowish")
-      @resource_green = FactoryGirl.create(:resource,name: "resource_green")
-
-      @resource_yellow.update({value_proposition_ids: [@yellow_value_proposition.id]})
-      @resource_yellowish.update({value_proposition_ids: [@yellowish_value_proposition.id]})
     end
 
     context "a filter query exists" do
       it 'returns resources with the given filter' do
-        post :filter, {value_proposition: "yellow"}
+        mock_resources = [double(:resource)]
+        Resource.should_receive(:where).and_return(mock_resources)
+        post :filter, {resource_search: "something" }
 
-        assigns(:resources).should =~([@resource_yellow, @resource_yellowish])
-        response.should render_template("index")
-      end
-    end
-
-    context "a filter does not exist" do
-      it 'returns all the resources' do
-        post :filter
-
-        assigns(:resources).should =~([@resource_yellow, @resource_yellowish, @resource_green])
+        assigns(:resources).should =~( mock_resources)
         response.should render_template("index")
       end
     end
