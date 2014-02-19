@@ -9,11 +9,12 @@
     });
   });
 
-%p Drag and drop to reorder.
 %h1 Reordering steps
+%p Drag and drop to reorder.
+%br
 %ul{id: 'sortable', :'data-update-url'=> "#{sort_steps_url}"}
   - @steps.each do |step| 
-    %li{class: "ui-state-default", id: "step_#{step.id}"}
+    %li{class: "well reorder-steps", id: "step_#{step.id}"}
       = step.name
 %br
-= link_to 'Back', edit_value_proposition_path(@value_proposition_id)
+= link_to 'Done', edit_value_proposition_path(@value_proposition_id), class: "btn btn-default"
