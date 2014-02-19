@@ -18,7 +18,7 @@
 %p
   %h3
     Journey
-  - @value_proposition.steps.each do |step|
+  - @steps.each do |step|
     .col
       .vp_steps.well
         = step.name
