@@ -220,7 +220,7 @@ describe ValuePropositionsController do
                                     value_proposition_category_id: 1 }
       @update_params = { id: 0, value_proposition: @value_proposition_params }
 
-      @mock_value_proposition = double(ValueProposition)
+      @mock_value_proposition = stub_model(ValueProposition, id: 0)
       ValueProposition.stub(:find).and_return(@mock_value_proposition)
     end
 
@@ -236,10 +236,11 @@ describe ValuePropositionsController do
           patch :update, @update_params
         end
 
-        it 'should redirect to value proposition index' do
+
+        it 'should redirect to value proposition show page' do
           @mock_value_proposition.stub(:update).and_return(true)
           patch :update, @update_params
-          response.should redirect_to value_propositions_path
+          response.should redirect_to value_proposition_path(@mock_value_proposition.id)
         end
       end
 
@@ -261,12 +262,6 @@ describe ValuePropositionsController do
           patch :update, @update_params
           assigns(:steps).should eql @mocked_steps
         end
-      end
-
-      it 'should redirect to value proposition show page' do
-        patch :update, @params
-
-        response.should redirect_to(value_proposition_path(@value_proposition.id))
       end
     end
 
