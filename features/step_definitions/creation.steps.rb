@@ -45,6 +45,9 @@ Given(/^a value proposition category and a value proposition exist$/) do
   @value_proposition = FactoryGirl.create(:value_proposition, value_proposition_category: @value_proposition_category)
 end
 
+Given(/^a resource exists$/) do
+  @resource = FactoryGirl.create(:resource)
+end
 
 Given(/^a resource with a (.*?) value proposition exists$/) do |value_proposition_name|
   @value_proposition = FactoryGirl.create(:value_proposition, name: value_proposition_name)

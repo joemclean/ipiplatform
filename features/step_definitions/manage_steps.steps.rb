@@ -28,6 +28,19 @@ When(/^I select the step to delete/) do
   @edit_value_proposition_page.delete_step_links[0].click
 end
 
+When(/^I navigate to the add existing resource page$/) do
+  @add_resource_page = AddResourcePage.new
+  @edit_step_page.add_existing_resource_link.click
+end
+
 Then(/^the step should no longer be displayed$/) do
   @edit_value_proposition_page.show_step_links.size.should eql 0
+end
+
+Then(/^I should be redirected to the edit step page$/) do
+  @edit_step_page.should be_displayed
+end
+
+Then(/^I should see the resource$/) do
+  @edit_step_page.show_step_links.first.text.should == @resource.name
 end

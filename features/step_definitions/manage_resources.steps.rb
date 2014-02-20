@@ -44,6 +44,10 @@ When(/^I upload the file to the file upload$/) do
   page.attach_file('resource_file', File.join(Rails.root, '/app/assets/images/ResourcePlaceHolder.png'))
 end
 
+When(/^I add the resource$/) do
+  @add_resource_page.add_resource_links.first.click
+end
+
 Then(/^I should not have the option to edit another user's resource$/) do
   page.should_not have_selector("#edit_resource_#{@resource2.id}")
 end
