@@ -3,8 +3,8 @@
     $("#sortable").sortable({ 
       axis: 'y',
       update: function (event, ui) {
-        var data = $(this).sortable("serialize");
-        $.post($(this).data("update-url"), $(this).sortable("serialize"));
+        var data = $(this).sortable("serialize") + "&value_proposition_id=" + $(this).data("value-proposition-id");
+        $.post($(this).data("update-url"), data);
       }
     });
   });
@@ -12,7 +12,7 @@
 %h1 Reordering steps
 %p Drag and drop to reorder.
 %br
-%ul{id: 'sortable', :'data-update-url'=> "#{sort_steps_url}"}
+%ul{id: 'sortable', :'data-update-url'=> "#{sort_steps_url}", :'data-value-proposition-id' => "#{@value_proposition_id}"}
   - @steps.each do |step| 
     %li{class: "well reorder-steps", id: "step_#{step.id}"}
       = step.name

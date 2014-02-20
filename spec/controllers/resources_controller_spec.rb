@@ -8,7 +8,7 @@ describe ResourcesController do
       @description = 'as in tasty carrots'
       @name = 'orange'
       @step = FactoryGirl.create(:step, id: 0)
-      @create_params = {user_id: user.id,
+      @create_params = {
                         resource: {
                           name: @name,
                           link: 'resource_link',
@@ -20,6 +20,7 @@ describe ResourcesController do
                         },
                         image: 'image.jpg'
       }
+      ApplicationController.any_instance.stub(:current_user).and_return(user)
     end
 
     context 'as an admin user' do
@@ -135,6 +136,10 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      before do
+        ApplicationController.any_instance.stub(:current_user).and_return(nil)
+      end
+
       it 'should redirect the user' do
         patch :create, @create_params
 

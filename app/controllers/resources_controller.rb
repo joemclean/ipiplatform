@@ -42,9 +42,7 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.new(resource_params)
-    @resource.user = current_user || User.find(params[:user_id])
-
-
+    @resource.user = current_user
 
     if @resource.save
       if @resource.step.nil?
@@ -53,29 +51,18 @@ class ResourcesController < ApplicationController
         redirect_to edit_step_path(@resource.step), notice: 'Resource was successfully created.'
       end
     else
-      respond_to do |format|
-        format.html { render action: 'new' }
-        format.json { render json: @value_proposition.errors, status: :unprocessable_entity }
-      end
+      render action: 'new'
     end
   end
 
   def update
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
-
       if @resource.update(resource_params)
         path = @resource.step.nil? ? resources_path : edit_step_path(@resource.step.id)
-        respond_to do |format|
-          format.html { redirect_to path, notice: 'Resource was successfully updated.' }
-          format.json { head :no_content }
-        end
+        redirect_to path, notice: 'Resource was successfully updated.'
       else
-        respond_to do |format|
-          format.html { render action: 'edit' }
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
+        render action: 'edit'
       end
-
     else
       redirect_to root_path, notice: "Not authorized to edit this resource!" and return
     end
@@ -83,16 +70,8 @@ class ResourcesController < ApplicationController
 
   def destroy
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
-
       @resource.destroy
-
-      redirect_path = request.referrer
-
-      respond_to do |format|
-        format.html { redirect_to redirect_path }
-        format.json { head :no_content }
-      end
-
+      redirect_to request.referrer
     else
       redirect_to root_path, notice: "Not authorized to destroy this resource!"
     end

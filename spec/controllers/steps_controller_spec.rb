@@ -210,13 +210,16 @@ describe StepsController do
 
   describe "POST sort" do
     it "inserts each step param in list at param index plus one" do
-      steps = [double(Step), double(Step), double(Step)]
-      Step.stub(:find).and_return(steps[0], steps[1], steps[2])
-      steps[0].should_receive(:insert_at).with(1)
-      steps[1].should_receive(:insert_at).with(2)
-      steps[2].should_receive(:insert_at).with(3)
-
-      post :sort, { step: [5, 6, 7] }, valid_session
+      step1 = FactoryGirl.build(:step, id: 5, position: 1)
+      step2 = FactoryGirl.build(:step, id: 6, position: 2)
+      step3 = FactoryGirl.build(:step, id: 7, position: 3)
+      Step.any_instance.stub(:save)
+      steps = [ step1, step2, step3]
+      subject.stub(:steps_to_sort).and_return(steps)
+      post :sort, { step: [7,5,6] }, valid_session
+      step1.position.should eql 2
+      step2.position.should eql 3
+      step3.position.should eql 1
     end
   end
 end
