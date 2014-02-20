@@ -57,17 +57,10 @@ class StepsController < ApplicationController
   end
 
   def sort
-    params[:step].each_with_index do |id, index|
-      step =  steps_to_sort.select{|x| x.id == id.to_i}.first
-      step.position = index + 1
-      step.save
-    end
+    StepsSorter.sort(params[:step])
     render nothing: true
   end
 
-  def steps_to_sort
-    Step.where("value_proposition_id = ?", params[:value_proposition_id])
-  end
   private
 
     # Use callbacks to share common setup or constraints between actions.

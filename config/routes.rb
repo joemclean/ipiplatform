@@ -31,6 +31,10 @@ IpiPlatform::Application.routes.draw do
   resources :bookmarks
 
   resources :resources, except: :new do
+    collection do
+      get :reorder
+      post :sort
+    end
     resources :upvotes
     post 'comments/save'
     get 'comments/delete'

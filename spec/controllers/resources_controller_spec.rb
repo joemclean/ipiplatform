@@ -578,4 +578,18 @@ describe ResourcesController do
       end
     end
   end
+
+  describe "POST sort" do
+    before :each do
+      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+    end
+
+    it 'should make call to sort on sorter' do
+      ResourcesSorter.stub(:sort)
+      ResourcesSorter.should_receive(:sort)
+
+      post :sort, {resource: [3 , 4 , 5]}
+    end
+  end
 end

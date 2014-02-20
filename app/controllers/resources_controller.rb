@@ -77,6 +77,12 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def sort
+    ResourcesSorter.sort(params[:resource])
+    render nothing: true
+  end
+
+
   private
   def set_resource
     @resource = Resource.find(params[:id])
