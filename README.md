@@ -26,3 +26,9 @@ brew install phantomjs
 To populate heroku's environment variables with S3 credentials (make sure config/application.yml exists) do:
 
 rake figaro:heroku[ipiplatform]
+
+To drop the database in heroku do
+heroku pg:reset DATABASE
+
+To run migrations and populate database
+heroku run rake db:setup
