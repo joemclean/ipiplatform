@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
-  before_filter :redirect_if_not_signed_in
+  before_action :redirect_if_not_signed_in
 
-  before_filter :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update, :filter]
+  before_action :redirect_if_unauthorized, except: [:create, :destroy, :edit, :index, :new, :show, :update, :reorder, :sort, :filter]
 
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_resource_associations, only: [:index, :show, :new, :edit, :create, :update, :filter]
@@ -78,10 +78,14 @@ class ResourcesController < ApplicationController
   end
 
   def sort
-    ResourcesSorter.sort(params[:resource])
+    ResourcesSorter.new.sort(params[:resource])
     render nothing: true
   end
 
+  def reorder
+    @resources = Step.find(params[:step_id]).resources.order(:position)
+    @step_id = params[:step_id]
+  end
 
   private
   def set_resource

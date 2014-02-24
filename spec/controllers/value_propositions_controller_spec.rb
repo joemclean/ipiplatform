@@ -295,7 +295,7 @@ describe ValuePropositionsController do
   end
 
   describe "GET edit" do
-    it 'should assign steps ordered be position' do
+    it 'should assign steps ordered by position' do
       ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
       ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
 

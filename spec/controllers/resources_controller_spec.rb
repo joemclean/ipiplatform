@@ -571,8 +571,33 @@ describe ResourcesController do
     end
 
     it 'should make call to sort on sorter' do
-      ResourcesSorter.should_receive(:sort).and_return(nil)
+      ResourcesSorter.any_instance.should_receive(:sort).and_return(nil)
       post :sort, {resource: [3 , 4 , 5]}
+    end
+  end
+
+  describe 'GET reorder' do
+    before :each do
+      @mock_step = double(:step)
+      Step.stub(:find).and_return(@mock_step)
+      @mock_resources = [double(:resource)]
+      @mock_step.stub(:resources).and_return(@mock_resources)
+      user = FactoryGirl.create(:user, :admin)
+      ApplicationController.any_instance.stub(:current_user).and_return(user)
+    end
+
+    it "assigns the step id as @step_id" do
+      @mock_resources.stub(:order)
+      get :reorder, {step_id: 0}
+      assigns(:step_id).should == "0"
+    end
+
+    it 'should assign resources ordered by position' do
+      @mock_resources.should_receive(:order).with(:position).and_return(@mock_resources)
+
+      get :reorder, {step_id: 0}
+
+      assigns(:resources).should eql @mock_resources
     end
   end
 end

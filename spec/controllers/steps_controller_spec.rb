@@ -41,9 +41,27 @@ describe StepsController do
       assigns(:step).should eq(step)
     end
 
-    it "assigns the value proposition id of the step as @value_proposition_id" do
+    it 'should assign resources ordered by position' do
+      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+
+      mock_resources = [double(Resource)]
+      mock_resources.should_receive(:order).with(:position).and_return(mock_resources)
       mock_step = double(Step)
-      mock_step.stub(:resources)
+      mock_step.stub(:resources).and_return(mock_resources)
+      mock_step.stub(:value_proposition_id)
+      Step.stub(:find).and_return(mock_step)
+
+      get :edit, { :id => 0 }
+
+      assigns(:resources).should eql mock_resources
+    end
+
+    it "assigns the value proposition id of the step as @value_proposition_id" do
+      mock_resources = [double(Resource)]
+      mock_resources.should_receive(:order).with(:position).and_return(mock_resources)
+      mock_step = double(Step)
+      mock_step.stub(:resources).and_return(mock_resources)
       mock_step.stub(:value_proposition_id).and_return(1)
       Step.stub(:find).and_return(mock_step)
 
@@ -210,7 +228,7 @@ describe StepsController do
 
   describe "POST sort" do
     it 'should make a call to sort on sorter ' do
-      StepsSorter.should_receive(:sort).and_return(nil)
+      StepsSorter.any_instance.should_receive(:sort).and_return(nil)
 
       post :sort, {step: [6,5,7]}
     end

@@ -12,6 +12,7 @@ class StepsController < ApplicationController
     @step = Step.new
     @value_proposition_id = params[:value_proposition_id]
   end
+
   def new_resource
    @resource = Resource.new
    @step_id = params[:step_id]
@@ -22,7 +23,7 @@ class StepsController < ApplicationController
   end
 
   def edit
-    @resources = @step.resources
+    @resources = Step.find(params[:id]).resources.order(:position)
     @value_proposition_id = @step.value_proposition_id
   end
 
@@ -57,7 +58,7 @@ class StepsController < ApplicationController
   end
 
   def sort
-    StepsSorter.sort(params[:step])
+    StepsSorter.new.sort(params[:step])
     render nothing: true
   end
 
