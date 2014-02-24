@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ResourcesController do
   describe '#create' do
     before :each do
-      user = FactoryGirl.create(:user)
+      user = FactoryGirl.create(:user, :admin)
 
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -24,11 +24,6 @@ describe ResourcesController do
     end
 
     context 'as an admin user' do
-      before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-      end
-
       context 'resource is valid' do
         it 'should create a resource using resource_params' do
           patch :create, @create_params
@@ -157,35 +152,27 @@ describe ResourcesController do
 
   describe '#destroy' do
     before :each do
-      @resource = FactoryGirl.create(:resource)
-
+      @user = FactoryGirl.create(:user)
+      controller.stub(:current_user).and_return(@user)
+      @resource = FactoryGirl.create(:resource, user_id: @user.id)
       @destroy_params = {id: @resource.id}
     end
 
     context 'as an admin user' do
       before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        @user = FactoryGirl.create(:user, is_admin: true)
-        controller.stub(:current_user).and_return(@user)
+        @user.is_admin = true
       end
 
       it 'should delete any resource' do
-
         request.stub(:referrer).and_return(resource_path(@resource))
-
         delete :destroy, @destroy_params
-
         expect(Resource.all.count).to eql(0)
       end
 
       it 'should redirect to previous url' do
-
         request.should_receive(:referrer).and_return(user_path(@user))
         Resource.any_instance.stub(:destroy)
-
         delete :destroy, @destroy_params
-
         response.should redirect_to(user_path(@user))
       end
     end
@@ -193,11 +180,7 @@ describe ResourcesController do
     context 'as a user' do
       context 'with a resource owned by the user' do
         it 'should delete a resource' do
-          ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-          user = FactoryGirl.create(:user)
-          controller.stub(:current_user).and_return(user)
-
-          request.stub(:referrer).and_return(user_path(user))
+          request.stub(:referrer).and_return(user_path(@user))
           delete :destroy, @destroy_params
           expect(Resource.all.count).to eql(0)
         end
@@ -205,16 +188,18 @@ describe ResourcesController do
 
       context 'with a resource owned by someone else' do
         it 'should not be able to delete a resource' do
-          ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+          Resource.any_instance.stub(:user_id).and_return(5)
           delete :destroy, @destroy_params
-
           expect(Resource.all.count).to eql(1)
         end
       end
-
     end
 
     context 'while not signed in' do
+      before :each do
+        controller.stub(:current_user).and_return(nil)
+      end
+
       it 'should redirect the user' do
         delete :destroy, @destroy_params
 
@@ -224,8 +209,8 @@ describe ResourcesController do
 
       it 'should not be able to delete a resource' do
         delete :destroy, @destroy_params
-
         expect(Resource.all.count).to eql(1)
+
       end
     end
   end
@@ -292,7 +277,7 @@ describe ResourcesController do
 
       context 'with a resource owned by another user' do
         before :each do
-          @user = FactoryGirl.create(:user, is_admin: true)
+          @user = FactoryGirl.create(:user, :admin)
           @other_user = FactoryGirl.create(:user, name: 'Bob')
 
           @step = FactoryGirl.create(:step)
@@ -581,14 +566,12 @@ describe ResourcesController do
 
   describe "POST sort" do
     before :each do
-      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+      user = FactoryGirl.create(:user, :admin)
+      ApplicationController.any_instance.stub(:current_user).and_return(user)
     end
 
     it 'should make call to sort on sorter' do
-      ResourcesSorter.stub(:sort)
-      ResourcesSorter.should_receive(:sort)
-
+      ResourcesSorter.should_receive(:sort).and_return(nil)
       post :sort, {resource: [3 , 4 , 5]}
     end
   end

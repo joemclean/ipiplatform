@@ -210,8 +210,7 @@ describe StepsController do
 
   describe "POST sort" do
     it 'should make a call to sort on sorter ' do
-      StepsSorter.stub(:sort)
-      StepsSorter.should_receive(:sort)
+      StepsSorter.should_receive(:sort).and_return(nil)
 
       post :sort, {step: [6,5,7]}
     end
