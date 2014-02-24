@@ -1,9 +1,13 @@
 require 'spec_helper'
 
 describe ResourcesController do
+  before :each do
+    @admin_user = FactoryGirl.create(:user, :admin)
+    @user = FactoryGirl.create(:user)
+  end
+
   describe '#create' do
     before :each do
-      user = FactoryGirl.create(:user, :admin)
 
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -20,10 +24,13 @@ describe ResourcesController do
         },
         image: 'image.jpg'
       }
-      ApplicationController.any_instance.stub(:current_user).and_return(user)
     end
 
     context 'as an admin user' do
+      before :each do
+        controller.stub(:current_user).and_return(@admin_user)
+      end
+
       context 'resource is valid' do
         it 'should create a resource using resource_params' do
           patch :create, @create_params
@@ -82,7 +89,7 @@ describe ResourcesController do
 
     context 'as a user' do
       before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        controller.stub(:current_user).and_return(@user)
       end
 
       it 'should create a resource using resource_params' do
@@ -101,7 +108,7 @@ describe ResourcesController do
 
     context 'while not signed in' do
       before do
-        ApplicationController.any_instance.stub(:current_user).and_return(nil)
+        controller.stub(:current_user).and_return(nil)
       end
 
       it 'should redirect the user' do
@@ -119,15 +126,13 @@ describe ResourcesController do
 
   describe '#destroy' do
     before :each do
-      @user = FactoryGirl.create(:user)
-      controller.stub(:current_user).and_return(@user)
       @resource = FactoryGirl.create(:resource, user_id: @user.id)
       @destroy_params = {id: @resource.id}
     end
 
     context 'as an admin user' do
       before :each do
-        @user.is_admin = true
+        controller.stub(:current_user).and_return(@admin_user)
       end
 
       it 'should delete any resource' do
@@ -147,6 +152,7 @@ describe ResourcesController do
     context 'as a user' do
       context 'with a resource owned by the user' do
         it 'should delete a resource' do
+          controller.stub(:current_user).and_return(@user)
           request.stub(:referrer).and_return(user_path(@user))
           delete :destroy, @destroy_params
           expect(Resource.all.count).to eql(0)
@@ -199,8 +205,7 @@ describe ResourcesController do
     context 'as an admin user' do
       context 'with a resource owned by the admin' do
         before :each do
-          @user = FactoryGirl.create(:user, is_admin: true)
-          controller.stub(:current_user).and_return(@user)
+          controller.stub(:current_user).and_return(@admin_user)
           @step = FactoryGirl.create(:step)
           @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
           @update_params[:id] = @resource.id
@@ -230,14 +235,12 @@ describe ResourcesController do
 
       context 'with a resource owned by another user' do
         before :each do
-          @user = FactoryGirl.create(:user, :admin)
-          controller.stub(:current_user).and_return(@user)
-          @other_user = FactoryGirl.create(:user, name: 'Bob')
+          controller.stub(:current_user).and_return(@admin_user)
           @step = FactoryGirl.create(:step)
-          @resource = FactoryGirl.create(:resource, user: @other_user, step_id: @step.id)
+          @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
           @update_params[:id] = @resource.id
           @update_params[:resource][:step_id] = @step.id
-          @update_params[:user_id] = @other_user.id
+          @update_params[:user_id] = @user.id
         end
 
         it 'should update any resource' do
@@ -250,11 +253,9 @@ describe ResourcesController do
 
     context 'as a user' do
       before :each do
-        @user = FactoryGirl.create(:user)
         controller.stub(:current_user).and_return(@user)
         @step = FactoryGirl.create(:step)
         @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
-        controller.stub(:current_user).and_return(@user)
         @update_params[:id] = @resource.id
         @update_params[:resource][:step_id] = @step.id
         @update_params[:user_id] = @user.id
@@ -282,10 +283,10 @@ describe ResourcesController do
 
     context 'while not signed in' do
       before :each do
-        @user = FactoryGirl.create(:user, is_admin: true)
-        @resource = FactoryGirl.create(:resource, user: @user)
+        @resource = FactoryGirl.create(:resource, user: @admin_user)
         @update_params[:id] = @resource.id
         @update_params[:user_id] = @user.id
+        controller.stub(:current_user).and_return(nil)
       end
 
       it 'should redirect the user' do
@@ -309,11 +310,8 @@ describe ResourcesController do
 
     context 'as an admin user' do
       it 'should show the list of resources' do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-
+        controller.stub(:current_user).and_return(@admin_user)
         get :index, @get_params
-
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(resources_path)
         assert_not_nil assigns(:resources)
@@ -323,42 +321,39 @@ describe ResourcesController do
 
     context 'as a user' do
       it 'should show the list of resources' do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-
+        controller.stub(:current_user).and_return(@user)
         get :index, @get_params
-
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(resources_path)
       end
     end
 
     context 'while not signed in' do
+      before :each do
+        controller.stub(:current_user).and_return(nil)
+      end
+
       it 'should redirect the user' do
         get :index, @get_params
-
         expect(response.status).to be(302)
         response.should redirect_to new_session_path
       end
 
       it 'should redirect the user to the new sessions path' do
         get :index, @get_params
-
         response.should redirect_to new_session_path
       end
     end
   end
 
   describe '#new' do
-
     context 'as an admin user' do
-      before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-      end
-
       it 'assigns a new resource to @resource' do
+        controller.stub(:current_user).and_return(@admin_user)
         step = FactoryGirl.create(:step, id: 0)
+
         get :new, {:step_id => step.id}
+
         assigns(:resource).should be_a_new(Resource)
         assigns(:resource).step_id.should eql(step.id)
         response.should render_template(:new)
@@ -366,11 +361,9 @@ describe ResourcesController do
     end
 
     context 'as a user' do
-      before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-      end
-
       it 'should view the create-a-resource page' do
+        controller.stub(:current_user).and_return(@user)
+
         get :new, {:step_id => 0}
 
         expect(response.status).to be(200)
@@ -379,6 +372,10 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      before :each do
+        controller.stub(:current_user).and_return(nil)
+      end
+
       it 'should redirect the user' do
         get :new, {:step_id => 0}
 
@@ -403,9 +400,7 @@ describe ResourcesController do
 
     context 'as an admin user' do
       it 'should show the requested resource' do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-        controller.stub_chain(:current_user, :id).and_return(1)
+        controller.stub(:current_user).and_return(@admin_user)
 
         get :show, @get_params
 
@@ -416,8 +411,7 @@ describe ResourcesController do
 
     context 'as a user' do
       it 'should show the requested resource' do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        controller.stub_chain(:current_user, :id).and_return(1)
+        controller.stub(:current_user).and_return(@user)
 
         get :show, @get_params
 
@@ -427,6 +421,10 @@ describe ResourcesController do
     end
 
     context 'while not signed in' do
+      before :each do
+        controller.stub(:current_user).and_return(nil)
+      end
+
       it 'should redirect the user' do
         get :show, @get_params
 
@@ -444,14 +442,14 @@ describe ResourcesController do
 
   describe "GET filter" do
     before :each do
-      ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-      ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
+      controller.stub(:current_user).and_return(@admin_user)
     end
 
     context "a filter query exists" do
       it 'returns resources with the given filter' do
         mock_resources = [double(:resource)]
         Resource.should_receive(:where).and_return(mock_resources)
+
         post :filter, {resource_search: "something" }
 
         assigns(:resources).should =~( mock_resources)
@@ -462,8 +460,7 @@ describe ResourcesController do
 
   describe "POST sort" do
     before :each do
-      user = FactoryGirl.create(:user, :admin)
-      ApplicationController.any_instance.stub(:current_user).and_return(user)
+      controller.stub(:current_user).and_return(@admin_user)
     end
 
     it 'should make call to sort on sorter' do
@@ -478,8 +475,7 @@ describe ResourcesController do
       Step.stub(:find).and_return(@mock_step)
       @mock_resources = [double(:resource)]
       @mock_step.stub(:resources).and_return(@mock_resources)
-      user = FactoryGirl.create(:user, :admin)
-      ApplicationController.any_instance.stub(:current_user).and_return(user)
+      controller.stub(:current_user).and_return(@admin_user)
     end
 
     it "assigns the step id as @step_id" do
