@@ -9,16 +9,16 @@ describe ResourcesController do
       @name = 'orange'
       @step = FactoryGirl.create(:step, id: 0)
       @create_params = {
-                        resource: {
-                          name: @name,
-                          link: 'resource_link',
-                          description: @description,
-                          full_description: 'resource_full_description',
-                          source: 'A cool person',
-                          tag_list: 'resource_tag_list',
-                          step_id: @step.id
-                        },
-                        image: 'image.jpg'
+        resource: {
+          name: @name,
+          link: 'resource_link',
+          description: @description,
+          full_description: 'resource_full_description',
+          source: 'A cool person',
+          tag_list: 'resource_tag_list',
+          step_id: @step.id
+        },
+        image: 'image.jpg'
       }
       ApplicationController.any_instance.stub(:current_user).and_return(user)
     end
@@ -49,25 +49,19 @@ describe ResourcesController do
 
         it 'should be able to attach associated tags' do
           patch :create, @create_params
-
           @resource = Resource.all.first
-
           expect(@resource.tags.count).to eql(1)
         end
 
         it 'should create a resource with a specific tag' do
           patch :create, @create_params
-
           @resource = Resource.all.first
-
           expect(@resource.tag_list).to eql 'resource_tag_list'
         end
 
         it 'should be able to attach associated image' do
           patch :create, @create_params
-
           @resource = Resource.all.first
-
           expect(@resource.image.class).to eql(ImageUploader)
         end
 
@@ -93,38 +87,13 @@ describe ResourcesController do
 
       it 'should create a resource using resource_params' do
         patch :create, @create_params
-
         @resource = Resource.all.first
-
         expect(Resource.all.count).to eql(1)
-        expect(@resource.name).to eql @name
-        expect(@resource.link).to eql 'resource_link'
-        expect(@resource.description).to eql @description
-        expect(@resource.full_description).to eql 'resource_full_description'
-        expect(@resource.source).to eql 'A cool person'
-      end
-
-      it 'should be able to attach associated tags' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tags.count).to eql(1)
-      end
-
-      it 'should create a resource with a specific tag' do
-        patch :create, @create_params
-
-        @resource = Resource.all.first
-
-        expect(@resource.tag_list).to eql 'resource_tag_list'
       end
 
       it 'should be able to attach associated image' do
         patch :create, @create_params
-
         @resource = Resource.all.first
-
         expect(@resource.image.class).to eql(ImageUploader)
       end
 
@@ -137,14 +106,12 @@ describe ResourcesController do
 
       it 'should redirect the user' do
         patch :create, @create_params
-
         expect(response.status).to be(302)
         response.should redirect_to new_session_path
       end
 
       it 'should not be able to create a resource' do
         patch :create, @create_params
-
         expect(Resource.all.count).to eql(0)
       end
     end
@@ -202,7 +169,6 @@ describe ResourcesController do
 
       it 'should redirect the user' do
         delete :destroy, @destroy_params
-
         expect(response.status).to be(302)
         response.should redirect_to new_session_path
       end
@@ -210,66 +176,53 @@ describe ResourcesController do
       it 'should not be able to delete a resource' do
         delete :destroy, @destroy_params
         expect(Resource.all.count).to eql(1)
-
       end
     end
   end
 
   describe '#update' do
     before :each do
-      @description = 'as in tasty carrots'
-      @name = 'orange'
+      @name = 'another resource name'
+      @update_params = {
+                          resource: {
+                            name: @name,
+                            link: 'resource_link',
+                            description: 'description',
+                            full_description: 'resource_full_description',
+                            source: 'A cool person',
+                            tag_list: 'resource_tag_list'
+                          },
+                          image: 'image.jpg'
+                      }
     end
 
     context 'as an admin user' do
-      before :each do
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
-        ApplicationController.any_instance.stub(:redirect_if_unauthorized).and_return(nil)
-      end
-
       context 'with a resource owned by the admin' do
         before :each do
           @user = FactoryGirl.create(:user, is_admin: true)
+          controller.stub(:current_user).and_return(@user)
           @step = FactoryGirl.create(:step)
           @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
-
-          controller.stub(:current_user).and_return(@user)
-          @update_params = {  id: @resource.id,
-                              user_id: @user.id,
-                              resource: {
-                                name: @name,
-                                link: 'resource_link',
-                                description: @description,
-                                full_description: 'resource_full_description',
-                                source: 'A cool person',
-                                tag_list: 'resource_tag_list',
-                                step_id: @step.id
-                              },
-                              image: 'image.jpg'
-          }
-        end
+          @update_params[:id] = @resource.id
+          @update_params[:resource][:step_id] = @step.id
+          @update_params[:user_id] = @user.id
+       end
 
         it 'should update any resource' do
-
           patch :update, @update_params
-
           @resource.reload
-
           expect(@resource.name).to eql(@name)
         end
 
         it 'should redirect to the edit step page' do
           patch :update, @update_params
-
           response.should redirect_to(edit_step_path(@step))
         end
 
         context 'resource without a step' do
           it 'redirects to the resources index page' do
             @update_params[:resource][:step_id] = nil
-
             patch :update, @update_params
-
             response.should redirect_to(resources_path)
           end
         end
@@ -278,128 +231,71 @@ describe ResourcesController do
       context 'with a resource owned by another user' do
         before :each do
           @user = FactoryGirl.create(:user, :admin)
+          controller.stub(:current_user).and_return(@user)
           @other_user = FactoryGirl.create(:user, name: 'Bob')
-
           @step = FactoryGirl.create(:step)
           @resource = FactoryGirl.create(:resource, user: @other_user, step_id: @step.id)
-
-          controller.stub(:current_user).and_return(@user)
-          @update_params = {id: @resource.id,
-                            user_id: @other_user.id,
-                            resource: {
-                              name: @name,
-                              link: 'resource_link',
-                              description: @description,
-                              full_description: 'resource_full_description',
-                              source: 'A cool person',
-                              tag_list: 'resource_tag_list',
-                              step_id: @step.id
-                            },
-                            image: 'image.jpg'
-          }
+          @update_params[:id] = @resource.id
+          @update_params[:resource][:step_id] = @step.id
+          @update_params[:user_id] = @other_user.id
         end
 
         it 'should update any resource' do
-
           patch :update, @update_params
-
           @resource.reload
-
           expect(@resource.name).to eql(@name)
         end
-
       end
     end
 
     context 'as a user' do
       before :each do
         @user = FactoryGirl.create(:user)
-        ApplicationController.any_instance.stub(:redirect_if_not_signed_in).and_return(nil)
+        controller.stub(:current_user).and_return(@user)
         @step = FactoryGirl.create(:step)
         @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
-
         controller.stub(:current_user).and_return(@user)
-        @update_params = {id: @resource.id,
-                          user_id: @user.id,
-                          resource: {
-                            name: @name,
-                            link: 'resource_link',
-                            description: @description,
-                            full_description: 'resource_full_description',
-                            source: 'A cool person',
-                            tag_list: 'resource_tag_list',
-                            step_id: @step.id
-                          },
-                          image: 'image.jpg'
-        }
-      end
+        @update_params[:id] = @resource.id
+        @update_params[:resource][:step_id] = @step.id
+        @update_params[:user_id] = @user.id
 
-      context 'with a resource owned by the user' do
-        it 'should update a resource' do
+        context 'with a resource owned by the user' do
+          it 'should update a resource' do
+            patch :update, @update_params
+            @resource.reload
+            expect(@resource.name).to eql(@name)
+          end
+        end
 
-          patch :update, @update_params
-
-          @resource.reload
-
-          expect(@resource.name).to eql(@name)
+        context 'with a resource owned by someone else' do
+          it 'should not be able to update a resource' do
+            other_user = FactoryGirl.create(:user, name: 'Wilson')
+            other_users_resource = FactoryGirl.create(:resource, user: other_user)
+            @update_params[:id] = other_users_resource.id
+            @update_params[:user_id] = other_user.id
+            patch :update, update_params
+            expect(other_users_resource.name).to eql('resource_name')
+          end
         end
       end
-
-      context 'with a resource owned by someone else' do
-        it 'should not be able to update a resource' do
-
-          other_user = FactoryGirl.create(:user, name: 'Wilson')
-          other_users_resource = FactoryGirl.create(:resource, user: other_user)
-          update_params = {id: other_users_resource.id,
-                           user_id: other_user.id,
-                           resource: {
-                             name: @name,
-                             link: 'resource_link',
-                             description: @description,
-                             full_description: 'resource_full_description',
-                             source: 'A cool person',
-                             tag_list: 'resource_tag_list'
-                           },
-                           image: 'image.jpg'
-          }
-
-          patch :update, update_params
-
-          expect(other_users_resource.name).to eql('resource_name')
-        end
-      end
-
     end
 
     context 'while not signed in' do
       before :each do
         @user = FactoryGirl.create(:user, is_admin: true)
         @resource = FactoryGirl.create(:resource, user: @user)
-
-        @update_params = {  id: @resource.id,
-                            user_id: @user.id,
-                            resource: {
-                              name: @name,
-                              link: 'resource_link',
-                              description: @description,
-                              full_description: 'resource_full_description',
-                              source: 'A cool person',
-                              tag_list: 'resource_tag_list'
-                            },
-                            image: 'image.jpg'
-        }
+        @update_params[:id] = @resource.id
+        @update_params[:user_id] = @user.id
       end
 
       it 'should redirect the user' do
         patch :update, @update_params
-
         expect(response.status).to be(302)
         response.should redirect_to new_session_path
       end
 
       it 'should not be able to update a resource' do
         patch :update, @update_params
-
         expect(@resource.name).to eql('resource_name')
       end
     end
