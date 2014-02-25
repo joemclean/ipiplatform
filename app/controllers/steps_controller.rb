@@ -62,6 +62,10 @@ class StepsController < ApplicationController
     render nothing: true
   end
 
+  def steps_to_sort
+    Step.where("value_proposition_id = ?", params[:value_proposition_id])
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.

@@ -32,9 +32,15 @@ IpiPlatform::Application.routes.draw do
 
   resources :resources, except: :new do
     collection do
+      get :existing
       get :reorder
       post :sort
     end
+
+    member do
+      post :add_to_step
+    end
+
     resources :upvotes
     post 'comments/save'
     get 'comments/delete'

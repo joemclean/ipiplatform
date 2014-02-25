@@ -88,6 +88,12 @@ class ResourcesController < ApplicationController
     @step_id = params[:step_id]
   end
 
+  def existing
+  end
+
+  def add_to_step
+  end
+
   private
   def set_resource
     @resource = Resource.find(params[:id])
