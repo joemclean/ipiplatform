@@ -8,7 +8,6 @@ describe ResourcesController do
 
   describe '#create' do
     before :each do
-
       @description = 'as in tasty carrots'
       @name = 'orange'
       @step = FactoryGirl.create(:step, id: 0)
@@ -45,6 +44,7 @@ describe ResourcesController do
           expect(@resource.source).to eql 'A cool person'
           expect(@resource.step_id).to eql @step.id
         end
+
         it 'should create a resource using resource_params without step id' do
           @create_params[:resource][:step_id] = nil
           patch :create, @create_params
@@ -103,7 +103,6 @@ describe ResourcesController do
         @resource = Resource.all.first
         expect(@resource.image.class).to eql(ImageUploader)
       end
-
     end
 
     context 'while not signed in' do
@@ -121,6 +120,7 @@ describe ResourcesController do
         patch :create, @create_params
         expect(Resource.all.count).to eql(0)
       end
+
     end
   end
 

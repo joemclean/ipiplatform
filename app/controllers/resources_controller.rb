@@ -15,7 +15,8 @@ class ResourcesController < ApplicationController
   end
 
   def filter
-    resource_search = params[:resource_search]
+    resource_search = params[:resource_search].downcase
+
     if resource_search.present?
       @resources = Resource.where("name LIKE ? OR description LIKE ? OR full_description LIKE ? OR source LIKE ? OR tag_list LIKE ?", "%" + resource_search + "%", "%" + resource_search + "%", "%" + resource_search + "%", "%" + resource_search + "%","%" + resource_search + "%")
 
