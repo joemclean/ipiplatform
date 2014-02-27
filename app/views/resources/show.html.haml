@@ -14,13 +14,13 @@
       = @resource.full_description
 .row.showresource
   .col-sm-4
-    -if !@resource.step.nil?
+    - @resource.steps.each do |step|
       %h3
         Step
-      =@resource.step.name
+      = step.name
       %h3
         Value Proposition
-      - value_proposition = @resource.step.value_proposition
+      - value_proposition = step.value_proposition
       = link_to (image_tag value_proposition.image_name, size: '70x70'), value_proposition_path(value_proposition)
     %br
     %h3
@@ -69,7 +69,7 @@
 
 - if current_user.can_edit_and_delete_resource?(current_user, @resource)
   .btn.btn-default
-    = link_to 'Edit this Resource', edit_resource_path, id: "edit_resource_#{@resource.id}"
+    = link_to 'Edit this Resource', edit_free_resource_path, id: "edit_resource_#{@resource.id}"
 %h3 Comments
 
 .new_comment

@@ -29,7 +29,6 @@ describe ValueProposition do
     end
   end
 
-
   describe '#save' do
     include FakeFS::SpecHelpers
 

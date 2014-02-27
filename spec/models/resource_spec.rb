@@ -107,4 +107,10 @@ describe Resource do
       end
     end
   end
+
+  describe 'associations' do
+    it 'should have and belong to many' do
+      Resource.reflect_on_association(:steps).macro.should == :has_and_belongs_to_many
+    end
+  end
 end

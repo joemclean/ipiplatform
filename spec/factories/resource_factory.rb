@@ -11,6 +11,6 @@ FactoryGirl.define do
     tag_list 'resource_tag_list'
     user_id 1
 
-    association :step, strategy: :build
+    # association :step, strategy: :build
   end
 end

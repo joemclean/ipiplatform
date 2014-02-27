@@ -73,7 +73,7 @@ value_proposition_categories.each do |name, value_proposition, value_proposition
       Array(steps).each do |step_name, resources|
         created_step = Step.find_or_create_by(name: step_name, value_proposition_id: value_proposition.id)
         Array(resources).each do |resource|
-          resource.step_id = created_step.id
+          resource.steps << created_step
           resource.save
         end
       end

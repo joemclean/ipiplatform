@@ -6,7 +6,7 @@ describe ResourcesController do
     @user = FactoryGirl.create(:user)
   end
 
-  describe '#create' do
+  describe 'POST create' do
     before :each do
       @description = 'as in tasty carrots'
       @name = 'orange'
@@ -19,9 +19,10 @@ describe ResourcesController do
           full_description: 'resource_full_description',
           source: 'A cool person',
           tag_list: 'resource_tag_list',
-          step_id: @step.id
+          step_ids: [@step.id],
+          image: 'image.jpg'
         },
-        image: 'image.jpg'
+        step_id: 0
       }
     end
 
@@ -42,15 +43,17 @@ describe ResourcesController do
           expect(@resource.description).to eql @description
           expect(@resource.full_description).to eql 'resource_full_description'
           expect(@resource.source).to eql 'A cool person'
-          expect(@resource.step_id).to eql @step.id
+          expect(@resource.steps.size).to eql 1
+          expect(@resource.steps.first).to eql @step
         end
 
         it 'should create a resource using resource_params without step id' do
-          @create_params[:resource][:step_id] = nil
+          @create_params.delete(:step_id)
+          @create_params[:resource][:step_ids] = []
           patch :create, @create_params
 
           @resource = Resource.all.first
-          expect(@resource.step_id).to eql nil
+          expect(@resource.step_ids).to be_empty
           response.should redirect_to(resources_path)
         end
 
@@ -72,9 +75,19 @@ describe ResourcesController do
           expect(@resource.image.class).to eql(ImageUploader)
         end
 
-        it 'should redirect to step edit page' do
-          patch :create, @create_params
-          response.should redirect_to(edit_step_path(@create_params[:resource][:step_id]))
+        context 'step_id param is not nil' do
+          it 'should redirect to step edit page' do
+            patch :create, @create_params
+            response.should redirect_to(edit_step_path(@create_params[:step_id]))
+          end
+        end
+
+        context 'step_id param is nil' do
+          it 'should redirect to resources index page' do
+            @create_params.delete(:step_id)
+            patch :create, @create_params
+            response.should redirect_to(resources_path)
+          end
         end
       end
 
@@ -124,7 +137,7 @@ describe ResourcesController do
     end
   end
 
-  describe '#destroy' do
+  describe 'DELETE destroy' do
     before :each do
       @resource = FactoryGirl.create(:resource, user_id: @user.id)
       @destroy_params = {id: @resource.id}
@@ -186,7 +199,25 @@ describe ResourcesController do
     end
   end
 
-  describe '#update' do
+  describe 'GET edit' do
+    context 'as an user' do
+      before do
+        controller.stub(:current_user).and_return(@user)
+      end
+
+      it 'assigns the step id as @step_id' do
+        Resource.stub(:find)
+        mock_step = stub_model(Step, id: 0)
+        Step.stub(:find).with([0]).and_return([mock_step])
+
+        get :edit, { id: 0, step_id: 0 }
+
+        assigns(:step_id).should == "0"
+      end
+    end
+  end
+
+  describe 'PUT update' do
     before :each do
       @name = 'another resource name'
       @update_params = {
@@ -207,10 +238,11 @@ describe ResourcesController do
         before :each do
           controller.stub(:current_user).and_return(@admin_user)
           @step = FactoryGirl.create(:step)
-          @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
+          @resource = FactoryGirl.create(:resource, user: @user, step_ids: [@step.id])
           @update_params[:id] = @resource.id
-          @update_params[:resource][:step_id] = @step.id
+          @update_params[:resource][:step_ids] = [@step.id]
           @update_params[:user_id] = @user.id
+          @update_params[:step_id] = @step.id
        end
 
         it 'should update any resource' do
@@ -221,12 +253,12 @@ describe ResourcesController do
 
         it 'should redirect to the edit step page' do
           patch :update, @update_params
-          response.should redirect_to(edit_step_path(@step))
+          response.should redirect_to(edit_step_path(@step.id))
         end
 
         context 'resource without a step' do
           it 'redirects to the resources index page' do
-            @update_params[:resource][:step_id] = nil
+            @update_params.delete(:step_id)
             patch :update, @update_params
             response.should redirect_to(resources_path)
           end
@@ -237,7 +269,7 @@ describe ResourcesController do
         before :each do
           controller.stub(:current_user).and_return(@admin_user)
           @step = FactoryGirl.create(:step)
-          @resource = FactoryGirl.create(:resource, user: @user, step_id: @step.id)
+          @resource = FactoryGirl.create(:resource, user: @user, step_ids: [@step.id])
           @update_params[:id] = @resource.id
           @update_params[:resource][:step_id] = @step.id
           @update_params[:user_id] = @user.id
@@ -302,7 +334,7 @@ describe ResourcesController do
     end
   end
 
-  describe '#index' do
+  describe 'GET index' do
     before :each do
       resource = FactoryGirl.create(:resource)
       @get_params = {id: resource.id}
@@ -346,25 +378,38 @@ describe ResourcesController do
     end
   end
 
-  describe '#new' do
+  describe 'GET new' do
     context 'as an admin user' do
-      it 'assigns a new resource to @resource' do
+      before do
         controller.stub(:current_user).and_return(@admin_user)
-        step = FactoryGirl.create(:step, id: 0)
+      end
+
+      it 'assigns a new resource to @resource' do
+        step = FactoryGirl.create(:step)
 
         get :new, {:step_id => step.id}
 
         assigns(:resource).should be_a_new(Resource)
-        assigns(:resource).step_id.should eql(step.id)
+        assigns(:resource).step_ids.should eql([step.id])
         response.should render_template(:new)
+      end
+
+      it 'assigns the step id as @step_id' do
+        mock_step = stub_model(Step, id: 0)
+        Step.stub(:find).with([0]).and_return([mock_step])
+
+        get :new, { step_id: 0 }
+
+        assigns(:step_id).should == "0"
       end
     end
 
     context 'as a user' do
       it 'should view the create-a-resource page' do
         controller.stub(:current_user).and_return(@user)
+        step = FactoryGirl.create(:step)
 
-        get :new, {:step_id => 0}
+        get :new, {:step_id => step.id}
 
         expect(response.status).to be(200)
         expect(controller.request.path).to eql(new_resource_path)
@@ -391,7 +436,7 @@ describe ResourcesController do
     end
   end
 
-  describe '#show' do
+  describe 'GET show' do
     before :each do
       @resource = FactoryGirl.create(:resource)
 

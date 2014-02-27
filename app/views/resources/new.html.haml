@@ -1,7 +1,9 @@
 %h1 New resource
 
-= render 'form'
--if @resource.step_id
-  = link_to 'Back', edit_step_path(@resource.step_id)
+- url = @step_id.nil? ? create_free_resource_path : create_resource_path(step_id: @step_id)
+= render partial: 'form', locals: { url: url }
+
+-if @step_id.nil?
+  = link_to 'Back', edit_step_path(@step_id)
 -else
   = link_to 'Back', resources_path

@@ -12,16 +12,16 @@ end
 
 Given(/^the user creates a resource$/) do
   @step = @step || FactoryGirl.create(:step)
-  @resource = FactoryGirl.create(:resource, user_id: @user.id, step_id: @step.id)
+  @resource = FactoryGirl.create(:resource, user_id: @user.id, step_ids: [@step.id])
 end
 
 Given(/^the admin creates a resource$/) do
   @step = @step || FactoryGirl.Create(:step)
-  @resource = FactoryGirl.create(:resource, user_id: @admin.id, step_id: @step.id)
+  @resource = FactoryGirl.create(:resource, user_id: @admin.id, step_ids: [@step.id])
 end
 Given(/^the second user creates a resource$/) do
   @step = @step || FactoryGirl.create(:step)
-  @resource2 = FactoryGirl.create(:resource, user_id: @user2.id, step_id: @step.id)
+  @resource2 = FactoryGirl.create(:resource, user_id: @user2.id, step_ids: [@step.id])
 end
 
 Given(/^a value proposition category exists$/) do
@@ -60,8 +60,9 @@ Given(/^a step exists for the last value proposition$/) do
 end
 
 Given(/^a resource exists for the last step$/) do
-  @resoure = FactoryGirl.create(:resource, step: Step.last)
+  @resource = FactoryGirl.create(:resource, steps: [Step.last])
 end
+
 private
 
 def create_user_type(user_type)

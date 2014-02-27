@@ -172,8 +172,8 @@ describe ValuePropositionsController do
 
       it 'should assign steps and resource' do
         step = FactoryGirl.create(:step, value_proposition: @value_proposition)
-        resource1 = FactoryGirl.create(:resource, step: step)
-        resource2 = FactoryGirl.create(:resource, name: 'resource2', step: step)
+        resource1 = FactoryGirl.create(:resource, steps: [step])
+        resource2 = FactoryGirl.create(:resource, name: 'resource2', steps: [step])
         get :show, @get_params
 
         assigns(:value_proposition).steps =~ [step]

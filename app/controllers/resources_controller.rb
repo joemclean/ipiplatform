@@ -35,10 +35,12 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    @resource = Resource.new(step_id: params[:step_id])
+    @resource = Resource.new(step_ids: [params[:step_id]])
+    @step_id = params[:step_id]
   end
 
   def edit
+    @step_id = params[:step_id]
   end
 
   def create
@@ -46,10 +48,11 @@ class ResourcesController < ApplicationController
     @resource.user = current_user
 
     if @resource.save
-      if @resource.step.nil?
+      if params[:step_id].nil?
         redirect_to resources_path, notice: 'Resource was successfully created.'
       else
-        redirect_to edit_step_path(@resource.step), notice: 'Resource was successfully created.'
+        # Step.find(params[:step_id]).add_resource(@resource)
+        redirect_to edit_step_path(params[:step_id]), notice: 'Resource was successfully created.'
       end
     else
       render action: 'new'
@@ -59,7 +62,7 @@ class ResourcesController < ApplicationController
   def update
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
       if @resource.update(resource_params)
-        path = @resource.step.nil? ? resources_path : edit_step_path(@resource.step.id)
+        path = params[:step_id].nil? ? resources_path : edit_step_path(params[:step_id])
         redirect_to path, notice: 'Resource was successfully updated.'
       else
         render action: 'edit'
@@ -100,7 +103,7 @@ class ResourcesController < ApplicationController
   end
 
   def resource_params
-    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, :step_id, value_proposition_ids: [], format_ids: [])
+    params.require(:resource).permit(:name, :link, :description, :full_description, :source, :tag_list, :image, :file, step_ids: [], value_proposition_ids: [], format_ids: [])
   end
 
   def set_resource_associations

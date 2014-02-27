@@ -1,5 +1,6 @@
-= form_for @resource do |f|
-  = f.hidden_field :step_id
+= form_for @resource, url: url do |f|
+  - @resource.step_ids.each do |id|
+    = f.hidden_field :step_ids, multiple: true, value: id
   .row
     - if @resource.errors.any?
       #error_explanation
@@ -56,5 +57,3 @@
   .field
     =f.submit id: "submit_resource", class: 'btn btn-default'
   %br
-
-

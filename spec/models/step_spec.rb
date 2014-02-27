@@ -10,12 +10,18 @@ describe Step do
 
   describe 'associations' do
     it { should belong_to(:value_proposition) }
+
+    it 'should have and belong to many resources' do
+      Step.reflect_on_association(:resources).macro.should == :has_and_belongs_to_many
+    end
   end
 
-  it "should respond to resources" do
-    step = FactoryGirl.build(:step)
-    resource = FactoryGirl.build(:resource)
-    step.resources=[resource]
-    expect(step).to have_many(:resources)
+  describe '#add_resource' do
+    it 'should add a new resource to the step' do
+      step = Step.new
+      resource = Resource.new
+      step.add_resource(resource)
+      step.resources.last.should == resource
+    end
   end
 end

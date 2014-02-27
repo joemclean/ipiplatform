@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220223029) do
+ActiveRecord::Schema.define(version: 20140225165907) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -48,9 +48,15 @@ ActiveRecord::Schema.define(version: 20140220223029) do
     t.string   "image"
     t.string   "default_image"
     t.string   "file"
-    t.integer  "step_id"
     t.integer  "position"
   end
+
+  create_table "resources_steps", id: false, force: true do |t|
+    t.integer "step_id"
+    t.integer "resource_id"
+  end
+
+  add_index "resources_steps", ["step_id", "resource_id"], name: "index_resources_steps_on_step_id_and_resource_id"
 
   create_table "steps", force: true do |t|
     t.string   "name"

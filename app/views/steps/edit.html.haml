@@ -11,7 +11,7 @@
           = link_to resource.name, resource_path(resource), class: "step_resources"
           .clearfix
           .pull-right
-            = link_to 'Edit', edit_resource_path(resource), class: "small-link edit"
+            = link_to 'Edit', edit_resource_path(id: resource.id, step_id: @step.id), class: "small-link edit"
             \|
             = link_to 'Delete', resource, method: :delete, data: { confirm: 'Are you sure?' }, class: "small-link delete" 
   .col-md-2
