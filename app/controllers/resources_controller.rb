@@ -72,6 +72,23 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def show_existing_resources
+    @step_id = params[:step_id]
+    @resources = Resource.all
+  end
+
+  def add_existing_resources
+    if params[:resource_id].present? && params[:resource_id].first.present?
+      @resource = Resource.find(params[:resource_id].first)
+      @step = Step.find(params[:step_id])
+      @resource.steps << @step
+      redirect_to edit_step_path(params[:step_id]), notice: 'Resource was successfully added.'
+    else
+      flash.now[:error] = "Please select a resource to add"
+      redirect_to show_existing_resources_path(params[:step_id])
+    end
+  end
+
   def destroy
     if current_user.present? and current_user.can_edit_and_delete_resource? current_user, @resource
       @resource.destroy

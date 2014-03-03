@@ -221,16 +221,16 @@ describe ResourcesController do
     before :each do
       @name = 'another resource name'
       @update_params = {
-                          resource: {
-                            name: @name,
-                            link: 'resource_link',
-                            description: 'description',
-                            full_description: 'resource_full_description',
-                            source: 'A cool person',
-                            tag_list: 'resource_tag_list'
-                          },
-                          image: 'image.jpg'
-                      }
+        resource: {
+          name: @name,
+          link: 'resource_link',
+          description: 'description',
+          full_description: 'resource_full_description',
+          source: 'A cool person',
+          tag_list: 'resource_tag_list'
+        },
+        image: 'image.jpg'
+      }
     end
 
     context 'as an admin user' do
@@ -243,7 +243,7 @@ describe ResourcesController do
           @update_params[:resource][:step_ids] = [@step.id]
           @update_params[:user_id] = @user.id
           @update_params[:step_id] = @step.id
-       end
+        end
 
         it 'should update any resource' do
           patch :update, @update_params
@@ -535,6 +535,56 @@ describe ResourcesController do
       get :reorder, {step_id: 0}
 
       assigns(:resources).should eql @mock_resources
+    end
+  end
+
+  describe 'GET show_existing_resources' do
+
+    before :each do
+      controller.stub(:current_user).and_return(@admin_user)
+    end
+
+    it 'should assign step_id' do
+      get :show_existing_resources, {step_id: 0}
+      assigns(:step_id).should eql "0"
+    end
+    it 'should assign resources to the view' do
+      mock_resources = [double(Resource)]
+      Resource.should_receive(:all).and_return(mock_resources)
+      get :show_existing_resources, {step_id: 0}
+
+      assigns(:resources).should eql mock_resources
+    end
+  end
+
+  describe 'POST add_exisiting_resource' do
+
+    before :each do
+      controller.stub(:current_user).and_return(@admin_user)
+    end
+
+    context 'when a resource is selected' do
+      it 'should add reource to a step' do
+        resource = FactoryGirl.build(:resource)
+        step = FactoryGirl.build(:step)
+        Resource.stub(:find).and_return(resource)
+        Step.stub(:find).and_return(step)
+
+        post :add_existing_resources, {step_id: 0, resource_id: [0]}
+
+        resource.steps.first.should eql step
+        response.should redirect_to(edit_step_path(0))
+      end
+    end
+
+    context 'when a resource is not chosen' do
+      it 'should redirect to show exisiting resources' do
+
+        post :add_existing_resources, {step_id: 0, resource_id: [""]}
+
+        response.should redirect_to(show_existing_resources_path(0))
+        flash.now[:error].should_not be_nil
+      end
     end
   end
 end

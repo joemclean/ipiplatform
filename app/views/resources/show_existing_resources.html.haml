@@ -1,0 +1,9 @@
+= form_tag add_existing_resources_path, method: :post do
+  .row
+    .form-group.col-sm-6
+      %label.control-label
+        = label_tag "Resource:"
+      =collection_select :resource_id, nil, Resource.all, :id, :name, prompt: true 
+    = hidden_field_tag :step_id,  @step_id
+  .field
+    =submit_tag "Submit", id: "add_resource", class: 'btn btn-default'

@@ -1,5 +1,4 @@
 Feature: Adding existing resources to steps as an admin
-
   Background:
     Given an admin account exists
     And I login as an admin
