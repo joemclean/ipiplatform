@@ -2,7 +2,7 @@
   %h2 
     Sign Up for | 
     %span{style: 'color:#DE403C;'} 
-      sidekick |
+      Innovation Platform Initiative |
   %h4
     %span{style: 'color:#3AAEEF;'}
       Create an account to customize your innovation experience.
@@ -19,12 +19,16 @@
         .field
           =f.label :name
           =f.text_field :name, class: 'loginfield'
+        %br
         .field
           =f.label :email
+          %br
           =f.text_field :email, class: 'loginfield'
+        %br
         .field
           =f.label :password
           =f.password_field :password, class: 'passwordfield'
+        %br
         .field
           =f.label :password_confirmation
           =f.password_field :password_confirmation, class: 'passwordfield'
