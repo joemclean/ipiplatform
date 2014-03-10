@@ -15,7 +15,6 @@
  */
 
 @import "twitter/bootstrap";
-@import url(http://fonts.googleapis.com/css?family=Raleway);
 
 td {
   box-sizing: border-box;
@@ -23,7 +22,8 @@ td {
 }
 
 * {
-  font-family: Raleway;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
 }
 
 body {
