@@ -24,6 +24,7 @@ IpiPlatform::Application.routes.draw do
   post 'resources/filter', to: 'resources#filter', as: :filter
   get 'resources/show_existing_resources/:step_id', to: 'resources#show_existing_resources', as: :show_existing_resources
   post 'resources/add_existing_resources', to: 'resources#add_existing_resources', as: :add_existing_resources
+  get 'resources/:id/remove/:step_id', to: 'resources#remove', as: :remove_resource
   get 'resources/new/:step_id', to: 'resources#new', as: :new_resource
   get 'resources/new', to: 'resources#new', as: :new_free_resource
   get 'resources/:id/edit/:step_id', to: 'resources#edit', as: :edit_resource

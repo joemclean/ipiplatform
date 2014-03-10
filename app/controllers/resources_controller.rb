@@ -113,10 +113,11 @@ class ResourcesController < ApplicationController
     @step_id = params[:step_id]
   end
 
-  def existing
-  end
-
-  def add_to_step
+  def remove
+    @resource = Resource.find(params[:id])
+    @step = Step.find(params[:step_id])
+    @step.resources -= [@resource]
+    redirect_to edit_step_path(@step.id)
   end
 
   private

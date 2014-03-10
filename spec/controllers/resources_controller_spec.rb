@@ -209,7 +209,6 @@ describe ResourcesController do
         Resource.stub(:find)
         mock_step = stub_model(Step, id: 0)
         Step.stub(:find).with([0]).and_return([mock_step])
-
         get :edit, { id: 0, step_id: 0 }
 
         assigns(:step_id).should == "0"
@@ -601,6 +600,25 @@ describe ResourcesController do
         flash[:error].should include("Resource for step already selected")
       end
     end
-
   end
+
+  describe 'GET remove' do
+    before :each do
+      controller.stub(:current_user).and_return(@admin_user)
+    end
+
+    it 'should remove the resource from teh step' do
+        resource = FactoryGirl.build(:resource, id: 0)
+        step = FactoryGirl.build(:step, id: 0)
+        step.resources << resource
+        Step.stub(:find).and_return(step)
+        Resource.stub(:find).and_return(resource)
+
+        get :remove, { id: resource.id, step_id: step.id }
+
+        step.resources.size.should eql 0
+        response.should redirect_to(edit_step_path(step.id))
+    end
+  end
+
 end
