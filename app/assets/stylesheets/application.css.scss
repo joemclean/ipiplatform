@@ -37,8 +37,20 @@ body {
   padding: 4px;
   .flash {
     text-align: center;
+  }
+  background-color: #fff388;
 }
-background-color: #fff388;
+
+
+.div.error_area {
+  padding: 10px;
+  margin-bottom: 5px;
+  color: white;
+  padding: 4px;
+  .flash {
+    text-align: center;
+  }
+  background-color: orange;
 }
 
 .footer {

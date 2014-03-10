@@ -12,6 +12,10 @@
       .div.alert_area
         .flash
           =flash[:notice]
+    -if flash[:error] 
+      .div.error_area
+        .flash
+          =flash[:error]
     .container
       = yield
     .content

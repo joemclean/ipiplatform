@@ -81,10 +81,15 @@ class ResourcesController < ApplicationController
     if params[:resource_id].present? && params[:resource_id].first.present?
       @resource = Resource.find(params[:resource_id].first)
       @step = Step.find(params[:step_id])
-      @resource.steps << @step
-      redirect_to edit_step_path(params[:step_id]), notice: 'Resource was successfully added.'
+      if !@step.resources.include?(@resource)
+        @resource.steps << @step
+        redirect_to edit_step_path(@step.id), notice: 'Resource was successfully added.'
+      else
+        flash[:error] = "Resource for step already selected"
+        redirect_to show_existing_resources_path(@step.id)
+      end
     else
-      flash.now[:error] = "Please select a resource to add"
+      flash[:error] = "Please select a resource to add"
       redirect_to show_existing_resources_path(params[:step_id])
     end
   end

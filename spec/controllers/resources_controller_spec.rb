@@ -565,8 +565,8 @@ describe ResourcesController do
 
     context 'when a resource is selected' do
       it 'should add reource to a step' do
-        resource = FactoryGirl.build(:resource)
-        step = FactoryGirl.build(:step)
+        resource = FactoryGirl.build(:resource, id: 0)
+        step = FactoryGirl.build(:step, id: 0)
         Resource.stub(:find).and_return(resource)
         Step.stub(:find).and_return(step)
 
@@ -583,8 +583,24 @@ describe ResourcesController do
         post :add_existing_resources, {step_id: 0, resource_id: [""]}
 
         response.should redirect_to(show_existing_resources_path(0))
-        flash.now[:error].should_not be_nil
+        flash[:error].should_not be_nil
       end
     end
+
+    context 'when a resource already added to the step' do
+      it 'should show error message in show existing resources page' do
+        resource = FactoryGirl.build(:resource, id: 0)
+        step = FactoryGirl.build(:step, id: 0)
+        step.resources << resource
+        Step.stub(:find).and_return(step)
+        Resource.stub(:find).and_return(resource)
+
+        post :add_existing_resources, {step_id: step.id, resource_id: [resource.id]}
+
+        response.should redirect_to(show_existing_resources_path(0))
+        flash[:error].should include("Resource for step already selected")
+      end
+    end
+
   end
 end
